@@ -1,9 +1,10 @@
-module.export = {
+let obj = {
     lang: 'ru',
     prototypes: ( function() {
-        let lang = this.lang;
         String.prototype.t = function() {
-            return lang;
+            return obj.lang;
         }
     })()
 }
+
+module.export = obj;
