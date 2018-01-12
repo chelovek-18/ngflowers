@@ -28,11 +28,11 @@ export default class ComponentMenu extends React.Component {
                 </View>
                 <View style={styles.button}>
                     <IconFA name="home" size={30} color="#900"/>
-                    <Button title="One"/>
+                    <Button title={ "Неперевод".t() }/>
                 </View>
                 <View style={styles.button}>
                     <IconFA name="rocket" size={30} color="#900"/>
-                    <Button title={ "quick".t }/>
+                    <Button title={ "Каталог".t() }/>
                 </View>
             </View>
         );
