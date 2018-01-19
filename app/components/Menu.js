@@ -32,7 +32,7 @@ export default class ComponentMenu extends React.Component {
                 </View>
                 <View style={styles.button}>
                     <IconFA name="rocket" size={30} color="#900"/>
-                    <Button title={global.ngflowers.lang}/>
+                    <Button title={ "quick".t }/>
                 </View>
             </View>
         );
@@ -43,11 +43,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        paddingHorizontal: 10
+        paddingHorizontal: 15
     },
     close: {
         textAlign: 'right',
-        marginTop: 50
+        marginTop: 40,
+        marginBottom: 30
     },
     button: {
         flexDirection: 'row'

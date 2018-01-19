@@ -14,6 +14,10 @@ global.ngflowers = {
   lang: 'ru'
 }
 
+String.prototype.t = function() {
+  return 'blablabla';
+}
+
 Navigation.startTabBasedApp({
   tabs: [
     {
