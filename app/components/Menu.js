@@ -9,6 +9,12 @@ import {
 import IconFA from './../../node_modules/react-native-vector-icons/FontAwesome';
 
 export default class ComponentMenu extends React.Component {
+    closeMenu = () => {
+        this.props.navigator.toggleDrawer({
+            to: 'close'
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -18,7 +24,7 @@ export default class ComponentMenu extends React.Component {
                         style={styles.close}
                         size={30}
                         color="#000"
-                        onPress={this.props.navigator.toggleDrawer}/>
+                        onPress={this.closeMenu}/>
                 </View>
                 <View style={styles.button}>
                     <IconFA name="home" size={30} color="#900"/>
@@ -26,7 +32,7 @@ export default class ComponentMenu extends React.Component {
                 </View>
                 <View style={styles.button}>
                     <IconFA name="rocket" size={30} color="#900"/>
-                    <Button title="Two"/>
+                    <Button title={global.ngflowers.lang}/>
                 </View>
             </View>
         );
@@ -36,7 +42,8 @@ export default class ComponentMenu extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        paddingHorizontal: 10
     },
     close: {
         textAlign: 'right',

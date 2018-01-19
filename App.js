@@ -10,6 +10,10 @@ import { registerScreens } from './app/nav';
 
 registerScreens();
 
+global.ngflowers = {
+  lang: 'ru'
+}
+
 Navigation.startTabBasedApp({
   tabs: [
     {
