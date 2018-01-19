@@ -12,8 +12,13 @@ export default class ComponentMenu extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.button}>
-                    <IconFA name="close" style={ textAlign: 'right' } size={30} color="#000"/>
+                <View>
+                    <IconFA
+                        name="close"
+                        style={styles.close}
+                        size={30}
+                        color="#000"
+                        onPress={this.props.navigator.toggleDrawer}/>
                 </View>
                 <View style={styles.button}>
                     <IconFA name="home" size={30} color="#900"/>
@@ -30,8 +35,14 @@ export default class ComponentMenu extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        flexDirection: 'column'
+    },
+    close: {
+        textAlign: 'right',
+        marginTop: 50
     },
     button: {
+        flexDirection: 'row'
     }
 });
