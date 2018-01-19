@@ -7,5 +7,5 @@ import ComponentMenu from './../components/Menu';
 export function registerScreens() {
     Navigation.registerComponent( 'ngflowers.Home', () => Home );
     
-    Navigation.registerComponent( 'ngflowers.Components.Menu', () => ComponentsMenu );
+    Navigation.registerComponent( 'ngflowers.Components.Menu', () => ComponentMenu );
 }

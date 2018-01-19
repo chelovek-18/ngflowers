@@ -23,9 +23,7 @@ export default class ComponentMenu extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'top',
-        justifyContent: 'left'
+        flex: 1
     },
     button: {
         marginTop: 16
