@@ -15,7 +15,17 @@ Navigation.startTabBasedApp({
     {
       screen: 'ngflowers.Home'
     }
-  ]
+  ],
+  drawer: {
+    left: {
+      screen: 'ngflowers.Components.Menu'
+    },
+    style: {
+      drawerShadow: false,
+      contentOverlayColor: 'rgba(0, 0, 0, .5)',
+      leftDrawerWidth: 100
+    }
+  }
 });
 
 /*import React, { Component } from 'react';
