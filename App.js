@@ -4,7 +4,21 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
+
+import { registerScreens } from './app/nav';
+
+registerScreens();
+
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      screen: 'ngflowers.Home'
+    }
+  ]
+});
+
+/*import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
@@ -54,4 +68,4 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-});
+});*/
