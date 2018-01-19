@@ -10,13 +10,7 @@ import { registerScreens } from './app/nav';
 
 registerScreens();
 
-global.ngflowers = {
-  lang: 'ru'
-}
-
-String.prototype.t = function() {
-  return 'blablabla';
-}
+global.ngflowers = require( './app/conf' );
 
 Navigation.startTabBasedApp({
   tabs: [
