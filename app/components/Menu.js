@@ -13,6 +13,9 @@ export default class ComponentMenu extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.button}>
+                    <IconFA name="close" style={ textAlign: 'right' } size={30} color="#000"/>
+                </View>
+                <View style={styles.button}>
                     <IconFA name="home" size={30} color="#900"/>
                     <Button title="One"/>
                 </View>
@@ -30,6 +33,5 @@ const styles = StyleSheet.create({
         flex: 1
     },
     button: {
-        marginTop: 16
     }
 });
