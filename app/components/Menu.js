@@ -27,12 +27,28 @@ export default class ComponentMenu extends React.Component {
                         onPress={this.closeMenu}/>
                 </View>
                 <View style={styles.button}>
-                    <IconFA name="home" size={30} color="#900"/>
-                    <Button title={ "Неперевод".t() }/>
+                    <IconFA name="list" style={{ fontSize: 30 }} size={30} color="#000"/>
+                    <Button title={ "Каталог".t() }/>
                 </View>
                 <View style={styles.button}>
-                    <IconFA name="rocket" size={30} color="#900"/>
-                    <Button title={ "Каталог".t() }/>
+                    <IconFA name="gift" style={{ fontSize: 30 }} size={30} color="#000"/>
+                    <Button title={ "Акции".t() }/>
+                </View>
+                <View style={styles.button}>
+                    <IconFA name="user" style={{ fontSize: 30 }} size={30} color="#000"/>
+                    <Button title={ "Войти".t() }/>
+                </View>
+                <View style={styles.button}>
+                    <IconFA name="history" style={{ fontSize: 30 }} size={30} color="#000"/>
+                    <Button title={ "История заказов".t() }/>
+                </View>
+                <View style={styles.button}>
+                    <IconFA name="credit-card-alt" style={{ fontSize: 30 }} size={30} color="#000"/>
+                    <Button title={ "Кэшбек".t() }/>
+                </View>
+                <View style={styles.button}>
+                    <IconFA name="star" style={{ fontSize: 30 }} size={30} color="#000"/>
+                    <Button title={ "Бонусы".t() }/>
                 </View>
             </View>
         );
@@ -48,7 +64,7 @@ const styles = StyleSheet.create({
     close: {
         textAlign: 'right',
         marginTop: 40,
-        marginBottom: 30
+        marginBottom: 20
     },
     button: {
         flexDirection: 'row'
