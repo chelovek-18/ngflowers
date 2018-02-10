@@ -8,7 +8,7 @@ class Route
 {
     constructor() {
         app
-            .listen( 80, () => {
+            .listen( () => {
                 this.allRoutes();
             });
     }

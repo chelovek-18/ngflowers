@@ -18,6 +18,6 @@ if ( cluster.isMaster ) {
 
 } else {
 
-	//new ( require( './route' ) );
+	new ( require( './route' ) );
 	
 }
