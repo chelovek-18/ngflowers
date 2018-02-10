@@ -14,7 +14,7 @@ class Route
     }
 
     allRoutes() {
-        app.use( function( req, res, next ) {
+        app.use( '/q', function( req, res, next ) {
             res.send( 'ok. fuck.' );
         });
     }

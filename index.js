@@ -4,7 +4,6 @@ const
 	fCount = 3, //require( './config/config' ).forkCount,
 	cluster = require( 'cluster' );
 
-/* Форки (количество настраивается в конфиге). Распараллеливание запросов. */
 if ( cluster.isMaster ) {
 
 	for ( let i = 0; i < fCount; i++ )
