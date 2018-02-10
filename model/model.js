@@ -39,7 +39,7 @@ class Model
     constructor() {
 		this.isConn = mongoose.connect( path, options, this.cbk );
 		this.isConn.connection.on( 'disconnected', function() { conn = false; });
-		for ( let key in models )
+		/*for ( let key in models )
 			if ( models[ key ].getSchema ) {
 				let
 					self = this,
@@ -74,7 +74,7 @@ class Model
 							return res.results ? res.results : self.query.apply( self, res );
 						}
 				});
-			}
+			}*/
     }
 
 	// ------------------------------------- Каллбэк при ошибке коннекта -------------------------------------
