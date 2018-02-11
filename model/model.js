@@ -37,8 +37,8 @@ class Model
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
-		this.isConn = mongoose.connect( path, options, this.cbk );
-		this.isConn.connection.on( 'disconnected', function() { conn = false; });
+		//this.isConn = mongoose.connect( path, options, this.cbk );
+		//this.isConn.connection.on( 'disconnected', function() { conn = false; });
 		/*for ( let key in models )
 			if ( models[ key ].getSchema ) {
 				let
