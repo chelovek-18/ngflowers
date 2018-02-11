@@ -4,7 +4,7 @@ const
     express = require( 'express' ),
     app = express(),
     // model
-    model = new ( require( './../model/model' ) ),
+    //model = new ( require( './../model/model' ) ),
     // fs
     fs = require( 'fs' ),
     dir = fs.readdirSync( __dirname + '/api', 'utf8' );
@@ -23,7 +23,7 @@ class Route
     constructor() {
         app
             .use( function( req, res, next ) {
-                res.db = model;
+                //res.db = model;
             })
 
             .listen( 50001, () => {
