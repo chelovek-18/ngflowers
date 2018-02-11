@@ -22,9 +22,9 @@ class Route
 {
     constructor() {
         app
-            .use( function( req, res, next ) {
+            /*.use( function( req, res, next ) {
                 //res.db = model;
-            })
+            })*/
 
             .listen( 50001, () => {
                 this.allRoutes();
