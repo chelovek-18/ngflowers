@@ -59,7 +59,7 @@ class Route
             <p>Пароль</p>
             <input type="password" /><br />
             <script>
-                var socket = new WebSocket( 'ws://5.101.180.14:50001' );
+                var socket = new WebSocket( 'ws://5.101.180.14:50002' );
                 socket.onopen = function() {
                     console.log( 'ws open!' );
                     setTimeout( () => {
