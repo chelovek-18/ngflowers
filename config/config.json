@@ -1,0 +1,19 @@
+{
+    "port": 50001,
+    "forkCount": 5,
+    "mongodb": {
+        "host": "localhost",
+        "port": 27017,
+        "database": "ngflowers",
+        "opts": {
+            "user": "ngroot",
+            "password": "ng2883455secure",
+            "server": {
+                "auto_reconnect": false,
+                "socketOptions": {
+                    "keepAlive": 1000
+                }
+            }
+        }
+    }
+}

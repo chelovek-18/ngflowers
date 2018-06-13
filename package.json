@@ -4,10 +4,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "^4.16.2",
-    "mongoose": "^5.0.4"
+    "mongoose": "^5.0.4",
+    "ws": "^5.2.0"
   }
 }

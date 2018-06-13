@@ -4,7 +4,7 @@ const
     express = require( 'express' ),
     app = express(),
     // model
-    model = new ( require( './../model/model' ) ),
+    //model = new ( require( './../model/model' ) ),
     // fs
     fs = require( 'fs' ),
     dir = fs.readdirSync( __dirname + '/api', 'utf8' );
@@ -13,19 +13,19 @@ let
 	routes = [];
 
 // Подключаем все js файлы из папки api
-dir.forEach( ( fnm ) => {
+/*dir.forEach( ( fnm ) => {
 	if ( fnm.split( '.' )[ 1 ] == 'js' ) routes.push( require( './api/' + fnm ) );
-});
+});*/
 
 
 class Route
 {
     constructor() {
         app
-            .use( function( req, res, next ) {
+            /*.use( function( req, res, next ) {
                 res.db = model;
                 next();
-            })
+            })*/
 
             .listen( 50001, () => {
                 this.allRoutes();
@@ -34,8 +34,19 @@ class Route
 
     allRoutes() {
         // Все маршруты
-        routes.forEach( ( route ) => {
+        /*routes.forEach( ( route ) => {
             if ( route.use ) app.use( '/app/', route );
+        });*/
+        app.get( '/', ( req, res, next ) => {
+            res.send( 'Чудо-система' );
+        });
+        app.get( '/login/', ( req, res, next ) => {
+            res.send( `
+            <p>Логин</p>
+            <input type="text" /><br />
+            <p>Пароль</p>
+            <input type="password" /><br />
+            ` )
         });
     }
 }
