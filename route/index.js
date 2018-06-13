@@ -80,13 +80,15 @@ class Route
         });
         app.get( '/admin/', ( req, res, next ) => {
             res.send(`
-            <ul style="float: left;">
+            <ul style="float: left; height: 500px; margin-right: 50px;">
+                <li><h1>Меню</h1></li>
                 <li><a href="#">Настройки</a></li>
                 <li><a href="#">Страницы</a></li>
                 <li><a href="#">Чат</a></li>
                 <li><a href="#">Активность</a></li>
             </ul>
             <div>
+                <p>&nbsp;</p>
                 <h1>Настройки</h1>
                 <p>Порт</p>
                 <input type="text" value="50001" /><br />
