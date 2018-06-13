@@ -36,7 +36,7 @@ class Route
                 this.allRoutes();
             });
 
-        server.listen( 50001 );
+        server.listen( 50002 );
         wss.on( 'connection', function connection( ws ) {
             ws.on( 'message', function ( message ) {
                 ws.send( `ok, ${ message }` );
