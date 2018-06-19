@@ -36,13 +36,13 @@ class Route
         app
             .engine( '.html', handlebars({
                 'defaultLayout': 'main',
-                'layoutsDir': './../view',
-                'partialsDir': './../view',
+                'layoutsDir': './../views',
+                'partialsDir': './../views',
                 'extname': '.html'
             }))
 
             .set( 'view engine', '.html' )
-            .set( 'views', './../view' )
+            .set( 'views', './../views' )
 
             .use( express.static( __dirname + '/../public' ) )
             .use( bodyParser.json() )
