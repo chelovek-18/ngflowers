@@ -7,6 +7,10 @@
         "secret": "ngflowers777",
         "maxAge": 60000
     },
+    "user": {
+        "login": "admin",
+        "password": "admins"
+    },
     "process": {
         "forkCount": 5
     },

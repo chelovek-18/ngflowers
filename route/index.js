@@ -3,6 +3,7 @@
 const
     // express
     express = require( 'express' ),
+    bodyParser = require( 'body-parser' ),
     session = require( 'express-session' ),
     app = express(),
 
@@ -33,6 +34,8 @@ class Route
         // Настройки app и запуск сервера
         app
             .use( express.static( __dirname + '/../public' ) )
+            .use( bodyParser.json() )
+            .use( bodyParser.urlencoded( { extended: true } ) )
             .use( session({
                 'secret': global.appConf.session.secret,
                 'resave': false,
@@ -67,8 +70,13 @@ class Route
             if ( route.use ) app.use( '/app/', route );
         });*/
         app.use( ( req, res, next ) => {
-            if ( !req.session.user )
-                throw 401;
+            if ( !req.session.user ) {
+                if (
+                    req.body.login
+                    && req.body.login == 'admin'
+                ) req.body.user = req.body.login;
+                else throw 401;
+            }
 
             next();
         });
@@ -156,7 +164,14 @@ class Route
         });
 
         app.use( ( err, req, res, next ) => {
-            if ( err == 401 ) res.send( 'Аффтаризуйсо!' );
+            if ( err == 401 ) res.send(`
+            <form method="POST" action="/">
+                <p>Логин</p>
+                <input type="text" name="login" /><br />
+                <p>Пароль</p>
+                <input type="password"name="password" /><br />
+            </form>
+            `);
             else res.send( err );
         });
     }
