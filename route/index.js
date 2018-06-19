@@ -157,7 +157,7 @@ class Route
 
         app.use( ( err, req, res, next ) => {
             if ( err == 401 ) res.send( 'Аффтаризуйсо!' );
-            res.send( err );
+            else res.send( err );
         });
     }
 }
