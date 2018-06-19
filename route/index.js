@@ -36,6 +36,8 @@ class Route
         app
             .engine( '.html', handlebars({
                 'defaultLayout': 'main',
+                'layoutsDir': './../view',
+                'partialsDir': './../view',
                 'extname': '.html'
             }))
 
