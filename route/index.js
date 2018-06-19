@@ -5,6 +5,7 @@ const
     express = require( 'express' ),
     bodyParser = require( 'body-parser' ),
     session = require( 'express-session' ),
+    handlebars = require( 'express-handlebars' ),
     app = express(),
 
 
@@ -33,6 +34,14 @@ class Route
     constructor() {
         // Настройки app и запуск сервера
         app
+            .engine( '.html', handlebars({
+                'defaultLayout': 'main',
+                'extname': '.html'
+            }))
+
+            .set( 'view engine', '.html' )
+            .set( 'views', './../view' )
+
             .use( express.static( __dirname + '/../public' ) )
             .use( bodyParser.json() )
             .use( bodyParser.urlencoded( { extended: true } ) )
@@ -164,14 +173,15 @@ class Route
         });
 
         app.use( ( err, req, res, next ) => {
-            if ( err == 401 ) res.send(`
+            if ( err == 401 ) res.render( 'partials/login', {} );
+            /*res.send(`
             <form method="POST" action="/">
                 <p>Логин</p>
                 <input type="text" name="login" /><br />
                 <p>Пароль</p>
                 <input type="password"name="password" /><br />
             </form>
-            `);
+            `);*/
             else res.send( err );
         });
     }
