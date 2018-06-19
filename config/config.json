@@ -1,6 +1,15 @@
 {
-    "port": 50001,
-    "forkCount": 5,
+    "location": {
+        "port": 50001,
+        "ws": 50002
+    },
+    "session": {
+        "secret": "ngflowers777",
+        "maxAge": 60000
+    },
+    "process": {
+        "forkCount": 5
+    },
     "mongodb": {
         "host": "localhost",
         "port": 27017,

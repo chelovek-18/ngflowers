@@ -1,9 +1,12 @@
 'use strict';
 
 const
+    // express
     express = require( 'express' ),
-    http = require( 'http' ),
     app = express(),
+
+
+    http = require( 'http' ),
 
     server = http.createServer( app ),
     WebSocket = require( 'ws' ),
@@ -14,8 +17,8 @@ const
     fs = require( 'fs' ),
     dir = fs.readdirSync( __dirname + '/api', 'utf8' );
 
-let
-	routes = [];
+/*let
+	routes = [];*/
 
 // Подключаем все js файлы из папки api
 /*dir.forEach( ( fnm ) => {
@@ -26,30 +29,49 @@ let
 class Route
 {
     constructor() {
+        // Настройки app и запуск сервера
         app
+            .use( express.static( __dirname + '/../public' ) )
+            .use( session({
+                'secret': global.appConf.session.secret,
+                'resave': false,
+                'saveUninitialized': true,
+                'httpOnly': true,
+                'cookie': {
+                    'expires': new Date( Date.now() + global.appConf.session.maxAge ),
+                    'maxAge': global.appConf.session.maxAge
+                }
+            }))
             /*.use( function( req, res, next ) {
                 res.db = model;
                 next();
             })*/
 
-            .listen( 50001, () => {
-                this.allRoutes();
+            .listen( global.appConf.location.port, () => {
+                this.routes();
             });
 
-        server.listen( 50002 );
+        // Web-socket
+        server.listen( global.appConf.location.ws );
         wss.on( 'connection', function connection( ws ) {
-            ws.on( 'message', function ( message ) {
+            /*ws.on( 'message', function ( message ) {
                 ws.send( `ok, ${ message }` );
-            });
+            });*/
         });
     }
 
-    allRoutes() {
+    routes() {
         // Все маршруты
         /*routes.forEach( ( route ) => {
             if ( route.use ) app.use( '/app/', route );
         });*/
-        app.use( express.static( __dirname + '/../public' ) );
+        app.use( ( req, res, next ) => {
+            if ( !req.session.user )
+                throw 401;
+
+            next();
+        });
+
         app.get( '/', ( req, res, next ) => {
             res.send( 'Чудо-система' );
         });
@@ -130,6 +152,10 @@ class Route
                 </table>
             </div>
             `);
+        });
+
+        app.use( ( err, req, res, next ) => {
+            res.send( 'Ашыпко!' );
         });
     }
 }

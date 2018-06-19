@@ -6,7 +6,7 @@ const cluster = require( 'cluster' );
 
 if ( cluster.isMaster ) {
 
-	for ( let i = 0; i < global.appConf.forkCount; i++ )
+	for ( let i = 0; i < global.appConf.process.forkCount; i++ )
 		cluster.fork();
 	cluster.on( 'exit', ( worker, code, signal ) => {
 		console.log( `Процесс ${ worker.process.pid } прибит` );
