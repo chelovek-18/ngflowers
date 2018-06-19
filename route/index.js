@@ -156,7 +156,8 @@ class Route
         });
 
         app.use( ( err, req, res, next ) => {
-            res.send( 'Ашыпко!' );
+            if ( err == 401 ) res.send( 'Аффтаризуйсо!' );
+            res.send( err );
         });
     }
 }
