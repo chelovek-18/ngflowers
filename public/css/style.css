@@ -1,8 +1,14 @@
 /* ALL */
 
+@font-face {
+    font-family: FuturaBookC;
+    src: url(../fonts/futurabookc.otf);
+}
+
 body {
     margin: 0;
     padding: 0;
+    font-family: FuturaBookC;
 }
 
 #abs-wrapper {
