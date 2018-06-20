@@ -12,7 +12,7 @@ router.use( ( req, res, next ) => {
             && req.body.login == 'admin'
         ) {
             req.session.user = req.body.login;
-            res.send( req.body.login );
+            res.send( req.body.login + ' -- ' + JSON.stringify( req.session ) );
             //res.redirect( '/' );
         } else res.render( 'partials/login' );
     }
