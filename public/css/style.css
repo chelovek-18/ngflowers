@@ -80,3 +80,13 @@ body {
     color: #ffffff;
     /*transition: all 0.5s ease-in-out;*/
 }
+
+/* MENU */
+
+#menu {
+    height: 100%;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    background: #444444;
+}

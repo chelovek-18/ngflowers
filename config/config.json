@@ -5,7 +5,7 @@
     },
     "session": {
         "secret": "ngflowers777",
-        "maxAge": 60000
+        "maxAge": 1800000
     },
     "user": {
         "login": "admin",

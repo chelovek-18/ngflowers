@@ -83,26 +83,19 @@ class Route
         /*routes.forEach( ( route ) => {
             if ( route.use ) app.use( '/app/', route );
         });*/
+        //router.get('/attribute-search/', require(__dirname +'/get/attribute-search'));
         app.get( '/bg/', ( req, res, next ) => {
             res.send( `
             <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center;">
-                <img src="img/serv.png" style="margin: 0 auto;" />
+                <img src="img/serv2.png" style="margin: 0 auto;" />
             </div>
             ` )
         });
-        app.use( ( req, res, next ) => {
-            if ( !req.session.user ) {
-                if (
-                    req.body.login
-                    && req.body.login == 'admin'
-                ) {
-                    req.session.user = req.body.login;
-                    res.redirect( '/' );
-                } else throw 401;
-            }
 
-            next();
-        });
+        app.use( require( './api/auth' ) );
+
+        app.use( require( './api/admin' ) );
+
 
         app.get( '/', ( req, res, next ) => {
             res.send( 'Чудо-система' );
@@ -178,16 +171,9 @@ class Route
             </div>
             `);
         });
-        app.get( '/logout/', ( req, res, next ) => {
-            delete req.session.user;
-            req.session.destroy();
-            throw 401;
-        });
 
         app.use( ( err, req, res, next ) => {
-            if ( err == 401 )
-                res.render( 'partials/login' );
-            else res.send( err );
+            res.send( err );
         });
     }
 }
