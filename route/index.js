@@ -95,8 +95,10 @@ class Route
                 if (
                     req.body.login
                     && req.body.login == 'admin'
-                ) req.session.user = req.body.login;
-                else throw 401;
+                ) {
+                    req.session.user = req.body.login;
+                    res.redirect( '/admin' );
+                } else throw 401;
             }
 
             next();
