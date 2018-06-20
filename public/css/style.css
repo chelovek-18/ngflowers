@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: FuturaBookC;
-    font-size: 28px;
+    font-size: 26px;
 }
 
 #abs-wrapper {
@@ -27,7 +27,7 @@ body {
     padding: 0;
     text-align: center;
     margin: 0 auto;
-    font-size: 28px;
+    font-size: 26px;
     /* ! */
     margin-top: 189px;
 }
@@ -40,7 +40,7 @@ body {
     border-radius: 10px;
     border: 2px #444444 solid;
     background: #ffffff;
-    padding: 20px;
+    padding: 38px 71px;
     box-sizing: border-box;
     margin-top: 97px;
 }
@@ -51,13 +51,16 @@ body {
 
 #auth form label {
     float: left;
-    width: 200px;
+    width: 150px;
     text-align: left;
 }
 
 #auth form input {
     border: 2px #444444 solid;
-    font-size: 28px;
+    font-size: 26px;
+    line-height: 28px;
+    /* ! */
+    max-width: 300px;
 }
 
 #authsubm {
@@ -66,6 +69,7 @@ body {
     border: 2px #ff0010 solid !important;
     border-radius: 10px;
     background: none;
-    padding: 3px 15px;
+    padding: 8px 60px;
     cursor: pointer;
+    margin-top: 37px;
 }
