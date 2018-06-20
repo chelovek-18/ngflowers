@@ -91,23 +91,7 @@ class Route
             </div>
             ` )
         });
-        app.use( ( req, res, next ) => {
-            let gemors = req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
-            if ( !req.session.user ) {
-                if (
-                    req.body.login
-                    && req.body.login == 'admin'
-                ) {
-                    req.session.user = req.body.login;
-                    gemors += req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
-                    res.send( gemors );
-                    //res.redirect( '/' );
-                } else res.render( 'partials/login' );
-            }
-        
-            else next();
-        });
-        
+
         app.use( require( './api/auth' ) );
 
         app.use( require( './api/admin' ) );

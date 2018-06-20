@@ -5,22 +5,19 @@ const
     router = express.Router();
 
 // ------------------------------------- Авторизация -------------------------------------
-/*router.use( ( req, res, next ) => {
-    let gemors = req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
+router.use( ( req, res, next ) => {
     if ( !req.session.user ) {
         if (
             req.body.login
             && req.body.login == 'admin'
         ) {
             req.session.user = req.body.login;
-            gemors += req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
-            res.send( gemors );
-            //res.redirect( '/' );
+            res.redirect( '/' );
         } else res.render( 'partials/login' );
     }
 
     else next();
-});*/
+});
 
 router.get( '/logout/', ( req, res, next ) => {
     req.session.destroy();
