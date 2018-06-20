@@ -178,15 +178,8 @@ class Route
         });
 
         app.use( ( err, req, res, next ) => {
-            if ( err == 401 ) res.render( 'partials/login', {} );
-            /*res.send(`
-            <form method="POST" action="/">
-                <p>Логин</p>
-                <input type="text" name="login" /><br />
-                <p>Пароль</p>
-                <input type="password"name="password" /><br />
-            </form>
-            `);*/
+            if ( err == 401 )
+                res.render( 'partials/login' );
             else res.send( err );
         });
     }

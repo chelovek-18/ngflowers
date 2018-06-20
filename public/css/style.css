@@ -1,0 +1,25 @@
+/* ALL */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#abs-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #eeeeee;
+}
+
+/* LOGIN */
+
+#auth {
+    padding: 0;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#logo {}
