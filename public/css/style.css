@@ -37,7 +37,7 @@ body {
 #auth form {
     margin: 0 auto;
     width: 600px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 2px #444444 solid;
     background: #ffffff;
     padding: 20px;
@@ -48,8 +48,17 @@ body {
 #auth form label {
     float: left;
     width: 200px;
+    text-align: left;
 }
 
 #auth form input {
     border: 2px #444444 solid;
+    font-size: 28px;
+}
+
+#authsubm {
+    line-height: 30px;
+    color: #ff0010;
+    border: 2px #ff0010 solid;
+    border-radius: 10px;
 }
