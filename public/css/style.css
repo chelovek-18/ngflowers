@@ -27,10 +27,18 @@ body {
 #logo {}
 
 #auth form {
+    margin: 0 auto;
+    width: 600px;
     border-radius: 5px;
     border: 2px #444444 solid;
     background: #ffffff;
     padding: 20px;
     box-sizing: border-box;
-    margin: 5px;
+    margin-top: 97px;
+    font-size: 20px;
+}
+
+#auth form label {
+    float: left;
+    width: 200px;
 }
