@@ -83,6 +83,13 @@ class Route
         /*routes.forEach( ( route ) => {
             if ( route.use ) app.use( '/app/', route );
         });*/
+        app.get( '/bg/', ( req, res, next ) => {
+            res.send( `
+            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center;">
+                <img src="img/serv.png" style="margin: 0 auto;" />
+            </div>
+            ` )
+        });
         app.use( ( req, res, next ) => {
             if ( !req.session.user ) {
                 if (
@@ -97,13 +104,6 @@ class Route
 
         app.get( '/', ( req, res, next ) => {
             res.send( 'Чудо-система' );
-        });
-        app.get( '/bg/', ( req, res, next ) => {
-            res.send( `
-            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center;">
-                <img src="img/serv.png" style="margin: 0 auto;" />
-            </div>
-            ` )
         });
         app.get( '/login/', ( req, res, next ) => {
             res.send( `
