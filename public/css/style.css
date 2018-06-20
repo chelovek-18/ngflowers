@@ -45,6 +45,10 @@ body {
     margin-top: 97px;
 }
 
+#auth form p {
+    margin: 16px 0;
+}
+
 #auth form label {
     float: left;
     width: 200px;
@@ -59,6 +63,9 @@ body {
 #authsubm {
     line-height: 30px;
     color: #ff0010;
-    border: 2px #ff0010 solid;
+    border: 2px #ff0010 solid !important;
     border-radius: 10px;
+    background: none;
+    padding: 3px 15px;
+    cursor: pointer;
 }
