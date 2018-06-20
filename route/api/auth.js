@@ -6,7 +6,7 @@ const
 
 // ------------------------------------- Авторизация -------------------------------------
 router.use( ( req, res, next ) => {
-    res.send( req.body.login + ' ?? ' + req.session );
+    res.send( req.body.login + ' ?? ' + JSON.stringify( req.session ) );
     if ( !req.session.user ) {
         if (
             req.body.login
