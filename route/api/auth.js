@@ -6,13 +6,13 @@ const
 
 // ------------------------------------- Авторизация -------------------------------------
 router.use( ( req, res, next ) => {
-    if ( !req.session.cookie.user ) {
+    if ( !req.session.user ) {
         if (
             req.body.login
             && req.body.login == 'admin'
         ) {
-            req.session.cookie.user = req.body.login;
-            res.send( JSON.stringify( req.session ) );
+            req.session.user = req.body.login;
+            res.send( JSON.stringify( req.session ) + '-' + req.session.user );
             //res.redirect( '/' );
         } else res.render( 'partials/login' );
     }
