@@ -97,7 +97,7 @@ class Route
                     && req.body.login == 'admin'
                 ) {
                     req.session.user = req.body.login;
-                    res.redirect( '/admin' );
+                    res.redirect( '/' );
                 } else throw 401;
             }
 
@@ -179,6 +179,7 @@ class Route
             `);
         });
         app.get( '/logout/', ( req, res, next ) => {
+            delete req.session.user;
             req.session.destroy();
             throw 401;
         });
