@@ -5,7 +5,7 @@ const
     router = express.Router();
 
 // ------------------------------------- Авторизация -------------------------------------
-router.use( ( req, res, next ) => {
+/*router.use( ( req, res, next ) => {
     let gemors = req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
     if ( !req.session.user ) {
         if (
@@ -20,7 +20,7 @@ router.use( ( req, res, next ) => {
     }
 
     else next();
-});
+});*/
 
 router.get( '/logout/', ( req, res, next ) => {
     req.session.destroy();
