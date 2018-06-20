@@ -12,7 +12,8 @@ router.use( ( req, res, next ) => {
             && req.body.login == 'admin'
         ) {
             req.session.cookie.user = req.body.login;
-            res.redirect( '/' );
+            res.send( JSON.stringify( req.session ) );
+            //res.redirect( '/' );
         } else res.render( 'partials/login' );
     }
 
