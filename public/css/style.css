@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: FuturaBookC;
+    font-size: 28px;
 }
 
 #abs-wrapper {
@@ -26,6 +27,7 @@ body {
     padding: 0;
     text-align: center;
     margin: 0 auto;
+    font-size: 28px;
     /* ! */
     margin-top: 189px;
 }
@@ -41,10 +43,13 @@ body {
     padding: 20px;
     box-sizing: border-box;
     margin-top: 97px;
-    font-size: 20px;
 }
 
 #auth form label {
     float: left;
     width: 200px;
+}
+
+#auth form input {
+    border: 2px #444444 solid;
 }
