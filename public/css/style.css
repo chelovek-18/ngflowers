@@ -58,7 +58,7 @@ body {
 #auth form input {
     border: 2px #444444 solid;
     font-size: 26px;
-    line-height: 28px;
+    line-height: 32px;
     /* ! */
     max-width: 300px;
 }
@@ -72,4 +72,11 @@ body {
     padding: 8px 60px;
     cursor: pointer;
     margin-top: 37px;
+    transition: all 1s ease-in-out;
+}
+
+#authsubm:hover {
+    background: #ff0010;
+    color: #ffffff;
+    transition: all 1s ease-in-out;
 }
