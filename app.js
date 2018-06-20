@@ -1,6 +1,7 @@
 'use strict';
 
 global.appConf = require( './config/config' );
+global.appConf.location.root = __dirname;
 
 const cluster = require( 'cluster' );
 

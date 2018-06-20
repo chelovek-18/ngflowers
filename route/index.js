@@ -14,6 +14,9 @@ const
     server = http.createServer( app ),
     WebSocket = require( 'ws' ),
     wss = new WebSocket.Server({ server }),
+
+    // paths
+    viewsPath = global.appConf.location.root + '/views',
     // model
     //model = new ( require( './../model/model' ) ),
     // fs
@@ -36,13 +39,13 @@ class Route
         app
             .engine( '.html', handlebars({
                 'defaultLayout': 'main',
-                'layoutsDir': './../views',
-                'partialsDir': './../views',
+                'layoutsDir': viewsPath,
+                'partialsDir': viewsPath,
                 'extname': '.html'
             }))
 
             .set( 'view engine', '.html' )
-            .set( 'views', './../views' )
+            .set( 'views', viewsPath )
 
             .use( express.static( __dirname + '/../public' ) )
             .use( bodyParser.json() )
