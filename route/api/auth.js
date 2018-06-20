@@ -13,7 +13,7 @@ router.use( ( req, res, next ) => {
             && req.body.login == 'admin'
         ) {
             req.session.user = req.body.login;
-            gemors = req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
+            gemors += req.session.user + ' <-> ' + JSON.stringify( req.session ) + ' <-> ';
             res.send( gemors );
             //res.redirect( '/' );
         } else res.render( 'partials/login' );
