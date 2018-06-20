@@ -20,6 +20,17 @@ body {
     padding: 0;
     text-align: center;
     margin: 0 auto;
+    /* ! */
+    margin-top: 189px;
 }
 
 #logo {}
+
+#auth form {
+    border-radius: 5px;
+    border: 2px #444444 solid;
+    background: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 5px;
+}
