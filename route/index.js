@@ -95,7 +95,7 @@ class Route
                 if (
                     req.body.login
                     && req.body.login == 'admin'
-                ) req.body.user = req.body.login;
+                ) req.session.user = req.body.login;
                 else throw 401;
             }
 
@@ -175,6 +175,10 @@ class Route
                 </table>
             </div>
             `);
+        });
+        app.get( '/logout/', ( req, res, next ) => {
+            req.session.destroy();
+            throw 401;
         });
 
         app.use( ( err, req, res, next ) => {
