@@ -115,7 +115,7 @@ class Route
         });*/
                 //app.use( require( './api/auth' ) );
 
-        app.use( require( './api/admin' ) );
+        //app.use( require( './api/admin' ) );
 
 
         app.get( '/', ( req, res, next ) => {
