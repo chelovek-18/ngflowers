@@ -4,7 +4,7 @@ global.appConf = require( './config/config' );
 global.appConf.location.root = __dirname;
 global.appConf.session.maxAge += 10800000;
 
-const cluster = require( 'cluster' );
+/*const cluster = require( 'cluster' );
 
 if ( cluster.isMaster ) {
 
@@ -21,4 +21,5 @@ if ( cluster.isMaster ) {
 
 	new ( require( './route' ) );
 	
-}
+}*/
+new ( require( './route' ) );
