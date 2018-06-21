@@ -70,12 +70,12 @@ class Route
             });
 
         // Web-socket
-        server.listen( global.appConf.location.ws );
-        wss.on( 'connection', function connection( ws ) {
+        //server.listen( global.appConf.location.ws );
+        //wss.on( 'connection', function connection( ws ) {
             /*ws.on( 'message', function ( message ) {
                 ws.send( `ok, ${ message }` );
             });*/
-        });
+        //});
     }
 
     routes() {
@@ -109,10 +109,10 @@ class Route
             else next();
         });
         
-        app.get( '/logout/', ( req, res, next ) => {
+        /*app.get( '/logout/', ( req, res, next ) => {
             req.session.destroy();
             throw 401;
-        });
+        });*/
                 //app.use( require( './api/auth' ) );
 
         app.use( require( './api/admin' ) );
