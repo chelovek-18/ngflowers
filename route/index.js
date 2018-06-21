@@ -54,7 +54,7 @@ class Route
                 'secret': global.appConf.session.secret,
                 'resave': false,
                 'saveUninitialized': true,
-                'httpOnly': true,
+                //'httpOnly': true,
                 'cookie': {
                     'expires': new Date( Date.now() + global.appConf.session.maxAge ),
                     'maxAge': global.appConf.session.maxAge
