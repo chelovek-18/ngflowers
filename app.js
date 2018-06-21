@@ -2,6 +2,7 @@
 
 global.appConf = require( './config/config' );
 global.appConf.location.root = __dirname;
+global.appConf.session.maxAge += 10800000;
 
 const cluster = require( 'cluster' );
 
