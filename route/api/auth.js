@@ -13,7 +13,7 @@ router.use( ( req, res, next ) => {
         ) {
             req.session.user = req.body.login;
             res.redirect( '/' );
-        } else res.render( 'partials/login' );
+        } else res.status( 401 ).render( 'partials/login' );
     }
 
     else next();
