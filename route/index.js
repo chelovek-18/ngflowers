@@ -93,6 +93,7 @@ class Route
         });
 
         app.use( ( req, res, next ) => {
+            console.log( req.session );
             if ( !req.session.user ) {
                 if (
                     req.body.login
