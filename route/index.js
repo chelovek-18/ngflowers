@@ -101,7 +101,8 @@ class Route
                     && req.body.login == 'admin'
                 ) {
                     req.session.user = req.body.login;
-                    res.redirect( '/' );
+                    //res.redirect( '/' );
+                    res.status( 200 ).send( 'e-e-e-e!' );
                 } else res.status( 401 ).render( 'partials/login' );
             }
         
