@@ -6,7 +6,23 @@ global.appConf.session.maxAge += 10800000;
 
 const cluster = require( 'cluster' );
 
-if ( cluster.isMaster ) {
+const fork = require( 'child_process' ).fork;
+
+let forks = [];
+
+let env = {
+	isWorker: true
+}
+
+if ( !process.env.isWorker ) for ( let i = 0; i < global.appConf.process.forkCount; i++ ) {
+	forks.push( fork( __dirname + '/app.js', [], { env: env } ) );
+} else {
+	console.log( 'new worker!' );
+
+	new ( require( './route' ) );
+}
+
+/*if ( cluster.isMaster ) {
 
 	for ( let i = 0; i < global.appConf.process.forkCount; i++ )
 		cluster.fork();
@@ -22,4 +38,4 @@ if ( cluster.isMaster ) {
 
 	new ( require( './route' ) );
 	
-}
+}*/
