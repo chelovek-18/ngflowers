@@ -9,10 +9,7 @@
     },
     "user": {
         "login": "admin",
-        "password": "admins"
-    },
-    "process": {
-        "forkCount": 5
+        "password": "admin"
     },
     "mongodb": {
         "host": "localhost",
