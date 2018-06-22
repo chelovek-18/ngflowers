@@ -92,7 +92,7 @@ class Route
             ` )
         });*/
 
-        app.use( ( req, res, next ) => {
+        /*app.use( ( req, res, next ) => {
             console.log( 'sess', req.session );
             console.log( 'body', req.body );
             if ( !req.session.user ) {
@@ -113,7 +113,7 @@ class Route
             req.session.destroy();
             throw 401;
         });*/
-                //app.use( require( './api/auth' ) );
+        app.use( require( './api/auth' ) );
 
         //app.use( require( './api/admin' ) );
 
