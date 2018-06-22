@@ -6,7 +6,7 @@ global.appConf.session.maxAge += 10800000;
 
 const cluster = require( 'cluster' );
 
-const fork = require( 'child_process' ).fork;
+/*const fork = require( 'child_process' ).fork;
 
 let forks = [];
 
@@ -20,11 +20,11 @@ if ( !process.env.isWorker ) for ( let i = 0; i < global.appConf.process.forkCou
 	console.log( 'new worker!' );
 
 	new ( require( './route' ) );
-}
+}*/
 
-/*if ( cluster.isMaster ) {
+if ( cluster.isMaster ) {
 
-	for ( let i = 0; i < global.appConf.process.forkCount; i++ )
+	//for ( let i = 0; i < global.appConf.process.forkCount; i++ )
 		cluster.fork();
 	cluster.on( 'exit', ( worker, code, signal ) => {
 		console.log( `Процесс ${ worker.process.pid } прибит` );
@@ -38,4 +38,4 @@ if ( !process.env.isWorker ) for ( let i = 0; i < global.appConf.process.forkCou
 
 	new ( require( './route' ) );
 	
-}*/
+}
