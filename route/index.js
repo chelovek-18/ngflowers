@@ -120,7 +120,7 @@ class Route
 
         app.use( require( './api/auth' ) );
 
-        app.use( require( './api/admin' ) );
+        app.use( require( './api/admin.js' ) );
 
         app.get( '/admin/', ( req, res, next ) => {
             res.send(`
