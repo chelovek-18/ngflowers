@@ -13,9 +13,9 @@ router.use( ( req, res, next ) => {
     }
 });
 
-app.use( '/', require( './admin/settings' ) );
+router.use( '/', require( './admin/settings' ) );
 
-app.use( '/settings/', require( './admin/settings' ) );
+router.use( '/settings/', require( './admin/settings' ) );
 
 /*router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', req.pageSettings( 'settings' ) );
