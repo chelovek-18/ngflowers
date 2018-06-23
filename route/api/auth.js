@@ -6,6 +6,7 @@ const
 
 // ------------------------------------- Авторизация -------------------------------------
 router.use( async ( req, res, next ) => {
+    req.db.users().delete();
     if ( !req.session.user ) {
         if (
             req.body.login

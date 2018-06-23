@@ -78,6 +78,9 @@ class Model
 			model.query.save = function( data ) {
 				return self.query( collection, 'save', data );
 			}
+			model.query.delete = function( data ) {
+				return self.query( collection, 'delete', ( data || {} ) );
+			}
 			if ( collection == 'users' ) model.query.hashing = function( data ) {
 				return crypto
 					.createHmac( 'sha1', data.salt )
@@ -172,6 +175,8 @@ class Model
 			case 'get':
 			case 'find':
 				return q.find.apply( models[ collection ].query, data );
+			case 'delete':
+				return q.deleteMany( data ).exec();
 		}
 	}
 

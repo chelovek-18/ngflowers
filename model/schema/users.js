@@ -23,6 +23,10 @@ class UsersCollection
             salt: {
                 type: String,
                 required: true
+            },
+            role: {
+                type: String,
+                default: ''
             }
         });
     }
