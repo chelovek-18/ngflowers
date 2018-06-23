@@ -66,7 +66,7 @@ class Model
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
-		mongoose.connect( path );
+		//mongoose.connect( path );
 		/*Object.keys( models ).forEach( collection => {
 			let
 				model = models[ collection ],
