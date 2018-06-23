@@ -66,8 +66,8 @@ class Model
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
-		//mongoose.connect( path );
-		/*Object.keys( models ).forEach( collection => {
+		mongoose.connect( path );
+		Object.keys( models ).forEach( collection => {
 			let
 				model = models[ collection ],
 				schema = model.getSchema( Schema );
@@ -83,7 +83,7 @@ class Model
 					// --- ?
 				}
 			});
-		});*/
+		});
 
 		//this.isConn = mongoose.connect( path, options, this.cbk );
 		//this.isConn.connection.on( 'disconnected', function() { conn = false; });
