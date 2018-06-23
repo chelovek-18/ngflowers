@@ -87,13 +87,13 @@ class Route
             if ( route.use ) app.use( '/app/', route );
         });*/
         //router.get('/attribute-search/', require(__dirname +'/get/attribute-search'));
-        /*app.get( '/bg/', ( req, res, next ) => {
+        app.get( '/bg/', ( req, res, next ) => {
             res.send( `
             <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center;">
                 <img src="img/serv2.png" style="margin: 0 auto;" />
             </div>
             ` )
-        });*/
+        });
 
         /*app.use( ( req, res, next ) => {
             console.log( 'sess', req.session );

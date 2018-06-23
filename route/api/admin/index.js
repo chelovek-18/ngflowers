@@ -6,26 +6,16 @@ const
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
-    res.pageSettings = pagename => {
-        return {
-            page: pagename
-        }
+    res.pageSettings = {
+        main: global.appConf.roles[ req.session.role ].main
     }
 
     next();
 });
 
-//router.get( '/', ( req, res, next ) => {
-    //res.send( 'WTF?????' );
-    //res.render( 'partials/page', req.pageSettings( 'settings' ) );
-//});
-router.use( '/', require( './settings' ) );
+router.use( '/', require( './' + res.pageSettings.main ) );
 
 router.use( '/settings/', require( './settings' ) );
-
-/*router.get( '/', ( req, res, next ) => {
-    res.render( 'partials/page', req.pageSettings( 'settings' ) );
-});*/
 
 /*router.get( '/params/cities', function( req, res, next ) {
     let cities = [ 'spb', 'msk' ];

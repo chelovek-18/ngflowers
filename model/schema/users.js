@@ -41,7 +41,7 @@ class UsersCollection
     async create( db, data ) {
         data.hashedPassword = this.hashing( db, data );
         delete data.password;
-        db.users().save( data );
+        await db.users().save( data );
         return data;
     }
 

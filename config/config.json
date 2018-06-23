@@ -1,7 +1,12 @@
 {
     "location": {
         "port": 50001,
-        "ws": 50002
+        "ws": 50002,
+        "pages": {
+            "settings": {
+                "access": [ "root", "admin" ]
+            }
+        }
     },
     "session": {
         "secret": "ngflowers777",
@@ -14,10 +19,16 @@
     },
     "roles": {
         "root": {
-            "name": "Root"
+            "name": "Root",
+            "main": "settings"
         },
         "admin": {
-            "name": "Администратор"
+            "name": "Администратор",
+            "main": "settings"
+        },
+        "operator": {
+            "name": "Оператор",
+            "main": ""
         }
     },
     "mongodb": {
