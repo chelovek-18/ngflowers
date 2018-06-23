@@ -13,9 +13,12 @@ router.use( ( req, res, next ) => {
     }
 });
 
-router.get( '/', require( './admin0/settings' ) );
+router.get( '/', ( req, res, next ) => {
+    res.render( 'partials/page', req.pageSettings( 'settings' ) );
+});
+//router.get( '/', require( './admin0/settings' ) );
 
-router.use( '/settings/', require( './admin0/settings' ) );
+//router.use( '/settings/', require( './admin0/settings' ) );
 
 /*router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', req.pageSettings( 'settings' ) );
