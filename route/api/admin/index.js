@@ -19,7 +19,7 @@ const
 //});
 router.use( '/', require( './settings' ) );
 
-//router.use( '/settings/', require( './admin0/settings' ) );
+router.use( '/settings/', require( './settings' ) );
 
 /*router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', req.pageSettings( 'settings' ) );
