@@ -24,7 +24,8 @@ class UsersCollection
         });
     }
 
-    auth( db, login, password ) {
+    async auth( db, login, password ) {
+        //db.users().find()
         return global.appConf.user.login == login && global.appConf.user.password == password;
     }
 }
