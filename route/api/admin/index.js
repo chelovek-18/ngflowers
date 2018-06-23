@@ -5,13 +5,15 @@ const
     router = express.Router();
 
 // ------------------------------------- Админка -------------------------------------
-/*router.use( ( req, res, next ) => {
+router.use( ( req, res, next ) => {
     req.pageSettings = pagename => {
         return {
             page: pagename
         }
     }
-});*/
+
+    next();
+});
 
 //router.get( '/', ( req, res, next ) => {
     //res.send( 'WTF?????' );
