@@ -10,16 +10,16 @@ const
 	
 	// options
 	path = 'mongodb://'
-		+ global.appConf.mongodb.user
+		+ ( global.appConf.mongodb.user
 			? `${ global.appConf.mongodb.user }:${ global.appConf.mongodb.password }@`
-			: ''
-		+ !~global.appConf.mongodb.host.indexOf( ':' )
+			: '' )
+		+ ( !~global.appConf.mongodb.host.indexOf( ':' )
 			? `${ global.appConf.mongodb.host }:${ global.appConf.mongodb.port }`
-			: global.appConf.mongodb.host
+			: global.appConf.mongodb.host )
 		+ `/${ global.appConf.mongodb.database }`
-		+ global.appConf.mongodb.replica
+		+ ( global.appConf.mongodb.replica
 			? `?replicaSet=${ global.appConf.mongodb.replica }`
-			: '',
+			: '' ),
 	dir = fs.readdirSync( __dirname + '/schema', 'utf8' );
 
 mongoose.Promise = global.Promise;

@@ -6,7 +6,7 @@ const
 
 // ------------------------------------- Авторизация -------------------------------------
 router.use( async ( req, res, next ) => {
-    console.log( 'db:', req.db.users().find() );
+    //console.log( 'db:', req.db.users().find() );
     if ( !req.session.user ) {
         if (
             req.body.login
