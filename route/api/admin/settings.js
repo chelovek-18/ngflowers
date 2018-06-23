@@ -7,7 +7,7 @@ const
 // ------------------------------------- Настройки -------------------------------------
 router.get( '/', ( req, res, next ) => {
     //res.send( 'WTF?????' );
-    res.render( 'partials/page', { page: 'Hoom' }/*req.pageSettings( 'settings' )*/ );
+    res.render( 'partials/page', res.pageSettings( 'settings' ) );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {
