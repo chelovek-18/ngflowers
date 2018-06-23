@@ -87,7 +87,9 @@ class Model
 					&& method != 'constructor'
 					&& typeof model[ method ] == 'function'
 				) model.query[ method ] = function() {
-					// --- ?
+					let args = [ self ];
+					for ( let k in arguments ) args.push( arguments[ k ] );
+					return model[ method ].apply( model, args );
 				}
 			});
 		});
@@ -132,10 +134,6 @@ class Model
 			}*/
 	}
 
-	getP() {
-		return path;
-	}
-	
 	query( collection, method, data ) {
 
 		// Один аргумент - возвращает модель для создания запроса вручную

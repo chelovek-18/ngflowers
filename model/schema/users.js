@@ -23,6 +23,10 @@ class UsersCollection
             }
         });
     }
+
+    auth( db, login, password ) {
+        return true;
+    }
 }
 
 module.exports = UsersCollection;
