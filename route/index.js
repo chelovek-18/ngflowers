@@ -7,9 +7,12 @@ const
     session = require( 'express-session' ),
     handlebars = require( 'express-handlebars' ),
     app = express(),
+    
+    // paths
+    viewsPath = global.appConf.location.root + '/views';
 
 
-    http = require( 'http' ),
+    /*http = require( 'http' ),
 
     server = http.createServer( app ),
     WebSocket = require( 'ws' ),
@@ -113,6 +116,9 @@ class Route
             req.session.destroy();
             throw 401;
         });*/
+
+        app.use( require( './api/init' ) );
+
         app.use( require( './api/auth' ) );
 
         //app.use( require( './api/admin' ) );

@@ -5,7 +5,8 @@ const
     router = express.Router();
 
 // ------------------------------------- Авторизация -------------------------------------
-router.use( ( req, res, next ) => {
+router.use( async ( req, res, next ) => {
+    console.log( 'db:', req.db.users().find() );
     if ( !req.session.user ) {
         if (
             req.body.login

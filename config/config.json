@@ -15,9 +15,9 @@
         "host": "localhost",
         "port": 27017,
         "database": "ngflowers",
+        "user": "ngroot",
+        "password": "ng2883455secure",
         "opts": {
-            "user": "ngroot",
-            "password": "ng2883455secure",
             "server": {
                 "auto_reconnect": false,
                 "socketOptions": {

@@ -3,8 +3,37 @@
 const
 	// mongoose
 	mongoose = require( 'mongoose' ),
-	ObjectId = mongoose.Types.ObjectId,
-	Schema = mongoose.Schema/*,
+	Schema = mongoose.Schema,
+
+	// -
+	fs = require( 'fs' ),
+	
+	// options
+	path = 'mongodb://'
+		+ global.appConf.mongodb.user
+			? `${ global.appConf.mongodb.user }:${ global.appConf.mongodb.password }@`
+			: ''
+		+ !~global.appConf.mongodb.host.indexOf( ':' )
+			? `${ global.appConf.mongodb.host }:${ global.appConf.mongodb.port }`
+			: global.appConf.mongodb.host
+		+ `/${ global.appConf.mongodb.database }`
+		+ global.appConf.mongodb.replica
+			? `?replicaSet=${ global.appConf.mongodb.replica }`
+			: '',
+	dir = fs.readdirSync( __dirname + '/schema', 'utf8' );
+
+mongoose.Promise = global.Promise;
+
+let models = dir.reduce(
+	( o, f ) => {
+		o[ f ] = ( new ( require( './schema/' + f.slice( 0, -3 ) ) ) ); return o;
+	}, {});
+
+	
+
+
+	/*ObjectId = mongoose.Types.ObjectId,
+	Schema = mongoose.Schema,
 	conf = global.plugGlobVar.userConf.site.mongoose,
 	path = 'mongodb://'
 		+ ( conf.username ? conf.username + ':' + conf.password + '@' : '' )
@@ -37,6 +66,24 @@ class Model
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
+		mongoose.connect( path );
+		Object.keys( models ).forEach( collection => {
+			let
+				model = models[ collection ],
+				schema = model.getSchema( Schema );
+
+			model.query = mongoose.model( collection, schema );
+
+			Object.getOwnPropertyNames( model.__proto__ ).forEach( ( method ) => {
+				if (
+					method != 'Schema'
+					&& method != 'constructor'
+					&& typeof model[ method ] == 'function'
+				) model.query[ method ] = function() {
+					// --- ?
+				}
+			});
+		});
 		//this.isConn = mongoose.connect( path, options, this.cbk );
 		//this.isConn.connection.on( 'disconnected', function() { conn = false; });
 		/*for ( let key in models )
@@ -75,10 +122,32 @@ class Model
 						}
 				});
 			}*/
-    }
+	}
+	
+	query( collection, method, data ) {
+
+		// Один аргумент - возвращает модель для создания запроса вручную
+		if ( !method ) {
+			return models[ collection ].query;
+		}
+
+		// Два аргумента - подразумевается get
+		if ( !data ) return this.query( collection, 'get', method );
+
+		let
+			self = this,
+			q = models[ collection ].query;
+		if ( method == 'save' ) q = new q( data );
+
+		switch ( method ) {
+			case 'get':
+			case 'find':
+				return q.find.apply( models[ collection ].query, data );
+		}
+	}
 
 	// ------------------------------------- Каллбэк при ошибке коннекта -------------------------------------
-	cbk( err ) {
+	/*cbk( err ) {
 		if ( err ) conn = false;
 	}
 
@@ -167,7 +236,7 @@ class Model
 	params( model, obj ) {
 		Object.keys( obj ).forEach( ( par ) => model = model[ par ]( obj[ par ] ) );
 		return model;
-	}
+	}*/
 
 }
 
