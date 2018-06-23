@@ -69,10 +69,17 @@ class Model
 		mongoose.connect( path );
 		Object.keys( models ).forEach( collection => {
 			let
+				self = this,
 				model = models[ collection ],
 				schema = model.getSchema( Schema );
 
 			model.query = mongoose.model( collection, schema );
+
+			this[ collection ] = function() {
+				let args = [ collection ];
+				for ( let k in arguments ) args.push( arguments[ k ] );
+				return self.query.apply( self, args );
+			}
 
 			Object.getOwnPropertyNames( model.__proto__ ).forEach( ( method ) => {
 				if (
