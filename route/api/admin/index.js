@@ -13,11 +13,11 @@ const
     }
 });*/
 
-router.get( '/', ( req, res, next ) => {
-    res.send( 'WTF?????' );
+//router.get( '/', ( req, res, next ) => {
+    //res.send( 'WTF?????' );
     //res.render( 'partials/page', req.pageSettings( 'settings' ) );
-});
-//router.get( '/', require( './admin0/settings' ) );
+//});
+router.get( '/', require( './settings' ) );
 
 //router.use( '/settings/', require( './admin0/settings' ) );
 

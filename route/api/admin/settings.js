@@ -6,7 +6,8 @@ const
 
 // ------------------------------------- Настройки -------------------------------------
 router.get( '/', ( req, res, next ) => {
-    res.render( 'partials/page', req.pageSettings( 'settings' ) );
+    res.send( 'WTF?????' );
+    //res.render( 'partials/page', req.pageSettings( 'settings' ) );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {
