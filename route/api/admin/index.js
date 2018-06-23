@@ -17,7 +17,7 @@ const
     //res.send( 'WTF?????' );
     //res.render( 'partials/page', req.pageSettings( 'settings' ) );
 //});
-router.get( '/', require( './settings' ) );
+router.use( '/', require( './settings' ) );
 
 //router.use( '/settings/', require( './admin0/settings' ) );
 
