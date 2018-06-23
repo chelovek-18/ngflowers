@@ -13,7 +13,7 @@ router.use( ( req, res, next ) => {
     }
 });
 
-router.use( '/', require( './admin0/settings' ) );
+router.get( '/', require( './admin0/settings' ) );
 
 router.use( '/settings/', require( './admin0/settings' ) );
 
