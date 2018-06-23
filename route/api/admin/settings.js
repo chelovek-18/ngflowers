@@ -5,9 +5,8 @@ const
     router = express.Router();
 
 // ------------------------------------- Настройки -------------------------------------
-router.get( ( req, res, next ) => {
-    res.send( 'xxxz' );
-    //res.render( 'partials/page', req.pageSettings( 'settings' ) );
+router.get( '/', ( req, res, next ) => {
+    res.render( 'partials/page', req.pageSettings( 'settings' ) );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {
