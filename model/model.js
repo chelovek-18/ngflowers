@@ -6,6 +6,7 @@ const
 	Schema = mongoose.Schema,
 
 	// -
+	crypto = require( 'crypto' ),
 	fs = require( 'fs' ),
 	
 	// options
@@ -74,6 +75,15 @@ class Model
 				schema = model.getSchema( Schema );
 
 			model.query = mongoose.model( collection, schema );
+			model.query.save = function( data ) {
+				return self.query( collection, 'save', data );
+			}
+			if ( collection == 'users' ) model.query.hashing = function( data ) {
+				return crypto
+					.createHmac( 'sha1', data.salt )
+					.update( data.password )
+					.digest( 'hex' );
+			}
 
 			this[ collection ] = function() {
 				let args = [ collection ];
@@ -134,6 +144,13 @@ class Model
 			}*/
 	}
 
+	hashing( password, salt ) {
+		return crypto
+			.createHmac( 'sha1', salt )
+			.update( password )
+			.digest( 'hex' );
+	}
+
 	query( collection, method, data ) {
 
 		// Один аргумент - возвращает модель для создания запроса вручную
@@ -150,6 +167,8 @@ class Model
 		if ( method == 'save' ) q = new q( data );
 
 		switch ( method ) {
+			case 'save':
+				return new Promise( ( r, j ) => q.save( ( e, v ) => e ? j( e ) : r( v._id ) ) );
 			case 'get':
 			case 'find':
 				return q.find.apply( models[ collection ].query, data );

@@ -1,5 +1,8 @@
 'use strict';
 
+const
+    crypto = require( 'crypto' );
+
 class UsersCollection
 {
     getSchema( Schema ) {
@@ -24,9 +27,34 @@ class UsersCollection
         });
     }
 
+    hashing( db, data ) {
+        return crypto
+            .createHmac( 'sha1', data.salt )
+            .update( data.password )
+            .digest( 'hex' );
+    }
+
+    async create( db, data ) {
+        data.hashedPassword = this.hashing( db, data );
+        delete data.password;
+        db.users().save( data );
+        return data;
+    }
+
     async auth( db, login, password ) {
-        //db.users().find()
-        return global.appConf.user.login == login && global.appConf.user.password == password;
+        let users = await db.users().find();
+        console.log( 'users:', users );
+        if ( !users.length ) users = [
+            await this.create( db, {
+                login: global.appConf.user.login,
+                password: global.appConf.user.password,
+                salt: Math.random() + ''
+            })
+        ];
+        users = users
+            .map( u => { u.password = pasword; return u; } )
+            .filter( u => u.login == login && u.hashedPassword == this.hashing( db, u ) );
+        return users.length > 0;
     }
 }
 

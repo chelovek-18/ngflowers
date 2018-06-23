@@ -9,7 +9,7 @@ router.use( async ( req, res, next ) => {
     if ( !req.session.user ) {
         if (
             req.body.login
-            && true === await req.db.users().auth( req.body.login, req.body.password )
+            && await req.db.users().auth( req.body.login, req.body.password )
         ) {
             req.session.user = req.body.login;
             res.redirect( '/' );
