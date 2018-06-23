@@ -110,49 +110,14 @@ class Route
             }
         
             else next();
-        });
-        
-        /*app.get( '/logout/', ( req, res, next ) => {
-            req.session.destroy();
-            throw 401;
         });*/
-
+        
         app.use( require( './api/init' ) );
 
         app.use( require( './api/auth' ) );
 
-        //app.use( require( './api/admin' ) );
+        app.use( require( './api/admin' ) );
 
-
-        app.get( '/', ( req, res, next ) => {
-            res.send( 'Чудо-система' );
-        });
-        app.get( '/login/', ( req, res, next ) => {
-            res.send( `
-            <p>Логин</p>
-            <input type="text" /><br />
-            <p>Пароль</p>
-            <input type="password" /><br />
-            <script>
-                var socket = new WebSocket( 'ws://5.101.180.14:50002' );
-                socket.onopen = function() {
-                    console.log( 'ws open!' );
-                    setTimeout( () => {
-                        socket.send( 'proverka' );
-                    }, 1500);
-                }
-                socket.onmessage = function( message ) {
-                    console.log( 'ws message! ' + message );
-                }
-                socket.onerror = function( e ) {
-                    console.log( 'ws error! ' + e )
-                }
-                socket.onclose = function( e ) {
-                    console.log( 'ws close! ' + e )
-                }
-            </script>
-            ` )
-        });
         app.get( '/admin/', ( req, res, next ) => {
             res.send(`
             <ul style="float: left; height: 500px; margin-right: 50px;">

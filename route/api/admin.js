@@ -13,9 +13,13 @@ router.use( ( req, res, next ) => {
     }
 });
 
-router.get( '/', ( req, res, next ) => {
+app.use( '/', require( './admin/settings' ) );
+
+app.use( '/settings/', require( './admin/settings' ) );
+
+/*router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', req.pageSettings( 'settings' ) );
-});
+});*/
 
 /*router.get( '/params/cities', function( req, res, next ) {
     let cities = [ 'spb', 'msk' ];
