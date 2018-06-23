@@ -6,7 +6,7 @@ const
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
-    req.pageSettings = pagename => {
+    res.pageSettings = pagename => {
         return {
             page: pagename
         }
