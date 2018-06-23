@@ -9,6 +9,7 @@ const
 // ------------------------------------- Инициализация -------------------------------------
 router.use( ( req, res, next ) => {
     req.db = model;
+    console.log( req.db.getP() );
 
     next();
 });
