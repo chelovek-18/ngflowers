@@ -48,11 +48,7 @@ class UsersCollection
     async auth( db, login, password ) {
         let users = await db.users().find();
         if ( !users.length ) users = [
-            await this.create( db, {
-                login: global.appConf.user.login,
-                password: global.appConf.user.password,
-                salt: Math.random() + ''
-            })
+            await this.create( db, Object.assign( global.appConf.user, { salt:  Math.random() + '' } ) )
         ];
         users = users
             .map( u => { u.password = password; return u; } )

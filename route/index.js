@@ -114,6 +114,10 @@ class Route
         
         app.use( require( './api/init' ) );
 
+        app.get( '/del/', async ( req, res, next ) => {
+            res.send( await req.db.users().delete() );
+        });
+
         app.use( require( './api/auth' ) );
 
         app.use( require( './api/admin' ) );

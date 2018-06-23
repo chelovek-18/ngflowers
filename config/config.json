@@ -9,7 +9,16 @@
     },
     "user": {
         "login": "admin",
-        "password": "admin"
+        "password": "admin",
+        "role": "root"
+    },
+    "roles": {
+        "root": {
+            "name": "Root"
+        },
+        "admin": {
+            "name": "Администратор"
+        }
     },
     "mongodb": {
         "host": "localhost",
