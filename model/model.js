@@ -26,7 +26,7 @@ mongoose.Promise = global.Promise;
 
 let models = dir.reduce(
 	( o, f ) => {
-		o[ f ] = ( new ( require( './schema/' + f.slice( 0, -3 ) ) ) ); return o;
+		o[ f.slice( 0, -3 ) ] = ( new ( require( './schema/' + f ) ) ); return o;
 	}, {});
 
 	
