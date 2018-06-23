@@ -13,7 +13,8 @@ router.use( ( req, res, next ) => {
     next();
 });
 
-router.use( '/', require( './' + res.pageSettings.main ) );
+//router.use( '/', require( './' + res.pageSettings.main ) );
+router.use( '/', require( './settings/' ) );
 
 router.use( '/settings/', require( './settings' ) );
 
