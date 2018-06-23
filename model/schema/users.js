@@ -25,7 +25,7 @@ class UsersCollection
     }
 
     auth( db, login, password ) {
-        return true;
+        return global.appConf.user.login == login && global.appConf.user.password == password;
     }
 }
 

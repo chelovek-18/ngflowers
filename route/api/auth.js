@@ -6,11 +6,10 @@ const
 
 // ------------------------------------- Авторизация -------------------------------------
 router.use( async ( req, res, next ) => {
-    console.log( 'db:', await req.db.users().find() );
     if ( !req.session.user ) {
         if (
             req.body.login
-            && req.body.login == 'admin'
+            && req.db.users().auth( req.body.login, req.body.password )
         ) {
             req.session.user = req.body.login;
             res.redirect( '/' );
