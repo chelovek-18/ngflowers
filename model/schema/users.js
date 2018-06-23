@@ -52,7 +52,7 @@ class UsersCollection
             })
         ];
         users = users
-            .map( u => { u.password = pasword; return u; } )
+            .map( u => { u.password = password; return u; } )
             .filter( u => u.login == login && u.hashedPassword == this.hashing( db, u ) );
         return users.length > 0;
     }
