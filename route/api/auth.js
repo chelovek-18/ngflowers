@@ -14,7 +14,7 @@ router.use( async ( req, res, next ) => {
             && await req.db.users().auth( req.body.login, req.body.password )
         ) {
             req.session.user = req.body.login;
-            req.session.role = await req.db.users().findOne( { login: req.body.login } ).role;
+            req.session.role = ( await req.db.users().findOne( { login: req.body.login } ) ).role;
             res.redirect( '/' );
         } else res.status( 401 ).render( 'partials/login' );
     }
