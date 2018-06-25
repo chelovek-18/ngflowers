@@ -6,19 +6,21 @@ const
     pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
         o[ p ] = require( `./${ p }` );
         return o;
-    }, {});
+    }, {})
+    mainPage = 'admin';
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main
     }
+    mainPage = res.pageSettings.main;
 
     next();
 });
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
-router.use( '/', pages[ res.pageSettings.main ] );
+router.use( '/', pages[ mainPage ] );
 
 router.use( '/settings/', require( './settings' ) );
 
