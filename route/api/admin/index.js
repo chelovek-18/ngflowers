@@ -2,7 +2,11 @@
 
 const
     express = require( 'express' ),
-    router = express.Router();
+    router = express.Router(),
+    pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
+        o[ p ] = require( `./${ p }` );
+        return o;
+    }, {});
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
@@ -14,7 +18,7 @@ router.use( ( req, res, next ) => {
 });
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
-router.use( '/', require( './settings' ) );
+router.use( '/', pages[ res.pageSettings.main ] );
 
 router.use( '/settings/', require( './settings' ) );
 
