@@ -6,7 +6,7 @@ const
     pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
         o[ p ] = require( `./${ p }` );
         return o;
-    }, {})
+    }, {}),
     mainPage = 'admin';
 
 // ------------------------------------- Админка -------------------------------------
