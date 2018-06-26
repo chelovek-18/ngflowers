@@ -24,7 +24,7 @@ router.use( ( req, res, next ) => {
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
 router.use( '/', ( req, res, next ) => {
-    require( './settings' );
+    return require( './settings' );
 });
 
 router.use( '/settings/', require( './settings' ) );
