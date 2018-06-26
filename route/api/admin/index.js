@@ -4,7 +4,7 @@ const
     express = require( 'express' ),
     router = express.Router(),
     reqs = { settings: require( './settings' ) },
-    bb = { get xq() { return reqs.settings } },
+    bb = { get xq() { return reqs[ 'settings' ] } },
     pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
         o[ p ] = require( `./${ p }` );
         return o;
