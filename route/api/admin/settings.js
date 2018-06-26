@@ -14,7 +14,7 @@ router.use( ( req, res, next ) => {
 
 
 router.get( '/', ( req, res, next ) => {
-    res.render( 'partials/page', res.pageSettings( 'settings' ) );
+    res.render( 'partials/page', res.pageSettings );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {
