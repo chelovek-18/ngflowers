@@ -10,7 +10,6 @@ router.use( ( req, res, next ) => {
         main: global.appConf.roles[ req.session.role ].main,
         menu: global.appConf.location.pages
     }
-    //res.pageSettings.page = 'settings';
 
     next();
 });

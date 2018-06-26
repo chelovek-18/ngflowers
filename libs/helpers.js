@@ -10,8 +10,7 @@ module.exports = {
     },
 
     setSettings( settings ) {
-        this.renderSetngs = 'settings'; //settings;
-        sett = 'settings'; //settings;
+        sett = settings;
     },
 
     changePage( pageName ) {
