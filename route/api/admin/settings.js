@@ -14,7 +14,8 @@ router.use( ( req, res, next ) => {
 
 
 router.get( '/', ( req, res, next ) => {
-    res.render( 'partials/page', res.pageSettings( 'settings' ) );
+    res.send( 'mumu' );
+    //res.render( 'partials/page', res.pageSettings( 'settings' ) );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {
