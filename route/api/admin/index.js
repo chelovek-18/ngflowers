@@ -23,7 +23,7 @@ router.use( ( req, res, next ) => {
 });
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
-router.use( '/', require( './settings' ) );
+router.use( '/', reqs );
 
 router.use( '/settings/', require( './settings' ) );
 
