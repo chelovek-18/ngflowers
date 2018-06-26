@@ -10,7 +10,7 @@ const
     }, {});
 
 let
-    mainPage = 'admin';
+    mainPage = 'settings'; //'admin';
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
@@ -23,7 +23,7 @@ router.use( ( req, res, next ) => {
 });
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
-router.use( '/', reqs[ 'settings' ] );
+router.use( '/', reqs[ mainPage ] );
 
 router.use( '/settings/', require( './settings' ) );
 
