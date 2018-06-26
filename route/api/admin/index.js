@@ -23,7 +23,8 @@ router.use( ( req, res, next ) => {
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
 router.use( '/', ( req, res, next ) => {
-    pages[ mainPage ];
+    res.send( 'chto?' );
+    //pages[ mainPage ];
 });
 
 router.use( '/settings/', require( './settings' ) );
