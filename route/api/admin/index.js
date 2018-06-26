@@ -8,14 +8,16 @@ const
 router.use( ( req, res, next ) => {
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main,
-        menu: global.appConf.location.pages
+        menu: global.appConf.location.pages,
+        page: 'settings'
     }
+    //res.pageSettings.page = 'settings';
 
     next();
 });
 
 router.use( '/', ( req, res, next ) => {
-    req.url += res.pageSettings.main;
+    req.url = '/' + res.pageSettings.main + '/';
 
     next();
 });

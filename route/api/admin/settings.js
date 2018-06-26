@@ -6,7 +6,7 @@ const
 
 // ------------------------------------- Настройки -------------------------------------
 router.use( ( req, res, next ) => {
-    res.pageSettings.page = 'settings';
+    //res.pageSettings.page = 'settings';
     //res.pageSettings.menu = res.pageSettings.menu.map( m => { if ( m.key == res.pageSettings.page ) m.actived = true; return m; });
     if ( !req.access() ) throw 401;
 
