@@ -8,7 +8,11 @@ const
 router.use( ( req, res, next ) => {
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main,
-        menu: global.appConf.location.pages
+        menu: global.appConf.location.pages,
+        math( a, op, b ) {
+            if ( !!~'==!='.indexOf( op ) ) return eval( '"' + a + '"' + ( op ? op : '+' ) + '"' + b + '"' );
+            if ( !!~'+-*/'.indexOf( op ) ) return eval( a + op + b );
+        }
     }
 
     next();
