@@ -8,8 +8,7 @@ const
 router.use( ( req, res, next ) => {
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main,
-        menu: global.appConf.location.pages,
-        page: 'settings'
+        menu: global.appConf.location.pages
     }
     //res.pageSettings.page = 'settings';
 

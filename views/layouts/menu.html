@@ -1,9 +1,8 @@
 <div id="menu">
     <img id="logo-invert" src="img/logo-invert.png" />
-    {{page}}
     <ul id="ul-menu">
     {{#each menu}}
-        <li{{#if (math key '==' page)}} class="actived"{{/if}}>{{name}} {{key}} {{page}}</li>
+        <li{{#if (changePage key)}} class="actived"{{/if}}>{{name}}</li>
     {{/each}}
     </ul>
 </div>
