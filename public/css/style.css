@@ -88,8 +88,12 @@ body {
 
 #menu {
     height: 100%;
-    width: 200px;
+    width: 308px;
     margin: 0;
     padding: 0;
     background: #444444;
+}
+
+#logo-invert {
+    margin: 15px 0 0 17px;
 }

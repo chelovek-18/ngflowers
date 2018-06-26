@@ -1,4 +1,8 @@
 <div id="menu">
-    <img src="img/logo-invert.png" />
-    {{page}}
+    <img id="logo-invert" src="img/logo-invert.png" />
+    <ul>
+    {{#each menu}}
+        <li>{{name}}</li>
+    {{/each}}
+    </ul>
 </div>

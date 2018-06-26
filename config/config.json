@@ -4,7 +4,24 @@
         "ws": 50002,
         "pages": {
             "settings": {
-                "access": [ "root", "admin" ]
+                "key": "settings",
+                "access": [ "root", "admin" ],
+                "name": "Настройки"
+            },
+            "pages": {
+                "key": "pages",
+                "access": [ "root", "admin" ],
+                "name": "Страницы"
+            },
+            "chat": {
+                "key": "chat",
+                "access": [ "root", "admin" ],
+                "name": "Чат"
+            },
+            "activity": {
+                "key": "activity",
+                "access": [ "root", "admin" ],
+                "name": "Активность"
             }
         }
     },

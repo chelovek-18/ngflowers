@@ -7,7 +7,8 @@ const
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
     res.pageSettings = {
-        main: global.appConf.roles[ req.session.role ].main
+        main: global.appConf.roles[ req.session.role ].main,
+        menu: global.appConf.location.pages
     }
 
     next();
