@@ -1,7 +1,7 @@
 'use strict';
 
 let
-    sett = '';
+    page = '';
 
 module.exports = {
     math: function( a, op, b ) {
@@ -9,11 +9,11 @@ module.exports = {
         if ( !!~'+-*/'.indexOf( op ) ) return eval( a + op + b );
     },
 
-    setSettings( settings ) {
-        sett = settings;
+    setPage( pageName ) {
+        page = pageName;
     },
 
     changePage( pageName ) {
-        return pageName == sett; //this.renderSetngs;
+        return pageName == page;
     }
 }
