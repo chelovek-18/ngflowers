@@ -11,6 +11,6 @@ module.exports = {
     },
 
     changePage( pageName ) {
-        return pageName == this.renderSetngs.page;
+        return pageName == this.renderSetngs;
     }
 }
