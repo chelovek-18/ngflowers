@@ -44,7 +44,8 @@ class Route
                 'defaultLayout': 'main',
                 'layoutsDir': viewsPath,
                 'partialsDir': viewsPath,
-                'extname': '.html'
+                'extname': '.html',
+                'helpers': require( '../libs/helpers' )
             }))
 
             .set( 'view engine', '.html' )
