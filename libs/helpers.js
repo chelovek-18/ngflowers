@@ -1,5 +1,8 @@
 'use strict';
 
+let
+    sett = '';
+
 module.exports = {
     math: function( a, op, b ) {
         if ( !!~'==!='.indexOf( op ) ) return eval( '"' + a + '"' + ( op ? op : '+' ) + '"' + b + '"' );
@@ -8,9 +11,10 @@ module.exports = {
 
     setSettings( settings ) {
         this.renderSetngs = 'settings'; //settings;
+        sett = 'settings'; //settings;
     },
 
     changePage( pageName ) {
-        return pageName == this.renderSetngs;
+        return pageName == sett; //this.renderSetngs;
     }
 }
