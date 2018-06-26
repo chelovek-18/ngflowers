@@ -10,14 +10,14 @@ const
     }, {});
 
 let
-    mainPage = 'settings'; //'admin';
+    mainPage = 'admin';
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main
     }
-    mainPage = res.pageSettings.main;
+    //mainPage = 'settings'; //res.pageSettings.main;
 
     next();
 });
