@@ -7,10 +7,10 @@ module.exports = {
     },
 
     setSettings( settings ) {
-        this.renderSetngs = settings;
+        this.renderSetngs = 'settings'; //settings;
     },
 
     changePage( pageName ) {
-        return pageName == 'settings'; //this.renderSetngs;
+        return pageName == this.renderSetngs;
     }
 }
