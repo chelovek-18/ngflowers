@@ -3,7 +3,7 @@
 const
     express = require( 'express' ),
     router = express.Router(),
-    reqs = require( './settings' ),
+    reqs = { settings: require( './settings' ) },
     pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
         o[ p ] = require( `./${ p }` );
         return o;
@@ -23,7 +23,7 @@ router.use( ( req, res, next ) => {
 });
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
-router.use( '/', reqs );
+router.use( '/', reqs[ 'settings' ] );
 
 router.use( '/settings/', require( './settings' ) );
 
