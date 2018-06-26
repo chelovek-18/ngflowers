@@ -66,13 +66,13 @@ body {
 }
 
 #authsubm {
-    line-height: 30px;
-    font-size: 26px;
+    line-height: 30px !important;
+    font-size: 26px !important;
     color: #ff0010;
     border: 2px #ff0010 solid !important;
     border-radius: 10px;
     background: none;
-    padding: 8px 60px;
+    padding: 8px 60px !important;
     cursor: pointer;
     margin-top: 37px;
     /*transition: all 0.5s ease-in-out;*/
