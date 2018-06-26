@@ -2,7 +2,7 @@
     <img id="logo-invert" src="img/logo-invert.png" />
     <ul id="ul-menu">
     {{#each menu}}
-        <li{{#if (math key '==' cpg)}} class="actived"{{/if}}>{{name}} {{key}} {{cpg}}</li>
+        <li{{#if (math key '==' page)}} class="actived"{{/if}}>{{name}} {{key}} {{page}}</li>
     {{/each}}
     </ul>
 </div>
