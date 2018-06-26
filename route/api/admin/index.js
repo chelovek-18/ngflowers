@@ -1,17 +1,17 @@
 'use strict';
 
+let
+    mainPage = 'admin';
+
 const
     express = require( 'express' ),
     router = express.Router(),
     reqs = { settings: require( './settings' ) },
-    bb = { get xq() { return reqs[ 'settings' ] } },
+    bb = { get xq() { return reqs[ mainPage ] } },
     pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
         o[ p ] = require( `./${ p }` );
         return o;
     }, {});
-
-let
-    mainPage = 'admin';
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
