@@ -3,6 +3,7 @@
 const
     express = require( 'express' ),
     router = express.Router(),
+    reqs = require( './settings' ),
     pages = Object.keys( global.appConf.location.pages ).reduce( ( o, p ) => {
         o[ p ] = require( `./${ p }` );
         return o;
@@ -22,11 +23,7 @@ router.use( ( req, res, next ) => {
 });
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
-router.use( '/', ( req, res, next ) => {
-    res.send( JSON.stringify( pages ) );
-    //pages[ 'settings' ];
-    //pages[ mainPage ];
-});
+router.use( '/', reqs );
 
 router.use( '/settings/', require( './settings' ) );
 
