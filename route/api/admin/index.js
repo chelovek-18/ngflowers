@@ -23,7 +23,7 @@ router.use( ( req, res, next ) => {
 
 //router.use( '/', require( './' + res.pageSettings.main ) );
 router.use( '/', ( req, res, next ) => {
-    res.send( pages[ 'settings' ] );
+    res.send( JSON.stringify( pages ) );
     //pages[ 'settings' ];
     //pages[ mainPage ];
 });
