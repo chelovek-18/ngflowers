@@ -1,7 +1,7 @@
 <div id="menu">
     <img id="logo-invert" src="img/logo-invert.png" />
     <ul id="ul-menu">
-    {{(setSettings page)}}
+    {{setSettings}}
     {{#each menu}}
         <li{{#if (changePage key)}} class="actived"{{/if}}>{{name}}</li>
     {{/each}}
