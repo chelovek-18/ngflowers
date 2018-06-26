@@ -6,7 +6,8 @@ const
 
 // ------------------------------------- Настройки -------------------------------------
 router.use( ( req, res, next ) => {
-    res.pageSettings.page = 'settings';
+    res.pageSettings.cpg = 'settings';
+    //res.pageSettings.menu
     if ( !req.access() ) throw 401;
 
     next();
@@ -14,8 +15,8 @@ router.use( ( req, res, next ) => {
 
 
 router.get( '/', ( req, res, next ) => {
-    res.send( res.pageSettings );
-    //res.render( 'partials/page', res.pageSettings );
+    //res.send( res.pageSettings );
+    res.render( 'partials/page', res.pageSettings );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {
