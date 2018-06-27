@@ -27,13 +27,15 @@
                 <td><label>Роль</label></td>
                 <td></td>
             </tr>
+            {{#each users}}
             <tr>
-                <td><input type="text" value="{{users/name}}" name="name" /></td>
-                <td><input type="text" value="{{users/login}}" name="login" /></td>
-                <td>{{{getRoleSelect roles users/role}}}</td>
+                <td><input type="text" value="{{name}}" name="name" /></td>
+                <td><input type="text" value="{{login}}" name="login" /></td>
                 <td><input type="password" value="" name="password" /></td>
+                <td>{{{getRoleSelect roles users/role}}}</td>
                 <td><img src="/img/red-cross.png" /></td>
             </tr>
+            {{/each}}
         </table>
         <p>
             <input type="submit" class="subm" value="Сохранить" />
