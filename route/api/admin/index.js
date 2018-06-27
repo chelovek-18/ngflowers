@@ -15,7 +15,8 @@ router.use( ( req, res, next ) => {
 });
 
 router.use( '/', ( req, res, next ) => {
-    req.url = '/' + res.pageSettings.main + '/';
+    if ( req.url == '/' || req.url == '' )
+        req.url = '/' + res.pageSettings.main + '/';
 
     next();
 });
