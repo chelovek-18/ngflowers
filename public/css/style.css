@@ -152,8 +152,14 @@ h1 {
     height: 40px;
     overflow: hidden;
     color: green;
+    list-style: round;
+    position: relative;
+    list-style: inside;
 }
 
 #userlist li div {
     color: #000;
+    position: absolute;
+    top: 0;
+    left: 30px;
 }
