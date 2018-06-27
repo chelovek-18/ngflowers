@@ -28,6 +28,10 @@ module.exports = {
     },
 
     getTr() {
-        return `<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>`;
+        return `<td><input type="text" name="name" /></td>
+        <td><input type="text" name="login" /></td>
+        <td><input type="password" name="password" /></td>
+        <td>${ this.getRoleSelect() }</td>
+        <td><img onClick="this.parentNode.parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>`;
     }
 }
