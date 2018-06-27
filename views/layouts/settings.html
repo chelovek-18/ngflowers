@@ -2,17 +2,39 @@
     <h1>Настройки</h1>
     <form action="/settings/db/update/" method="POST">
         <p>
-            <label>Порт</label><input type="text" name="port" />
+            <label>Порт</label><input type="text" value="{{db/port}}" name="port" />
         </p>
         <p>
-            <label>База</label><input type="text" name="basename" />
+            <label>База</label><input type="text" value="{{db/database}}" name="database" />
         </p>
         <p>
-            <label>Логин</label><input type="text" name="user" />
+            <label>Логин</label><input type="text" value="{{db/user}}" name="user" />
         </p>
         <p>
-            <label>Пароль</label><input type="password" name="password" />
+            <label>Пароль</label><input type="password" value="{{db/password}}" name="password" />
         </p>
+        <p>
+            <input type="submit" class="subm" value="Сохранить" />
+        </p>
+    </form>
+    <h1>Пользователи</h1>
+    <form action="/settings/users/update/" method="POST">
+        <table>
+            <tr>
+                <td><label>Имя</label></td>
+                <td><label>Логин</label></td>
+                <td><label>Пароль</label></td>
+                <td><label>Роль</label></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="text" value="{{users/name}}" name="name" /></td>
+                <td><input type="text" value="{{users/login}}" name="login" /></td>
+                <td>{{getRoleSelect roles users/role}}</td>
+                <td><input type="password" value="" name="password" /></td>
+                <td><img src="/img/red-cross.png/" /></td>
+            </tr>
+        </table>
         <p>
             <input type="submit" class="subm" value="Сохранить" />
         </p>

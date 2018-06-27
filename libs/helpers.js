@@ -15,5 +15,12 @@ module.exports = {
 
     changePage( pageName ) {
         return pageName == page;
+    },
+
+    getRoleSelect( roles, role ) {
+        let getOptions = () => {
+            Object.keys( roles ).map( r => `<option${ r == 'admin' ? 'checked="checked"' : '' }>${ roles[ r ].name }</option>` );
+        }
+        return `<select name="role">${ getOptions() }</select>`;
     }
 }
