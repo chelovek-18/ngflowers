@@ -55,7 +55,7 @@ label {
     text-align: left;
 }
 
-input, select, #userlist li, div[contenteditable] {
+input, select, #userlist li, #driverlist li, div[contenteditable] {
     border: 2px #444444 solid;
     font-size: 24px;
     line-height: 32px;
@@ -148,7 +148,7 @@ h1 {
     cursor: pointer;
 }
 
-#userlist li {
+#userlist li, #driverlist li {
     height: 40px;
     overflow: hidden;
     color: green;
@@ -158,14 +158,14 @@ h1 {
     transition: all 0.5s ease-in-out;
 }
 
-#userlist li > div {
+#userlist li > div, #driverlist li > div {
     color: #000;
     position: absolute;
     top: 0;
     left: 30px;
 }
 
-#userlist li [contenteditable] {
+#userlist li [contenteditable], #driverlist li [contenteditable] {
     height: 200px;
 }
 
@@ -173,6 +173,6 @@ h1 {
     height: 40px !important;
 }
 
-#userlist li p {
+#userlist li p, #driverlist li p {
     margin: 2px 0 !important;
 }
