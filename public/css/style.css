@@ -55,7 +55,7 @@ label {
     text-align: left;
 }
 
-input, select {
+input, select, #userlist li, div[contenteditable] {
     border: 2px #444444 solid;
     font-size: 24px;
     line-height: 32px;
@@ -146,4 +146,14 @@ h1 {
 
 .add-tr, .del-tr {
     cursor: pointer;
+}
+
+#userlist li {
+    height: 40px;
+    overflow: hidden;
+    color: green;
+}
+
+#userlist li div {
+    color: #000;
 }
