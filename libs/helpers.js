@@ -23,7 +23,7 @@ const obj = {
     },
 
     getRoleSelect( role ) {
-        let getOptions = () => Object.keys( roles ).map( r => `<option${ r == 'admin' ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>` ).join( '' );
+        let getOptions = () => Object.keys( roles ).map( r => `<option${ r == role ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>` ).join( '' );
         return `<select name="role">${ getOptions() }</select>`;
     },
 
