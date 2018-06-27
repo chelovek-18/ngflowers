@@ -1,5 +1,6 @@
 <div id="page-wrapper">
     {{#if (math page '==' 'settings')}}{{> layouts/settings}}{{/if}}
+    {{#if (math page '==' 'pages')}}{{> layouts/pages}}{{/if}}
     {{#if (math page '==' 'chat')}}{{> layouts/chat}}{{/if}}
     {{#if (math page '==' 'activity')}}{{> layouts/activity}}{{/if}}
 </div>

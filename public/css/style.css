@@ -152,10 +152,10 @@ h1 {
     height: 40px;
     overflow: hidden;
     color: green;
-    list-style: round;
     position: relative;
     list-style: inside;
     transition: all 0.5s ease-in-out;
+    cursor: pointer;
 }
 
 #userlist li > div, #driverlist li > div {
