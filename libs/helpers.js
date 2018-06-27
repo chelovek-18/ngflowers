@@ -25,5 +25,9 @@ module.exports = {
     getRoleSelect( role ) {
         let getOptions = () => Object.keys( roles ).map( r => `<option${ r == 'admin' ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>` ).join( '' );
         return `<select name="role">${ getOptions() }</select>`;
+    },
+
+    getTr() {
+        return `<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>`;
     }
 }

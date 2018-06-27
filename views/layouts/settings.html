@@ -33,11 +33,11 @@
                 <td><input type="text" value="{{login}}" name="login" /></td>
                 <td><input type="password" value="" name="password" /></td>
                 <td>{{{getRoleSelect role}}}</td>
-                <td><img onClick="this[ 0 ].parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>
+                <td><img onClick="this.parentNode.parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>
             </tr>
             {{/each}}
             <tr>
-                <td></td><td></td><td></td><td></td><td><h1><img style="transform: rotate(45deg);" class="add-tr" src="/img/red-cross.png" /></h1></td>
+                <td></td><td></td><td></td><td></td><td><h1><img style="transform: rotate(45deg);" onClick="tr = document.createElement('tr'); tr.innerHtml = '{{getTr}}'; this.parentNode.parentNode.parentNode.insertBefore( tr, this.parentNode.parentNode );" class="add-tr" src="/img/red-cross.png" /></h1></td>
             </tr>
         </table>
         <p>
