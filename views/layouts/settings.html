@@ -37,7 +37,7 @@
             </tr>
             {{/each}}
             <tr>
-                <td></td><td></td><td></td><td></td><td><img style="transform: rotate(45deg);" onClick="tr = document.createElement('tr'); this.parentNode.parentNode.parentNode.insertBefore( tr, this.parentNode.parentNode ).innerHtml = '{{getTr}}';" class="add-tr" src="/img/red-cross.png" /></td>
+                <td></td><td></td><td></td><td></td><td><img style="transform: rotate(45deg);" onClick="tr = document.createElement('tr'); this.parentNode.parentNode.parentNode.insertBefore( tr, this.parentNode.parentNode ).innerHTML = '{{getTr}}';" class="add-tr" src="/img/red-cross.png" /></td>
             </tr>
         </table>
         <p>
