@@ -20,7 +20,7 @@ router.use( '/', ( req, res, next ) => {
     next();
 });
 
-router.use( '/settings/', require( './settings' ) );
+Object.keys( global.appConf.location.pages ).forEach( p => router.use( `/${ p }/`, require( `./${ p }` ) ) );
 
 /*router.get( '/params/cities', function( req, res, next ) {
     let cities = [ 'spb', 'msk' ];
