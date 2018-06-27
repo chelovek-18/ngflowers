@@ -1,7 +1,8 @@
 'use strict';
 
 let
-    page = '';
+    page = '',
+    roles = [];
 
 module.exports = {
     math: function( a, op, b ) {
@@ -13,14 +14,16 @@ module.exports = {
         page = pageName;
     },
 
+    setRoles( croles ) {
+        roles = croles;
+    },
+
     changePage( pageName ) {
         return pageName == page;
     },
 
-    getRoleSelect( roles, role ) {
+    getRoleSelect( role ) {
         let getOptions = () => Object.keys( roles ).map( r => `<option${ r == 'admin' ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>` ).join( '' );
         return `<select name="role">${ getOptions() }</select>`;
-    },
-
-    wtf( u ) { console.log( u ); }
+    }
 }
