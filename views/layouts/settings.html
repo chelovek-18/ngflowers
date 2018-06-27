@@ -1,3 +1,20 @@
 <div>
     <h1>Настройки</h1>
+    <form action="/settings/db/update/" method="POST">
+        <p>
+            <label>Порт</label><input type="text" name="port" />
+        </p>
+        <p>
+            <label>База</label><input type="text" name="basename" />
+        </p>
+        <p>
+            <label>Логин</label><input type="text" name="user" />
+        </p>
+        <p>
+            <label>Пароль</label><input type="password" name="password" />
+        </p>
+        <p>
+            <input type="submit" class="subm" value="Сохранить" />
+        </p>
+    </form>
 </div>

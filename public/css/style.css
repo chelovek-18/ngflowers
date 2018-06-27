@@ -45,17 +45,17 @@ body {
     margin-top: 97px;
 }
 
-#auth p {
+p {
     margin: 16px 0;
 }
 
-#auth form label {
+label {
     float: left;
     width: 150px;
     text-align: left;
 }
 
-#auth form input {
+input {
     border: 2px #444444 solid;
     font-size: 24px;
     line-height: 32px;
@@ -65,7 +65,7 @@ body {
     box-sizing: border-box;
 }
 
-#authsubm {
+.subm {
     line-height: 30px !important;
     font-size: 26px !important;
     color: #ff0010;
@@ -78,7 +78,7 @@ body {
     /*transition: all 0.5s ease-in-out;*/
 }
 
-#authsubm:hover {
+.subm:hover {
     background: #ff0010;
     color: #ffffff;
     /*transition: all 0.5s ease-in-out;*/
@@ -135,9 +135,10 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 0 0 0 400px;
+    padding: 0 0 0 370px;
 }
 
 h1 {
-    margin: 30px 0;
+    margin: 50px 0;
+    font-size: 36px;
 }
