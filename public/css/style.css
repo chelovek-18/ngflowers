@@ -155,11 +155,24 @@ h1 {
     list-style: round;
     position: relative;
     list-style: inside;
+    transition: all 0.5s ease-in-out;
 }
 
-#userlist li div {
+#userlist li > div {
     color: #000;
     position: absolute;
     top: 0;
     left: 30px;
+}
+
+#userlist li [contenteditable] {
+    height: 200px;
+}
+
+.enterfield {
+    height: 40px;
+}
+
+#userlist li p {
+    margin: 2px 0 !important;
 }
