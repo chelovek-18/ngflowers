@@ -107,7 +107,6 @@ body {
 #ul-menu li {
     line-height: 56px;
     color: #ffffff;
-    padding-left: 52px;
     cursor: pointer;
 }
 
@@ -119,6 +118,7 @@ body {
 
 #ul-menu li a {
     color: #ffffff;
+    padding-left: 52px;
     text-decoration: none;
 }
 
