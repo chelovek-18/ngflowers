@@ -19,6 +19,14 @@ router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
 
+router.post( '/db/update/', ( req, res, next ) => {
+    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+});
+
+router.post( '/users/update/', ( req, res, next ) => {
+    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+});
+
 /*router.get( '/params/cities', function( req, res, next ) {
     let cities = [ 'spb', 'msk' ];
     res.json( cities );
