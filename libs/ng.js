@@ -4,6 +4,8 @@ const
     https = require( 'https' ),
     dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
 
+process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
+
 class NG
 {
     constructor() {
