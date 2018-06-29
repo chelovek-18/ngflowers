@@ -12,6 +12,7 @@ class NG
         this.host = 'novayagollandiya.ru';
         this.path = '/inc/ajax/rest.php';
         this.method = 'POST';
+        this.city = 'spb';
     }
 
     setBody( data ) {
@@ -49,6 +50,18 @@ class NG
 
     async getCities() {
         return await this.setBody( { action: 'getCities' } ).request();
+    }
+
+    async getBanners() {
+        return await this.setBody( { action: 'getBanners', city: this.city } ).request();
+    }
+
+    async getSections() {
+        return await this.setBody( { action: 'getSections', city: this.city } ).request();
+    }
+
+    async getProducts() {
+        return await this.setBody( { action: 'getProducts', city: this.city } ).request();
     }
 }
 

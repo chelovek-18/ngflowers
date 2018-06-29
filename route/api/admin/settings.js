@@ -25,7 +25,7 @@ router.post( '/db/update/', ( req, res, next ) => {
 });
 
 router.post( '/users/update/', async ( req, res, next ) => {
-    res.send( await ng.getCities() );
+    res.send( await ng.getBanners() );
     //res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
 });
 
