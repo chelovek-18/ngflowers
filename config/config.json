@@ -45,7 +45,7 @@
         },
         "operator": {
             "name": "Оператор",
-            "main": ""
+            "main": "chat"
         }
     },
     "mongodb": {
