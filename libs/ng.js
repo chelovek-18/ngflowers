@@ -21,6 +21,7 @@ class NG
         return await new Promise( ( r, j ) => {
         let httpReq = https.request( this, function( httpRes ) {
             let output = '';
+            console.log( httpRes );
 
             if ( httpRes.statusCode >= 400 ) {
                 //return callback( httpRes.statusCode );
