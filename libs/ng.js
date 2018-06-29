@@ -19,6 +19,7 @@ class NG
 
     async getCities() {
         return await new Promise( ( r, j ) => {
+            console.log( 'tsar' );
         let httpReq = https.request( this, function( httpRes ) {
             let output = '';
             console.log( httpRes );
@@ -35,6 +36,7 @@ class NG
             });
         });
         httpReq.on( 'error', ( err ) => {
+            console.log( 'err::', err );
             //callback( err );
         });
         httpReq.write( this.body );
