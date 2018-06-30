@@ -8,7 +8,7 @@ const
     ng = new ( require( './../../libs/ng' ) ),
     refreshDatas = async () => {
         let
-            rCities = await ( async () => {
+            rCities = await ng.getCities(); /*await ( async () => {
                 try {
                     return await ng.getCities();
                 } catch ( err ) {

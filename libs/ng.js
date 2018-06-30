@@ -30,7 +30,8 @@ class NG
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
-                    j( httpRes.statusCode );
+                    console.log( httpRes.statusCode );
+                    j( {} );
                 }
     
                 httpRes.on( 'data', function ( chunk ) {
@@ -41,7 +42,8 @@ class NG
                 });
             });
             httpReq.on( 'error', ( err ) => {
-                j( err );
+                console.log( err );
+                j( {} );
             });
             httpReq.write( this.body );
             httpReq.end();
