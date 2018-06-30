@@ -7,6 +7,7 @@ const
     model = new ( require( './../../model/model' ) ),
     ng = new ( require( './../../libs/ng' ) ),
     refreshDatas = async () => {
+        cities = await cities;
         console.log( 'cities1', cities );
         let
             rCities = await ng.getCities();
