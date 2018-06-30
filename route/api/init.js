@@ -6,10 +6,15 @@ const
     
     model = new ( require( './../../model/model' ) ),
     ng = new ( require( './../../libs/ng' ) ),
-    refreshDatas = () => {
-        global.log( 'rf!', 777 );
-        if ( cities.length < 3 ) cities.push( 7 );
-        if ( cities.length == 2 ) mmm = x + d;
+    refreshDatas = async () => {
+        let
+            rCities = await ng.getCities();
+        cities.forEach( c => {
+            if ( !rCities[ c.key ] ) {
+                model.cities().update( { on: false }, { key: c.key } );
+            }
+        });
+        console.log( 'cities:', cities );
     };
 
 let

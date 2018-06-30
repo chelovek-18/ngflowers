@@ -9,7 +9,7 @@ process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 class NG
 {
     constructor() {
-        this.host = 'novayagollandiya.ru';
+        this.host = 'novayagollandiya1.ru';
         this.path = '/inc/ajax/rest.php';
         this.method = 'POST';
         this.city = 'spb';

@@ -20,6 +20,10 @@ class CitiesCollection
             siteId: {
                 type: String,
                 required: true
+            },
+            on: {
+                type: Boolean,
+                default: true
             }
         }, {
             autoIndex: true
