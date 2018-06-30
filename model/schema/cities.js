@@ -27,4 +27,4 @@ class CitiesCollection
     }
 }
 
-module.exports = CitesCollection;
+module.exports = CitiesCollection;
