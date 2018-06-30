@@ -8,13 +8,7 @@ const
     ng = new ( require( './../../libs/ng' ) ),
     refreshDatas = async () => {
         let
-            rCities = await ng.getCities(); /*await ( async () => {
-                try {
-                    return await ng.getCities();
-                } catch ( err ) {
-                    return [ 789 ];
-                }
-            })();
+            rCities = await ng.getCities();
         /*cities.forEach( c => {
             if ( !rCities[ c.key ] ) {
                 model.cities().update( { used: false }, { key: c.key } );
