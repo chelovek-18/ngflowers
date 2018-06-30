@@ -5,9 +5,9 @@ const
     router = express.Router();
 
 // ------------------------------------- Настройки -------------------------------------
-router.use( ( req, res, next ) => {
+router.use( async ( req, res, next ) => {
     res.pageSettings.page = 'pages';
-    res.pageSettings.cities = cities;
+    res.pageSettings.cities = await req.cities;
     if ( !req.access() ) throw 401;
 
     next();
