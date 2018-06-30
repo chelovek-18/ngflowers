@@ -7,6 +7,7 @@ const
     model = new ( require( './../../model/model' ) ),
     ng = new ( require( './../../libs/ng' ) ),
     refreshDatas = async () => {
+        console.log( 'cities1', cities );
         let
             rCities = await ng.getCities();
         if ( Object.keys( rCities ).length ) {
@@ -17,6 +18,7 @@ const
                 return c;
             }).filter( c => rCities[ c.key ] );
             let keys = cities.map( c => c.key );
+            console.log( 'cities:', cities, keys );
             /*cities = cities.concat(
                 Object.keys( rCities )
                     .filter( k => !~keys.indexOf( k ) )
@@ -28,11 +30,13 @@ const
                     }; })
             );*/
         }
-        console.log( 'cities:', cities, keys );
+        //console.log( 'cities:', cities, keys );
     };
 
 let
-    cities = [];
+    cities = ( async () => {
+        return await model.cities().find()
+    })();
 
 setInterval( refreshDatas, 5000 );
 
