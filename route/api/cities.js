@@ -5,12 +5,12 @@ const
     router = express.Router();
 
 // ------------------------------------- API: города -------------------------------------
+router.get( '/city/', ( req, res, next ) => {
+    res.json( req.cities );
+});
+
 router.get( '/city/:city', ( req, res, next ) => {
-    if ( !req.params.city )
-        res.send( req.cities );
-    else {
-        res.send( 'Maza-faka-city' );
-    }
+    res.send( 'Maza-faka-city-' + req.params.city );
 });
 
 module.exports = router;
