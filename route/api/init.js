@@ -11,7 +11,7 @@ const
             rCities = await ng.getCities();
         cities.forEach( c => {
             if ( !rCities[ c.key ] ) {
-                model.cities().update( { on: false }, { key: c.key } );
+                model.cities().update( { use: false }, { key: c.key } );
             }
         });
         console.log( 'cities:', cities );

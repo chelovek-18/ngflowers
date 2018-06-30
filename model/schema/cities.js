@@ -21,7 +21,7 @@ class CitiesCollection
                 type: String,
                 required: true
             },
-            on: {
+            use: {
                 type: Boolean,
                 default: true
             }
