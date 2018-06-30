@@ -1,8 +1,5 @@
 'use strict';
 
-let
-    cities = [];
-
 const
     express = require( 'express' ),
     router = express.Router(),
@@ -13,10 +10,11 @@ const
         let
             rCities = await ng.getCities();
         if ( Object.keys( rCities ).length ) {
-            cities = cities.forEach( c => {
+            cities = cities.map( c => {
                 if ( !rCities[ c.key ] ) {
                     model.cities().update( { use: false }, { key: c.key } );
                 }
+                return c;
             }).filter( c => rCities[ c.key ] );
             let keys = cities.map( c => c.key );
             cities = cities.concat(
@@ -32,6 +30,9 @@ const
         }
         console.log( 'cities:', cities );
     };
+
+let
+    cities = [];
 
 setInterval( refreshDatas, 5000 );
 
