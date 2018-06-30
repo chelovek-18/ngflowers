@@ -10,7 +10,7 @@ router.get( '/city/', async ( req, res, next ) => {
 });
 
 router.get( '/city/:city', ( req, res, next ) => {
-    res.send( 'Maza-faka-city-' + req.params.city );
+    res.json( ( await req.cities ).filter( c => c.key == req.params.city )[ 0 ] );
 });
 
 module.exports = router;

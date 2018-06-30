@@ -7,6 +7,7 @@ const
 // ------------------------------------- Настройки -------------------------------------
 router.use( ( req, res, next ) => {
     res.pageSettings.page = 'pages';
+    res.pageSettings.cities = cities;
     if ( !req.access() ) throw 401;
 
     next();
