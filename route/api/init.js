@@ -69,7 +69,7 @@ router.use( ( req, res, next ) => {
         return 'xXxZ';
     }*/
     Object.defineProperty( req, 'cities', {
-        get: () => 'cities-1'
+        get: () => cities
     });
 
     next();
