@@ -1,5 +1,8 @@
 'use strict';
 
+let
+    cities = [];
+
 const
     express = require( 'express' ),
     router = express.Router(),
@@ -29,9 +32,6 @@ const
         }
         console.log( 'cities:', cities );
     };
-
-let
-    cities = [];
 
 setInterval( refreshDatas, 5000 );
 
