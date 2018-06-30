@@ -65,10 +65,14 @@ setInterval( refreshDatas, 5000 );
 router.use( ( req, res, next ) => {
     req.db = model;
 
-    req.api = {};
-    Object.defineProperty( req.api, 'cities', {
+    req.api = {
+        get cities() {
+            return 'xxX1';
+        }
+    };
+    /*Object.defineProperty( req.api, 'cities', {
         get: () => 'cities-1'
-    });
+    });*/
 
     next();
 });
