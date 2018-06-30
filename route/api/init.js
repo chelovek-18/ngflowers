@@ -22,21 +22,27 @@ const
             cities = cities.concat(
                 Object.keys( rCities )
                     .filter( k => !~keys.indexOf( k ) )
-                    .map( k => { return {
-                        key: k,
-                        name: rCities[ k ].name,
-                        link: rCities[ k ].link,
-                        siteId: rCities[ k ].site_id
-                    }; })
+                    .map( k => {
+                        let city = {
+                            key: k,
+                            name: rCities[ k ].name,
+                            link: rCities[ k ].link,
+                            siteId: rCities[ k ].site_id
+                        };
+                        if ( await model.cities().findOne( { key: city.key } ) )
+                            model.cities().update( Object.assign( city, { use: true } ), { key: city.key } );
+                        else
+                            model.cities().save( city );
+                        return city;
+                    })
             );
             console.log( 'cities:', cities, keys, rCities );
         }
-        //console.log( 'cities:', cities, keys );
     };
 
 let
     cities = ( async () => {
-        return await model.cities().find()
+        return await model.cities().find( { use: true } )
     })();
 
 setInterval( refreshDatas, 5000 );
