@@ -34,13 +34,15 @@ const
             let newCities = Object.keys( rCities ).filter( k => !~keys.indexOf( k ) );
             //let nC = [];
             for ( let nc in newCities ) {
-                let city = await model.cities().findOne( { key: rCities[ nc ].key } );
+                let k = newCities[ nc ];
+                let c = rCities[ k ];
+                let city = await model.cities().findOne( { key: c.key } );
                 if ( !city ) {
                     city = {
-                        key: rCities[ nc ].key,
-                        name: rCities[ nc ].name,
-                        link: rCities[ nc ].link,
-                        siteId: rCities[ nc ].site_id
+                        key: c.key,
+                        name: c.name,
+                        link: c.link,
+                        siteId: c.site_id
                     };
                     model.cities().save( city );
                     cities.push( city );
