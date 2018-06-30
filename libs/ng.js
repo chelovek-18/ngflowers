@@ -30,7 +30,7 @@ class NG
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
-                    console.log( httpRes.statusCode );
+                    //console.log( httpRes.statusCode );
                     j( {} );
                 }
     
@@ -42,7 +42,7 @@ class NG
                 });
             });
             httpReq.on( 'error', ( err ) => {
-                console.log( err );
+                //console.log( err );
                 j( {} );
             });
             httpReq.write( this.body );
