@@ -9,7 +9,7 @@ router.get( '/city/', async ( req, res, next ) => {
     res.json( await req.cities );
 });
 
-router.get( '/city/:city', ( req, res, next ) => {
+router.get( '/city/:city', async ( req, res, next ) => {
     res.json( ( await req.cities ).filter( c => c.key == req.params.city )[ 0 ] );
 });
 
