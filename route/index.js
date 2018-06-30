@@ -96,6 +96,8 @@ class Route
             ` )
         });
 
+        app.use( require( './api/cities' ) );
+
         /*app.use( ( req, res, next ) => {
             console.log( 'sess', req.session );
             console.log( 'body', req.body );
