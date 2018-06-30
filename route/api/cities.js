@@ -13,7 +13,7 @@ router.get( '/city/:city', async ( req, res, next ) => {
     res.json( ( await req.cities ).filter( c => c.key == req.params.city )[ 0 ] );
 });
 
-router.post( '/city/:city', async ( req, res, next ) => {
+router.put( '/city/:city', async ( req, res, next ) => {
     res.send( req.body.use );
 });
 
