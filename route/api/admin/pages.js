@@ -7,7 +7,7 @@ const
 // ------------------------------------- Настройки -------------------------------------
 router.use( async ( req, res, next ) => {
     res.pageSettings.page = 'pages';
-    res.pageSettings.cities = await req.cities;
+    res.pageSettings.cities = await req.db.cities().find();
     if ( !req.access() ) throw 401;
 
     next();
