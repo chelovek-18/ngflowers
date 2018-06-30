@@ -9,12 +9,25 @@ const
     refreshDatas = async () => {
         let
             rCities = await ng.getCities();
-        cities.forEach( c => {
-            if ( !rCities[ c.key ] ) {
-                model.cities().update( { used: false }, { key: c.key } );
-            }
-        });
-        //console.log( 'cities:', rCities );
+        if ( Object.keys( rCities ).length ) {
+            cities = cities.forEach( c => {
+                if ( !rCities[ c.key ] ) {
+                    model.cities().update( { use: false }, { key: c.key } );
+                }
+            }).filter( c => rCities[ c.key ] );
+            let keys = cities.map( c => c.key );
+            cities = cities.concat(
+                Object.keys( rCities )
+                    .filter( k => !~keys.indexOf( k ) )
+                    .map( k => { return {
+                        key: k,
+                        name: rCities[ k ].name,
+                        link: rCities[ k ].link,
+                        siteId: rCities[ k ].site_id
+                    }; })
+            );
+        }
+        console.log( 'cities:', cities );
     };
 
 let
