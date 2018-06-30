@@ -38,7 +38,12 @@ class NG
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    r( output )
+                    try {
+                        r( JSON.parse( output ) );
+                    } catch( err ) {
+                        console.log( 'request error:', err );
+                        r( {} );
+                    }
                 });
             });
             httpReq.on( 'error', ( err ) => {
