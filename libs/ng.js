@@ -30,7 +30,7 @@ class NG
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
-                    //console.log( httpRes.statusCode );
+                    console.log( 'request error:', httpRes.statusCode );
                     j( {} );
                 }
     
@@ -42,12 +42,15 @@ class NG
                 });
             });
             httpReq.on( 'error', ( err ) => {
-                //console.log( err );
+                console.log( 'request error:', err );
                 j( {} );
             });
             httpReq.write( this.body );
             httpReq.end();
-        }).catch( e => { return {}; } );
+        }).catch( e => {
+            console.log( 'request error:', e );
+            return {};
+        });
     }
 
     async getCities() {
