@@ -85,6 +85,11 @@ router.use( ( req, res, next ) => {
     Object.defineProperty( req, 'cities', {
         get: () => cities
     });
+    req.citiesRefresh = () => {
+        cities = ( async () => {
+            return await model.cities().find( { use: true } )
+        })();
+    }
 
     next();
 });
