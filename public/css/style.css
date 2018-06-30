@@ -207,6 +207,10 @@ h1 {
     color: red;
 }
 
-.use-true span, .use-false span {
+.use-switcher {
+    cursor: pointer;
+}
+
+.use-switcher span {
     color: #272727;
 }
