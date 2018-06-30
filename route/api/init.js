@@ -31,7 +31,22 @@ const
             }).filter( c => rCities[ c.key ] );
             let keys = cities.map( c => c.key );
             // 2. Добавляем те, что нет у нас
-            cities = cities.concat(
+            let newCities = Object.keys( rCities ).filter( k => !~keys.indexOf( k ) );
+            //let nC = [];
+            for ( let nc in newCities ) {
+                let city = await model.cities().findOne( { key: rCities[ nc ].key } );
+                if ( !city ) {
+                    city = {
+                        key: rCities[ nc ].key,
+                        name: rCities[ nc ].name,
+                        link: rCities[ nc ].link,
+                        siteId: rCities[ nc ].site_id
+                    };
+                    model.cities().save( city );
+                    cities.push( city );
+                }
+            }
+            /*cities = cities.concat(
                 Object.keys( rCities )
                     .filter( k => !~keys.indexOf( k ) )
                     .map( k => {
@@ -50,7 +65,7 @@ const
                         })();
                         return city;
                     })
-            );
+            );*/
         }
     };
 
