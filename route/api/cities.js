@@ -15,7 +15,7 @@ router.get( '/city/:city', async ( req, res, next ) => {
 
 router.put( '/city/:city', async ( req, res, next ) => {
     req.body.use = req.body.use == 'true';
-    let answ = await req.db.cities().update( req.body, { key: req.params.city } ).exec();
+    let answ = await req.db.cities().update( req.body, { key: 'spb' /*req.params.city*/ } ).exec();
     req.citiesRefresh();
     console.log( await req.db.cities().find() );
     res.send( answ );
