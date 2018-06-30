@@ -66,7 +66,7 @@ router.use( ( req, res, next ) => {
     req.db = model;
 
     Object.defineProperty( req, 'cities', {
-        get: () => cities
+        get: () => 'cities-1'
     });
 
     next();
