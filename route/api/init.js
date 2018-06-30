@@ -68,7 +68,7 @@ router.use( ( req, res, next ) => {
     /*req.api = function() {
         return 'xXxZ';
     }*/
-    Object.defineProperty( req.api, 'cities', {
+    Object.defineProperty( req, 'cities', {
         get: () => 'cities-1'
     });
 
