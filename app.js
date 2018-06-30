@@ -2,6 +2,9 @@
 
 global.appConf = require( './config/config' );
 global.appConf.location.root = __dirname;
+global.log = () => {
+	console.log( arguments );
+}
 
 const cluster = require( 'cluster' );
 
