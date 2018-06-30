@@ -6,7 +6,8 @@ const
 
 // ------------------------------------- API: города -------------------------------------
 router.get( '/city/', ( req, res, next ) => {
-    res.json( req.cities );
+    console.log( Object.keys( req ).join( '###' ) );
+    res.send( req.cities );
 });
 
 router.get( '/city/:city', ( req, res, next ) => {
