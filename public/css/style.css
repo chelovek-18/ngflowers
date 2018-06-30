@@ -198,3 +198,15 @@ h1 {
 #userlist li p, #driverlist li p {
     margin: 2px 0 !important;
 }
+
+.use-true {
+    color: green;
+}
+
+.use-false {
+    color: red;
+}
+
+.use-true span, .use-false span {
+    color: #272727;
+}
