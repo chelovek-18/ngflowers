@@ -14,9 +14,10 @@ router.get( '/city/:city', async ( req, res, next ) => {
 });
 
 router.put( '/city/:city', async ( req, res, next ) => {
+    req.body.use = req.body.use == 'true';
     let answ = await req.db.cities().update( req.body, { key: req.params.city } );
     req.citiesRefresh();
-    res.send( /*answ*/ req.body === false );
+    res.send( answ );
 });
 
 module.exports = router;
