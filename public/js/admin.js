@@ -5,7 +5,7 @@ document.addEventListener( "DOMContentLoaded", function() {
         this.classList.toggle( 'use-true' );
         this.classList.toggle( 'use-false' );
         var xhr = new XMLHttpRequest();
-        xhr.open( 'PUT', location.origin + '/' + this.getAttribute( 'type' ) + '/' + this.getAttribute( 'key' ) );
+        xhr.open( 'POST', location.origin + '/' + this.getAttribute( 'type' ) + '/' + this.getAttribute( 'key' ) );
         xhr.send( dataSerialize( { use: this.classList.contains( 'use-true' ) } ) );
     });
 });
