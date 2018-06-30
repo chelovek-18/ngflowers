@@ -15,12 +15,12 @@
             },
             "chat": {
                 "key": "chat",
-                "access": [ "root", "admin" ],
+                "access": [ "root", "admin", "operator" ],
                 "name": "Чат"
             },
             "activity": {
                 "key": "activity",
-                "access": [ "root", "admin" ],
+                "access": [ "root", "admin", "operator" ],
                 "name": "Активность"
             }
         }
