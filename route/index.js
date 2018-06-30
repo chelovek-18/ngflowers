@@ -96,8 +96,6 @@ class Route
             ` )
         });
 
-        app.use( require( './api/cities' ) );
-
         /*app.use( ( req, res, next ) => {
             console.log( 'sess', req.session );
             console.log( 'body', req.body );
@@ -116,6 +114,8 @@ class Route
         });*/
         
         app.use( require( './api/init' ) );
+
+        app.use( require( './api/cities' ) );
 
         app.get( '/del/', async ( req, res, next ) => {
             res.send( await req.db.users().delete() );
