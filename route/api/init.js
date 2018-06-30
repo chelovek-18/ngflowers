@@ -21,13 +21,13 @@ const
             let keys = cities.map( c => c.key );
             cities = cities.concat(
                 Object.keys( rCities )
-                    /*.filter( k => !~keys.indexOf( k ) )
+                    .filter( k => !~keys.indexOf( k ) )
                     .map( k => { return {
                         key: k,
                         name: rCities[ k ].name,
                         link: rCities[ k ].link,
                         siteId: rCities[ k ].site_id
-                    }; })*/
+                    }; })
             );
             console.log( 'cities:', cities, keys, rCities );
         }
