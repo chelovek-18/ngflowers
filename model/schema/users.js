@@ -28,6 +28,8 @@ class UsersCollection
                 type: String,
                 default: ''
             }
+        }, {
+            autoIndex: true
         });
     }
 
