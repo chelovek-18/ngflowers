@@ -5,8 +5,8 @@ const
     router = express.Router();
 
 // ------------------------------------- API: города -------------------------------------
-router.get( '/city/', ( req, res, next ) => {
-    res.json( req.cities );
+router.get( '/city/', async ( req, res, next ) => {
+    res.json( await req.cities );
 });
 
 router.get( '/city/:city', ( req, res, next ) => {
