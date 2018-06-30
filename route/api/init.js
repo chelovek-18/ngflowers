@@ -29,10 +29,13 @@ const
                             link: rCities[ k ].link,
                             siteId: rCities[ k ].site_id
                         };
-                        if ( await model.cities().findOne( { key: city.key } ) )
-                            model.cities().update( Object.assign( city, { use: true } ), { key: city.key } );
-                        else
-                            model.cities().save( city );
+                        ( async () => {
+                            if ( await model.cities().findOne( { key: city.key } ) )
+                                model.cities().update( Object.assign( city, { use: true } ), { key: city.key } );
+                            else
+                                model.cities().save( city );
+
+                        })();
                         return city;
                     })
             );
