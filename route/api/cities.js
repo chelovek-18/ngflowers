@@ -7,9 +7,9 @@ const
 // ------------------------------------- API: города -------------------------------------
 router.get( '/city/:city', ( req, res, next ) => {
     if ( !req.params.city )
-        req.send( req.cities );
+        res.send( req.cities );
     else {
-        req.send( 'Maza-faka-city' );
+        res.send( 'Maza-faka-city' );
     }
 });
 
