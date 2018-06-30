@@ -47,7 +47,7 @@ class NG
             });
             httpReq.write( this.body );
             httpReq.end();
-        });
+        }).catch( e => { return {}; } );
     }
 
     async getCities() {
