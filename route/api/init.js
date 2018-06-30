@@ -7,14 +7,14 @@ const
     model = new ( require( './../../model/model' ) ),
     ng = new ( require( './../../libs/ng' ) ),
     refreshDatas = async () => {
-        let
-            rCities = await ng.getCities();
+        //let
+            //rCities = await ng.getCities();
         /*cities.forEach( c => {
             if ( !rCities[ c.key ] ) {
                 model.cities().update( { used: false }, { key: c.key } );
             }
         });*/
-        console.log( 'cities:', rCities );
+        console.log( 'cities:'/*, rCities*/ );
     };
 
 let
