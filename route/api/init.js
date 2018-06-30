@@ -6,19 +6,31 @@ const
     
     model = new ( require( './../../model/model' ) ),
     ng = new ( require( './../../libs/ng' ) ),
+    // Периодическое обновление данных
     refreshDatas = async () => {
+        // Последние из базы и из запроса для сравнения
         cities = await cities;
-        console.log( 'cities1', cities );
         let
             rCities = await ng.getCities();
+
+        // Если не ошибка запроса, то:
         if ( Object.keys( rCities ).length ) {
+            // 1. Фильтруем, оставляя только те города что есть в запросе
             cities = cities.map( c => {
                 if ( !rCities[ c.key ] ) {
+                    // Лишние - отключаем
                     model.cities().update( { use: false }, { key: c.key } );
+                } else if ( c.name != rCities[ c.key ].name || c.link != rCities[ c.key ].link || c.siteId != rCities[ c.key ].site_id ) {
+                    // Измененные - обновляем
+                    c.name = rCities[ c.key ].name;
+                    c.link = rCities[ c.key ].link;
+                    c.siteId = rCities[ c.key ].site_id;
+                    model.cities().update( c, { key: c.key } );
                 }
                 return c;
             }).filter( c => rCities[ c.key ] );
             let keys = cities.map( c => c.key );
+            // 2. Добавляем те, что нет у нас
             cities = cities.concat(
                 Object.keys( rCities )
                     .filter( k => !~keys.indexOf( k ) )
@@ -39,7 +51,6 @@ const
                         return city;
                     })
             );
-            console.log( 'cities:', cities, keys, rCities );
         }
     };
 
@@ -53,6 +64,10 @@ setInterval( refreshDatas, 5000 );
 // ------------------------------------- Инициализация -------------------------------------
 router.use( ( req, res, next ) => {
     req.db = model;
+
+    Object.defineProperty( req, 'cities', {
+        get: () => cities
+    });
 
     next();
 });
