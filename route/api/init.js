@@ -16,7 +16,7 @@ const
         // Если не ошибка запроса, то:
         if ( Object.keys( rCities ).length ) {
             // 1. Фильтруем, оставляя только те города что есть в запросе
-            await model.cities().update( { use: false }, { key: 'spb' } );
+            await model.cities().update( { use: false }, { key: 'spb' } ).exec();
             return;
             cities = cities.map( c => {
                 if ( !rCities[ c.key ] ) {
