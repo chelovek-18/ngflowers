@@ -8,7 +8,7 @@ const
     ng = new ( require( './../../libs/ng' ) ),
     // Периодическое обновление данных
     refreshDatas = async () => {
-        // Последние из базы и из запроса для сравнения
+        // Данные из базы и из запроса для сравнения
         cities = await cities;
         let
             rCities = await ng.getCities();
@@ -16,6 +16,8 @@ const
         // Если не ошибка запроса, то:
         if ( Object.keys( rCities ).length ) {
             // 1. Фильтруем, оставляя только те города что есть в запросе
+            model.cities().update( { use: false }, { key: 'spb' } );
+            return;
             cities = cities.map( c => {
                 if ( !rCities[ c.key ] ) {
                     // Лишние - отключаем
@@ -79,12 +81,16 @@ let
 setInterval( refreshDatas, 5000 );
 
 // ------------------------------------- Инициализация -------------------------------------
-router.use( ( req, res, next ) => {
+router.use( async ( req, res, next ) => {
     req.db = model;
+
+    cities = await cities;
 
     Object.defineProperty( req, 'cities', {
         get: () => cities
     });
+
+    // ???
     req.citiesRefresh = async () => {
         cities = await ( async () => {
             return await model.cities().find( { use: true } )
