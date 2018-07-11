@@ -64,10 +64,6 @@ class Route
                     'maxAge': global.appConf.session.maxAge
                 }
             }))
-            /*.use( function( req, res, next ) {
-                res.db = model;
-                next();
-            })*/
 
             .listen( global.appConf.location.port, () => {
                 this.routes();
@@ -83,7 +79,6 @@ class Route
     }
 
     routes() {
-        // Все маршруты
         /*routes.forEach( ( route ) => {
             if ( route.use ) app.use( '/app/', route );
         });*/
@@ -113,64 +108,25 @@ class Route
             else next();
         });*/
         
+        // Все маршруты:
+
+        // Инициализация
         app.use( require( './api/init' ) );
 
+        // ?
         app.use( require( './api/cities' ) );
 
         app.get( '/del/', async ( req, res, next ) => {
             res.send( await req.db.users().delete() );
         });
 
+        // Авторизация
         app.use( require( './api/auth' ) );
 
+        // Админка
         app.use( require( './api/admin' ) );
 
-        app.get( '/admin/', ( req, res, next ) => {
-            res.send(`
-            <ul style="float: left; height: 500px; margin-right: 50px;">
-                <li><h1>Меню</h1></li>
-                <li><a href="#">Настройки</a></li>
-                <li><a href="#">Страницы</a></li>
-                <li><a href="#">Чат</a></li>
-                <li><a href="#">Активность</a></li>
-            </ul>
-            <div>
-                <p>&nbsp;</p>
-                <h1>Настройки</h1>
-                <p>Порт</p>
-                <input type="text" value="50001" /><br />
-                <p>База</p>
-                <input type="text" value="ngflowers" /><br />
-                <p>Логин</p>
-                <input type="text" value="ngroot" /><br />
-                <p>Пароль</p>
-                <input type="password" value="ngpas" /><br />
-                <hr />
-                <h1>Пользователи</h1>
-                <table>
-                    <tr>
-                        <td> Имя </td>
-                        <td> Логин </td>
-                        <td> Пароль </td>
-                        <td> Роль </td>
-                    </tr>
-                    <tr>
-                        <td> <input type="text" value="Сергей" /> </td>
-                        <td> <input type="text" value="serg007" /> </td>
-                        <td> <input type="password" value="ngr" /> </td>
-                        <td> <select><option>Root</option><option>Admin</option></select> </td>
-                    </tr>
-                    <tr>
-                        <td> <input type="text" value="Антон" /> </td>
-                        <td> <input type="text" value="anton008" /> </td>
-                        <td> <input type="password" value="ngr" /> </td>
-                        <td> <select><option>Root</option><option>Admin</option></select> </td>
-                    </tr>
-                </table>
-            </div>
-            `);
-        });
-
+        // Обработка ошибок
         app.use( ( err, req, res, next ) => {
             res.send( err );
         });

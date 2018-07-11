@@ -1,10 +1,12 @@
 'use strict';
 
+// Задаем глобальные конфиги для управления сервером
 global.appConf = require( './config/config' );
 global.appConf.location.root = __dirname;
 
 const cluster = require( 'cluster' );
 
+// Форкаем процесс для автоматического перезапуска в случае падения
 if ( cluster.isMaster ) {
 
 	cluster.fork();

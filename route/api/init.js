@@ -82,9 +82,11 @@ setInterval( refreshDatas, 5000 );
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
+    // Подключение БД
     req.db = model;
+    console.log( 'db:', req.db );
 
-    cities = await cities;
+    /*cities = await cities;
 
     Object.defineProperty( req, 'cities', {
         get: () => cities
@@ -97,7 +99,7 @@ router.use( async ( req, res, next ) => {
         })();
     }
 
-    next();
+    next();*/
 });
 
 module.exports = router;
