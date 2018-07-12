@@ -128,6 +128,7 @@ class Route
 
         // Обработка ошибок
         app.use( ( err, req, res, next ) => {
+            console.log( res, req );
             res.send( err );
         });
     }
