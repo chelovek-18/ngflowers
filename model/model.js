@@ -68,7 +68,7 @@ class Model
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
 		let self = this;
-		mongoose.connect( path, {}, err => self.error = err );
+		mongoose.connect( path, {}, err => { self.error = err; console.log( 'herr wam' ); } );
 		Object.keys( models ).forEach( collection => {
 			let
 				model = models[ collection ],
