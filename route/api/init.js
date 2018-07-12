@@ -8,7 +8,7 @@ const
     ng = new ( require( './../../libs/ng' ) ),
 
     // Периодическое обновление данных
-    refreshDatas = async () => {};
+    //refreshDatas = async () => {};
 
 
 
@@ -82,7 +82,7 @@ const
 let
     cities = model.cities().find();
 
-setInterval( refreshDatas, 5000 );
+//setInterval( refreshDatas, 5000 );
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
@@ -90,14 +90,14 @@ router.use( async ( req, res, next ) => {
     req.db = await model;
     if ( !req.db.cities ) next( req.db );
 
-    /*cities = await cities;
+    cities = await cities;
 
     Object.defineProperty( req, 'cities', {
         get: () => cities
     });
 
     // ???
-    req.citiesRefresh = async () => {
+    /*req.citiesRefresh = async () => {
         cities = await ( async () => {
             return await model.cities().find( { use: true } )
         })();
