@@ -80,7 +80,7 @@ const
     };*/
 
 let
-    cities = ( async () => await model.cities().find() )();
+    cities = ( async () => { return await model.cities().find(); } )();
 
 //setInterval( refreshDatas, 5000 );
 
