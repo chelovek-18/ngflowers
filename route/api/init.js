@@ -99,7 +99,9 @@ router.use( async ( req, res, next ) => {
     }
 
     //cities = await cities;
-    cities = cities || req.db.cities().find();
+    cities = cities;
+    if ( !cities.length ) cities = await req.db.cities().find();
+    //if ( !cities.length ) cities = await req.db.cities().find();
     console.log( 'cities:', cities );
 
     Object.defineProperty( req, 'cities', {

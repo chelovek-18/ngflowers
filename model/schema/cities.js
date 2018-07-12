@@ -29,6 +29,8 @@ class CitiesCollection
             autoIndex: true
         });
     }
+
+    //getCities( db,  ) {}
 }
 
 module.exports = CitiesCollection;
