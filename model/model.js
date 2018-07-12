@@ -25,6 +25,7 @@ const
 
 mongoose.Promise = global.Promise;
 
+// Схемы
 let models = dir.reduce(
 	( o, f ) => {
 		o[ f.slice( 0, -3 ) ] = ( new ( require( './schema/' + f ) ) ); return o;
@@ -66,9 +67,8 @@ class Model
 {
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
-    constructor() {
+    async constructor() {
 		let self = this;
-		//mongoose.connect( path, {}, err => { self.error = err; console.log( 'herr wam' ); } );
 		return ( async function() {
 			try {
 				await mongoose.connect( path );
@@ -109,8 +109,6 @@ class Model
 						}
 					});
 				});
-		
-
 			} catch( e ) {
 				console.log( 'hz' );
 				return 'hz';
