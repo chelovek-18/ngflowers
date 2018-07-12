@@ -97,7 +97,7 @@ router.use( async ( req, res, next ) => {
         res.status( 500 );
         next( req.db );
     }
-    res.send( 'yaya' );
+    //res.send( 'yaya' );
 
     //cities = await cities;
     cities = cities;
