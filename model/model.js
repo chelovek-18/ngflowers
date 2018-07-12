@@ -25,7 +25,6 @@ const
 
 mongoose.Promise = global.Promise;
 
-// Схемы
 let models = dir.reduce(
 	( o, f ) => {
 		o[ f.slice( 0, -3 ) ] = ( new ( require( './schema/' + f ) ) ); return o;
@@ -69,57 +68,9 @@ class Model
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
 		let self = this;
-		return ( async () => {
-			try {
-				await mongoose.connect( path );
-				Object.keys( models ).forEach( collection => {
-					let
-						model = models[ collection ],
-						schema = model.getSchema( Schema );
-		
-					model.query = mongoose.model( collection, schema );
-					model.query.save = function( data ) {
-						return self.query( collection, 'save', data );
-					}
-					model.query.delete = function( data ) {
-						return self.query( collection, 'delete', ( data || {} ) );
-					}
-					if ( collection == 'users' ) model.query.hashing = function( data ) {
-						return crypto
-							.createHmac( 'sha1', data.salt )
-							.update( data.password )
-							.digest( 'hex' );
-					}
-		
-					self[ collection ] = function() {
-						let args = [ collection ];
-						for ( let k in arguments ) args.push( arguments[ k ] );
-						return self.query.apply( self, args );
-					}
-		
-					Object.getOwnPropertyNames( model.__proto__ ).forEach( ( method ) => {
-						if (
-							method != 'Schema'
-							&& method != 'constructor'
-							&& typeof model[ method ] == 'function'
-						) model.query[ method ] = function() {
-							let args = [ self ];
-							for ( let k in arguments ) args.push( arguments[ k ] );
-							return model[ method ].apply( model, args );
-						}
-					});
-				});
-			} catch( err ) {
-				return err;
-			}
-		})();
-		/*try {
-			mongoose.connect( path );
-		} catch( e ) {
-			return 'hz';
-		}*/
-		//mongoose.connect( path );
-		/*Object.keys( models ).forEach( collection => {
+		//mongoose.connect( path, {}, err => { self.error = err; console.log( 'herr wam' ); } );
+		mongoose.connect( path );
+		Object.keys( models ).forEach( collection => {
 			let
 				model = models[ collection ],
 				schema = model.getSchema( Schema );
@@ -154,8 +105,8 @@ class Model
 					for ( let k in arguments ) args.push( arguments[ k ] );
 					return model[ method ].apply( model, args );
 				}
-			});*/
-		//});
+			});
+		});
 
 		//this.isConn = mongoose.connect( path, options, this.cbk );
 		//this.isConn.connection.on( 'disconnected', function() { conn = false; });
