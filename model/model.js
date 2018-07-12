@@ -110,6 +110,7 @@ class Model
 					});
 				});
 			} catch( err ) {
+				self.error = err;
 				return err;
 			}
 		})();
