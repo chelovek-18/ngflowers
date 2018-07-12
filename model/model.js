@@ -91,7 +91,7 @@ class Model
 							.digest( 'hex' );
 					}
 		
-					this[ collection ] = function() {
+					self[ collection ] = function() {
 						let args = [ collection ];
 						for ( let k in arguments ) args.push( arguments[ k ] );
 						return self.query.apply( self, args );
