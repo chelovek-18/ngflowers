@@ -5,7 +5,13 @@ const
     router = express.Router(),
     
     model = new ( require( './../../model/model' ) ),
-    ng = new ( require( './../../libs/ng' ) );
+    ng = new ( require( './../../libs/ng' ) ),
+
+    // Периодическое обновление данных
+    refreshDatas = async () => {};
+
+
+
     // Периодическое обновление данных
     /*refreshDatas = async () => {
         // Данные из базы и из запроса для сравнения
@@ -71,26 +77,18 @@ const
                                         })
                                 );-------------------------------*/
         /*}
-    };
+    };*/
 
 let
-    cities = ( async () => {
-        return await model.cities().find( { use: true } )
-    })();
+    cities = model.cities().find();
 
-setInterval( refreshDatas, 5000 );*/
+setInterval( refreshDatas, 5000 );
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
     // Подключение БД
-    /*try {
-        req.db = await model;
-    } catch( err ) {
-        console.log( 'herr:', err );
-    }*/
     req.db = await model;
     if ( !req.db.cities ) next( req.db );
-    console.log( 'db:', req.db );
 
     /*cities = await cities;
 
