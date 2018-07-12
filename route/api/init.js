@@ -5,7 +5,7 @@ const
     router = express.Router(),
     
     model = new ( require( './../../model/model' ) ),
-    ng = new ( require( './../../libs/ng' ) ),
+    ng = new ( require( './../../libs/ng' ) );
 
     // Периодическое обновление данных
     //refreshDatas = async () => {};
