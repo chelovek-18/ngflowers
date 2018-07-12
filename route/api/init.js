@@ -5,9 +5,9 @@ const
     router = express.Router(),
     
     model = new ( require( './../../model/model' ) ),
-    ng = new ( require( './../../libs/ng' ) ),
+    ng = new ( require( './../../libs/ng' ) );
     // Периодическое обновление данных
-    refreshDatas = async () => {
+    /*refreshDatas = async () => {
         // Данные из базы и из запроса для сравнения
         cities = await cities;
         let
@@ -49,28 +49,28 @@ const
                     model.cities().save( city );
                     cities.push( city );
                 }
-            }
-            /*cities = cities.concat(
-                Object.keys( rCities )
-                    .filter( k => !~keys.indexOf( k ) )
-                    .map( k => {
-                        let city = {
-                            key: k,
-                            name: rCities[ k ].name,
-                            link: rCities[ k ].link,
-                            siteId: rCities[ k ].site_id
-                        };
-                        ( async () => {
-                            if ( await model.cities().findOne( { key: city.key } ) )
-                                model.cities().update( Object.assign( city, { use: true } ), { key: city.key } );
-                            else
-                                model.cities().save( city );
+            }*/
+                                /*-------------------------------cities = cities.concat(
+                                    Object.keys( rCities )
+                                        .filter( k => !~keys.indexOf( k ) )
+                                        .map( k => {
+                                            let city = {
+                                                key: k,
+                                                name: rCities[ k ].name,
+                                                link: rCities[ k ].link,
+                                                siteId: rCities[ k ].site_id
+                                            };
+                                            ( async () => {
+                                                if ( await model.cities().findOne( { key: city.key } ) )
+                                                    model.cities().update( Object.assign( city, { use: true } ), { key: city.key } );
+                                                else
+                                                    model.cities().save( city );
 
-                        })();
-                        return city;
-                    })
-            );*/
-        }
+                                            })();
+                                            return city;
+                                        })
+                                );-------------------------------*/
+        /*}
     };
 
 let
@@ -78,7 +78,7 @@ let
         return await model.cities().find( { use: true } )
     })();
 
-setInterval( refreshDatas, 5000 );
+setInterval( refreshDatas, 5000 );*/
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
@@ -88,8 +88,8 @@ router.use( async ( req, res, next ) => {
     } catch( err ) {
         console.log( 'herr:', err );
     }*/
-    req.db = model;
-    console.log( 'db:', await req.db );
+    req.db = await model;
+    console.log( 'db:', req.db );
 
     /*cities = await cities;
 
