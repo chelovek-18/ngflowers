@@ -118,7 +118,14 @@ class Model
 		} catch( e ) {
 			return 'hz';
 		}*/
-		mongoose.connect( path );
+
+
+		//
+		// <------------------------------------------------------------
+
+
+
+		/*mongoose.connect( path );
 		Object.keys( models ).forEach( collection => {
 			let
 				model = models[ collection ],
@@ -155,7 +162,7 @@ class Model
 					return model[ method ].apply( model, args );
 				}
 			});
-		});
+		});*/
 
 		//this.isConn = mongoose.connect( path, options, this.cbk );
 		//this.isConn.connection.on( 'disconnected', function() { conn = false; });
