@@ -83,12 +83,12 @@ setInterval( refreshDatas, 5000 );
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
     // Подключение БД
-    try {
+    /*try {
         req.db = await model;
     } catch( err ) {
         console.log( 'herr:', err );
-    }
-    //req.db = model;
+    }*/
+    req.db = model;
     console.log( 'db:', await req.db.error );
 
     /*cities = await cities;
