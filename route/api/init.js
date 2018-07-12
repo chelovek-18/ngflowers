@@ -79,10 +79,13 @@ const
         /*}
     };*/
 
-let
+/*let
     cities = ( async () => {
         //return ( await model ).cities().find();
-    })();
+    })();*/
+
+let
+    cities = [];
 
 //setInterval( refreshDatas, 5000 );
 
@@ -95,7 +98,8 @@ router.use( async ( req, res, next ) => {
         next( req.db );
     }
 
-    cities = await cities;
+    //cities = await cities;
+    cities = cities || req.db.cities().find();
 
     Object.defineProperty( req, 'cities', {
         get: () => cities

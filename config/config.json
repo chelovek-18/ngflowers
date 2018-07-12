@@ -52,7 +52,7 @@
         "host": "localhost",
         "port": 27017,
         "database": "ngflowers",
-        "user": "ngroot0",
+        "user": "ngroot",
         "password": "ng2883455secure",
         "opts": {
             "server": {
