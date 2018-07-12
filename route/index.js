@@ -3,6 +3,7 @@
 const
     // express
     express = require( 'express' ),
+    pem = require( 'pem' ),
     https = require( 'https' ),
     bodyParser = require( 'body-parser' ),
     session = require( 'express-session' ),
@@ -64,11 +65,17 @@ class Route
                     'expires': new Date( Date.now() + global.appConf.session.maxAge ),
                     'maxAge': global.appConf.session.maxAge
                 }
-            }))
+            }));
 
-            .listen( global.appConf.location.port, () => {
+            /*.listen( global.appConf.location.port, () => {
+                this.routes();
+            });*/
+
+        pem.createCertificate( { days: 1, selfSigned: true }, function ( err, keys ) {
+            https.createServer( { key: keys.serviceKey, cert: keys.certificate }, app ).listen( global.appConf.location.port, () => {
                 this.routes();
             });
+        });
 
         // Web-socket
         //server.listen( global.appConf.location.ws );
