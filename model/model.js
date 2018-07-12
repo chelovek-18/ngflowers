@@ -67,9 +67,9 @@ class Model
 {
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
-    async constructor() {
+    constructor() {
 		let self = this;
-		return ( async function() {
+		return ( async () => {
 			try {
 				await mongoose.connect( path );
 				Object.keys( models ).forEach( collection => {
@@ -109,9 +109,8 @@ class Model
 						}
 					});
 				});
-			} catch( e ) {
-				console.log( 'hz' );
-				return 'hz';
+			} catch( err ) {
+				return err;
 			}
 		})();
 		/*try {
