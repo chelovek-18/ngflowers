@@ -89,7 +89,7 @@ router.use( async ( req, res, next ) => {
         console.log( 'herr:', err );
     }*/
     req.db = model;
-    console.log( 'db:', await req.db.error );
+    console.log( 'db:', await req.db );
 
     /*cities = await cities;
 

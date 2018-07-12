@@ -69,7 +69,12 @@ class Model
     constructor() {
 		let self = this;
 		//mongoose.connect( path, {}, err => { self.error = err; console.log( 'herr wam' ); } );
-		mongoose.connect( path );
+		try {
+			mongoose.connect( path );
+		} catch( e ) {
+			return 'hz';
+		}
+		//mongoose.connect( path );
 		Object.keys( models ).forEach( collection => {
 			let
 				model = models[ collection ],
