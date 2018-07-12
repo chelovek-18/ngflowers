@@ -91,7 +91,7 @@ router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = await model;
     //if ( true ) next( { bb: !!req.db.cities, qq: Object.keys( req.db ), tt: Object.getOwnPropertyNames( req.db.__proto__ ) } );
-    if ( !!!req.db.cities ) next( req.db );
+    if ( !!!req.db.cities ) next( /*req.db*/ { a: 8 } );
 
     cities = await cities;
 
