@@ -114,9 +114,9 @@ router.use( async ( req, res, next ) => {
         cities = await ( async () => {
             return await model.cities().find( { use: true } )
         })();
-    }
+    }*/
 
-    next();*/
+    next();
 });
 
 module.exports = router;
