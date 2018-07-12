@@ -71,9 +71,11 @@ class Route
                 this.routes();
             });*/
 
+        let self = this;
+
         pem.createCertificate( { days: 1, selfSigned: true }, function ( err, keys ) {
             https.createServer( { key: keys.serviceKey, cert: keys.certificate }, app ).listen( global.appConf.location.port, () => {
-                this.routes();
+                self.routes();
             });
         });
 
