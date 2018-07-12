@@ -81,7 +81,7 @@ const
 
 let
     cities = ( async () => {
-        return await ( !!model.cities ? model : await model ).cities().find();
+        return await model.cities().find();
     })();
 
 //setInterval( refreshDatas, 5000 );
@@ -89,7 +89,7 @@ let
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
     // Подключение БД
-    req.db = await model;
+    req.db = model;
     if ( !!!req.db.cities ) {
         res.status( 500 );
         next( req.db );
