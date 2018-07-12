@@ -90,7 +90,7 @@ cities = ( async () => {
 router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = await model;
-    if ( true ) next( { bb: await model.cities().find(), qq: Object.keys( req.db ), tt: Object.getOwnPropertyNames( req.db.__proto__ ) } );
+    if ( true ) next( { bb: req.db.cities, qq: Object.keys( req.db ), tt: Object.getOwnPropertyNames( req.db.__proto__ ) } );
     //if ( true /*!req.db.cities*/ ) next( { q: await model.cities().find() } /*req.db*/ );
 
     cities = await cities;
