@@ -88,7 +88,8 @@ router.use( async ( req, res, next ) => {
     } catch( err ) {
         console.log( 'herr:', err );
     }*/
-    req.db = model;
+    req.db = await model;
+    if ( !req.db.cities ) throw req.db;
     console.log( 'db:', req.db );
 
     /*cities = await cities;
