@@ -84,7 +84,7 @@ setInterval( refreshDatas, 5000 );
 router.use( async ( req, res, next ) => {
     // Подключение БД
     try {
-        req.db = model;
+        req.db = await model;
     } catch( err ) {
         console.log( 'herr:', err );
     }
