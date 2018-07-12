@@ -65,19 +65,19 @@ class Route
                     'expires': new Date( Date.now() + global.appConf.session.maxAge ),
                     'maxAge': global.appConf.session.maxAge
                 }
-            }));
+            }))
 
-            /*.listen( global.appConf.location.port, () => {
+            .listen( global.appConf.location.port, () => {
                 this.routes();
-            });*/
+            });
 
-        let self = this;
+        /*let self = this;
 
         pem.createCertificate( { days: 1, selfSigned: true }, function ( err, keys ) {
             https.createServer( { key: keys.serviceKey, cert: keys.certificate }, app ).listen( global.appConf.location.port, () => {
                 self.routes();
             });
-        });
+        });*/
 
         // Web-socket
         //server.listen( global.appConf.location.ws );
