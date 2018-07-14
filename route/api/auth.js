@@ -14,6 +14,7 @@ router.use( async ( req, res, next ) => {
                 req.body.login == global.appConf.user.login
                 && req.body.password == global.appConf.user.password
             ) {
+                console.log( 'eee1!' );
                 req.session.role = global.appConf.user.role;
                 res.redirect( '/' );
             } else res.status( 401 ).render( 'partials/login' );
@@ -30,6 +31,7 @@ router.use( async ( req, res, next ) => {
 
     else {
         // Проверка допуска к странице по роли
+        console.log( 'eee2!' );
         req.access = () => ~global.appConf.location.pages[ res.pageSettings.page ].access.indexOf( req.session.role );
 
         next();
