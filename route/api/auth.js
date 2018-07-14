@@ -7,7 +7,6 @@ const
 // ------------------------------------- Авторизация -------------------------------------
 router.use( async ( req, res, next ) => {
     // Если сессия еще не авторизована
-    console.log( 'eee!', req.session );
     if ( !req.session.user ) {
         if ( !!req.db.error ) {
             // Если ошибка БД берем юзера из конфигов
@@ -15,7 +14,7 @@ router.use( async ( req, res, next ) => {
                 req.body.login == global.appConf.user.login
                 && req.body.password == global.appConf.user.password
             ) {
-                console.log( 'eee1!' );
+                req.session.user = req.body.login;
                 req.session.role = global.appConf.user.role;
                 res.redirect( '/' );
             } else res.status( 401 ).render( 'partials/login' );
@@ -32,7 +31,6 @@ router.use( async ( req, res, next ) => {
 
     else {
         // Проверка допуска к странице по роли
-        console.log( 'eee2!' );
         req.access = () => ~global.appConf.location.pages[ res.pageSettings.page ].access.indexOf( req.session.role );
 
         next();
