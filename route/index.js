@@ -124,7 +124,7 @@ class Route
         app.use( require( './api/init' ) );
 
         // ?
-        if ( !!!req.db.error ) app.use( require( './api/cities' ) );
+        app.use( require( './api/cities' ) );
 
         app.get( '/del/', async ( req, res, next ) => {
             res.send( await req.db.users().delete() );
