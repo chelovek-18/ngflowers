@@ -95,29 +95,21 @@ let
 router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
-
-    if ( !!req.db.error ) {
-        res.send( 'error!' );
-    } else {
-        res.send( 'no-error!' );
-    }
-
-
-    if ( !!req.db.error ) {
+    /*if ( !!req.db.error ) {
         res.status( 500 );
         next( req.db );
-    }
+    }*/
     //res.send( 'yaya' );
 
     //cities = await cities;
-    cities = cities;
+    /*cities = cities;
     if ( !cities.length ) cities = await req.db.cities().find();
     //if ( !cities.length ) cities = await req.db.cities().find();
     //console.log( 'cities:', cities );
 
     Object.defineProperty( req, 'cities', {
         get: () => cities
-    });
+    });*/
 
     // ???
     /*req.citiesRefresh = async () => {

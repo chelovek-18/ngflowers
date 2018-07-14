@@ -17,7 +17,8 @@ router.use( async ( req, res, next ) => {
 
 
 router.get( '/', ( req, res, next ) => {
-    res.render( 'partials/page', res.pageSettings );
+    res.send( 'faka!))' );
+    //res.render( 'partials/page', res.pageSettings );
 });
 
 router.post( '/db/update/', ( req, res, next ) => {

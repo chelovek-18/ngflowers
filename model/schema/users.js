@@ -33,6 +33,7 @@ class UsersCollection
         });
     }
 
+    // Хэширование пароля
     hashing( db, data ) {
         return crypto
             .createHmac( 'sha1', data.salt )
@@ -40,6 +41,7 @@ class UsersCollection
             .digest( 'hex' );
     }
 
+    // Создание пользователя
     async create( db, data ) {
         data.hashedPassword = this.hashing( db, data );
         delete data.password;
@@ -47,6 +49,7 @@ class UsersCollection
         return data;
     }
 
+    // Авторизация
     async auth( db, login, password ) {
         let users = await db.users().find();
         if ( !users.length ) users = [
