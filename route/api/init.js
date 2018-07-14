@@ -1,9 +1,11 @@
 'use strict';
 
 const
+    // express
     express = require( 'express' ),
     router = express.Router(),
     
+    // api data
     model = new ( require( './../../model/model' ) ),
     ng = new ( require( './../../libs/ng' ) );
 
@@ -93,7 +95,15 @@ let
 router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
-    if ( !!!req.db.cities ) {
+
+    if ( !!req.db.error ) {
+        res.send( 'error!' );
+    } else {
+        res.send( 'no-error!' );
+    }
+
+
+    if ( !!req.db.error ) {
         res.status( 500 );
         next( req.db );
     }
