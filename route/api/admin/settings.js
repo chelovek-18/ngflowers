@@ -17,7 +17,7 @@ router.use( async ( req, res, next ) => {
 
 
 router.get( '/', ( req, res, next ) => {
-    console.log( 'eee1!' );
+    console.log( 'eee3!' );
     res.send( 'faka!))' );
     //res.render( 'partials/page', res.pageSettings );
 });
