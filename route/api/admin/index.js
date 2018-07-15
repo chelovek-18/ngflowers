@@ -20,12 +20,13 @@ router.use( ( req, res, next ) => {
 
 router.post( '/settings/db/update/', ( req, res, next ) => {
     let conf = require( './../../config/config' );
-    conf.mongodb.port = req.body.port;
-    conf.mongodb.database = req.body.database;
-    conf.mongodb.user = req.body.user;
-    conf.mongodb.password = req.body.password;
+    //conf.mongodb.port = req.body.port;
+    //conf.mongodb.database = req.body.database;
+    //conf.mongodb.user = req.body.user;
+    //conf.mongodb.password = req.body.password;
     //fs.writeFileSync( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
-    res.redirect( '/' );
+    //res.redirect( '/' );
+    res.send( 'q' );
 });
 
 router.use( ( req, res, next ) => {
