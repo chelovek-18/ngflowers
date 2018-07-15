@@ -19,6 +19,7 @@ router.use( ( req, res, next ) => {
 router.use( ( req, res, next ) => {
     if ( !!req.db.error ) {
         res.pageSettings.page = 'settings';
+        res.pageSettings.db = global.appConf.mongodb;
         res.render( 'partials/page', res.pageSettings );
     }
 

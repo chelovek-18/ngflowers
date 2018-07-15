@@ -9,7 +9,7 @@ const
 router.use( async ( req, res, next ) => {
     res.pageSettings.page = 'settings';
     res.pageSettings.db = global.appConf.mongodb;
-    res.pageSettings.users = !!req.db.error ? [] : await req.db.users().find().exec();
+    res.pageSettings.users = await req.db.users().find().exec();
     if ( !req.access() ) throw 401;
 
     next();
@@ -17,8 +17,7 @@ router.use( async ( req, res, next ) => {
 
 
 router.get( '/', ( req, res, next ) => {
-    res.send( 'faka!))' );
-    //res.render( 'partials/page', res.pageSettings );
+    res.render( 'partials/page', res.pageSettings );
 });
 
 router.post( '/db/update/', ( req, res, next ) => {

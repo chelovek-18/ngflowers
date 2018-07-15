@@ -45,5 +45,7 @@
             <input type="submit" class="subm" value="Сохранить" />
         </p>
     </form>
+    {{#else}}
+    <h1 style="color: red;">Ошибка связи с базой данных!</h1>
     {{/if}}
 </div>
