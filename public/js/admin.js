@@ -37,7 +37,11 @@ var Ajax = function() {
 var dataSerialize = function( obj ) { return Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' ); };
 
 function addUser( elm, tr ) {
-    alert( ( new Ajax ).post().data( { u: 77 } ).path( '/users/create' ).send() );
+    ( new Ajax ).post().data( { u: 77 } ).path( '/users/create' ).send().then( function( r ) {
+        console.log( r );
+        alert( r );
+    });
+    //alert( ( new Ajax ).post().data( { u: 77 } ).path( '/users/create' ).send() );
 
     //var tr = document.createElement('tr'); tr.innerHTML = `{{getTr}}`; this.parentNode.parentNode.parentNode.insertBefore( tr, this.parentNode.parentNode );
 }
