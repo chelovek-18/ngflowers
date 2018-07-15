@@ -1,4 +1,6 @@
 document.addEventListener( "DOMContentLoaded", function() {
+    alert( 'hero!' );
+    // Функционал
     var Ajax = function() {
         var self = this;
         this.method = 'GET';
