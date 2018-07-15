@@ -37,6 +37,7 @@ router.use( async ( req, res, next ) => {
     }
 });
 
+// Выйти из-под юзера
 router.get( '/logout/', ( req, res, next ) => {
     req.session.destroy();
     throw 401;

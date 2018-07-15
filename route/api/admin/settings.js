@@ -20,10 +20,6 @@ router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
 
-router.post( '/db/update/', ( req, res, next ) => {
-    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
-});
-
 router.post( '/users/update/', async ( req, res, next ) => {
     res.send( await ng.getCities() );
     //res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );

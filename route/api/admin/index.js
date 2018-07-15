@@ -6,11 +6,9 @@ const
     
     fs = require( 'fs' );
 
-//let
-    //conf = require( './../../../config/config' );
-
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
+    // Настройки для шаблонизатора
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main,
         menu: global.appConf.location.pages,
@@ -21,29 +19,30 @@ router.use( ( req, res, next ) => {
     next();
 });
 
+// Обновление данных подключения БД
 router.post( '/settings/db/update/', ( req, res, next ) => {
     let conf = require( './../../../config/config' );
+    conf.mongodb.host = req.body.host;
     conf.mongodb.port = req.body.port;
     conf.mongodb.database = req.body.database;
     conf.mongodb.user = req.body.user;
     conf.mongodb.password = req.body.password;
+    // Сохранение параметров подключения БД и перезапуск сервера
     fs.writeFileSync( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
     setTimeout( () => {
         process.exit();
     }, 1000);
     res.send( `
-    <h1>Сервер перезапускается...</h1>
-    <script>
-        setTimeout( function() {
-            location.href = location.href;
-        }, 2000);
-    </script>
+        <h1>Сервер перезапускается...</h1>
+        <script>
+            setTimeout( function() {
+                location.href = location.href;
+            }, 2000);
+        </script>
     ` );
-    //process.exit();
-    //res.redirect( '/' );
-    //res.send( 'q' );
 });
 
+// Вывод настроек БД при ошибке подключения БД
 router.use( ( req, res, next ) => {
     if ( !!req.db.error ) {
         res.pageSettings.page = 'settings';
