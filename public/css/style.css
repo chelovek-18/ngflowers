@@ -149,12 +149,21 @@ select {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 }
 
 .exitmenu .material-icons {
+    color: #ffffff;
+    font-size: 40px;
+}
+
+.exitmenu .material-icons-block {
     color: #ff0010;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
 }
 
 /* PAGE */
