@@ -16,6 +16,10 @@ router.use( ( req, res, next ) => {
     next();
 });
 
+router.post( '/settings/db/update/', ( req, res, next ) => {
+    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+});
+
 router.use( ( req, res, next ) => {
     if ( !!req.db.error ) {
         res.pageSettings.page = 'settings';
