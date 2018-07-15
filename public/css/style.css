@@ -144,6 +144,19 @@ select {
     text-decoration: none;
 }
 
+.exitmenu {
+    display: block;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 24px;
+    height: 24px;
+}
+
+.exitmenu .material-icons {
+    color: #ff0010;
+}
+
 /* PAGE */
 
 #page-wrapper {
