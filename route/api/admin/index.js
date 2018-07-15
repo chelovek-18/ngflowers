@@ -6,6 +6,9 @@ const
     
     //fs = require( 'fs' );
 
+let
+    conf = require( './../../config/config' );
+
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
     res.pageSettings = {
@@ -19,7 +22,7 @@ router.use( ( req, res, next ) => {
 });
 
 router.post( '/settings/db/update/', ( req, res, next ) => {
-    let conf = require( './../../config/config' );
+    //let conf = require( './../../config/config' );
     //conf.mongodb.port = req.body.port;
     //conf.mongodb.database = req.body.database;
     //conf.mongodb.user = req.body.user;
