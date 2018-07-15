@@ -28,8 +28,11 @@ router.post( '/settings/db/update/', ( req, res, next ) => {
     conf.mongodb.user = req.body.user;
     conf.mongodb.password = req.body.password;
     fs.writeFileSync( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
+    setTimeout( () => {
+        rocess.exit();
+    }, 2000);
     res.send( '<h1>Сервер перезапускается...</h1>' );
-    process.exit();
+    //process.exit();
     //res.redirect( '/' );
     //res.send( 'q' );
 });
