@@ -107,6 +107,7 @@ select {
     padding: 0;
     background: #444444;
     float: left;
+    position: fixed;
 }
 
 #logo-invert {
@@ -150,6 +151,7 @@ select {
     height: 100%;
     margin: 0;
     padding: 0 0 0 375px;
+    background: #eeeeee;
 }
 
 h1 {

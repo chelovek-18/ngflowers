@@ -36,7 +36,7 @@ router.post( '/settings/db/update/', ( req, res, next ) => {
         <h1>Сервер перезапускается...</h1>
         <script>
             setTimeout( function() {
-                location.href = location.href;
+                location.href = location.origin;
             }, 2000);
         </script>
     ` );
