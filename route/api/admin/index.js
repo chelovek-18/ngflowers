@@ -7,7 +7,7 @@ const
     //fs = require( 'fs' );
 
 let
-    conf = require( './../../config/config' );
+    conf = require( './../../../config/config' );
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
