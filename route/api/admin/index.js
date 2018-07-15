@@ -2,9 +2,9 @@
 
 const
     express = require( 'express' ),
-    router = express.Router(),
+    router = express.Router();
     
-    fs = require( 'fs' );
+    //fs = require( 'fs' );
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
