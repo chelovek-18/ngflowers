@@ -147,7 +147,7 @@ select {
 /* PAGE */
 
 #page-wrapper {
-    width: 100%;
+    width: calc( 100% - 375px );
     height: 100%;
     margin: 0;
     padding: 0 0 0 375px;
