@@ -32,7 +32,7 @@ router.post( '/settings/db/update/', ( req, res, next ) => {
         setTimeout( () => {
             res.redirect( '/' );
         }, 1000);
-        rocess.exit();
+        process.exit();
     }, 1000);
     res.send( '<h1>Сервер перезапускается...</h1>' );
     //process.exit();
