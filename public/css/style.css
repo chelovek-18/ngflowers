@@ -29,8 +29,10 @@ body {
 .redbtn {
     color: #ff0010;
     font-size: 50px !important;
-    line-height: 60px !important;
+    /*line-height: 60px !important;*/
     cursor: pointer;
+    position: absolute;
+    top: -5px;
 }
 
 /* LOGIN */

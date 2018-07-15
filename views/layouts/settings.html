@@ -37,13 +37,13 @@
                 <td><input type="text" style="width: 150px;" value="{{login}}" name="{{_id}}:login" /></td>
                 <td><input type="password" style="width: 150px;" value="" name="{{_id}}:password" /></td>
                 <td>{{{getRoleSelect _id role}}}</td>
-                <td><i class="material-icons redbtn">clear</i></td>
+                <td style="position: relative;"><i class="material-icons redbtn">clear</i></td>
                 <!--<td><img onClick="this.parentNode.parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>-->
             </tr>
             {{/each}}
             <tr>
                 <td></td><td></td><td></td><td></td>
-                <td><i onClick="addUser( this, `{{getUserTr}}` );" class="material-icons redbtn">add</i></td>
+                <td style="position: relative;"><i onClick="addUser( this, `{{getUserTr}}` );" class="material-icons redbtn">add</i></td>
             </tr>
         </table>
         <p>
