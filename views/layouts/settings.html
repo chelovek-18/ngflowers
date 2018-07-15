@@ -17,6 +17,7 @@
             <input type="submit" class="subm" value="Сохранить" />
         </p>
     </form>
+    {{#if dbWorked}}
     <h1>Пользователи</h1>
     <form action="/settings/users/update/" method="POST">
         <table>
@@ -44,4 +45,5 @@
             <input type="submit" class="subm" value="Сохранить" />
         </p>
     </form>
+    {{/if}}
 </div>

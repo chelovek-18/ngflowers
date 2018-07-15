@@ -9,10 +9,20 @@ router.use( ( req, res, next ) => {
     res.pageSettings = {
         main: global.appConf.roles[ req.session.role ].main,
         menu: global.appConf.location.pages,
-        roles: global.appConf.roles
+        roles: global.appConf.roles,
+        dbWorked = !req.db.error
     }
 
     next();
+});
+
+router.use( ( req, res, next ) => {
+    if ( !!req.db.error ) {
+        res.pageSettings.page = 'settings';
+        res.render( 'partials/page', res.pageSettings );
+    }
+
+    else next();
 });
 
 router.use( '/', ( req, res, next ) => {
