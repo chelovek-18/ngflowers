@@ -5,34 +5,43 @@ let
     roles = [];
 
 let obj = {
+    // Математические операции для шаблонизатора
     math: function( a, op, b ) {
         if ( !!~'==!='.indexOf( op ) ) return eval( '"' + a + '"' + ( op ? op : '+' ) + '"' + b + '"' );
         if ( !!~'+-*/'.indexOf( op ) ) return eval( a + op + b );
     },
 
+    // Установки для страницы
     setPage( pageName ) {
         page = pageName;
     },
-
     setRoles( croles ) {
         roles = croles;
     },
 
+    // Получить установки страницы
     changePage( pageName ) {
         return pageName == page;
     },
 
-    getRoleSelect( role ) {
-        let getOptions = () => Object.keys( roles ).map( r => `<option${ r == role ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>` ).join( '' );
-        return `<select name="role">${ getOptions() }</select>`;
+    // Рендерим селект с ролями
+    getRoleSelect( _id, role = 'admin' ) {
+        // Рендерим OPTION'sы:
+        let getOptions = () => Object.keys( roles )
+                .map(
+                    r => `<option${ r == role ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>`
+                )
+                .join( '' );
+        return `<select name="${ _id }:role">${ getOptions() }</select>`;
     },
 
-    getTr() {
-        return `<td><input type="text" name="name" /></td>
-        <td><input type="text" name="login" /></td>
-        <td><input type="password" name="password" /></td>
-        <td>${ obj.getRoleSelect() }</td>
-        <td><img onClick="this.parentNode.parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>`;
+    // Получить новую строку таблицы юзеров
+    getUserTr() {
+        return `<td><input type="text" name="%%_id%%:name" /></td>
+        <td><input type="text" name="%%_id%%:login" /></td>
+        <td><input type="password" name="%%_id%%:password" /></td>
+        <td>${ obj.getRoleSelect( '%%_id%%' ) }</td>
+        <td><i class="material-icons redbtn">clear</i></td>`;
     }
 }
 

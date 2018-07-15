@@ -2,8 +2,7 @@
 
 const
     express = require( 'express' ),
-    router = express.Router(),
-    ng = new ( require( './../../../libs/ng' ) );
+    router = express.Router();
 
 // ------------------------------------- Настройки -------------------------------------
 router.use( async ( req, res, next ) => {
@@ -21,8 +20,13 @@ router.get( '/', ( req, res, next ) => {
 });
 
 router.post( '/users/update/', async ( req, res, next ) => {
-    res.send( await ng.getCities() );
-    //res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+    //res.send( await ng.getCities() );
+    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+});
+
+router.post( '/users/create/', async ( req, res, next ) => {
+    //res.send( await ng.getCities() );
+    res.json( { uu: req.body.u + 5 } );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {

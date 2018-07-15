@@ -26,8 +26,11 @@ body {
     height: 100%;
 }
 
-.red {
+.redbtn {
     color: #ff0010;
+    font-size: 50px;
+    line-height: 60px;
+    cursor: pointer;
 }
 
 /* LOGIN */

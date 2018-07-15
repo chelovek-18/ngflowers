@@ -53,6 +53,7 @@ router.use( ( req, res, next ) => {
     else next();
 });
 
+// Определяем страницу по умолчанию для данной роли
 router.use( '/', ( req, res, next ) => {
     if ( req.url == '/' || req.url == '' )
         req.url = '/' + res.pageSettings.main + '/';
@@ -60,11 +61,9 @@ router.use( '/', ( req, res, next ) => {
     next();
 });
 
-Object.keys( global.appConf.location.pages ).forEach( p => router.use( `/${ p }/`, require( `./${ p }` ) ) );
-
-/*router.get( '/params/cities', function( req, res, next ) {
-    let cities = [ 'spb', 'msk' ];
-    res.json( cities );
-});*/
+// Маршрутизация страниц админки
+Object.keys( global.appConf.location.pages ).forEach(
+    p => router.use( `/${ p }/`, require( `./${ p }` ) )
+);
 
 module.exports = router;
