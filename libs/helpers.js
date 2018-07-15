@@ -38,8 +38,8 @@ let obj = {
     // Получить новую строку таблицы юзеров
     getUserTr() {
         return `<td><input type="text" name="%%_id%%:name" /></td>
-        <td><input type="text" name="%%_id%%:login" /></td>
-        <td><input type="password" name="%%_id%%:password" /></td>
+        <td><input type="text" style="width: 150px;" name="%%_id%%:login" /></td>
+        <td><input type="password" style="width: 150px;" name="%%_id%%:password" /></td>
         <td>${ obj.getRoleSelect( '%%_id%%' ) }</td>
         <td><i class="material-icons redbtn">clear</i></td>`;
     }

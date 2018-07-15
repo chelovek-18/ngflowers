@@ -1,7 +1,7 @@
 function addUser( elm, newtr ) {
     ( new Ajax ).post().path( '/settings/users/create/' ).send().then( function( r ) {
         var tr = document.createElement( 'tr' );
-        tr.innerHTML = newtr.replace( /%%_id%%/g, r.responseText._id );
+        tr.innerHTML = newtr.replace( /%%_id%%/g, JSON.parse( r.responseText )._id );
         elm.parentNode.parentNode.parentNode.insertBefore( tr, elm.parentNode.parentNode );
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
 
