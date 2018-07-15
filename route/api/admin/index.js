@@ -2,9 +2,9 @@
 
 const
     express = require( 'express' ),
-    router = express.Router();
+    router = express.Router(),
     
-    //fs = require( 'fs' );
+    fs = require( 'fs' );
 
 //let
     //conf = require( './../../../config/config' );
@@ -28,8 +28,8 @@ router.post( '/settings/db/update/', ( req, res, next ) => {
     conf.mongodb.user = req.body.user;
     conf.mongodb.password = req.body.password;
     fs.writeFileSync( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
-    process.close();
-    res.redirect( '/' );
+    process.exit();
+    //res.redirect( '/' );
     //res.send( 'q' );
 });
 
