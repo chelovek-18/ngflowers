@@ -1,9 +1,9 @@
-function addUser( elm, tr ) {
+function addUser( elm, newtr ) {
     ( new Ajax ).post().path( '/settings/users/create/' ).send().then( function( r ) {
-        console.log( r.responseText );
-        alert( r.responseText );
-    });
-    //alert( ( new Ajax ).post().data( { u: 77 } ).path( '/users/create' ).send() );
+        var tr = document.createElement( 'tr' );
+        tr.innerHTML = newtr.replace( /%%_id%%/g, r.responseText._id );
+        elm.parentNode.parentNode.parentNode.insertBefore( tr, elm.parentNode.parentNode );
+    }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
 
     //var tr = document.createElement('tr'); tr.innerHTML = `{{getTr}}`; this.parentNode.parentNode.parentNode.insertBefore( tr, this.parentNode.parentNode );
 }

@@ -26,7 +26,7 @@ class UsersCollection
             },
             role: {
                 type: String,
-                default: ''
+                default: 'admin'
             }
         }, {
             autoIndex: true
