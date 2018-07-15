@@ -2,7 +2,9 @@
 
 const
     express = require( 'express' ),
-    router = express.Router();
+    router = express.Router(),
+    
+    fs = require( 'fs' );
 
 // ------------------------------------- Админка -------------------------------------
 router.use( ( req, res, next ) => {
@@ -17,7 +19,13 @@ router.use( ( req, res, next ) => {
 });
 
 router.post( '/settings/db/update/', ( req, res, next ) => {
-    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+    let conf = require( './../../config/config' );
+    conf.mongodb.port = req.body.port;
+    conf.mongodb.database = req.body.database;
+    conf.mongodb.user = req.body.user;
+    conf.mongodb.password = req.body.password;
+    fs.writeFileSync( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
+    res.redirect( '/' );
 });
 
 router.use( ( req, res, next ) => {
