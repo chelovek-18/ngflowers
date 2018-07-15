@@ -34,10 +34,11 @@
             {{#each users}}
             <tr>
                 <td><input type="text" value="{{name}}" name="name" /></td>
-                <td><input type="text" style="width: 100px;" value="{{login}}" name="login" /></td>
+                <td><input type="text" style="width: 150px;" value="{{login}}" name="login" /></td>
                 <td><input type="password" style="width: 150px;" value="" name="password" /></td>
                 <td>{{{getRoleSelect role}}}</td>
-                <td><img onClick="this.parentNode.parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>
+                <td><i class="material-icons red">clear</i></td>
+                <!--<td><img onClick="this.parentNode.parentNode.style.display = 'none';" class="del-tr" src="/img/red-cross.png" /></td>-->
             </tr>
             {{/each}}
             <tr>

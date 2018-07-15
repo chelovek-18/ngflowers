@@ -26,6 +26,10 @@ body {
     height: 100%;
 }
 
+.red {
+    color: #ff0010;
+}
+
 /* LOGIN */
 
 #auth {
@@ -149,13 +153,13 @@ select {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
 }
 
 .exitmenu .material-icons {
     color: #ffffff;
-    font-size: 40px;
+    font-size: 60px;
 }
 
 .exitmenu .material-icons-abs {
