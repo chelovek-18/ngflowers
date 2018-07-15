@@ -38,8 +38,8 @@ var dataSerialize = function( obj ) { return Object.keys( obj ).map( k => k + '=
 
 function addUser( elm, tr ) {
     ( new Ajax ).post().data( { u: 77 } ).path( '/settings/users/create/' ).send().then( function( r ) {
-        console.log( r );
-        alert( r );
+        console.log( r.responseText );
+        alert( r.responseText );
     });
     //alert( ( new Ajax ).post().data( { u: 77 } ).path( '/users/create' ).send() );
 
