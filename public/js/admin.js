@@ -37,7 +37,7 @@ var Ajax = function() {
 var dataSerialize = function( obj ) { return Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' ); };
 
 function addUser( elm, tr ) {
-    ( new Ajax ).post().data( { u: 77 } ).path( '/users/create' ).send().then( function( r ) {
+    ( new Ajax ).post().data( { u: 77 } ).path( '/settings/users/create/' ).send().then( function( r ) {
         console.log( r );
         alert( r );
     });
