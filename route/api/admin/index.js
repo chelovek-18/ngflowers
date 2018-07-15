@@ -24,7 +24,7 @@ router.post( '/settings/db/update/', ( req, res, next ) => {
     conf.mongodb.database = req.body.database;
     conf.mongodb.user = req.body.user;
     conf.mongodb.password = req.body.password;
-    fs.writeFileSync( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
+    fs.writeFile( global.appConf.location.root + '/config/config.json', JSON.stringify( conf ) );
     res.redirect( '/' );
 });
 
