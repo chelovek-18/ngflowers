@@ -239,6 +239,8 @@ class Model
 				return q.find.apply( models[ collection ].query, data );
 			case 'delete':
 				return q.deleteMany( data ).exec();
+			default:
+				return q[ method ].apply( qModel, data ).exec();
 		}
 	}
 
