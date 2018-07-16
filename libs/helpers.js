@@ -29,7 +29,7 @@ let obj = {
         // Рендерим OPTION'sы:
         let getOptions = () => Object.keys( roles )
                 .map(
-                    r => `<option${ r == role ? ' selected="selected"' : '' } values="${ r }" prb="${ role }">${ roles[ r ].name }</option>`
+                    r => `<option${ r == role ? ' selected="selected"' : '' } value="${ r }" prb="${ role }">${ roles[ r ].name }</option>`
                 )
                 .join( '' );
         return `<select name="${ _id }:role">${ getOptions() }</select>`;
