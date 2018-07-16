@@ -1,4 +1,5 @@
 <div>
+    {{#if (math role '==' 'root')}}
     <h1>Настройки</h1>
     <form action="/settings/db/update/" method="POST">
         <p>
@@ -20,6 +21,7 @@
             <input type="submit" class="subm" value="Сохранить" />
         </p>
     </form>
+    {{/if}}
     {{#if dbWorked}}
     <h1>Пользователи</h1>
     <form action="/settings/users/" method="POST">

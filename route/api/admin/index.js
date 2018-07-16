@@ -13,6 +13,7 @@ router.use( ( req, res, next ) => {
         main: global.appConf.roles[ req.session.role ].main,
         menu: global.appConf.location.pages,
         roles: global.appConf.roles,
+        role: req.session.role,
         dbWorked: !req.db.error
     }
 

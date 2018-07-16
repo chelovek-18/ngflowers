@@ -14,15 +14,16 @@ router.use( async ( req, res, next ) => {
     next();
 });
 
-
 router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
 
+// Удаление пользователя
 router.delete( '/users/', async ( req, res, next ) => {
     res.json( await req.db.users().delete( { _id: req.db.id( req.body.id ) } ) );
 });
 
+// Изменение пользователей
 router.post( '/users/', async ( req, res, next ) => {
     let users = req.body;
     users = Object.keys( users ).reduce( ( o, k ) => {
@@ -43,15 +44,11 @@ router.post( '/users/', async ( req, res, next ) => {
     res.redirect( '/settings/' );
 });
 
+// Создание пользователя
 router.put( '/users/', async ( req, res, next ) => {
     let loginnum = 0;
     do { loginnum++; } while( await req.db.users().findOne( { login: 'user' + loginnum } ) );
     res.json( await req.db.users().create( { salt: Math.random() + '', login: 'user' + loginnum, password: 'user' + loginnum } ) );
 });
-
-/*router.get( '/params/cities', function( req, res, next ) {
-    let cities = [ 'spb', 'msk' ];
-    res.json( cities );
-});*/
 
 module.exports = router;
