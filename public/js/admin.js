@@ -18,7 +18,7 @@ function delUser( elm, id ) {
 
 // Вкл/выкл город
 function switchCity( elm, key ) {
-    ( new Ajax ).post().path( '/pages/cities/' ).data( { key: key, use: this.checked } ).send();
+    ( new Ajax ).post().path( '/pages/cities/' ).data( { key: key, use: elm.checked } ).send();
 }
 
 /*document.addEventListener( "DOMContentLoaded", function() {
