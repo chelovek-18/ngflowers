@@ -1,5 +1,5 @@
 function addUser( elm, newtr ) {
-    ( new Ajax ).post().path( '/settings/users/create/' ).send().then( function( r ) {
+    ( new Ajax ).put().path( '/settings/users/' ).send().then( function( r ) {
         var res = JSON.parse( r.responseText );
         var tr = document.createElement( 'tr' );
         tr.innerHTML = newtr.replace( /%%_id%%/g, res._id );

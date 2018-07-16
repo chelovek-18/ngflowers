@@ -19,12 +19,26 @@ router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
 
-router.post( '/users/update/', async ( req, res, next ) => {
-    //res.send( await ng.getCities() );
-    res.send( 'В данный момент эта опция заблокирована в связи с проводимыми работами' );
+router.post( '/users/', async ( req, res, next ) => {
+    let users = req.body;
+    users = Object.keys( users ).reduce( ( o, k ) => {
+        let kk = k.split( ':' );
+        if ( !o[ kk[ 0 ] ] ) o[ kk[ 0 ] ] = { _id: kk[ 0 ] };
+        o[ kk[ 0 ] ][ kk[ 1 ] ] = users[ k ];
+        return o;
+    }, {});
+    for( let id in users ) {
+        if ( users[ id ].password ) {
+            users[ id ].salt = ( await req.db.users().findOne( { _id: id } ) ).salt;
+            users[ id ].hashedPassword = req.db.users().hashing( req.db, users[ id ] );
+        }
+        delete users[ id ].password;
+        req.db.users().update( { _id: id }, users[ id ] );
+    }
+    res.redirect( '/settings/' );
 });
 
-router.post( '/users/create/', async ( req, res, next ) => {
+router.put( '/users/', async ( req, res, next ) => {
     let loginnum = 0;
     do { loginnum++; } while( await req.db.users().findOne( { login: 'user' + loginnum } ) );
     res.json( await req.db.users().create( { salt: Math.random() + '', login: 'user' + loginnum, password: 'user' + loginnum } ) );
