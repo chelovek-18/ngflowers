@@ -33,6 +33,7 @@ router.post( '/users/', async ( req, res, next ) => {
             users[ id ].hashedPassword = req.db.users().hashing( users[ id ] );
         }
         delete users[ id ].password;
+        delete users[ id ]._id;
         req.db.users().update( { _id: req.db.id( id ) }, users[ id ] );
     }
     res.redirect( '/settings/' );
