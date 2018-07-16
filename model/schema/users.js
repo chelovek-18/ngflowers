@@ -46,14 +46,14 @@ class UsersCollection
         data.hashedPassword = this.hashing( db, data );
         delete data.password;
         await db.users().save( data );
-        return data;
+        return await db.users().findOne( { login: data.login } );
     }
 
     // Авторизация
     async auth( db, login, password ) {
         let users = await db.users().find();
         if ( !users.length ) users = [
-            await this.create( db, Object.assign( global.appConf.user, { salt:  Math.random() + '' } ) )
+            await this.create( db, Object.assign( global.appConf.user, { salt: Math.random() + '' } ) )
         ];
         users = users
             .map( u => { u.password = password; return u; } )

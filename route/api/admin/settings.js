@@ -26,7 +26,7 @@ router.post( '/users/update/', async ( req, res, next ) => {
 
 router.post( '/users/create/', async ( req, res, next ) => {
     //res.send( await ng.getCities() );
-    res.json( { _id: 789 } );
+    res.json( await req.db.users().create( { salt: Math.random() + '', login: 'aaa' } ) );
 });
 
 /*router.get( '/params/cities', function( req, res, next ) {

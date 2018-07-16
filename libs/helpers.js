@@ -29,7 +29,7 @@ let obj = {
         // Рендерим OPTION'sы:
         let getOptions = () => Object.keys( roles )
                 .map(
-                    r => `<option${ r == role ? ' checked="checked"' : '' }>${ roles[ r ].name }</option>`
+                    r => `<option${ r == role ? ' checked="checked"' : '' } values="${ r }" prb="${ role }">${ roles[ r ].name }</option>`
                 )
                 .join( '' );
         return `<select name="${ _id }:role">${ getOptions() }</select>`;
@@ -41,7 +41,7 @@ let obj = {
         <td><input type="text" style="width: 150px;" name="%%_id%%:login" /></td>
         <td><input type="password" style="width: 150px;" name="%%_id%%:password" /></td>
         <td>${ obj.getRoleSelect( '%%_id%%' ) }</td>
-        <td><i class="material-icons redbtn">clear</i></td>`;
+        <td style="position: relative;"><i class="material-icons redbtn">clear</i></td>`;
     }
 }
 

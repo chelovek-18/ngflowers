@@ -4,9 +4,8 @@ function addUser( elm, newtr ) {
         tr.innerHTML = newtr.replace( /%%_id%%/g, JSON.parse( r.responseText )._id );
         elm.parentNode.parentNode.parentNode.insertBefore( tr, elm.parentNode.parentNode );
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
-
-    //var tr = document.createElement('tr'); tr.innerHTML = `{{getTr}}`; this.parentNode.parentNode.parentNode.insertBefore( tr, this.parentNode.parentNode );
 }
+
 document.addEventListener( "DOMContentLoaded", function() {
 
     document.querySelectorAll( '.use-switcher' ).forEach( e => e.onclick = function() {
