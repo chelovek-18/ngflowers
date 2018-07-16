@@ -250,7 +250,7 @@ h1 {
 
 /* ELEMENTS */
 
-.use-switcher .label {
+.use-switcher label {
     float: none;
     width: 100%;
 }
@@ -269,7 +269,7 @@ h1 {
 }
 .checkbox-custom,
 .radio-custom,
-.use-switcher .label {
+.use-switcher label {
 	display: inline-block;
 	vertical-align: middle;
 }

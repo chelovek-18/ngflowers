@@ -14,7 +14,7 @@ function delUser( elm, id ) {
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
 }
 
-document.addEventListener( "DOMContentLoaded", function() {
+/*document.addEventListener( "DOMContentLoaded", function() {
 
     document.querySelectorAll( '.use-switcher' ).forEach( e => e.onclick = function() {
         this.classList.toggle( 'use-true' );
@@ -25,4 +25,4 @@ document.addEventListener( "DOMContentLoaded", function() {
         xhr.send( dataSerialize( { use: this.classList.contains( 'use-true' ) } ) );
     });
 
-});
+});*/
