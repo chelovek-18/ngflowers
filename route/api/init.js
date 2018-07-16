@@ -96,7 +96,7 @@ let
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
-    //cities = await model.cities().find( { use: true } );
+    //cities = await model.cities().find();
 
     //setInterval( refreshDatas, 5000 );
 }
@@ -106,7 +106,8 @@ router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
 
-    res.json( await ng.getCities() );
+    //res.json( await ng.getCities() );
+    res.json( ng.getProducts( 'spb' ) );
 
     /*cities = cities;
     if ( !cities.length ) cities = await req.db.cities().find();

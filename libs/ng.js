@@ -63,9 +63,9 @@ class NG
             cities = await this.setBody( { action: 'getCities' } ).request(),
             keys = Object.keys( cities );
         for( let k in keys ) {
-            //cities[ keys[ k ] ].banners = await this.getBanners( k );
-            //cities[ keys[ k ] ].categories = await this.getSections( k );
-            cities[ keys[ k ] ].products = await this.getProducts( k );
+            cities[ keys[ k ] ].banners = await this.getBanners( k );
+            cities[ keys[ k ] ].categories = await this.getSections( k );
+            //cities[ keys[ k ] ].products = await this.getProducts( k );
         }
         return keys
             .map( k => {
