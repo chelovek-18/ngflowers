@@ -27,7 +27,7 @@ router.post( '/users/', async ( req, res, next ) => {
         o[ kk[ 0 ] ][ kk[ 1 ] ] = users[ k ];
         return o;
     }, {});
-    req.json( users );
+    res.json( users );
     /*for( let id in users ) {
         if ( users[ id ].password ) {
             users[ id ].salt = ( await req.db.users().findOne( { _id: id } ) ).salt;
