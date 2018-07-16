@@ -1,8 +1,10 @@
 function addUser( elm, newtr ) {
     ( new Ajax ).post().path( '/settings/users/create/' ).send().then( function( r ) {
+        var res = JSON.parse( r.responseText );
         var tr = document.createElement( 'tr' );
-        tr.innerHTML = newtr.replace( /%%_id%%/g, JSON.parse( r.responseText )._id );
+        tr.innerHTML = newtr.replace( /%%_id%%/g, res._id );
         elm.parentNode.parentNode.parentNode.insertBefore( tr, elm.parentNode.parentNode );
+        document.querySelector( '[name="' + res._id + ':login"]' ).value = res.login;
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
 }
 
