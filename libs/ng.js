@@ -59,7 +59,12 @@ class NG
     }
 
     async getCities() {
-        return await this.setBody( { action: 'getCities' } ).request();
+        return ( await this.setBody( { action: 'getCities' } ).request() )
+            /*.map( c => {
+                c.siteId = c.site_id;
+                delete c.site_id;
+                return c;
+            })*/;
     }
 
     async getBanners() {

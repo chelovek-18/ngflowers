@@ -106,6 +106,8 @@ router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
 
+    res.json( await ng.getCities() );
+
     /*cities = cities;
     if ( !cities.length ) cities = await req.db.cities().find();
     //if ( !cities.length ) cities = await req.db.cities().find();
