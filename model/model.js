@@ -240,7 +240,7 @@ class Model
 			case 'delete':
 				return q.deleteMany( data ).exec();
 			default:
-				return q[ method ].apply( models[ collection ], data ).exec();
+				return q[ method ].apply( q[ method ], data ).exec();
 		}
 	}
 

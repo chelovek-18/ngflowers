@@ -34,7 +34,7 @@ router.post( '/users/', async ( req, res, next ) => {
         }
         delete users[ id ].password;
         delete users[ id ]._id;
-        req.db.users().update( { _id: req.db.id( id ) }, users[ id ] );
+        await req.db.users().update( { _id: req.db.id( id ) }, users[ id ] );
     }
     res.redirect( '/settings/' );
 });
