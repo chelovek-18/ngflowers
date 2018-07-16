@@ -30,7 +30,7 @@ router.post( '/users/', async ( req, res, next ) => {
     for( let id in users ) {
         if ( users[ id ].password ) {
             users[ id ].salt = ( await req.db.users().findOne( { _id: id } ) ).salt;
-            //users[ id ].hashedPassword = req.db.users().hashing( req.db, users[ id ] );
+            users[ id ].hashedPassword = req.db.users().hashing( users[ id ] );
         }
         delete users[ id ].password;
         //req.db.users().update( { _id: id }, users[ id ] );
