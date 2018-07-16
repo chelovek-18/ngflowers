@@ -1,13 +1,15 @@
 'use strict';
 
 let
-    BannersSchema = new ( require('./sub/banners') )();
+    BannersSchema = new ( require('./sub/banners') )(),
+    CategoriesSchema = new ( require('./sub/categories') )();
 
 class CitiesCollection
 {
     getSchema( Schema ) {
 		let
-			bannersSchema = BannersSchema.getSchema( Schema );
+            bannersSchema = BannersSchema.getSchema( Schema ),
+            categoriesSchema = CategorisSchema.getSchema( Schema );
         return new Schema({
             key: {
                 type: String,
@@ -32,6 +34,9 @@ class CitiesCollection
             },
 			banners: {
 				type: [ bannersSchema ]
+			},
+			categories: {
+				type: [ categoriesSchema ]
 			}
         }, {
             autoIndex: true
