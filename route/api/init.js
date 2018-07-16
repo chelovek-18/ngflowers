@@ -87,14 +87,20 @@ const
     })();*/
 
 let
-    cities = [];
+    cities = 'one'; //[];
 
 //setInterval( refreshDatas, 5000 );
+
+( async () => {
+    if ( !model.error ) cities = 'two'
+})();
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
+
+
     /*if ( !!req.db.error ) {
         res.status( 500 );
         next( req.db );
@@ -119,6 +125,10 @@ router.use( async ( req, res, next ) => {
     }*/
 
     next();
+});
+
+router.get( '/lol/', ( req, res, next ) => {
+    res.send( cities );
 });
 
 module.exports = router;
