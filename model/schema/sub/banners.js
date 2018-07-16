@@ -1,6 +1,6 @@
 'use strict';
 
-class CitiesCollection
+class BannersCollection
 {
     getSchema( Schema ) {
         return new Schema({
@@ -29,6 +29,8 @@ class CitiesCollection
             autoIndex: true
         });
     }
+
+    //getCities( db,  ) {}
 }
 
-module.exports = CitiesCollection;
+module.exports = BannersCollection;

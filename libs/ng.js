@@ -59,16 +59,21 @@ class NG
     }
 
     async getCities() {
-        return ( await this.setBody( { action: 'getCities' } ).request() )
-            /*.map( c => {
-                c.siteId = c.site_id;
-                delete c.site_id;
-                return c;
-            })*/;
+        let cities = await this.setBody( { action: 'getCities' } ).request();
+        for( let k in Object.keys( cities ) ) {
+            cities[ k ].banners = await this.getBanners( k );
+        }
+        return Object.keys( cities )
+            .map( k => {
+                cities[ k ].key = k;
+                cities[ k ].siteId = cities[ k ].site_id;
+                delete cities[ k ].site_id;
+                return cities[ k ];
+            });
     }
 
-    async getBanners() {
-        return await this.setBody( { action: 'getBanners', city: this.city } ).request();
+    async getBanners( city = this.city ) {
+        return await this.setBody( { action: 'getBanners', city: city } ).request();
     }
 
     async getSections() {
