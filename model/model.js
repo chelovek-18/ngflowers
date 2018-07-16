@@ -70,7 +70,7 @@ class Model
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
 		let self = this;
-		this.connected = ( async () => {
+		( async () => {
 			try {
 				await mongoose.connect( path );
 				Object.keys( models ).forEach( collection => {
@@ -103,6 +103,10 @@ class Model
 							return model[ method ].apply( model, args );
 						}
 					});
+
+					self.clbk = function( callback ) {
+						callback();
+					}
 				});
 			} catch( err ) {
 				self.error = err;

@@ -92,7 +92,10 @@ let
 //setInterval( refreshDatas, 5000 );
 
 ( async () => {
-    if ( await model.connected && !model.error ) cities = 'two';
+    //if ( !model.error ) cities = 'two';
+    await model.clbk( function() {
+        cities = 'two';
+    });
 })();
 
 // ------------------------------------- Инициализация -------------------------------------
