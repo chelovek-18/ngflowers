@@ -7,10 +7,10 @@ const
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
-    ng = new ( require( './../../libs/ng' ) );
+    ng = new ( require( './../../libs/ng' ) ),
 
     // Периодическое обновление данных
-    //refreshDatas = async () => {};
+    refreshDatas = async () => {};
 
 
 
