@@ -1,11 +1,11 @@
 <div>
-    <h1>Данные обновляются</h1>
+    <h1>Настройка городов</h1>
     <ul>
     {{#each cities}}
     <!--<li class="use-{{use}} use-switcher" type="city" key="{{key}}"><span>{{name}}</span></li>-->
     <li class="use-{{use}} use-switcher">
         <label style="margin-bottom: 4px;">
-            <input class="checkbox" type="checkbox" name="checkbox-test">
+            <input {{#if (math use '==' 'true')}}checkbox="checked"{{/if}} class="checkbox" type="checkbox" name="checkbox-test">
             <span class="checkbox-custom"></span>
             <span class="label">{{name}}</span>
         </label>            

@@ -250,6 +250,11 @@ h1 {
 
 /* ELEMENTS */
 
+.use-switcher .label {
+    float: none;
+    width: 100%;
+}
+
 .checkbox,
 .radio {
 	display: none;
@@ -258,13 +263,13 @@ h1 {
 .radio-custom {
 	width: 20px;
 	height: 20px;
-	border: 2px solid #b8c75e;
+	border: 2px solid red;
 	border-radius: 3px;
 	position: relative;
 }
 .checkbox-custom,
 .radio-custom,
-.label {
+.use-switcher .label {
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -277,7 +282,7 @@ h1 {
 	right: 2px;
 	bottom: 2px;
 	left: 2px;
-	background: #b8c75e;
+	background: #ff0000;
 	border-radius: 2px;
 }
 .checkbox:checked + .checkbox-custom.fred::before,
@@ -286,11 +291,11 @@ h1 {
 }
 .checkbox:checked + .checkbox-custom.fyellow::before,
 .radio:checked + .radio-custom.fyellow::before {
-	background: #ffff00;
+	background: #ff0000;
 }
 .checkbox:checked + .checkbox-custom.fwhite::before,
 .radio:checked + .radio-custom.fwhite::before {
-	background: #dddddd;
+	background: #ff0000;
 }
 .radio-custom,
 .radio:checked + .radio-custom::before {
