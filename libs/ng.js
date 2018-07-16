@@ -63,7 +63,8 @@ class NG
             cities = await this.setBody( { action: 'getCities' } ).request(),
             keys = Object.keys( cities );
         for( let k in keys ) {
-            cities[ keys[ k ] ].banners = await this.getBanners( k );
+            //cities[ keys[ k ] ].banners = await this.getBanners( k );
+            cities[ keys[ k ] ].categories = await this.getSections( k );
         }
         return keys
             .map( k => {
@@ -78,12 +79,12 @@ class NG
         return await this.setBody( { action: 'getBanners', city: city } ).request();
     }
 
-    async getSections() {
-        return await this.setBody( { action: 'getSections', city: this.city } ).request();
+    async getSections( city = this.city ) {
+        return await this.setBody( { action: 'getSections', city: city } ).request();
     }
 
-    async getProducts() {
-        return await this.setBody( { action: 'getProducts', city: this.city } ).request();
+    async getProducts( city = this.city ) {
+        return await this.setBody( { action: 'getProducts', city: city } ).request();
     }
 }
 

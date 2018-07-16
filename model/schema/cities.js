@@ -1,8 +1,13 @@
 'use strict';
 
+let
+    BannersSchema = new ( require('./sub/banners') )();
+
 class CitiesCollection
 {
     getSchema( Schema ) {
+		let
+			bannersSchema = BannersSchema.getSchema( Schema );
         return new Schema({
             key: {
                 type: String,
@@ -24,7 +29,10 @@ class CitiesCollection
             use: {
                 type: Boolean,
                 default: true
-            }
+            },
+			banners: {
+				type: [ bannersSchema ]
+			}
         }, {
             autoIndex: true
         });

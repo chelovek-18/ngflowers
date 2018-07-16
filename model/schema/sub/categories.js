@@ -1,6 +1,6 @@
 'use strict';
 
-class BannersCollection
+class CategoriesCollection
 {
     getSchema( Schema ) {
         return new Schema({
@@ -24,4 +24,4 @@ class BannersCollection
     }
 }
 
-module.exports = BannersCollection;
+module.exports = CategoriesCollection;
