@@ -123,8 +123,8 @@ class Route
         // Инициализация
         app.use( require( './api/init' ) );
 
-        // ?
-        app.use( require( './api/cities' ) );
+        // API
+        app.use( require( './api/api' ) );
 
         app.get( '/del/', async ( req, res, next ) => {
             res.send( await req.db.users().delete() );

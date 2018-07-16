@@ -5,7 +5,7 @@ const
     express = require( 'express' ),
     router = express.Router(),
     
-    // api data
+    // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
     ng = new ( require( './../../libs/ng' ) );
 
@@ -81,22 +81,15 @@ const
         /*}
     };*/
 
-/*let
-    cities = ( async () => {
-        //return ( await model ).cities().find();
-    })();*/
-
+// Данные
 let
-    cities = 'one'; //[];
+    cities = [];
 
-//setInterval( refreshDatas, 5000 );
+// Функция дергается по готовности базы
+async function dbcomplete() {
+    cities = await model.cities().find();
 
-( async () => {
-    //if ( !model.error ) cities = 'two';
-})();
-
-function dbcomplete() {
-    cities = 'two';
+    setInterval( refreshDatas, 5000 );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
@@ -104,22 +97,14 @@ router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
 
-
-    /*if ( !!req.db.error ) {
-        res.status( 500 );
-        next( req.db );
-    }*/
-    //res.send( 'yaya' );
-
-    //cities = await cities;
     /*cities = cities;
     if ( !cities.length ) cities = await req.db.cities().find();
     //if ( !cities.length ) cities = await req.db.cities().find();
-    //console.log( 'cities:', cities );
+    //console.log( 'cities:', cities );*/
 
     Object.defineProperty( req, 'cities', {
         get: () => cities
-    });*/
+    });
 
     // ???
     /*req.citiesRefresh = async () => {
@@ -129,10 +114,6 @@ router.use( async ( req, res, next ) => {
     }*/
 
     next();
-});
-
-router.get( '/lol/', ( req, res, next ) => {
-    res.send( cities );
 });
 
 module.exports = router;
