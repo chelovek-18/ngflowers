@@ -92,7 +92,7 @@ let
 //setInterval( refreshDatas, 5000 );
 
 ( async () => {
-    if ( !model.error ) cities = 'two'
+    if ( !await model.error ) cities = 'two'
 })();
 
 // ------------------------------------- Инициализация -------------------------------------
