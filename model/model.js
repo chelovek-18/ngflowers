@@ -68,7 +68,7 @@ class Model
 {
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
-    constructor() {
+    constructor( clbk ) {
 		let self = this;
 		( async () => {
 			try {
@@ -104,9 +104,7 @@ class Model
 						}
 					});
 
-					self.clbk = function( callback ) {
-						callback();
-					}
+					clbk();
 				});
 			} catch( err ) {
 				self.error = err;

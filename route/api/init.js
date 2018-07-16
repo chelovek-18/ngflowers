@@ -6,7 +6,8 @@ const
     router = express.Router(),
     
     // api data
-    model = new ( require( './../../model/model' ) ),
+    clbk = () => { dbcomplete(); },
+    model = new ( require( './../../model/model' ) )( clbk ),
     ng = new ( require( './../../libs/ng' ) );
 
     // Периодическое обновление данных
@@ -93,10 +94,11 @@ let
 
 ( async () => {
     //if ( !model.error ) cities = 'two';
-    await model.clbk( function() {
-        cities = 'two';
-    });
 })();
+
+function dbcomplete() {
+    cities = 'two';
+}
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
