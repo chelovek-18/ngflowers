@@ -29,6 +29,7 @@ mongoose.Promise = global.Promise;
 // Схемы
 let models = dir.reduce(
 	( o, f ) => {
+		if ( f.split( '.' )[ 1 ] != 'js' ) return;
 		o[ f.slice( 0, -3 ) ] = ( new ( require( './schema/' + f ) ) ); return o;
 	}, {});
 
