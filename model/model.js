@@ -4,6 +4,7 @@ const
 	// mongoose
 	mongoose = require( 'mongoose' ),
 	Schema = mongoose.Schema,
+	ObjectId = mongoose.Types.ObjectId,
 
 	//
 	crypto = require( 'crypto' ),
@@ -209,6 +210,10 @@ class Model
 			.createHmac( 'sha1', salt )
 			.update( password )
 			.digest( 'hex' );
+	}
+
+	id( id ) {
+		return ObjectId( id );
 	}
 
 	query( collection, method, data ) {
