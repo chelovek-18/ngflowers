@@ -107,7 +107,7 @@ router.use( async ( req, res, next ) => {
     req.db = model;
 
     //res.json( await ng.getCities() );
-    res.json( ng.getProducts( 'spb' ) );
+    res.json( await ng.getProducts( 'spb' ) );
 
     /*cities = cities;
     if ( !cities.length ) cities = await req.db.cities().find();
