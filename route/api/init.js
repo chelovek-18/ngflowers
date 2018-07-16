@@ -6,8 +6,7 @@ const
     router = express.Router(),
     
     // api data
-    clbk = dbcomplete,
-    model = new ( require( './../../model/model' ) )( clbk ),
+    model = new ( require( './../../model/model' ) )( dbcomplete ),
     ng = new ( require( './../../libs/ng' ) );
 
     // Периодическое обновление данных
