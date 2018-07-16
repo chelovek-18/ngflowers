@@ -10,7 +10,16 @@ const
     ng = new ( require( './../../libs/ng' ) ),
 
     // Периодическое обновление данных
-    refreshDatas = async () => {};
+    refreshDatas = async () => {
+        // Данные из запроса для сравнения
+        let
+            reqCities = await ng.getCities();
+
+        // Если не ошибка запроса, то:
+        if ( Object.keys( reqCities ).length ) {
+            await model.cities().update( { use: false }, { key: 'spb' } )
+        }
+    };
 
 
 
@@ -87,7 +96,7 @@ let
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
-    cities = await model.cities().find();
+    cities = await model.cities().find( { use: true } );
 
     setInterval( refreshDatas, 5000 );
 }
