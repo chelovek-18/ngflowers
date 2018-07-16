@@ -27,16 +27,16 @@ router.post( '/users/', async ( req, res, next ) => {
         o[ kk[ 0 ] ][ kk[ 1 ] ] = users[ k ];
         return o;
     }, {});
-    res.json( users );
-    /*for( let id in users ) {
+    for( let id in users ) {
         if ( users[ id ].password ) {
             users[ id ].salt = ( await req.db.users().findOne( { _id: id } ) ).salt;
             users[ id ].hashedPassword = req.db.users().hashing( req.db, users[ id ] );
         }
         delete users[ id ].password;
-        req.db.users().update( { _id: id }, users[ id ] );
+        //req.db.users().update( { _id: id }, users[ id ] );
     }
-    res.redirect( '/settings/' );*/
+    res.json( users );
+    //res.redirect( '/settings/' );
 });
 
 router.put( '/users/', async ( req, res, next ) => {
