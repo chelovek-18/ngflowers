@@ -59,11 +59,13 @@ class NG
     }
 
     async getCities() {
-        let cities = await this.setBody( { action: 'getCities' } ).request();
-        for( let k in Object.keys( cities ) ) {
-            cities[ k ].banners = await this.getBanners( k );
+        let
+            cities = await this.setBody( { action: 'getCities' } ).request(),
+            keys = Object.keys( cities );
+        for( let k in keys ) {
+            cities[ keys[ k ] ].banners = await this.getBanners( k );
         }
-        return Object.keys( cities )
+        return keys
             .map( k => {
                 cities[ k ].key = k;
                 cities[ k ].siteId = cities[ k ].site_id;
