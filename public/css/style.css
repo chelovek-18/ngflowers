@@ -269,7 +269,7 @@ h1 {
 }
 .checkbox-custom,
 .radio-custom,
-.use-switcher label {
+.label {
 	display: inline-block;
 	vertical-align: middle;
 }
