@@ -241,8 +241,58 @@ h1 {
 
 .use-switcher {
     cursor: pointer;
+    list-style: none;
 }
 
 .use-switcher span {
     color: #272727;
+}
+
+/* ELEMENTS */
+
+.checkbox,
+.radio {
+	display: none;
+}
+.checkbox-custom,
+.radio-custom {
+	width: 20px;
+	height: 20px;
+	border: 2px solid #b8c75e;
+	border-radius: 3px;
+	position: relative;
+}
+.checkbox-custom,
+.radio-custom,
+.label {
+	display: inline-block;
+	vertical-align: middle;
+}
+.checkbox:checked + .checkbox-custom::before,
+.radio:checked + .radio-custom::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	bottom: 2px;
+	left: 2px;
+	background: #b8c75e;
+	border-radius: 2px;
+}
+.checkbox:checked + .checkbox-custom.fred::before,
+.radio:checked + .radio-custom.fred::before {
+	background: #ff0000;
+}
+.checkbox:checked + .checkbox-custom.fyellow::before,
+.radio:checked + .radio-custom.fyellow::before {
+	background: #ffff00;
+}
+.checkbox:checked + .checkbox-custom.fwhite::before,
+.radio:checked + .radio-custom.fwhite::before {
+	background: #dddddd;
+}
+.radio-custom,
+.radio:checked + .radio-custom::before {
+	border-radius: 50%;
 }
