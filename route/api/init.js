@@ -6,7 +6,7 @@ const
     router = express.Router(),
     
     // api data
-    clbk = () => { dbcomplete(); },
+    clbk = dbcomplete,
     model = new ( require( './../../model/model' ) )( clbk ),
     ng = new ( require( './../../libs/ng' ) );
 
