@@ -37,7 +37,7 @@
                 <td><input type="text" style="width: 150px;" value="{{login}}" name="{{_id}}:login" /></td>
                 <td><input type="password" style="width: 150px;" value="" name="{{_id}}:password" /></td>
                 <td>{{{getRoleSelect _id role}}}</td>
-                <td style="position: relative;"><i class="material-icons redbtn">clear</i></td>
+                <td style="position: relative;"><i onClick="delUser( this, `{{_id}}` );" class="material-icons redbtn">clear</i></td>
             </tr>
             {{/each}}
             <tr>

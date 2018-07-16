@@ -19,6 +19,10 @@ router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
 
+router.delete( '/users/', async ( req, res, next ) => {
+    res.json( await req.db.users().delete( { _id: req.db.id( req.body.id ) } ) );
+});
+
 router.post( '/users/', async ( req, res, next ) => {
     let users = req.body;
     users = Object.keys( users ).reduce( ( o, k ) => {

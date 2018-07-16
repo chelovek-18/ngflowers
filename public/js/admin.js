@@ -8,6 +8,12 @@ function addUser( elm, newtr ) {
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
 }
 
+function delUser( elm, id ) {
+    ( new Ajax ).delete().path( '/settings/users/' ).data( { id: id } ).send().then( function( r ) {
+        elm.parentNode.parentNode.remove();
+    }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
+}
+
 document.addEventListener( "DOMContentLoaded", function() {
 
     document.querySelectorAll( '.use-switcher' ).forEach( e => e.onclick = function() {
