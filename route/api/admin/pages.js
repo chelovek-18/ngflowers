@@ -18,9 +18,8 @@ router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
 
-/*router.get( '/params/cities', function( req, res, next ) {
-    let cities = [ 'spb', 'msk' ];
-    res.json( cities );
-});*/
+router.post( '/cities/', async ( req, res, next ) => {
+    res.json( await req.db.cities().update( { key: req.body.key }, req.body ) );
+});
 
 module.exports = router;

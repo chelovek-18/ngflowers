@@ -271,7 +271,8 @@ h1 {
 .radio-custom,
 .label {
 	display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
+    cursor: pointer;
 }
 .checkbox:checked + .checkbox-custom::before,
 .radio:checked + .radio-custom::before {

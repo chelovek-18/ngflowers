@@ -1,3 +1,4 @@
+// Добавить пользователя в таблицу
 function addUser( elm, newtr ) {
     ( new Ajax ).put().path( '/settings/users/' ).send().then( function( r ) {
         var res = JSON.parse( r.responseText );
@@ -8,10 +9,16 @@ function addUser( elm, newtr ) {
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
 }
 
+// Удалить пользователя из таблицы
 function delUser( elm, id ) {
     ( new Ajax ).delete().path( '/settings/users/' ).data( { id: id } ).send().then( function( r ) {
         elm.parentNode.parentNode.remove();
     }).catch( function( e ) { alert( 'Error ' + e.status + ':' + e.statusText ); } );
+}
+
+// Вкл/выкл город
+function switchCity( elm, key ) {
+    ( new Ajax ).post().path( '/pages/cities/' ).data( { key: key, use: this.checked } ).send();
 }
 
 /*document.addEventListener( "DOMContentLoaded", function() {
