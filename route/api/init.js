@@ -17,7 +17,7 @@ const
 
         // Если не ошибка запроса, то:
         if ( Object.keys( reqCities ).length ) {
-            await model.cities().update( { use: false }, { key: 'spb' } )
+            await model.cities().update( { key: 'spb' }, { use: false } );
         }
     };
 
