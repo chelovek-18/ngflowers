@@ -70,7 +70,7 @@ class Model
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor() {
 		let self = this;
-		( async () => {
+		let connected = ( async () => {
 			try {
 				await mongoose.connect( path );
 				Object.keys( models ).forEach( collection => {

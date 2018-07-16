@@ -92,10 +92,7 @@ let
 //setInterval( refreshDatas, 5000 );
 
 ( async () => {
-    try {
-        await model.users().findOne();
-    } catch( e ) {}
-    if ( !model.error ) cities = 'two'
+    if ( await model.connected && !model.error ) cities = 'two';
 })();
 
 // ------------------------------------- Инициализация -------------------------------------
