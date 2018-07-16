@@ -92,6 +92,9 @@ let
 //setInterval( refreshDatas, 5000 );
 
 ( async () => {
+    try {
+        await model.users().findOne();
+    } catch( e ) {}
     if ( !model.error ) cities = 'two'
 })();
 

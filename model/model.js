@@ -85,12 +85,6 @@ class Model
 					model.query.delete = function( data ) {
 						return self.query( collection, 'delete', ( data || {} ) );
 					}
-					if ( collection == 'users' ) model.query.hashing = function( data ) {
-						return crypto
-							.createHmac( 'sha1', data.salt )
-							.update( data.password )
-							.digest( 'hex' );
-					}
 		
 					self[ collection ] = function() {
 						let args = [ collection ];
