@@ -12,12 +12,20 @@ class ProductsCollection
                 type: String,
                 required: true
             },
-            url: {
-                type: String,
+            price: {
+                type: Number,
                 required: true
             },
-            parent: {
+            oldPrice: {
                 type: Number,
+                required: true
+            },
+            image: {
+                type: [ String ],
+                required: true
+            },
+            mainImage: {
+                type: String,
                 required: true
             },
             use: {

@@ -96,9 +96,9 @@ let
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
-    cities = await model.cities().find( { use: true } );
+    //cities = await model.cities().find( { use: true } );
 
-    setInterval( refreshDatas, 5000 );
+    //setInterval( refreshDatas, 5000 );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
@@ -113,9 +113,9 @@ router.use( async ( req, res, next ) => {
     //if ( !cities.length ) cities = await req.db.cities().find();
     //console.log( 'cities:', cities );*/
 
-    Object.defineProperty( req, 'cities', {
+    /*Object.defineProperty( req, 'cities', {
         get: () => cities
-    });
+    });*/
 
     // ???
     /*req.citiesRefresh = async () => {
@@ -124,7 +124,7 @@ router.use( async ( req, res, next ) => {
         })();
     }*/
 
-    next();
+    //next();
 });
 
 module.exports = router;
