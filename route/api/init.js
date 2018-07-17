@@ -29,16 +29,14 @@ const
                 // Новые города
                 rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
 
-            console.log( 'keys::', rKeys, keys, rKeysNew );
-
             // 1. Отключаем те города, что отключены в API
-            /*for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
+            for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
                 await model.cities().update( { key: cities[ k ].key }, { use: false } );
                 isUpd = true;
             }
 
             // 2. Сравниваем по полям
-            for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
+            /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
                 let
                     city = cities[ k ],
                     rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
