@@ -312,4 +312,7 @@ h1 {
 
 .propmenu {
     list-style: none;
+    overflow: hidden;
+    height: 1px;
+    transition: all 0.5s ease-in-out;
 }

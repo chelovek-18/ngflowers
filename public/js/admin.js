@@ -21,6 +21,10 @@ function switchCity( elm, key ) {
     ( new Ajax ).post().path( '/pages/cities/' ).data( { key: key, use: elm.checked } ).send();
 }
 
+function openProps( elm ) {
+    elm.parentNode.querySelector( '.propmenu' ).style.height = '300px';
+}
+
 /*document.addEventListener( "DOMContentLoaded", function() {
 
     document.querySelectorAll( '.use-switcher' ).forEach( e => e.onclick = function() {
