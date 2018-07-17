@@ -44,11 +44,11 @@ const
                         .filter( c => !~[ 'key', 'use', 'geo', 'location', 'banners', 'categories' ].indexOf( c ) && city[ c ] != rCity[ c ] )
                         .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
 
-                console.log( 'city!', city, rCity );
-                /*if ( Object.keys( updCity ).length ) {
+                console.log( 'upd-city!', updCity );
+                if ( Object.keys( updCity ).length ) {
                     await model.cities().update( { key: city.key }, updCity );
                     isUpd = true;
-                }*/
+                }
             }
 
             // 3. Добавляем новые
