@@ -2,11 +2,16 @@
 
 const
     express = require( 'express' ),
-    router = express.Router();
+    router = express.Router(),
+    geo = new ( require( './../../libs/geo' ) );
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
-    res.json( req.cities );
+    res.json( req.cities.filter( c => c.use ).map( c => { return { key: c.key, name: c.name, link: c.link }; } ) );
+});
+
+router.get( '/citiesgeo/', async ( req, res, next ) => {
+    res.json( await geo.getCoords() );
 });
 
 /*router.get( '/city/:city', async ( req, res, next ) => {
