@@ -7,7 +7,7 @@ const
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
-    res.json( req.cities.filter( c => c.use ).map( c => { return { key: c.key, name: c.name, link: c.link, location: c.location, phuy: c.phuy }; } ) );
+    res.json( req.cities.filter( c => c.use ).map( c => { return { key: c.key, name: c.name, link: c.link, location: c.location, geo: c.geo }; } ) );
 });
 
 /*router.get( '/citiesgeo/', async ( req, res, next ) => {

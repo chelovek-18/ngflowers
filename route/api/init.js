@@ -64,7 +64,6 @@ const
         let geoUpd = false;
         for( let i in cities ) {
             if ( !cities[ i ].location || !cities[ i ].location.length ) {
-                console.log( 'xxxWTF', cities[ i ] );
                 cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
                 cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
                 //console.log( 'locat', cities[ i ] );
@@ -73,16 +72,17 @@ const
                 console.log( 'wtfff', cities[ i ] );
                 //await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
                 console.log( 'го: ', cities[ i ] );*/
-                await model.cities().update( { key: cities[ i ].key }, Object.keys( cities ).reduce( ( o, k ) => {
+
+                /*await model.cities().update( { key: cities[ i ].key }, Object.keys( cities ).reduce( ( o, k ) => {
                     if ( k == 'location' ) return o;
                     if ( k == 'geo' ) o.location = cities.geo;
                     o[ k ] = cities[ k ];
                     return o;
-                }, {}) );
+                }, {}) );*/
                 geoUpd = true;
             }
         }
-        if ( geoUpd ) cities = await model.cities().find();
+        //if ( geoUpd ) cities = await model.cities().find();
 };
 
 
