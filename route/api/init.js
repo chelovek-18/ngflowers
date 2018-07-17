@@ -13,10 +13,49 @@ const
     refreshDatas = async () => {
         // Данные из запроса для сравнения
         let
-            reqCities = await ng.getCities();
+            reqCities = await ng.getCities(),
+            compareObjs = ( arr, city ) => {
+                let
+                    beChange = false;//,
+                    //ids = ;
+
+                //arr.
+
+
+                return beChange;
+
+
+
+                /*let keys = cities.map( c => c.key );
+                arr.forEach( obj => {
+                    //let cElem = cities
+                    //Object.keys( obj )
+                });*/
+            };
 
         // Если не ошибка запроса, то:
         if ( Object.keys( reqCities ).length ) {
+            let
+                keys = cities.map( c => c.key ),
+                rKeys = reqCities.map( c => c.key ),
+                newCities = reqCities.filter( c => !~keys.indexOf( c.key ) ),
+                offCities = cities.filter( c => !~rKeys.indexOf( c.key ) ).map( c => c.key ),
+                beChange = newCities.length || offCities.length;
+
+            cities.forEach( c => {
+                // 1. Отключаем те города, что отключены в API
+                if ( ~offCities.indexOf( c.key ) ) c.use = false;
+                // 2. Сверяем поля
+                let reqCity = reqCities.filter( rc => rc.key == c.key )[ 0 ];
+                Object.keys( c ).forEach( k => {
+                    if ( !~[ 'use', '_id', 'banners', 'categories', 'products', 'key', 'coords' ].indexOf( k ) && c[ k ] != reqCity[ k ] ) {
+                        c[ k ] = reqCity[ k ];
+                        beChange = true;
+                    } else if ( ~[ 'banners', 'categories', 'products' ].indexOf( k ) ) {
+                        //compareObjs( c[ k ], c.key );
+                    }
+                });
+            });
             //await model.cities().update( { key: 'spb' }, { use: false } );
         }
     };
@@ -96,9 +135,9 @@ let
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
-    //cities = await model.cities().find();
+    cities = await model.cities().find();
 
-    //setInterval( refreshDatas, 5000 );
+    setInterval( refreshDatas, 5000 );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
@@ -107,16 +146,22 @@ router.use( async ( req, res, next ) => {
     req.db = model;
 
     //res.json( await ng.getCities() );
-    res.json( await ng.getProducts( 'spb' ) );
+    //res.json( await ng.getProducts( 'spb' ) );
 
     /*cities = cities;
     if ( !cities.length ) cities = await req.db.cities().find();
     //if ( !cities.length ) cities = await req.db.cities().find();
     //console.log( 'cities:', cities );*/
 
-    /*Object.defineProperty( req, 'cities', {
-        get: () => cities
-    });*/
+    Object.defineProperty( req, 'cities', {
+        get: () => cities,
+        set: async cs => {
+            for( let k in cs )
+                await req.db.cities().update( { key: cs[ k ].key }, cs[ k ] );
+            cities = await req.db.cities().find();
+            return cs;
+        }
+    });
 
     // ???
     /*req.citiesRefresh = async () => {
@@ -125,7 +170,7 @@ router.use( async ( req, res, next ) => {
         })();
     }*/
 
-    //next();
+    next();
 });
 
 module.exports = router;
