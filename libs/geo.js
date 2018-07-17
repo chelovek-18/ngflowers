@@ -13,7 +13,7 @@ class Geo extends Request
         this.address = 'Санкт-Петербург';
     }
 
-    async getCoords( address = this.address ) {
+    async getCityLocation( address = this.address ) {
         return await this.setBody( { address: address } ).request();
     }
 }

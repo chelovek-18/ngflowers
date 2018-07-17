@@ -48,7 +48,7 @@ const
                 // 2. Сверяем поля
                 let reqCity = reqCities.filter( rc => rc.key == c.key )[ 0 ];
                 Object.keys( c ).forEach( k => {
-                    if ( !~[ 'use', '_id', 'banners', 'categories', 'products', 'key', 'coords' ].indexOf( k ) && c[ k ] != reqCity[ k ] ) {
+                    if ( !~[ 'use', '_id', 'banners', 'categories', 'products', 'key', 'location' ].indexOf( k ) && c[ k ] != reqCity[ k ] ) {
                         c[ k ] = reqCity[ k ];
                         beChange = true;
                     } else if ( ~[ 'banners', 'categories', 'products' ].indexOf( k ) ) {
@@ -58,6 +58,14 @@ const
             });
             //await model.cities().update( { key: 'spb' }, { use: false } );
         }*/
+
+        // Подцепляем к городам геолокацию:
+        for( let i in cities ) {
+            if ( !cities[ i ].location ) {
+                cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name ) ).results[ 0 ].geometry.location;
+                cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
+            }
+        }
     };
 
 

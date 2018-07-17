@@ -6,6 +6,9 @@ const
 
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 
+/**
+ * ------------------------------------- Запрос -------------------------------------
+ */
 class Request
 {
     constructor() {
@@ -15,10 +18,13 @@ class Request
 
     setBody( data ) {
         this.body = dataSerialize( Object.assign( this.defaultData, data ) );
-        if ( this.method != 'GET' ) this.headers = {
+        if ( this.method != 'GET' ) {
+            this.headers = {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Content-Length': Buffer.byteLength( this.body )
             };
+            this.path = this.defaultPath;
+        }
         else this.path = `${ this.defaultPath }?${ this.body }`;
         return this;
     }

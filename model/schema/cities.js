@@ -32,6 +32,9 @@ class CitiesCollection
                 type: Boolean,
                 default: true
             },
+            location: {
+                type: Point
+            },
 			banners: {
 				type: [ bannersSchema ]
 			},
