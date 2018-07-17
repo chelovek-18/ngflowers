@@ -44,7 +44,6 @@ const
                         .filter( c => ~[ 'name', 'link', 'siteId' ].indexOf( c ) && city[ c ] != rCity[ c ] )
                         .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
 
-                console.log( 'upd-city!', updCity );
                 if ( Object.keys( updCity ).length ) {
                     await model.cities().update( { key: city.key }, updCity );
                     isUpd = true;
@@ -52,13 +51,13 @@ const
             }
 
             // 3. Добавляем новые
-            /*for ( let k in rKeysNew ) {
+            for ( let k in rKeysNew ) {
                 await model.cities().save( rKeysNew[ k ] );
                 isUpd = true;
             }
             
             // 4. Сохраняем в cities
-            if ( isUpd ) cities = await model.cities().find();*/
+            if ( isUpd ) cities = await model.cities().find();
 
         }
 
