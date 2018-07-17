@@ -61,18 +61,28 @@ const
         }*/
 
         // Подцепляем к городам геолокацию:
+        let geoUpd = false;
         for( let i in cities ) {
             if ( !cities[ i ].location || !cities[ i ].location.length ) {
-                cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );
-                console.log( 'locat', cities[ i ] );
+                cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
+                cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
+                //console.log( 'locat', cities[ i ] );
                 /*cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
                 cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
                 console.log( 'wtfff', cities[ i ] );
                 //await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
                 console.log( 'го: ', cities[ i ] );*/
+                await model.cities().update( { key: cities[ i ].key }, Object.keys( cities ).reduce( ( o, k ) => {
+                    if ( k == 'location' ) return o;
+                    if ( k == 'geo' ) o.location = cities.geo;
+                    o[ k ] = cities[ k ];
+                    return o;
+                }, {}) );
+                geoUpd = true;
             }
         }
-    };
+        if ( geoUpd ) cities = await model.cities().find();
+};
 
 
 
@@ -168,13 +178,13 @@ router.use( async ( req, res, next ) => {
     //console.log( 'cities:', cities );*/
 
     Object.defineProperty( req, 'cities', {
-        get: () => cities
-        /*set: async cs => {
+        get: () => cities,
+        set: async cs => {
             for( let k in cs )
                 await req.db.cities().update( { key: cs[ k ].key }, cs[ k ] );
             cities = await req.db.cities().find();
             return cs;
-        }*/
+        }
     });
 
     // ???
