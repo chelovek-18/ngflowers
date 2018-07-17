@@ -63,7 +63,7 @@ const
         // Подцепляем к городам геолокацию:
         for( let i in cities ) {
             if ( !cities[ i ].location || !cities[ i ].location.length ) {
-                cities[ i ].location = [ 12.345634, 22.234234 ];
+                cities[ i ].phuy = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );
                 /*cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
                 cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
                 console.log( 'wtfff', cities[ i ] );
