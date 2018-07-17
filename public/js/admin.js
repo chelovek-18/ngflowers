@@ -23,7 +23,7 @@ function switchCity( elm, key ) {
 
 function openProps( elm ) {
     if ( elm.parentNode.querySelector( '.propmenu' ).style.height == '1px' )
-        elm.parentNode.querySelector( '.propmenu' ).style.height = '90px';
+        elm.parentNode.querySelector( '.propmenu' ).style.height = 'auto';
     else
         elm.parentNode.querySelector( '.propmenu' ).style.height = '1px';
 }
