@@ -12,7 +12,7 @@ const
     // Периодическое обновление данных
     refreshDatas = async () => {
         // Данные из запроса для сравнения
-        let
+        /*let
             reqCities = await ng.getCities(),
             compareObjs = ( arr, city ) => {
                 let
@@ -30,11 +30,11 @@ const
                 arr.forEach( obj => {
                     //let cElem = cities
                     //Object.keys( obj )
-                });*/
+                });*-/
             };
 
         // Если не ошибка запроса, то:
-        if ( Object.keys( reqCities ).length ) {
+        /*if ( Object.keys( reqCities ).length ) {
             let
                 keys = cities.map( c => c.key ),
                 rKeys = reqCities.map( c => c.key ),
@@ -57,7 +57,7 @@ const
                 });
             });
             //await model.cities().update( { key: 'spb' }, { use: false } );
-        }
+        }*/
     };
 
 
@@ -154,13 +154,13 @@ router.use( async ( req, res, next ) => {
     //console.log( 'cities:', cities );*/
 
     Object.defineProperty( req, 'cities', {
-        get: () => cities,
+        get: () => cities/*,
         set: async cs => {
             for( let k in cs )
                 await req.db.cities().update( { key: cs[ k ].key }, cs[ k ] );
             cities = await req.db.cities().find();
             return cs;
-        }
+        }*/
     });
 
     // ???
