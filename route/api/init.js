@@ -19,7 +19,7 @@ const
 
         // Если не ошибка запроса, то:
         if ( Object.keys( reqCities ).length ) {
-            /*let
+            let
                 // Ключи в запросе
                 rKeys = reqCities.map( c => c.key ),
                 // Ключи в списке городов (отдельно те что есть в rKeys, отдельно те что нет)
@@ -27,10 +27,10 @@ const
                     .map( c => c.key )
                     .reduce( ( o, c ) => { ~rKeys.indexOf( c ) ? o.in.push( c ) : o.out.push( c ); return o; }, { in: [], out: [] }),
                 // Новые города
-                rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );*/
+                rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
 
             // 1. Отключаем те города, что отключены в API
-            /*for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) ) ) {
+            for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
                 await model.cities().update( { key: cities[ k ].key }, { use: false } );
                 isUpd = true;
             }
@@ -57,7 +57,7 @@ const
             }
             
             // 4. Сохраняем в cities
-            if ( isUpd ) cities = await model.cities().find();*/
+            if ( isUpd ) cities = await model.cities().find();
 
         }
 
