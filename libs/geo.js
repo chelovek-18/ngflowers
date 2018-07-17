@@ -1,19 +1,15 @@
 'use strict';
 
-const
-    https = require( 'https' ),
-    Request = require( './request' ),
-    dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
-
-process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
+const Request = require( './request' );
 
 class Geo extends Request
 {
     constructor() {
         super();
         this.host = 'maps.google.com';
-        this.path = '/maps/api/geocode/json';
+        this.defaultPath = '/maps/api/geocode/json';
         this.method = 'GET';
+        this.defaultDate = { sensor: false };
         this.address = 'Санкт-Петербург';
     }
 
