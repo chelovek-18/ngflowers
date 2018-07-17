@@ -69,6 +69,7 @@ const
                     cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
                 } else {
                     cities[ i ].location = cities[ i ].geo;
+                    await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
                     geoUpd = true;
                 }
                 //cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
