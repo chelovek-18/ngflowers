@@ -37,16 +37,16 @@ class NG extends Request
 
     async getSections( city = this.city ) {
         return ( await this.setBody( { action: 'getSections', city: city } ).request() )
-            .map( k => {
-                cities[ k ].id = cities[ k ].ID;
-                delete cities[ k ].ID;
-                cities[ k ].name = cities[ k ].NAME;
-                delete cities[ k ].NAME;
-                cities[ k ].url = cities[ k ].SECTION_PAGE_URL;
-                delete cities[ k ].SECTION_PAGE_URL;
-                cities[ k ].parent = cities[ k ].IBLOCK_SECTION_ID;
-                delete cities[ k ].IBLOCK_SECTION_ID;
-                return cities[ k ];
+            .map( s => {
+                s.id = s.ID;
+                delete s.ID;
+                s.name = s.NAME;
+                delete s.NAME;
+                s.url = s.SECTION_PAGE_URL;
+                delete s.SECTION_PAGE_URL;
+                s.parent = s.IBLOCK_SECTION_ID;
+                delete s.IBLOCK_SECTION_ID;
+                return s;
             });
     }
 
