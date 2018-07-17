@@ -2,7 +2,7 @@
 
 const
     https = require( 'https' ),
-    Request = require( 'request' ),
+    Request = require( './request' ),
     dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
 
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
