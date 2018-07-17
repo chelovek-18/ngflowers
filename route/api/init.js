@@ -64,6 +64,7 @@ const
         let geoUpd = false;
         for( let i in cities ) {
             if ( !cities[ i ].location || !cities[ i ].location.length ) {
+                console.log( 'xxxWTF', cities[ i ] );
                 cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
                 cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
                 //console.log( 'locat', cities[ i ] );
