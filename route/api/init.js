@@ -64,6 +64,7 @@ const
         for( let i in cities ) {
             if ( !cities[ i ].location || !cities[ i ].location.length ) {
                 cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );
+                console.log( 'locat', cities[ i ] );
                 /*cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
                 cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
                 console.log( 'wtfff', cities[ i ] );
@@ -167,13 +168,13 @@ router.use( async ( req, res, next ) => {
     //console.log( 'cities:', cities );*/
 
     Object.defineProperty( req, 'cities', {
-        get: () => cities,
-        set: async cs => {
+        get: () => cities
+        /*set: async cs => {
             for( let k in cs )
                 await req.db.cities().update( { key: cs[ k ].key }, cs[ k ] );
             cities = await req.db.cities().find();
             return cs;
-        }
+        }*/
     });
 
     // ???
