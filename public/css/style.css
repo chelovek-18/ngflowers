@@ -274,6 +274,9 @@ h1 {
     vertical-align: middle;
     cursor: pointer;
 }
+.label {
+    width: 400px;
+}
 .checkbox:checked + .checkbox-custom::before,
 .radio:checked + .radio-custom::before {
 	content: "";
@@ -301,4 +304,8 @@ h1 {
 .radio-custom,
 .radio:checked + .radio-custom::before {
 	border-radius: 50%;
+}
+
+.openbtn {
+    vertical-align: middle;
 }
