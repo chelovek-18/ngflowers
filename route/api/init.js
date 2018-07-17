@@ -62,13 +62,13 @@ const
 
         // Подцепляем к городам геолокацию:
         for( let i in cities ) {
-            /*if ( !cities[ i ].location || !cities[ i ].location.length ) {
-                cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
+            if ( !cities[ i ].location || !cities[ i ].location.length ) {
+                /*cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
                 cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
                 console.log( 'wtfff', cities[ i ] );
                 //await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
-                console.log( 'го: ', cities[ i ] );
-            }*/
+                console.log( 'го: ', cities[ i ] );*/
+            }
         }
     };
 
