@@ -40,7 +40,7 @@ class Request
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {
-                        console.log( 'request error:', err );
+                        console.log( 'request error:', err, ' in ', output );
                         r( {} );
                     }
                 });
