@@ -13,52 +13,53 @@ const
     // Периодическое обновление данных
     refreshDatas = async () => {
         // Данные из запроса для сравнения
-        /*let
+        let
             reqCities = await ng.getCities(),
-            compareObjs = ( arr, city ) => {
-                let
-                    beChange = false;//,
-                    //ids = ;
-
-                //arr.
-
-
-                return beChange;
-
-
-
-                /*let keys = cities.map( c => c.key );
-                arr.forEach( obj => {
-                    //let cElem = cities
-                    //Object.keys( obj )
-                });*-/
-            };
+            isUpd = false;
 
         // Если не ошибка запроса, то:
-        /*if ( Object.keys( reqCities ).length ) {
+        if ( Object.keys( reqCities ).length ) {
             let
-                keys = cities.map( c => c.key ),
+                // Ключи в запросе
                 rKeys = reqCities.map( c => c.key ),
-                newCities = reqCities.filter( c => !~keys.indexOf( c.key ) ),
-                offCities = cities.filter( c => !~rKeys.indexOf( c.key ) ).map( c => c.key ),
-                beChange = newCities.length || offCities.length;
+                // Ключи в списке городов (отдельно те что есть в rKeys, отдельно те что нет)
+                keys = cities
+                    .map( c => c.key )
+                    .reduce( ( o, c ) => { ~rKeys.indexOf( c ) ? o.in.push( c ) : o.out.push( c ); return o; }, { in: [], out: [] }),
+                // Новые города
+                rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
 
-            cities.forEach( c => {
-                // 1. Отключаем те города, что отключены в API
-                if ( ~offCities.indexOf( c.key ) ) c.use = false;
-                // 2. Сверяем поля
-                let reqCity = reqCities.filter( rc => rc.key == c.key )[ 0 ];
-                Object.keys( c ).forEach( k => {
-                    if ( !~[ 'use', '_id', 'banners', 'categories', 'products', 'key', 'location' ].indexOf( k ) && c[ k ] != reqCity[ k ] ) {
-                        c[ k ] = reqCity[ k ];
-                        beChange = true;
-                    } else if ( ~[ 'banners', 'categories', 'products' ].indexOf( k ) ) {
-                        //compareObjs( c[ k ], c.key );
-                    }
-                });
-            });
-            //await model.cities().update( { key: 'spb' }, { use: false } );
-        }*/
+            // 1. Отключаем те города, что отключены в API
+            for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) ) ) {
+                await model.cities().update( { key: cities[ k ].key }, { use: false } );
+                isUpd = true;
+            }
+
+            // 2. Сравниваем по полям
+            for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
+                let
+                    city = cities[ k ],
+                    rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
+                    updCity = Object.keys( city )
+                        .filter( c => !~[ 'key', 'use', 'geo', 'location', 'banners', 'categories' ].indexOf( c ) && city[ c ] != rCity[ c ] )
+                        .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
+
+                if ( Object.keys( updCity ).length ) {
+                    await model.cities().update( { key: city.key }, updCity );
+                    isUpd = true;
+                }
+            }
+
+            // 3. Добавляем новые
+            for ( let k in rKeysNew ) {
+                await model.cities().save( rKeysNew[ k ] );
+                isUpd = true;
+            }
+            
+            // 4. Сохраняем в cities
+            if ( isUpd ) cities = await model.cities().find();
+
+        }
 
         // Подцепляем к городам геолокацию:
         let geoUpd = false;
@@ -72,22 +73,6 @@ const
                     await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
                     geoUpd = true;
                 }
-                //cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
-                //cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
-
-                //console.log( 'locat', cities[ i ] );
-                /*cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
-                cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
-                console.log( 'wtfff', cities[ i ] );
-                //await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
-                console.log( 'го: ', cities[ i ] );*/
-
-                /*await model.cities().update( { key: cities[ i ].key }, Object.keys( cities ).reduce( ( o, k ) => {
-                    if ( k == 'location' ) return o;
-                    if ( k == 'geo' ) o.location = cities.geo;
-                    o[ k ] = cities[ k ];
-                    return o;
-                }, {}) );*/
             }
         }
         if ( geoUpd ) cities = await model.cities().find();
