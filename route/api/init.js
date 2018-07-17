@@ -41,7 +41,7 @@ const
                     city = cities[ k ],
                     rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
                     updCity = Object.keys( city )
-                        .filter( c => !~[ 'key', 'use', 'geo', 'location', 'banners', 'categories' ].indexOf( c ) && city[ c ] != rCity[ c ] )
+                        .filter( c => ~[ 'name', 'link', 'siteId' ].indexOf( c ) && city[ c ] != rCity[ c ] )
                         .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
 
                 console.log( 'upd-city!', updCity );
