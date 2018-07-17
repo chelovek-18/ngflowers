@@ -32,9 +32,9 @@ class CitiesCollection
                 type: Boolean,
                 default: true
             },
-            /*location: {
-                type: Point
-            },*/
+            location: {
+                type: Array
+            },
 			banners: {
 				type: [ bannersSchema ]
 			},
