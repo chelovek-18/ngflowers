@@ -48,6 +48,33 @@ const
                     await model.cities().update( { key: city.key }, updCity );
                     isUpd = true;
                 }
+
+                for ( let prop in [ 'banners', 'categories' ] ) {
+                    let
+                        propUpd = false,
+                        cityProps = [],
+                        rCityIds = rCity[ prop ].map( p => p.id );
+                    for ( let n in rCity[ prop ] ) {
+                        let
+                            rProp = rCity[ prop ][ n ],
+                            id = rProp.id,
+                            cityProp = city[ prop ].filter( p => p.id == id )[ 0 ];
+                        if ( !cityProp ) {
+                            city[ prop ].push( { id: id } );
+                            cityProp = city[ prop ][ city[ prop ].length - 1 ];
+                        }
+                        Object.keys( rProp )
+                            .filter( p => p != 'use' && rProp[ p ] != cityProp[ p ] )
+                            .forEach( p => { cityProp[ p ] = rProp[ p ]; propUpd = true; } );
+                        cityProps.push( cityProp );
+                        city[ prop ]
+                            .filter( p => !~rCityIds.indexOf( p.id ) )
+                            .forEach( p => { p.use = false; cityProps.push( p ); } );
+                    }
+                    if ( propUpd ) {
+                        await model.cities().update( { key: city.key }, { [ prop ]: cityProps } );
+                    }
+                }
             }
 
             // 3. Добавляем новые
@@ -94,14 +121,7 @@ router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
 
-    //res.json( await ng.getCities() );
-    //res.json( await geo.getCityLocation() );
-
-    /*cities = cities;
-    if ( !cities.length ) cities = await req.db.cities().find();
-    //if ( !cities.length ) cities = await req.db.cities().find();
-    //console.log( 'cities:', cities );*/
-
+    // Геттер и сеттер req.cities
     Object.defineProperty( req, 'cities', {
         get: () => cities,
         set: async cs => {
@@ -111,13 +131,6 @@ router.use( async ( req, res, next ) => {
             return cs;
         }
     });
-
-    // ???
-    /*req.citiesRefresh = async () => {
-        cities = await ( async () => {
-            return await model.cities().find( { use: true } )
-        })();
-    }*/
 
     next();
 });
