@@ -64,8 +64,14 @@ const
         let geoUpd = false;
         for( let i in cities ) {
             if ( !cities[ i ].location || !cities[ i ].location.length ) {
-                cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
-                cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
+                if ( !cities[ i ].geo ) {
+                    cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
+                    cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
+                } else
+                    cities[ i ].location = cities[ i ].geo;
+                //cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
+                //cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
+
                 //console.log( 'locat', cities[ i ] );
                 /*cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) );//.results[ 0 ].geometry.location;
                 cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
