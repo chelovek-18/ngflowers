@@ -62,7 +62,7 @@ const
                 for ( let nm in props ) {
                     let
                         prop = props[ nm ],
-                        propUpd = false;
+                        propUpd = false,
                         ids = rCity[ prop ].map( p => p.id );
 
                     // Перебираем массив (баннеров, категорий или товаров)
