@@ -17,10 +17,11 @@ class GEO
 
     setBody( data ) {
         this.body = dataSerialize( Object.assign( { sensor: false }, data ) );
-        this.headers = {
+        this.path += '?' + this.body;
+        /*this.headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Content-Length': Buffer.byteLength( this.body )
-        };
+        };*/
         return this;
     }
 
