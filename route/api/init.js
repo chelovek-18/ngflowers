@@ -12,24 +12,32 @@ const
 
     // Периодическое обновление данных
     refreshDatas = async () => {
-        // Данные из запроса для сравнения
+        // Данные из api-запроса для сравнения
         let
-            reqCities = await ng.getCities(),
+            reqCities = ( await ng.getCities() ) || [],
             isUpd = false;
 
-        // Если не ошибка запроса, то:
+        // Сравниваем данные из базы и из запроса:
         if ( Object.keys( reqCities ).length ) {
             let
-                // Ключи в запросе
+                // Список кодов городов (запрос)
                 rKeys = reqCities.map( c => c.key ),
-                // Ключи в списке городов (отдельно те что есть в rKeys, отдельно те что нет)
+                // Список кодов городов (база)
                 keys = cities
                     .map( c => c.key )
-                    .reduce( ( o, c ) => { ~rKeys.indexOf( c ) ? o.in.push( c ) : o.out.push( c ); return o; }, { in: [], out: [] }),
-                // Новые города
+                    .reduce(
+                        ( o, c ) => {
+                            // Отдельно города, которые есть в api (обслуживаются), отдельно которые отключены
+                            ~rKeys.indexOf( c )
+                                ? o.in.push( c )
+                                : o.out.push( c );
+                            return o;
+                        }, { in: [], out: [] }
+                    ),
+                // Новые города (которых еще нет в базе)
                 rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
 
-            // 1. Отключаем те города, что отключены в API
+            // 1. Отключаем те города, что отсутствуют в API
             for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
                 await model.cities().update( { key: cities[ k ].key }, { use: false } );
                 isUpd = true;
@@ -49,8 +57,16 @@ const
                     isUpd = true;
                 }
 
-                for ( let prop in [ 'banners', 'categories' ] ) {
+                // Сравниваем баннеры, категории, товары
+                let props = [ 'banners', 'categories' ];
+                for ( let n in props ) {
                     let
+                        propUpd = false,
+                        cityProps = [],
+                        rCityIds = rCity[ props[ n ] ].map( p => p.id );
+
+
+                    /*let
                         propUpd = false,
                         cityProps = [],
                         rCityIds = rCity[ prop ].map( p => p.id );
@@ -73,7 +89,7 @@ const
                     }
                     if ( propUpd ) {
                         await model.cities().update( { key: city.key }, { [ prop ]: cityProps } );
-                    }
+                    }*/
                 }
             }
 
@@ -85,7 +101,6 @@ const
             
             // 4. Сохраняем в cities
             if ( isUpd ) cities = await model.cities().find();
-
         }
 
         // Подцепляем к городам геолокацию:
