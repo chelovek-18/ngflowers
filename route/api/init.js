@@ -154,13 +154,13 @@ router.use( async ( req, res, next ) => {
     //console.log( 'cities:', cities );*/
 
     Object.defineProperty( req, 'cities', {
-        get: () => cities/*,
+        get: () => cities,
         set: async cs => {
             for( let k in cs )
                 await req.db.cities().update( { key: cs[ k ].key }, cs[ k ] );
             cities = await req.db.cities().find();
             return cs;
-        }*/
+        }
     });
 
     // ???
