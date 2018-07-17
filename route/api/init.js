@@ -59,37 +59,37 @@ const
 
                 // Сравниваем баннеры, категории, товары
                 let props = [ 'banners', 'categories' ];
-                for ( let n in props ) {
+                for ( let nm in props ) {
                     let
-                        propUpd = false,
-                        cityProps = [],
-                        rCityIds = rCity[ props[ n ] ].map( p => p.id );
+                        prop = props[ nm ],
+                        propUpd = false;
+                        ids = rCity[ prop ].map( p => p.id );
 
-
-                    /*let
-                        propUpd = false,
-                        cityProps = [],
-                        rCityIds = rCity[ prop ].map( p => p.id );
-                    for ( let n in rCity[ prop ] ) {
+                    // Перебираем массив (баннеров, категорий или товаров)
+                    rCity[ prop ].forEach( item => {
                         let
-                            rProp = rCity[ prop ][ n ],
-                            id = rProp.id,
-                            cityProp = city[ prop ].filter( p => p.id == id )[ 0 ];
-                        if ( !cityProp ) {
-                            city[ prop ].push( { id: id } );
-                            cityProp = city[ prop ][ city[ prop ].length - 1 ];
-                        }
-                        Object.keys( rProp )
-                            .filter( p => p != 'use' && rProp[ p ] != cityProp[ p ] )
-                            .forEach( p => { cityProp[ p ] = rProp[ p ]; propUpd = true; } );
-                        cityProps.push( cityProp );
-                        city[ prop ]
-                            .filter( p => !~rCityIds.indexOf( p.id ) )
-                            .forEach( p => { p.use = false; cityProps.push( p ); } );
-                    }
+                            id = item.id,
+                            propItem = city[ prop ]
+                                .filter( i => i.id == id )[ 0 ] ||
+                                ( city[ prop ].push( { id: id } ), city[ prop ][ city[ prop ].length - 1 ] );
+
+                        // Сравниваем значения и корректируем
+                        Object.keys( item ).forEach( p => {
+                            if ( item[ p ] != propItem[ p ] ) {
+                                propItem[ p ] = item[ p ];
+                                propUpd = true;
+                            }
+                        });
+                    });
+                    // Отключаем те, которые в api отсутствуют
+                    city[ prop ]
+                        .filter( i => !~ids.indexOf( i.id ) && i.use )
+                        .forEach( i => { i.use = false; propUpd = true; } );
+                    
                     if ( propUpd ) {
-                        await model.cities().update( { key: city.key }, { [ prop ]: cityProps } );
-                    }*/
+                        await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
+                        isUpd = true;
+                    }
                 }
             }
 
