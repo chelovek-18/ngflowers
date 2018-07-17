@@ -28,6 +28,13 @@ function openProps( elm ) {
         elm.parentNode.querySelector( '.propmenu' ).style.height = '1px';
 }
 
+function openPropsSub( elm ) {
+    if ( elm.parentNode.querySelector( '.propmenusub' ).style.display == 'none' )
+        elm.parentNode.querySelector( '.propmenusub' ).style.display = 'block';
+    else
+        elm.parentNode.querySelector( '.propmenusub' ).style.display = 'none';
+}
+
 /*document.addEventListener( "DOMContentLoaded", function() {
 
     document.querySelectorAll( '.use-switcher' ).forEach( e => e.onclick = function() {
