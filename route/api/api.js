@@ -11,7 +11,7 @@ router.get( '/cities/', ( req, res, next ) => {
 });
 
 router.get( '/citiesgeo/', async ( req, res, next ) => {
-    res.json( await geo.getCoords() );
+    res.json( ( await geo.getCoords() ).results[ 0 ].geometry.location );
 });
 
 /*router.get( '/city/:city', async ( req, res, next ) => {
