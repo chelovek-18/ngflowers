@@ -36,7 +36,7 @@ const
             }
 
             // 2. Сравниваем по полям
-            /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
+            for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
                 let
                     city = cities[ k ],
                     rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
@@ -44,14 +44,15 @@ const
                         .filter( c => !~[ 'key', 'use', 'geo', 'location', 'banners', 'categories' ].indexOf( c ) && city[ c ] != rCity[ c ] )
                         .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
 
-                if ( Object.keys( updCity ).length ) {
+                console.log( 'city!', city, rCity );
+                /*if ( Object.keys( updCity ).length ) {
                     await model.cities().update( { key: city.key }, updCity );
                     isUpd = true;
-                }
+                }*/
             }
 
             // 3. Добавляем новые
-            for ( let k in rKeysNew ) {
+            /*for ( let k in rKeysNew ) {
                 await model.cities().save( rKeysNew[ k ] );
                 isUpd = true;
             }
