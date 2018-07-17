@@ -33,7 +33,7 @@ class CitiesCollection
                 default: true
             },
             location: {
-                type: Array
+                type: [ Number ]
             },
 			banners: {
 				type: [ bannersSchema ]
