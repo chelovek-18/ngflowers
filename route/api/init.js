@@ -8,6 +8,7 @@ const
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
     ng = new ( require( './../../libs/ng' ) ),
+    geo = new ( require( './../../libs/geo' ) ),
 
     // Периодическое обновление данных
     refreshDatas = async () => {
