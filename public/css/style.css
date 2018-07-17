@@ -309,3 +309,7 @@ h1 {
 .openbtn {
     vertical-align: middle;
 }
+
+.propmenu {
+    list-style: none;
+}
