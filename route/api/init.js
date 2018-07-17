@@ -65,6 +65,7 @@ const
             if ( !cities[ i ].location ) {
                 cities[ i ].location = ( await geo.getCityLocation( cities[ i ].name ) ).results[ 0 ].geometry.location;
                 cities[ i ].location = Object.keys( cities[ i ].location ).map( k => cities[ i ].location[ k ] );
+                console.log( cities[ i ].name );
             }
         }
     };
