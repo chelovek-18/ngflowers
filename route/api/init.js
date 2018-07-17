@@ -67,8 +67,10 @@ const
                 if ( !cities[ i ].geo ) {
                     cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
                     cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
-                } else
+                } else {
                     cities[ i ].location = cities[ i ].geo;
+                    geoUpd = true;
+                }
                 //cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
                 //cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
 
@@ -85,10 +87,9 @@ const
                     o[ k ] = cities[ k ];
                     return o;
                 }, {}) );*/
-                geoUpd = true;
             }
         }
-        //if ( geoUpd ) cities = await model.cities().find();
+        if ( geoUpd ) cities = await model.cities().find();
 };
 
 
