@@ -63,7 +63,7 @@ const
                     let
                         prop = props[ nm ],
                         propUpd = false,
-                        ids = rCity[ prop ].map( p => p.id );
+                        ids = rCity[ prop ].map( p => parseInt( p.id ) );
 
                     // Перебираем массив (баннеров, категорий или товаров)
                     rCity[ prop ].forEach( item => {
@@ -81,7 +81,6 @@ const
                             }
                         });
                     });
-                    console.log( 'prop:', rCity[ prop ], ids, city[ prop ] );
                     // Отключаем те, которые в api отсутствуют
                     city[ prop ]
                         .filter( i => !~ids.indexOf( i.id ) && i.use )
