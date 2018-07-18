@@ -30,7 +30,7 @@
                     {{#each categories}}
                     <li class="use-{{use}} use-switcher">
                         <label style="margin-bottom: 4px;">
-                            <input{{#if use}} checked="checked"{{/if}} onChange="switchBanner( this, `{{id}}` );" class="checkbox" type="checkbox" name="checkbox-test">
+                            <input{{#if use}} checked="checked"{{/if}} onChange="switchCategory( this, `{{id}}` );" class="checkbox" type="checkbox" name="checkbox-test">
                             <span class="checkbox-custom"></span>
                             <span class="label">{{name}}</span>
                         </label>
