@@ -17,7 +17,8 @@ router.get( '/cities/', ( req, res, next ) => {
 
 router.get( '/banners/:city', ( req, res, next ) => {
     res.json(
-        req.cities[ req.params.city ].banners
+        req.cities
+            .filter( c => c.key == req.params.city )[ 0 ].banners
             .filter( b => b.use )
             .map( b => { return { id: b.id, link: b.link, image: b.image }; } )
     );
@@ -25,7 +26,8 @@ router.get( '/banners/:city', ( req, res, next ) => {
 
 router.get( '/categories/:city', ( req, res, next ) => {
     res.json(
-        req.cities[ req.params.city ].categories
+        req.cities
+            .filter( c => c.key == req.params.city )[ 0 ].categories
             .filter( c => c.use )
             .map( c => { return { id: c.id, name: c.name, url: c.url, parent: c.parent }; } )
     );
