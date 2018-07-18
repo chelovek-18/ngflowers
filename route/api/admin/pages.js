@@ -23,4 +23,16 @@ router.post( '/cities/', async ( req, res, next ) => {
     //res.json( await req.db.cities().update( { key: req.body.key }, req.body ) );
 });
 
+router.post( '/banners/', async ( req, res, next ) => {
+    res.json(
+        await ( req.cities = req.cities.map( c => {
+            if ( c.key == req.body.key )
+                c.banners.forEach( b => {
+                    if ( b.id == req.body.id ) b = req.body;
+                });
+            return c;
+        }))
+    );
+});
+
 module.exports = router;

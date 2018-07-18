@@ -21,6 +21,12 @@ function switchCity( elm, key ) {
     ( new Ajax ).post().path( '/pages/cities/' ).data( { key: key, use: elm.checked } ).send();
 }
 
+// Вкл/выкл баннер
+function switchBanner( elm, id ) {
+    var city = elm.parentNode.parentNode.parentNode.getAttribute( 'city' );
+    ( new Ajax ).post().path( '/pages/banners/' ).data( { key: city, id: id, use: elm.checked } ).send();
+}
+
 // Открыть блок редактирования баннеров, категорий, товаров города
 function openProps( elm ) {
     if ( elm.parentNode.querySelector( '.propmenu' ).style.height == '1px' ) {
