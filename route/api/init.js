@@ -70,7 +70,7 @@ const
                         let
                             id = item.id,
                             propItem = city[ prop ]
-                                .filter( i => i.id == id )[ 0 ] ||
+                                .filter( i => ( console.log( 'ids!', i.id, id ), i.id == id ) )[ 0 ] ||
                                 ( city[ prop ].push( { id: id } ), city[ prop ][ city[ prop ].length - 1 ] );
 
                         // Сравниваем значения и корректируем
