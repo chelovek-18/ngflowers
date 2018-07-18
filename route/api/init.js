@@ -66,7 +66,7 @@ const
                         ids = rCity[ prop ].map( p => p.id );
 
                     // Перебираем массив (баннеров, категорий или товаров)
-                    rCity[ prop ].forEach( item => {
+                    if ( rCity[ prop ] && rCity[ prop ].length ) rCity[ prop ].forEach( item => {
                         let
                             id = item.id,
                             propItem = city[ prop ]
@@ -82,7 +82,7 @@ const
                         });
                     });
                     // Отключаем те, которые в api отсутствуют
-                    city[ prop ]
+                    if ( rCity[ prop ] && rCity[ prop ].length ) city[ prop ]
                         .filter( i => !~ids.indexOf( i.id ) && i.use )
                         .forEach( i => { i.use = false; propUpd = true; } );
                     

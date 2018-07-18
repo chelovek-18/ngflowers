@@ -37,6 +37,10 @@ router.get( '/products/:city', async ( req, res, next ) => {
     res.json( await ng.getProducts( req.params.city ) );
 });
 
+router.get( '/rbanners/:city', async ( req, res, next ) => {
+    res.json( await ng.getBanners( req.params.city ) );
+});
+
 /*router.get( '/citiesgeo/', async ( req, res, next ) => {
     res.json( ( await geo.getCoords() ).results[ 0 ].geometry.location );
 });*/
