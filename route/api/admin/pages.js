@@ -13,7 +13,6 @@ router.use( async ( req, res, next ) => {
     next();
 });
 
-
 router.get( '/', ( req, res, next ) => {
     res.render( 'partials/page', res.pageSettings );
 });
@@ -27,8 +26,12 @@ router.post( '/banners/', async ( req, res, next ) => {
     res.json(
         await ( req.cities = req.cities.map( c => {
             if ( c.key == req.body.key )
+                console.log( 'bann', c.banners );
                 c.banners.forEach( b => {
-                    if ( b.id == req.body.id ) b = req.body;
+                    if ( b.id == req.body.id ) {
+                        console.log( '1bann', b );
+                        b.use = req.body.use;
+                    }
                 });
             return c;
         }))
