@@ -24,6 +24,7 @@ function switchCity( elm, key ) {
 // Вкл/выкл баннер
 function switchBanner( elm, id ) {
     var city = elm.parentNode.parentNode.parentNode.getAttribute( 'city' );
+    console.log( 'Banner data:', city, id, elm.checked );
     ( new Ajax ).post().path( '/pages/banners/' ).data( { key: city, id: id, use: elm.checked } ).send();
 }
 
