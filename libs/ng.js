@@ -51,7 +51,7 @@ class NG extends Request
     }
 
     async getProducts( city = this.city ) {
-        return await this.setBody( { action: 'getProducts', filter: JSON.stringify( { city: city } ) } ).request();
+        return await this.setBody( { action: 'getProducts', "filter[city]": city } ).request();
     }
 }
 
