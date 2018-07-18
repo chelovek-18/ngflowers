@@ -11,7 +11,23 @@ router.get( '/cities/', ( req, res, next ) => {
     res.json(
         req.cities
             .filter( c => c.use )
-            .map( c => { return { key: c.key, name: c.name, link: c.link, location: c.location, banners: c.banners }; } )
+            .map( c => { return { key: c.key, name: c.name, link: c.link, location: c.location }; } )
+    );
+});
+
+router.get( '/banners/:city', ( req, res, next ) => {
+    res.json(
+        req.cities[ req.params.city ].banners
+            .filter( b => b.use )
+            .map( b => { return { id: b.id, link: b.link, image: b.image }; } )
+    );
+});
+
+router.get( '/categories/:city', ( req, res, next ) => {
+    res.json(
+        req.cities[ req.params.city ].categories
+            .filter( c => c.use )
+            .map( c => { return { id: c.id, name: c.name, url: c.url, parent: c.parent }; } )
     );
 });
 
