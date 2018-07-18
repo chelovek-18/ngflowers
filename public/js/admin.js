@@ -29,10 +29,11 @@ function openProps( elm ) {
 }
 
 function openPropsSub( elm ) {
-    if ( elm.parentNode.querySelector( '.propmenusub' ).style.display == 'none' )
+    if ( elm.parentNode.querySelector( '.propmenusub' ).style.display == 'none' ) {
         elm.parentNode.querySelector( '.propmenusub' ).style.display = 'block';
-    else
+    } else {
         elm.parentNode.querySelector( '.propmenusub' ).style.display = 'none';
+    }
 }
 
 /*document.addEventListener( "DOMContentLoaded", function() {

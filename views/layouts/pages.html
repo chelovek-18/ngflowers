@@ -3,7 +3,7 @@
     <ul>
     {{#each cities}}
     <li class="use-{{use}} use-switcher">
-        <label style="margin-bottom: 4px;">
+        <label onClick="openProps( this );" style="margin-bottom: 4px;">
             <input{{#if use}} checked="checked"{{/if}} onChange="switchCity( this, `{{key}}` );" class="checkbox" type="checkbox" name="checkbox-test">
             <span class="checkbox-custom"></span>
             <span class="label">{{name}}</span>
@@ -11,7 +11,7 @@
         <i onClick="openProps( this );" class="material-icons openbtn">more_vert</i>
         <ul class="propmenu">
             <li>
-                <i onClick="openPropsSub( this );" class="material-icons">arrow_right</i>Баннеры
+                <span onClick="openPropsSub( this );"><i class="material-icons arrowprop">arrow_right</i>Баннеры</span>
                 <ul class="propmenusub">
                     <li>
                         <label style="margin-bottom: 4px;">

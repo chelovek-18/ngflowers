@@ -321,3 +321,7 @@ h1 {
     list-style: none;
     display: none;
 }
+
+.arrowpropact {
+    transform: rotate(90deg);
+}
