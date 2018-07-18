@@ -3,7 +3,7 @@
     <ul>
     {{#each cities}}
     <li class="use-{{use}} use-switcher">
-        <label onClick="openProps( this );" style="margin-bottom: 4px;">
+        <label style="margin-bottom: 4px;">
             <input{{#if use}} checked="checked"{{/if}} onChange="switchCity( this, `{{key}}` );" class="checkbox" type="checkbox" name="checkbox-test">
             <span class="checkbox-custom"></span>
             <span class="label">{{name}}</span>

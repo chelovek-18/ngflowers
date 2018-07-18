@@ -21,14 +21,20 @@ function switchCity( elm, key ) {
     ( new Ajax ).post().path( '/pages/cities/' ).data( { key: key, use: elm.checked } ).send();
 }
 
+// Открыть блок редактирования баннеров, категорий, товаров города
 function openProps( elm ) {
-    if ( elm.parentNode.querySelector( '.propmenu' ).style.height == '1px' )
-        elm.parentNode.querySelector( '.propmenu' ).style.height = 'inherit';
-    else
+    if ( elm.parentNode.querySelector( '.propmenu' ).style.height == '1px' ) {
+        elm.parentNode.querySelector( '.propmenu' ).style.height = '90px';
+        setTimeout( function() {
+            elm.parentNode.querySelector( '.propmenu' ).style.height = 'inherit';
+        }, 700);
+    } else
         elm.parentNode.querySelector( '.propmenu' ).style.height = '1px';
 }
 
+// Открыть список элементов списка баннеров, категорий или товаров
 function openPropsSub( elm ) {
+    elm.querySelector( '.arrowprop' ).classList.toggle( 'arrowpropact' );
     if ( elm.parentNode.querySelector( '.propmenusub' ).style.display == 'none' ) {
         elm.parentNode.querySelector( '.propmenusub' ).style.display = 'block';
     } else {

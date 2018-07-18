@@ -3,6 +3,7 @@
 const
     express = require( 'express' ),
     router = express.Router(),
+    ng = new ( require( './../../libs/ng' ) ),
     geo = new ( require( './../../libs/geo' ) );
 
 // ------------------------------------- API -------------------------------------
@@ -12,6 +13,10 @@ router.get( '/cities/', ( req, res, next ) => {
             .filter( c => c.use )
             .map( c => { return { key: c.key, name: c.name, link: c.link, location: c.location }; } )
     );
+});
+
+router.get( '/products/:city', async ( req, res, next ) => {
+    res.json( await ng.getProducts( req.params.city ) );
 });
 
 /*router.get( '/citiesgeo/', async ( req, res, next ) => {

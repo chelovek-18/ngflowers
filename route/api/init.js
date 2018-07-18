@@ -128,7 +128,7 @@ let
 async function dbcomplete() {
     cities = await model.cities().find();
 
-    setInterval( refreshDatas, 5000 );
+    setInterval( refreshDatas, 600000 );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
