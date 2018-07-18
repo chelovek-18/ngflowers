@@ -26,12 +26,20 @@ router.post( '/banners/', async ( req, res, next ) => {
     res.json(
         await ( req.cities = req.cities.map( c => {
             if ( c.key == req.body.key )
-                console.log( 'bann', c.banners );
                 c.banners.forEach( b => {
-                    if ( b.id == req.body.id ) {
-                        console.log( '1bann', b );
-                        b.use = req.body.use;
-                    }
+                    if ( b.id == req.body.id ) b = Object.assign( b, req.body );
+                });
+            return c;
+        }))
+    );
+});
+
+router.post( '/categories/', async ( req, res, next ) => {
+    res.json(
+        await ( req.cities = req.cities.map( c => {
+            if ( c.key == req.body.key )
+                c.categories.forEach( b => {
+                    if ( b.id == req.body.id ) b = Object.assign( b, req.body );
                 });
             return c;
         }))
