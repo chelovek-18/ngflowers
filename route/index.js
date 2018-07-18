@@ -18,24 +18,7 @@ const
 
     server = http.createServer( app ),
     WebSocket = require( 'ws' ),
-    wss = new WebSocket.Server({ server }),
-
-    // paths
-    viewsPath = global.appConf.location.root + '/views',
-    // model
-    //model = new ( require( './../model/model' ) ),
-    // fs
-    fs = require( 'fs' ),
-    dir = fs.readdirSync( __dirname + '/api', 'utf8' );
-
-/*let
-	routes = [];*/
-
-// Подключаем все js файлы из папки api
-/*dir.forEach( ( fnm ) => {
-	if ( fnm.split( '.' )[ 1 ] == 'js' ) routes.push( require( './api/' + fnm ) );
-});*/
-
+    wss = new WebSocket.Server({ server }),*/
 
 class Route
 {
@@ -89,46 +72,13 @@ class Route
     }
 
     routes() {
-        /*routes.forEach( ( route ) => {
-            if ( route.use ) app.use( '/app/', route );
-        });*/
-        //router.get('/attribute-search/', require(__dirname +'/get/attribute-search'));
-        app.get( '/bg/', ( req, res, next ) => {
-            res.send( `
-            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center;">
-                <img src="img/serv2.png" style="margin: 0 auto;" />
-            </div>
-            ` )
-        });
-
-        /*app.use( ( req, res, next ) => {
-            console.log( 'sess', req.session );
-            console.log( 'body', req.body );
-            if ( !req.session.user ) {
-                if (
-                    req.body.login
-                    && req.body.login == 'admin'
-                ) {
-                    req.session.user = req.body.login;
-                    //res.redirect( '/' );
-                    res.status( 200 ).send( 'e-e-e-e!' );
-                } else res.status( 401 ).render( 'partials/login' );
-            }
-        
-            else next();
-        });*/
-        
-        // Все маршруты:
+        // Маршруты:
 
         // Инициализация
         app.use( require( './api/init' ) );
 
         // API
         app.use( require( './api/api' ) );
-
-        app.get( '/del/', async ( req, res, next ) => {
-            res.send( await req.db.users().delete() );
-        });
 
         // Авторизация
         app.use( require( './api/auth' ) );
