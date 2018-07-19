@@ -39,7 +39,18 @@
                 </ul>
             </li>
             <li>
-                <i class="material-icons">arrow_right</i>Баннеры
+                <span onClick="openPropsSub( this );"><i class="material-icons arrowprop">arrow_right</i>Товары</span>
+                <ul style="display: none;" city="{{key}}" class="propmenusub">
+                    {{#each categories}}
+                    <li class="use-{{use}} use-switcher">
+                        <label style="margin-bottom: 4px;">
+                            <input{{#if use}} checked="checked"{{/if}} onChange="switchProducts( this, `{{id}}` );" class="checkbox" type="checkbox" name="checkbox-test">
+                            <span class="checkbox-custom"></span>
+                            <span class="label">{{name}}</span>
+                        </label>
+                    </li>
+                    {{/each}}
+                </ul>
             </li>
         </ul>
     </li>

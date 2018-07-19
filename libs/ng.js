@@ -20,7 +20,7 @@ class NG extends Request
         for( let k in keys ) {
             cities[ keys[ k ] ].banners = await this.getBanners( k );
             cities[ keys[ k ] ].categories = await this.getSections( k );
-            //cities[ keys[ k ] ].products = await this.getProducts( k );
+            cities[ keys[ k ] ].products = await this.getProducts( k );
         }
         return keys
             .map( k => {
@@ -32,11 +32,11 @@ class NG extends Request
     }
 
     async getBanners( city = this.city ) {
-        return await this.setBody( { action: 'getBanners', city: city } ).request();
+        return await this.setBody( { action: 'getBanners', "filter[city]": city } ).request();
     }
 
     async getSections( city = this.city ) {
-        return ( await this.setBody( { action: 'getSections', city: city } ).request() )
+        return ( await this.setBody( { action: 'getSections', "filter[city]": city } ).request() )
             .map( s => {
                 s.id = s.ID;
                 delete s.ID;
@@ -51,7 +51,12 @@ class NG extends Request
     }
 
     async getProducts( city = this.city ) {
-        return await this.setBody( { action: 'getProducts', "filter[city]": city } ).request();
+        return ( await this.setBody( { action: 'getProducts', "filter[city]": city } ).request() )
+            .map( p => {
+                p.oldPrice = p.oldprice;
+                delete p.oldprice;
+                return p;
+            });
     }
 }
 

@@ -58,7 +58,7 @@ const
                 }
 
                 // Сравниваем баннеры, категории, товары
-                let props = [ 'banners', 'categories' ];
+                let props = [ 'banners', 'categories', 'products' ];
                 for ( let nm in props ) {
                     let
                         prop = props[ nm ],

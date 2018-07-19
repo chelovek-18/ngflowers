@@ -33,6 +33,12 @@ function switchCategory( elm, id ) {
     ( new Ajax ).post().path( '/pages/categories/' ).data( { key: city, id: id, use: elm.checked } ).send();
 }
 
+// Вкл/выкл товар
+function switchProducts( elm, id ) {
+    var city = elm.parentNode.parentNode.parentNode.getAttribute( 'city' );
+    ( new Ajax ).post().path( '/pages/products/' ).data( { key: city, id: id, use: elm.checked } ).send();
+}
+
 // Открыть блок редактирования баннеров, категорий, товаров города
 function openProps( elm ) {
     if ( elm.parentNode.querySelector( '.propmenu' ).style.height == '1px' ) {

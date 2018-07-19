@@ -28,6 +28,24 @@ class ProductsCollection
                 type: String,
                 required: true
             },
+            sostav: {
+                type: String
+            },
+            youtube: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+            offers: {
+                type: [ Number ]
+            },
+            qty: {
+                type: Number
+            },
+            groups: {
+                type: [ Number ]
+            },
             use: {
                 type: Boolean,
                 default: true
