@@ -26,6 +26,7 @@ router.delete( '/users/', async ( req, res, next ) => {
 
 // Изменение настроек приложения
 router.post( '/settings/', async ( req, res, next ) => {
+    if ( ! ( await req.db.settings().findOne() ) ) await req.db.settings().save( { version: '1.0.0' } ).exec();
     await req.db.settings().update( {}, req.body );
     res.redirect( '/settings/' );
 });
