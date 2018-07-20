@@ -23,6 +23,12 @@ router.delete( '/users/', async ( req, res, next ) => {
     res.json( await req.db.users().delete( { _id: req.db.id( req.body.id ) } ) );
 });
 
+// Изменение настроек приложения
+router.post( '/settings/', async ( req, res, next ) => {
+    await req.db.settings().update( {}, req.body );
+    res.redirect( '/settings/' );
+});
+
 // Изменение пользователей
 router.post( '/users/', async ( req, res, next ) => {
     let users = req.body;

@@ -1,6 +1,6 @@
 <div>
     {{#if (math role '==' 'root')}}
-    <h1>Настройки</h1>
+    <h1>Настройки БД</h1>
     <form action="/settings/db/update/" method="POST">
         <p>
             <label>Хост</label><input type="text" value="{{db/host}}" name="host" />
@@ -23,6 +23,15 @@
     </form>
     {{/if}}
     {{#if dbWorked}}
+    <h1>Настройки приложения</h1>
+    <form action="/settings/settings/" method="POST">
+        <p>
+            <label>Версия</label><input type="text" value="{{settings/version}}" name="version" />
+        </p>
+        <p>
+            <label>Телефон оператора</label><input type="text" value="{{settings/phone}}" name="phone" />
+        </p>
+    </form>
     <h1>Пользователи</h1>
     <form action="/settings/users/" method="POST">
         <table>
