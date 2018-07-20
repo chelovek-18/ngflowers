@@ -8,7 +8,8 @@ const
 router.use( async ( req, res, next ) => {
     res.pageSettings.page = 'settings';
     res.pageSettings.db = global.appConf.mongodb;
-    res.pageSettings.users = await req.db.users().find().exec();
+    res.pageSettings.users = await req.db.users().find();
+    res.pageSettings.settings = await req.db.users().findOne();
     if ( !req.access() ) throw 401;
 
     next();
