@@ -67,6 +67,7 @@ const
 
                     // Перебираем массив (баннеров, категорий или товаров)
                     rCity[ prop ].forEach( item => {
+                        console.log( 'city[ prop ]', city[ prop ] );
                         let
                             id = item.id,
                             propItem = city[ prop ]
