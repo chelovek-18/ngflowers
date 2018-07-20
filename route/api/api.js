@@ -42,6 +42,10 @@ router.get( '/products/:city', ( req, res, next ) => {
     );
 });
 
+router.get( '/app-settings/', async ( req, res, next ) => {
+    res.json( await req.db.settings().findOne() );
+});
+
 router.get( '/rproducts/:city', async ( req, res, next ) => {
     res.json( await ng.getProducts( req.params.city ) );
 });
