@@ -33,7 +33,16 @@ router.get( '/categories/:city', ( req, res, next ) => {
     );
 });
 
-router.get( '/products/:city', async ( req, res, next ) => {
+router.get( '/products/:city', ( req, res, next ) => {
+    res.json(
+        req.cities
+            .filter( c => c.key == req.params.city )[ 0 ].products
+            .filter( c => c.use )
+            .map( c => { return { id: c.id, name: c.name, price: c.price, oldPrice: c.oldPrice }; } )
+    );
+});
+
+router.get( '/rproducts/:city', async ( req, res, next ) => {
     res.json( await ng.getProducts( req.params.city ) );
 });
 
