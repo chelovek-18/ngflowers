@@ -9,7 +9,7 @@ router.use( async ( req, res, next ) => {
     res.pageSettings.page = 'settings';
     res.pageSettings.db = global.appConf.mongodb;
     res.pageSettings.users = await req.db.users().find();
-    res.pageSettings.settings = await req.db.users().findOne();
+    res.pageSettings.settings = await req.db.settings().findOne();
     if ( !req.access() ) throw 401;
 
     next();
@@ -26,7 +26,7 @@ router.delete( '/users/', async ( req, res, next ) => {
 
 // Изменение настроек приложения
 router.post( '/settings/', async ( req, res, next ) => {
-    if ( ! ( await req.db.settings().findOne() ) ) await req.db.settings().save( { version: '1.0.0' } ).exec();
+    if ( ! ( await req.db.settings().findOne() ) ) await req.db.settings().save( { version: '1.0.0' } );
     await req.db.settings().update( {}, req.body );
     res.redirect( '/settings/' );
 });
