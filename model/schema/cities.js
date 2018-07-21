@@ -2,14 +2,16 @@
 
 let
     BannersSchema = new ( require('./sub/banners') )(),
-    CategoriesSchema = new ( require('./sub/categories') )();
+    CategoriesSchema = new ( require('./sub/categories') )(),
+    ProductsSchema = new ( require('./sub/products') )();
 
 class CitiesCollection
 {
     getSchema( Schema ) {
 		let
             bannersSchema = BannersSchema.getSchema( Schema ),
-            categoriesSchema = CategoriesSchema.getSchema( Schema );
+            categoriesSchema = CategoriesSchema.getSchema( Schema ),
+            productsSchema = ProductsSchema.getSchema( Schema );
         return new Schema({
             key: {
                 type: String,
@@ -40,6 +42,9 @@ class CitiesCollection
 			},
 			categories: {
 				type: [ categoriesSchema ]
+			},
+			products: {
+				type: [ productsSchema ]
 			}
         }, {
             autoIndex: true
