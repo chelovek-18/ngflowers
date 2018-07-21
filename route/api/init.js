@@ -67,9 +67,10 @@ const
 
                     // Перебираем массив (баннеров, категорий или товаров)
                     rCity[ prop ].forEach( item => {
+                        console.log( 'city[ prop ]', city[ prop ] );
                         let
                             id = item.id,
-                            propItem = ( await city[ prop ] )
+                            propItem = city[ prop ]
                                 .filter( i => i.id == id )[ 0 ] ||
                                 ( city[ prop ].push( { id: id } ), city[ prop ][ city[ prop ].length - 1 ] );
 
