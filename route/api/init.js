@@ -109,8 +109,11 @@ const
                                             imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`,
                                             dirs = imgpath.split( '/' )/*.filter( d => d )*/;
                                         dirs.pop();
-                                        if ( !fs.existsSync( dirs.join( '/' ) ) )
-                                            fs.mkdirSync( dirs.join( '/' ) );
+                                        dirs.forEach( ( d, i ) => {
+                                            let dir = dirs.filter( ( fd, fi ) => fi <= i ).join( '/' );
+                                            if ( !fs.existsSync( dir ) )
+                                                fs.mkdirSync( dir );
+                                        });
                                         if ( !fs.existsSync( imgpath ) )
                                             imagemagick.resize({
                                                 srcPath: imghttp,
