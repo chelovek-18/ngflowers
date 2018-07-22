@@ -103,14 +103,14 @@ const
                             .filter( i => i.use )
                             .forEach( i => {
                                 if ( typeof i.image == 'object' && i.image.length )
-                                    i.forEach( img => {
+                                    i.image.forEach( img => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
                                             imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`,
                                             dirs = imgpath.split( '/' )/*.filter( d => d )*/;
                                         dirs.pop();
-                                        dirs.forEach( ( d, i ) => {
-                                            let dir = dirs.filter( ( fd, fi ) => fi <= i ).join( '/' );
+                                        dirs.forEach( ( d, ii ) => {
+                                            let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
                                             if ( !fs.existsSync( dir ) )
                                                 fs.mkdirSync( dir );
                                         });
