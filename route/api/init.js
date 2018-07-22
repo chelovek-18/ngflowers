@@ -95,8 +95,9 @@ const
 
                     // Проверяем наличие сохраненных изображений
                     if ( prop == 'products' ) {
-                        console.log( 'pth', `${ global.appConf.location.root }/public/thumbs/${ city.key }` );
-                        //if ( !fs.existsSync( `${ global.appConf.location.root }` ) )
+                        let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
+                        if ( !fs.existsSync( dirpath ) )
+                            fs.mkdirSync( dirpath );
                         /*city[ prop ]
                             .filter( i => i.use )
                             forEach( async i => {
