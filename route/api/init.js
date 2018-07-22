@@ -7,7 +7,6 @@ const
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
-    settings = model.settings().findOne(),
     ng = new ( require( './../../libs/ng' ) ),
     geo = new ( require( './../../libs/geo' ) ),
 
@@ -121,8 +120,6 @@ const
         if ( geoUpd ) cities = await model.cities().find();
     };
 
-geo.setParams( settings );
-
 // Данные
 let
     cities = [];
@@ -130,6 +127,9 @@ let
 // Функция дергается по готовности базы
 async function dbcomplete() {
     cities = await model.cities().find();
+
+    let settings = await model.settings().findOne();
+    geo.setParams( settings );
 
     setInterval( refreshDatas, 600000 );
 }
