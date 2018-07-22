@@ -12,6 +12,9 @@ class ProductsCollection
                 type: String,
                 required: true
             },
+            url: {
+                type: String
+            },
             price: {
                 type: Number,
                 required: true
