@@ -6,6 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
+    imagemagick = require( 'imagemagick' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -93,16 +94,29 @@ const
                         isUpd = true;
                     }
 
-                    // Проверяем наличие сохраненных изображений
+                    // Проверяем наличие сохраненных изображений, сохраняем
                     if ( prop == 'products' ) {
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         if ( !fs.existsSync( dirpath ) )
                             fs.mkdirSync( dirpath );
-                        /*city[ prop ]
+                        city[ prop ]
                             .filter( i => i.use )
                             forEach( async i => {
-                                //if ( fs.existsSync( `global.appConf.location.root + ` ) )
-                            });*/
+                                if ( typeof i == 'object' && i.length )
+                                    i.forEach( img => {
+                                        let
+                                            imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
+                                            imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`;
+                                        if ( !fs.existsSync( imgpath ) )
+                                            imagemagick.resize({
+                                                srcPath: imghttp,
+                                                width: 300
+                                            }, function( err, stdout, stderr ){
+                                                if ( err ) return console.log( err );
+                                                fs.writeFileSync( imgpath, stdout, 'binary' );
+                                            });
+                                    });
+                            });
                     }
                 }
             }
