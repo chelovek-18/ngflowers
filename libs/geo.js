@@ -16,6 +16,10 @@ class Geo extends Request
     async getCityLocation( address = this.address ) {
         return await this.setBody( { address: address } ).request();
     }
+
+    async setParams( settings ) {
+        this.defaultData.key = ( await settings ).googleKey;
+    }
 }
 
 module.exports = Geo;

@@ -7,6 +7,7 @@ const
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
+    settings = model.settings().findOne(),
     ng = new ( require( './../../libs/ng' ) ),
     geo = new ( require( './../../libs/geo' ) ),
 
@@ -118,7 +119,9 @@ const
             }
         }
         if ( geoUpd ) cities = await model.cities().find();
-};
+    };
+
+geo.setParams( settings );
 
 // Данные
 let

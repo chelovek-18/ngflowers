@@ -11,6 +11,9 @@ class SettingsCollection
             },
             phone: {
                 type: String
+            },
+            googleKey: {
+                type: String
             }
         });
     }
