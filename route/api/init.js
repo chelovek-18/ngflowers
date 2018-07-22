@@ -102,10 +102,8 @@ const
                         city[ prop ]
                             .filter( i => i.use )
                             .forEach( i => {
-                                console.log( 'i?', i );
-                                if ( typeof i == 'object' && i.length )
+                                if ( typeof i.image == 'object' && i.image.length )
                                     i.forEach( img => {
-                                        console.log( 'img?', img );
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
                                             imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`,
