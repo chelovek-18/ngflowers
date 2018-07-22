@@ -4,6 +4,8 @@ const
     // express
     express = require( 'express' ),
     router = express.Router(),
+
+    fs = require( 'fs' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -90,6 +92,17 @@ const
                         await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
                         isUpd = true;
                     }
+
+                    // Проверяем наличие сохраненных изображений
+                    if ( prop == 'products' ) {
+                        console.log( 'pth', `${ global.appConf.location.root }/public/thumbs/${ city.key }` );
+                        //if ( !fs.existsSync( `${ global.appConf.location.root }` ) )
+                        /*city[ prop ]
+                            .filter( i => i.use )
+                            forEach( async i => {
+                                //if ( fs.existsSync( `global.appConf.location.root + ` ) )
+                            });*/
+                    }
                 }
             }
 
@@ -131,7 +144,7 @@ async function dbcomplete() {
     let settings = await model.settings().findOne();
     geo.setParams( settings );
 
-    setInterval( refreshDatas, 600000 );
+    setInterval( refreshDatas, 15000 /*600000*/ );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
