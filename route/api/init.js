@@ -106,7 +106,11 @@ const
                                     i.forEach( img => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
-                                            imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`;
+                                            imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`,
+                                            dirs = imgpath.split( '/' )/*.filter( d => d )*/;
+                                        dirs.pop();
+                                        if ( !fs.existsSync( dirs.join( '/' ) ) )
+                                            fs.mkdirSync( dirs.join( '/' ) );
                                         if ( !fs.existsSync( imgpath ) )
                                             imagemagick.resize({
                                                 srcPath: imghttp,
