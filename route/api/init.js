@@ -101,7 +101,7 @@ const
                             fs.mkdirSync( dirpath );
                         city[ prop ]
                             .filter( i => i.use )
-                            forEach( async i => {
+                            .forEach( i => {
                                 if ( typeof i == 'object' && i.length )
                                     i.forEach( img => {
                                         let
