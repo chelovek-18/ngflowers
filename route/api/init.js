@@ -111,7 +111,7 @@ const
                                         dirs.pop();
                                         dirs.forEach( ( d, ii ) => {
                                             let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
-                                            if ( !fs.existsSync( dir ) )
+                                            if ( dir && !fs.existsSync( dir ) )
                                                 fs.mkdirSync( dir );
                                         });
                                         if ( !fs.existsSync( imgpath ) )
