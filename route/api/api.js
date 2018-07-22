@@ -38,7 +38,21 @@ router.get( '/products/:city', ( req, res, next ) => {
         req.cities
             .filter( c => c.key == req.params.city )[ 0 ].products
             .filter( c => c.use )
-            .map( c => { return { id: c.id, name: c.name, price: c.price, oldPrice: c.oldPrice }; } )
+            .map( c => { return {
+                id: c.id,
+                name: c.name,
+                url: c.url,
+                price: c.price,
+                oldPrice: c.oldPrice,
+                image: c.image,
+                mainImage: c.mainImage,
+                sostav: c.sostav,
+                youtube: c.youtube,
+                description: c.description,
+                offers: c.offers,
+                qty: c.qty,
+                groups: c.groups
+            }; })
     );
 });
 
