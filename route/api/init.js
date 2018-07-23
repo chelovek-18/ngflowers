@@ -102,7 +102,7 @@ const
                             .filter( i => i.use )
                             .forEach( i => {
                                 ( async () => {
-                                if ( typeof i.image == 'object' && i.image.length )
+                                if ( typeof i.image == 'object' && i.image.length && false )
                                     for ( let kimg in i.image ) {
                                         let img = i.image[ kimg ];
                                     //i.image.forEach( async ( img ) => {
