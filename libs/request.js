@@ -33,7 +33,9 @@ class Request
     async request() {
         let self = this;
         return await new Promise( ( r, j ) => {
+            console.log( '1!' );
             let httpReq = https.request( this, function( httpRes ) {
+                console.log( '2!' );
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
@@ -45,6 +47,8 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
+                    console.log( '3!' );
+                    console.log( 'outp', output );
                     if ( self.dataType != 'json' ) return r( output );
                     try {
                         r( JSON.parse( output ) );
