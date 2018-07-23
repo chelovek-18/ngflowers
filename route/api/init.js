@@ -105,7 +105,7 @@ const
                                     i.image.forEach( async ( img ) => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
-                                            imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`,
+                                            imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ) }`,
                                             dirs = imgpath.split( '/' )/*.filter( d => d )*/;
                                         dirs.pop();
                                         dirs.forEach( ( d, ii ) => {
@@ -115,6 +115,7 @@ const
                                         });
                                         if ( !fs.existsSync( imgpath ) )
                                             gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage() )
+                                                .resize( 300, 300 )
                                                 .write( imgpath, function ( err ) {
                                                     if ( !err ) console.log( 'done' );
                                                     else console.log( 'img err', err );
