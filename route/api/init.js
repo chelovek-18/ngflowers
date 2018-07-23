@@ -6,7 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    sharp = require( 'sharp' ),
+    gm = require( 'gm' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -123,11 +123,11 @@ const
                                                     .cover( 300, 300 )
                                                     .write( imgpath );
                                             }); }*/
-                                            sharp( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() )
+                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() )
                                                 .resize( 300, 300 )
-                                                .toFile( imgpath, ( err, info ) => {
-                                                    if ( !err ) console.log( 'done!', info );
-                                                    else console.log( 'img err', err );
+                                                .write( imgpath, ( err ) => {
+                                                    if ( err ) console.log( 'no done!', err );
+                                                    else console.log( 'done!!' );
                                                 });
                                                 /*.write( imgpath, function ( err ) {
                                                     if ( !err ) console.log( 'done' );
