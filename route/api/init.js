@@ -100,9 +100,11 @@ const
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         city[ prop ]
                             .filter( i => i.use )
-                            .forEach( i => {
+                            .forEach( async ( i ) => {
                                 if ( typeof i.image == 'object' && i.image.length )
-                                    i.image.forEach( async ( img ) => {
+                                    for ( let kimg in i.image ) {
+                                        let img = i.image[ kimg ];
+                                    //i.image.forEach( async ( img ) => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
                                             imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
@@ -143,7 +145,7 @@ const
                                                 if ( err ) return console.log( err );
                                                 fs.writeFileSync( imgpath, stdout, 'binary' );
                                             });*/
-                                    });
+                                    }//);
                             });
                     }
                 }
