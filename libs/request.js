@@ -27,9 +27,7 @@ class Request
             this.path = this.defaultPath;
         }
         else this.path = `${ this.defaultPath }?${ this.body }`;
-        if ( this.dataType != 'json' ) this.headers = {
-            'Content-Type': 'image/jpeg'
-        }
+        if ( this.dataType != 'json' ) this.encoding = 'binary';
         return this;
     }
 
@@ -51,8 +49,8 @@ class Request
                 });
                 httpRes.on( 'end', () => {
                     //console.log( '3!', self.dataType );
-                    if ( self.dataType != 'json' ) console.log( 'outp', output );
-                    if ( self.dataType != 'json' ) return r( output );
+                    //if ( self.dataType != 'json' ) console.log( 'outp', output );
+                    if ( self.dataType != 'json' ) return r( new Buffer( output, 'binary' ) );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {
