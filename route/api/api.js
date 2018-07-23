@@ -73,7 +73,7 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 
 router.get( '/imgs/', async ( req, res, next ) => {
     //res.end( fs.readFileSync( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
-    res.end( await images.getImage( 'novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
+    res.end( new Buffer( await images.getImage( 'novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) );
 
 
 
