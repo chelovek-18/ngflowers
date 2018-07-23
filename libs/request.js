@@ -47,8 +47,8 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    console.log( '3!' );
-                    console.log( 'outp', output );
+                    console.log( '3!', self.dataType );
+                    if ( self.dataType != 'json' ) console.log( 'outp', output );
                     if ( self.dataType != 'json' ) return r( output );
                     try {
                         r( JSON.parse( output ) );
