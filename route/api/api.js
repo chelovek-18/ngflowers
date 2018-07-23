@@ -8,9 +8,9 @@ const
     https = require( 'https' ),
     fs = require( 'fs' ),
     //gm = require( 'gm' ),
-    mimages = require( 'images' ),
-    url = require( 'url' ),
-    images = new( require( './../../libs/images' ) );
+    images = require( 'images' ),
+    url = require( 'url' );
+    //images = new( require( './../../libs/images' ) );
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
@@ -75,7 +75,7 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
-    mimages( `${ global.appConf.location.root }/public/prob.jpg` )
+    images( `${ global.appConf.location.root }/public/prob.jpg` )
         .resize( 300 )
         .encode( "png" )
         .save( `${ global.appConf.location.root }/public/prob.png` );
