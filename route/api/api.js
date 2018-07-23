@@ -7,7 +7,8 @@ const
     geo = new ( require( './../../libs/geo' ) ),
     https = require( 'https' ),
     fs = require( 'fs' ),
-    gm = require( 'gm' ),
+    //gm = require( 'gm' ),
+    images = require( 'images' ),
     url = require( 'url' ),
     images = new( require( './../../libs/images' ) );
 
@@ -74,15 +75,18 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
-    gm( `${ global.appConf.location.root }/public/prob.jpg` )
-        .resize( 50 )
-        .stream( ( err, stdout, stderr ) => {
+    images( `${ global.appConf.location.root }/public/prob.jpg` )
+        .resize( 300 )
+        .encode( "png" )
+        .save( `${ global.appConf.location.root }/public/prob.png` );
+    });
+        /*.stream( ( err, stdout, stderr ) => {
             // `${ global.appConf.location.root }/public/prob.jpg`
             let writeStream = fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` );
             stdout.pipe( writeStream );
             //if ( err ) res.send( err );
             //else res.send( 'resized!' );
-        });
+        });*/
 
     // 1!..
     /*let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
