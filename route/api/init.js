@@ -117,6 +117,7 @@ const
                                             //jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
                                             jimp.read( imghttp, ( err, image ) => {
                                                 if (err) return console.log( err );
+                                                console.log( 'image!', image );
                                                 image
                                                     .cover( 300, 300 )
                                                     .write( imgpath );
