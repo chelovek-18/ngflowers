@@ -6,7 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    sharp = require( 'sharp' ),
+    jimp = require( 'jimp' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -114,7 +114,13 @@ const
                                                 fs.mkdirSync( dir );
                                         });
                                         if ( !fs.existsSync( imgpath ) )
-                                            sharp( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage() )
+                                            jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage(), ( err, image ) => {
+                                                if (err) return console.log( err );
+                                                image
+                                                    .cover( 300, 300 )
+                                                    .write( imgpath );
+                                            });
+                                            /*sharp( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage() )
                                                 .resize( 300, 300 )
                                                 .toFile( imgpath, ( err, info ) => {
                                                     if ( !err ) console.log( 'done!', info );
