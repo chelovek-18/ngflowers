@@ -106,8 +106,8 @@ const
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
                                             imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
-                                            dirs = imgpath.split( '/' )/*.filter( d => d )*/;
-                                        dirs.pop();
+                                            dirs = imgpath.split( '/' ),
+                                            fnm = dirs.pop();
                                         dirs.forEach( ( d, ii ) => {
                                             let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
                                             if ( dir && !fs.existsSync( dir ) )
@@ -123,7 +123,7 @@ const
                                                     .cover( 300, 300 )
                                                     .write( imgpath );
                                             }); }*/
-                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() )
+                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), fnm )
                                                 .resize( 300, 300 )
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
