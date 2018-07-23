@@ -50,7 +50,7 @@ class Request
                 httpRes.on( 'end', () => {
                     //console.log( '3!', self.dataType );
                     //if ( self.dataType != 'json' ) console.log( 'outp', output );
-                    if ( self.dataType != 'json' ) r( new Buffer( output ) ); //return r( new Buffer( output, 'binary' ) );
+                    if ( self.dataType != 'json' ) r( output ); //return r( new Buffer( output, 'binary' ) );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {
