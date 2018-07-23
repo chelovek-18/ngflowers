@@ -130,7 +130,7 @@ const
                                             console.log( 'тыц', imghttp );
                                             //console.log( 'img buf', await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) );
                                             //gm( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ), fnm )
-                                            gm( imghttp )
+                                            gm( fs.readFileSync( imghttp ) )
                                                 .resize( 300, 300 )
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
