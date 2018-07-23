@@ -33,7 +33,7 @@ class Request
     async request() {
         let self = this;
         return await new Promise( ( r, j ) => {
-            console.log( '1!' );
+            console.log( '1!', self.host, self.defaultPath );
             let httpReq = https.request( this, function( httpRes ) {
                 console.log( '2!' );
                 let output = '';
