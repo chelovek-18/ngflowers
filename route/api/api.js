@@ -75,7 +75,7 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 
 router.get( '/imgs/', async ( req, res, next ) => {
     gm( `${ global.appConf.location.root }/public/prob.jpg` )
-        .resize( 300 )
+        .resize( 50 )
         .write( `${ global.appConf.location.root }/public/prob.jpg`, () => {
             res.send( 'resized!' );
         });
