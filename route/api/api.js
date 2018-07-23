@@ -79,7 +79,7 @@ router.get( '/imgs/', async ( req, res, next ) => {
         .resize( 300 )
         .encode( "png" )
         .save( `${ global.appConf.location.root }/public/prob.png` );
-    });
+    //});
         /*.stream( ( err, stdout, stderr ) => {
             // `${ global.appConf.location.root }/public/prob.jpg`
             let writeStream = fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` );
