@@ -33,13 +33,13 @@ class Request
     async request() {
         let self = this;
         return await new Promise( ( r, j ) => {
-            console.log( '1!', self.host, self.path, self.method );
+            //console.log( '1!', self.host, self.path, self.method );
             let httpReq = https.request( self, function( httpRes ) {
-                console.log( '2!' );
+                //console.log( '2!' );
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
-                    console.log( 'request error:', httpRes.statusCode );
+                    //console.log( 'request error:', httpRes.statusCode );
                     j( {} );
                 }
     
@@ -47,7 +47,7 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    console.log( '3!', self.dataType );
+                    //console.log( '3!', self.dataType );
                     if ( self.dataType != 'json' ) console.log( 'outp', output );
                     if ( self.dataType != 'json' ) return r( output );
                     try {
