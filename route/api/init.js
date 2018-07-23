@@ -104,8 +104,8 @@ const
                                 if ( typeof i.image == 'object' && i.image.length )
                                     i.image.forEach( async ( img ) => {
                                         let
-                                            imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
-                                            imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ) }`,
+                                            imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
+                                            imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
                                             dirs = imgpath.split( '/' )/*.filter( d => d )*/;
                                         dirs.pop();
                                         dirs.forEach( ( d, ii ) => {
@@ -114,7 +114,7 @@ const
                                                 fs.mkdirSync( dir );
                                         });
                                         if ( !fs.existsSync( imgpath ) )
-                                            jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage(), ( err, image ) => {
+                                            jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
                                                 if (err) return console.log( err );
                                                 image
                                                     .cover( 300, 300 )
