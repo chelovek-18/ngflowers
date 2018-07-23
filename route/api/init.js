@@ -124,8 +124,8 @@ const
                                                     .cover( 300, 300 )
                                                     .write( imgpath );
                                             }); }*/
-                                            {console.log( 'img buf', await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() );
-                                            gm( await ( console.log( 'туц' ), new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), fnm )
+                                            {console.log( 'туц' ); console.log( 'img buf', await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() );
+                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), fnm )
                                                 .resize( 300, 300 )
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
