@@ -100,7 +100,8 @@ const
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         city[ prop ]
                             .filter( i => i.use )
-                            .forEach( async ( i ) => {
+                            .forEach( i => {
+                                ( async () => {
                                 if ( typeof i.image == 'object' && i.image.length )
                                     for ( let kimg in i.image ) {
                                         let img = i.image[ kimg ];
@@ -150,6 +151,7 @@ const
                                                 fs.writeFileSync( imgpath, stdout, 'binary' );
                                             });*/
                                     }//);
+                                })();
                             });
                     }
                 }
