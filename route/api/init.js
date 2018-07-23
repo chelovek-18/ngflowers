@@ -113,6 +113,7 @@ const
                                             if ( dir && !fs.existsSync( dir ) )
                                                 fs.mkdirSync( dir );
                                         });
+                                        console.log( 'imgpath', imgpath );
                                         if ( !fs.existsSync( imgpath ) )
                                             /*{ console.log( 'ch.z.ha?' ); jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
                                             //{ console.log( 'ch.z.ha?', imgpath ); jimp.read( imghttp, ( err, image ) => {
@@ -124,7 +125,7 @@ const
                                                     .write( imgpath );
                                             }); }*/
                                             {console.log( 'img buf', await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() );
-                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), fnm )
+                                            gm( await ( console.log( 'туц' ), new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), fnm )
                                                 .resize( 300, 300 )
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
