@@ -14,6 +14,7 @@ class Request
     constructor() {
         this.defaultData = {};
         this.defaultPath = '';
+        this.dataType = 'json';
     }
 
     setBody( data ) {
@@ -30,6 +31,7 @@ class Request
     }
 
     async request() {
+        let self = this;
         return await new Promise( ( r, j ) => {
             let httpReq = https.request( this, function( httpRes ) {
                 let output = '';
@@ -43,6 +45,7 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
+                    if ( self.dataType != 'json' ) return output;
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {

@@ -6,12 +6,13 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    imagemagick = require( 'imagemagick' ),
+    gm = require( 'gm' ).subClass( { imageMagick: true } ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
     ng = new ( require( './../../libs/ng' ) ),
     geo = new ( require( './../../libs/geo' ) ),
+    images = require( './../../libs/images' ),
 
     // Периодическое обновление данных
     refreshDatas = async () => {
@@ -97,13 +98,11 @@ const
                     // Проверяем наличие сохраненных изображений, сохраняем
                     if ( prop == 'products' ) {
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
-                        if ( !fs.existsSync( dirpath ) )
-                            fs.mkdirSync( dirpath );
                         city[ prop ]
                             .filter( i => i.use )
                             .forEach( i => {
                                 if ( typeof i.image == 'object' && i.image.length )
-                                    i.image.forEach( img => {
+                                    i.image.forEach( async ( img ) => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ) }`,
                                             imgpath = `${ dirpath }/${ img.replace( '/resize_cache/', '/' ) }`,
@@ -115,13 +114,18 @@ const
                                                 fs.mkdirSync( dir );
                                         });
                                         if ( !fs.existsSync( imgpath ) )
-                                            imagemagick.resize({
+                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage() )
+                                                .write( imgpath, function ( err ) {
+                                                    if ( !err ) console.log( 'done' );
+                                                    else console.log( 'img err', err );
+                                                });
+                                            /*imagemagick.resize({
                                                 srcPath: imghttp,
                                                 width: 300
                                             }, function( err, stdout, stderr ){
                                                 if ( err ) return console.log( err );
                                                 fs.writeFileSync( imgpath, stdout, 'binary' );
-                                            });
+                                            });*/
                                     });
                             });
                     }
