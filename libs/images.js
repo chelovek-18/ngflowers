@@ -6,7 +6,7 @@ class Images extends Request
 {
     constructor( url, path ) {
         super();
-        this.host = url;
+        this.host = url.replace( 'https://', '' );
         this.defaultPath = path;
         this.method = 'GET';
         this.dataType = 'jpeg';
