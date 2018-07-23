@@ -13,7 +13,7 @@ class Images extends Request
     }
 
     async getImage() {
-        return await this.setBody( { } ).request();
+        return await this.setBody( { q: 7 } ).request();
     }
 
 }
