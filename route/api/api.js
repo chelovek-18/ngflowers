@@ -70,7 +70,7 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
-    res.send( await ( new images( 'https://novayagollandiya.ru', '/upload/iblock/c65/80_80_1/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ).getImage() );
+    res.send( await ( new images( 'novayagollandiya.ru', '/upload/iblock/c65/80_80_1/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ).getImage() );
 });
 
 /*router.get( '/citiesgeo/', async ( req, res, next ) => {
