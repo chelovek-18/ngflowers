@@ -6,7 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    jimp = require( 'jimp' ),
+    sharp = require( 'sharp' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
