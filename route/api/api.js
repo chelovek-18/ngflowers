@@ -4,7 +4,8 @@ const
     express = require( 'express' ),
     router = express.Router(),
     ng = new ( require( './../../libs/ng' ) ),
-    geo = new ( require( './../../libs/geo' ) );
+    geo = new ( require( './../../libs/geo' ) ),
+    images = require( './../../libs/images' );
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
@@ -66,6 +67,10 @@ router.get( '/rproducts/:city', async ( req, res, next ) => {
 
 router.get( '/rbanners/:city', async ( req, res, next ) => {
     res.json( await ng.getBanners( req.params.city ) );
+});
+
+router.get( '/imgs/', async ( req, res, next ) => {
+    res.send( await ( new images( 'https://novayagollandiya.ru', '/upload/iblock/c65/80_80_1/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ).getImage() );
 });
 
 /*router.get( '/citiesgeo/', async ( req, res, next ) => {
