@@ -45,7 +45,7 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    if ( self.dataType != 'json' ) return output;
+                    if ( self.dataType != 'json' ) return r( output );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {
