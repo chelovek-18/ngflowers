@@ -72,7 +72,7 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
-    fs.writeFileSync( `${ global.appConf.location.root }/public/prob.jpg`, fs.readFileSync( url.parse( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) );
+    fs.writeFileSync( `${ global.appConf.location.root }/public/prob.jpg`, new Buffer( fs.readFileSync( url.parse( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) ) );
     res.send( fs.readFileSync( `${ global.appConf.location.root }/public/prob.jpg` ) );
     //fs.writeFileSync( `${ global.appConf.location.root }/public/prob.jpg`, new Buffer( await images.getImage('novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg') ) );
     //res.send( fs.readFileSync( `${ global.appConf.location.root }/public/prob.jpg` ) );
