@@ -34,7 +34,7 @@ class Request
         let self = this;
         return await new Promise( ( r, j ) => {
             console.log( '1!', self.host, self.path, self.method );
-            let httpReq = https.request( this, function( httpRes ) {
+            let httpReq = https.request( self, function( httpRes ) {
                 console.log( '2!' );
                 let output = '';
 
@@ -62,7 +62,7 @@ class Request
                 console.log( 'request error:', err );
                 j( {} );
             });
-            httpReq.write( this.body );
+            httpReq.write( self.body );
             httpReq.end();
         }).catch( e => {
             console.log( 'request error:', e );

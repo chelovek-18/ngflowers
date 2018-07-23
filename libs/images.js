@@ -4,15 +4,15 @@ const Request = require( './request' );
 
 class Images extends Request
 {
-    constructor( url, path ) {
+    constructor() {
         super();
-        this.host = url.replace( 'https://', '' );
-        this.defaultPath = path;
         this.method = 'GET';
         this.dataType = 'jpeg';
     }
 
-    async getImage() {
+    async getImage( url, path ) {
+        this.host = url.replace( 'https://', '' );
+        this.defaultPath = path;
         return await this.setBody( { q: 7 } ).request();
     }
 

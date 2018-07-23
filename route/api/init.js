@@ -12,7 +12,7 @@ const
     model = new ( require( './../../model/model' ) )( dbcomplete ),
     ng = new ( require( './../../libs/ng' ) ),
     geo = new ( require( './../../libs/geo' ) ),
-    images = require( './../../libs/images' ),
+    images = new ( require( './../../libs/images' ) ),
 
     // Периодическое обновление данных
     refreshDatas = async () => {
@@ -125,8 +125,8 @@ const
                                                     .write( imgpath );
                                             }); }*/
                                             {console.log( 'туц', city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
-                                            console.log( 'img buf', await ( new images( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage() );
-                                            gm( await ( new images( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), fnm )
+                                            console.log( 'img buf', await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) );
+                                            gm( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ), fnm )
                                                 .resize( 300, 300 )
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
