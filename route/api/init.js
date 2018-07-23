@@ -129,7 +129,7 @@ const
                                             }); }*/
                                             {//console.log( 'туц', city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
                                             console.log( 'тыц' );
-                                            fs.writeFileSync( imghttp, await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) );
+                                            fs.writeFileSync( imghttp, new Buffer( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ) );
                                             console.log( 'тырыдыц' );
                                             //console.log( 'img buf', await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) );
                                             //gm( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ), fnm )
