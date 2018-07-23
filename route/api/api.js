@@ -7,8 +7,8 @@ const
     geo = new ( require( './../../libs/geo' ) ),
     https = require( 'https' ),
     fs = require( 'fs' ),
-    //gm = require( 'gm' ),
-    images = require( 'images' ),
+    gm = require( 'gm' ),
+    //images = require( 'images' ),
     url = require( 'url' );
     //images = new( require( './../../libs/images' ) );
 
@@ -75,7 +75,14 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
-    images( `${ global.appConf.location.root }/public/prob.jpg` )
+    await gm( `${ global.appConf.location.root }/public/prob.jpg` )
+        .resize( 50 )
+        .stream()
+        .pipe( fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` ) );
+
+    res.send( 'hu!' );
+
+    /*images( `${ global.appConf.location.root }/public/prob.jpg` )
         .resize( 300 )
         .encode( "png" )
         .save( `${ global.appConf.location.root }/public/prob.png` );
