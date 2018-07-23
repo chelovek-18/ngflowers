@@ -11,9 +11,9 @@
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
-    "gm": "^1.23.1",
     "mongoose": "^5.0.4",
     "pem": "^1.12.5",
+    "sharp": "^0.20.5",
     "ws": "^5.2.0"
   }
 }

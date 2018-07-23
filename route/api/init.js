@@ -6,7 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    gm = require( 'gm' ).subClass( { imageMagick: true } ),
+    sharp = require( 'sharp' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -114,12 +114,16 @@ const
                                                 fs.mkdirSync( dir );
                                         });
                                         if ( !fs.existsSync( imgpath ) )
-                                            gm( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage() )
+                                            sharp( await ( new images( city.link, img.replace( '/resize_cache/', '/' ) ) ).getImage() )
                                                 .resize( 300, 300 )
-                                                .write( imgpath, function ( err ) {
-                                                    if ( !err ) console.log( 'done' );
+                                                .toFile( imgpath, ( err, info ) => {
+                                                    if ( !err ) console.log( 'done!', info );
                                                     else console.log( 'img err', err );
                                                 });
+                                                /*.write( imgpath, function ( err ) {
+                                                    if ( !err ) console.log( 'done' );
+                                                    else console.log( 'img err', err );
+                                                });*/
                                             /*imagemagick.resize({
                                                 srcPath: imghttp,
                                                 width: 300
