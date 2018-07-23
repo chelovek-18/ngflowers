@@ -27,6 +27,9 @@ class Request
             this.path = this.defaultPath;
         }
         else this.path = `${ this.defaultPath }?${ this.body }`;
+        if ( this.dataType != 'json' ) this.headers = {
+            'Content-Type': 'image/jpeg'
+        }
         return this;
     }
 
