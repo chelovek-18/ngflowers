@@ -106,7 +106,7 @@ const
                             for ( let i in image ) {
                                 let
                                     img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
-                                    imghttp = `/${ city.link }${ img }`,
+                                    imghttp = `${ city.link }${ img }`,
                                     imgpath = `${ dirpath }${ img }`,
                                     dirs = imgpath.split( '/' ),
                                     fnm = dirs.pop();
