@@ -105,7 +105,7 @@ const
                                 for ( let i in prod.image ) {
                                     //if ( !prod.image[ i ].replace ) continue;
                                     let
-                                        img = prod.image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                        img = ( prod.image[ i ] + '' ).replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                         imghttp = `${ city.link }/${ img }`,
                                         imgpath = `${ dirpath }${ img }`,
                                         dirs = imgpath.split( '/' ),
