@@ -79,7 +79,7 @@ router.get( '/imgs/', async ( req, res, next ) => {
     jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
         return img.resize( 50 ).write( `${ global.appConf.location.root }/public/prob.jpg` );
     }).catch( function( err ) {
-        console.loe( 'erro!', err );
+        console.log( 'erro!', err );
     });
 
     /*await gm( `${ global.appConf.location.root }/public/prob.jpg` )
