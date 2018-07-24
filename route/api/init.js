@@ -99,25 +99,25 @@ const
                     if ( prop == 'products' ) {
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
-                            let prod = city[ prop ][ p ];
-                            console.log( 'prod:', prod.image[ 0 ], typeof prod.image[ 0 ], 'hu', prod.image[ 0 ].replace );
-                            if ( typeof prod.image == 'object' && prod.image.length )
-                                for ( let i in prod.image ) {
-                                    //if ( !prod.image[ i ].replace ) continue;
-                                    let
-                                        img = prod.image[ i ].toString().replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
-                                        imghttp = `${ city.link }/${ img }`,
-                                        imgpath = `${ dirpath }${ img }`,
-                                        dirs = imgpath.split( '/' ),
-                                        fnm = dirs.pop();
-                                    dirs.forEach( ( d, ii ) => {
-                                        let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
-                                        if ( dir && !fs.existsSync( dir ) )
-                                            fs.mkdirSync( dir );
-                                    });
-                                    /*if ( !fs.existsSync( imgpath ) )
-                                        await images.getImage( city.link, img );*/
-                                }
+                            let
+                                prod = city[ prop ][ p ],
+                                image = city[ prop ][ p ].image || [];
+                            for ( let i in image ) {
+                                //if ( !prod.image[ i ].replace ) continue;
+                                let
+                                    img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                    imghttp = `${ city.link }/${ img }`,
+                                    imgpath = `${ dirpath }${ img }`,
+                                    dirs = imgpath.split( '/' ),
+                                    fnm = dirs.pop();
+                                dirs.forEach( ( d, ii ) => {
+                                    let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
+                                    if ( dir && !fs.existsSync( dir ) )
+                                        fs.mkdirSync( dir );
+                                });
+                                /*if ( !fs.existsSync( imgpath ) )
+                                    await images.getImage( city.link, img );*/
+                            }
                         }
 
                         /*city[ prop ]
