@@ -99,11 +99,11 @@ const
                     if ( prop == 'products' ) {
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
-                            let prod = await city[ prop ][ p ];
+                            let prod = city[ prop ][ p ];
                             if ( typeof prod.image == 'object' && prod.image.length )
                                 for ( let i in prod.image ) {
                                     let
-                                        img = /*( typeof prod.image[ i ] == 'function' ? prod.image[ i ]() : prod.image[ i ] )*/ prod.image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                        img = ( typeof prod.image[ i ] == 'function' ? prod.image[ i ]() : prod.image[ i ] ).replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                         imghttp = `${ city.link }/${ img }`,
                                         imgpath = `${ dirpath }${ img }`,
                                         dirs = imgpath.split( '/' ),
