@@ -118,16 +118,19 @@ const
                                 console.log( 'da..' );
                                 if ( !fs.existsSync( imgpath ) ) {
                                     console.log( 'da......' );
-                                    https.get( imghttp, function( resp ) {
-                                        console.log( 'da!' );
-                                        /*resp.pipe( fs.createWriteStream( imgpath ) );
-                                        console.log( 'dada!' );
-                                        /*jimp.read( imgpath ).then( function ( img ) {
-                                            img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
-                                            img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
-                                        }).catch( function( err ) {
-                                            console.log( 'erro!', err );
-                                        });*/
+                                    await new Promise( ( r, j ) => {
+                                        https.get( imghttp, function( resp ) {
+                                            console.log( 'da!' );
+                                            r();
+                                            /*resp.pipe( fs.createWriteStream( imgpath ) );
+                                            console.log( 'dada!' );
+                                            /*jimp.read( imgpath ).then( function ( img ) {
+                                                img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
+                                                img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
+                                            }).catch( function( err ) {
+                                                console.log( 'erro!', err );
+                                            });*/
+                                        });
                                     });
                                     //let resp = await images.getImage( city.link, img, imgpath );
                                     //await resp.pipe( await fs.createWriteStream( imgpath ) );
