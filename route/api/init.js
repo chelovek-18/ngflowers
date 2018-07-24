@@ -106,7 +106,7 @@ const
                             for ( let i in image ) {
                                 let
                                     img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
-                                    imghttp = `${ city.link }${ img }`,
+                                    imghttp = `/${ city.link }${ img }`,
                                     imgpath = `${ dirpath }${ img }`,
                                     dirs = imgpath.split( '/' ),
                                     fnm = dirs.pop();
@@ -115,10 +115,11 @@ const
                                     if ( dir && !fs.existsSync( dir ) )
                                         fs.mkdirSync( dir );
                                 });
-                                console.log( 'imgz:', imghttp, imgpath );
                                 if ( !fs.existsSync( imgpath ) ) {
                                     https.get( imghttp, function( resp ) {
+                                        console.log( 'da!' );
                                         resp.pipe( fs.createWriteStream( imgpath ) );
+                                        console.log( 'dada!' );
                                         /*jimp.read( imgpath ).then( function ( img ) {
                                             img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                                             img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
