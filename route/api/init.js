@@ -118,7 +118,7 @@ const
                                 console.log( 'da..' );
                                 if ( !fs.existsSync( imgpath ) ) {
                                     console.log( 'da......' );
-                                    https.get( imghttp, function( resp ) {
+                                    /*https.get( imghttp, function( resp ) {
                                         console.log( 'da!' );
                                         resp.pipe( fs.createWriteStream( imgpath ) );
                                         console.log( 'dada!' );
@@ -128,10 +128,11 @@ const
                                         }).catch( function( err ) {
                                             console.log( 'erro!', err );
                                         });*/
-                                    });
-                                    /*await images.getImage( city.link, img, imgpath );
+                                    //});
+                                    let resp = await images.getImage( city.link, img, imgpath );
+                                    console.log( 'resp:', resp );
                                     //await resp.pipe( fs.createWriteStream( imgpath ) );
-                                    jimp.read( imgpath ).then( function ( img ) {
+                                    /*jimp.read( imgpath ).then( function ( img ) {
                                         img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                                         img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
                                     }).catch( function( err ) {

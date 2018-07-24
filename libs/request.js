@@ -46,14 +46,16 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    if ( self.dataType == 'image' )
-                        return r( httpRes.pipe( fs.createWriteStream( self.imgpath ) ) );
-                    //if ( self.dataType == 'image' ) return r( httpRes ); //return r( new Buffer( output, 'binary' ) );
-                    try {
-                        r( JSON.parse( output ) );
-                    } catch( err ) {
-                        console.log( 'request error:', err, ' in ', output );
-                        r( {} );
+                    //if ( self.dataType == 'image' )
+                        //return r( httpRes.pipe( fs.createWriteStream( self.imgpath ) ) );
+                    if ( self.dataType == 'image' ) r( httpRes ); //return r( new Buffer( output, 'binary' ) );
+                    else {
+                        try {
+                            r( JSON.parse( output ) );
+                        } catch( err ) {
+                            console.log( 'request error:', err, ' in ', output );
+                            r( {} );
+                        }
                     }
                 });
             });
