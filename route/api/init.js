@@ -118,11 +118,10 @@ const
                                 console.log( 'da..' );
                                 if ( !fs.existsSync( imgpath ) ) {
                                     console.log( 'da......' );
-                                    /*await new Promise( ( r, j ) => {
-                                        https.get( imghttp, function( resp ) {
+                                    await new Promise( ( r, j ) => {
+                                        https.get( imghttp, async function( resp ) {
                                             console.log( 'da!' );
-                                            r();
-                                            resp.pipe( fs.createWriteStream( imgpath ) );
+                                            r( await resp.pipe( await fs.createWriteStream( imgpath ) ) );
                                             console.log( 'dada!' );
                                             /*jimp.read( imgpath ).then( function ( img ) {
                                                 img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
@@ -130,11 +129,11 @@ const
                                             }).catch( function( err ) {
                                                 console.log( 'erro!', err );
                                             });*/
-                                        //});
-                                    //});
-                                    let resp = await images.getImage( city.link, img, imgpath );
-                                    await resp.pipe( await fs.createWriteStream( imgpath ) );
-                                    console.log( 'ok:', imgpath );
+                                        });
+                                    });
+                                    //let resp = await images.getImage( city.link, img, imgpath );
+                                    //await resp.pipe( await fs.createWriteStream( imgpath ) );
+                                    //console.log( 'ok:', imgpath );
                                     //await resp.pipe( fs.createWriteStream( imgpath ) );
                                     /*jimp.read( imgpath ).then( function ( img ) {
                                         img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
