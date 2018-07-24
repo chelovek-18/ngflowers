@@ -35,6 +35,7 @@ class Request
         let self = this;
         return new Promise( ( r, j ) => {
             let httpReq = https.request( self, function( httpRes ) {
+                if ( self.dataType == 'image' ) return r( httpRes );
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
@@ -48,15 +49,15 @@ class Request
                 httpRes.on( 'end', () => {
                     //if ( self.dataType == 'image' )
                         //return r( httpRes.pipe( fs.createWriteStream( self.imgpath ) ) );
-                    if ( self.dataType == 'image' ) r( httpRes ); //return r( new Buffer( output, 'binary' ) );
-                    else {
+                    //if ( self.dataType == 'image' ) r( httpRes ); //return r( new Buffer( output, 'binary' ) );
+                    //else {
                         try {
                             r( JSON.parse( output ) );
                         } catch( err ) {
                             console.log( 'request error:', err, ' in ', output );
                             r( {} );
                         }
-                    }
+                    //}
                 });
             });
             httpReq.on( 'error', ( err ) => {

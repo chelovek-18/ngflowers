@@ -115,10 +115,8 @@ const
                                     if ( dir && !fs.existsSync( dir ) )
                                         fs.mkdirSync( dir );
                                 });
-                                console.log( 'da..' );
                                 if ( !fs.existsSync( imgpath ) ) {
-                                    console.log( 'da......' );
-                                    await new Promise( ( r, j ) => {
+                                    /*await new Promise( ( r, j ) => {
                                         https.get( imghttp, async function( resp ) {
                                             console.log( 'da!' );
                                             r( await resp.pipe( await fs.createWriteStream( imgpath ) ) );
@@ -129,8 +127,9 @@ const
                                             }).catch( function( err ) {
                                                 console.log( 'erro!', err );
                                             });*/
-                                        });
-                                    });
+                                        /*});
+                                    });*/
+                                    await images.getImage( city.link, img, imgpath );
                                     //let resp = await images.getImage( city.link, img, imgpath );
                                     //await resp.pipe( await fs.createWriteStream( imgpath ) );
                                     //console.log( 'ok:', imgpath );
