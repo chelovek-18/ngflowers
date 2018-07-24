@@ -104,9 +104,9 @@ const
                                 image = prod.image || [];
                             for ( let i in image ) {
                                 //if ( !prod.image[ i ].replace ) continue;
+                                console.log( 'WTF?????', image[ i ] );
                                 let
-                                    pth = await image[ i ],
-                                    img = pth.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                    img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                     imghttp = `${ city.link }/${ img }`,
                                     imgpath = `${ dirpath }${ img }`,
                                     dirs = imgpath.split( '/' ),
