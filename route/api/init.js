@@ -116,8 +116,8 @@ const
                                 });
                                 if ( !fs.existsSync( imgpath ) ) {
                                     let resp = await images.getImage( city.link, img );
-                                    resp.pipe( fs.createWriteStream( imgpath ) );
-                                    await jimp.read( imgpath ).then( function ( img ) {
+                                    await resp.pipe( fs.createWriteStream( imgpath ) );
+                                    jimp.read( imgpath ).then( function ( img ) {
                                         img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                                         img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
                                     }).catch( function( err ) {
