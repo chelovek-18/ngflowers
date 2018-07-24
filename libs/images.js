@@ -12,7 +12,7 @@ class Images extends Request
 
     async getImage( url, path ) {
         this.host = url.replace( 'https://', '' );
-        this.defaultPath = path;
+        this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
         return await this.setBody().request();
     }
 

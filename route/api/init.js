@@ -108,12 +108,17 @@ const
                                             imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
                                             dirs = imgpath.split( '/' ),
                                             fnm = dirs.pop();
-                                        console.log( 'img: ', imghttp, imgpath, dirs, fnm );
                                         dirs.forEach( ( d, ii ) => {
                                             let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
                                             if ( dir && !fs.existsSync( dir ) )
                                                 fs.mkdirSync( dir );
                                         });
+                                        if ( !fs.existsSync( imgpath ) )
+                                            ( async () => {
+                                                await images.getImage( city.link, img );
+                                            })();
+
+                                        
                                         /*if ( !fs.existsSync( imgpath ) )
                                             images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
                                             /*{ console.log( 'ch.z.ha?' ); jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
