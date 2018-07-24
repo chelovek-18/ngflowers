@@ -115,7 +115,9 @@ const
                                     if ( dir && !fs.existsSync( dir ) )
                                         fs.mkdirSync( dir );
                                 });
+                                console.log( 'da..' );
                                 if ( !fs.existsSync( imgpath ) ) {
+                                    console.log( 'da......' );
                                     https.get( imghttp, function( resp ) {
                                         console.log( 'da!' );
                                         resp.pipe( fs.createWriteStream( imgpath ) );
