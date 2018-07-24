@@ -78,7 +78,7 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 router.get( '/imgs/', async ( req, res, next ) => {
     // 2!..
     await jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
-        return img.scaleToFit( 300, 0 ).write( `${ global.appConf.location.root }/public/prob.jpg` );
+        return img.contain( 300, 5000 ).write( `${ global.appConf.location.root }/public/prob.jpg` );
     }).catch( function( err ) {
         console.log( 'erro!', err );
     });
