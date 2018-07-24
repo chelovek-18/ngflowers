@@ -34,9 +34,8 @@ class Request
     async request() {
         let self = this;
         return await new Promise( ( r, j ) => {
-            //console.log( '1!', self.host, self.path, self.method );
-            //if (  )
-            let httpReq = https[ self.dataType != 'json' ? 'get' : 'request' ]/*.request*/( ( self.dataType != 'json' ? `https://${ self.host }${ self.path }` : self ), function( httpRes ) {
+            if ( self.dataType != 'json' ) console.log( 'path:', `https://${ self.host }/${ self.path }` );
+            let httpReq = https[ self.dataType != 'json' ? 'get' : 'request' ]/*.request*/( ( self.dataType != 'json' ? `https://${ self.host }/${ self.path }` : self ), function( httpRes ) {
                 if ( self.dataType != 'json' ) console.log( 'self 2!' );
                 let output = '';
 
