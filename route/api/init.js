@@ -101,7 +101,7 @@ const
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
                             let
                                 prod = city[ prop ][ p ],
-                                image = prod.image || [];
+                                image = ( prod.image || [] ).map( i => i );
                             for ( let i in image ) {
                                 //if ( !prod.image[ i ].replace ) continue;
                                 console.log( 'WTF?????', typeof ( await image[ i ] ) == 'function' ? ( await image() )[ i ] : image[ i ] );
