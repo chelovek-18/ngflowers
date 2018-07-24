@@ -100,12 +100,13 @@ const
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
                             let
-                                prod = await city[ prop ][ p ],
-                                image = await prod.image || [];
+                                prod = city[ prop ][ p ],
+                                image = prod.image || [];
                             for ( let i in image ) {
                                 //if ( !prod.image[ i ].replace ) continue;
                                 let
-                                    img = ( await image )[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                    pth = await image[ i ],
+                                    img = pth.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                     imghttp = `${ city.link }/${ img }`,
                                     imgpath = `${ dirpath }${ img }`,
                                     dirs = imgpath.split( '/' ),
