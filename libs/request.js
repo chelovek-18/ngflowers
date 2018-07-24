@@ -35,8 +35,9 @@ class Request
         let self = this;
         return await new Promise( ( r, j ) => {
             //console.log( '1!', self.host, self.path, self.method );
-            let httpReq = https.request( self, function( httpRes ) {
-                //console.log( '2!' );
+            //if (  )
+            let httpReq = https[ self.dataType != 'json' ? 'get' : 'request' ]/*.request*/( ( self.dataType != 'json' ? `https://${ self.host }${ self.path }` : self ), function( httpRes ) {
+                console.log( '2!' );
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {

@@ -101,11 +101,8 @@ const
                         city[ prop ]
                             .filter( i => i.use )
                             .forEach( i => {
-                                ( async () => {
-                                if ( typeof i.image == 'object' && i.image.length && false )
-                                    for ( let kimg in i.image ) {
-                                        let img = i.image[ kimg ];
-                                    //i.image.forEach( async ( img ) => {
+                                if ( typeof i.image == 'object' && i.image.length )
+                                    i.image.forEach( async ( img ) => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
                                             imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
@@ -116,8 +113,8 @@ const
                                             if ( dir && !fs.existsSync( dir ) )
                                                 fs.mkdirSync( dir );
                                         });
-                                        console.log( 'imgpath', imgpath );
                                         if ( !fs.existsSync( imgpath ) )
+                                            await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
                                             /*{ console.log( 'ch.z.ha?' ); jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
                                             //{ console.log( 'ch.z.ha?', imgpath ); jimp.read( imghttp, ( err, image ) => {
                                                 console.log( '??', imgpath );
@@ -127,7 +124,7 @@ const
                                                     .cover( 300, 300 )
                                                     .write( imgpath );
                                             }); }*/
-                                            {//console.log( 'туц', city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
+                                            /*{//console.log( 'туц', city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
                                             console.log( 'тыц' );
                                             fs.writeFileSync( imghttp, new Buffer( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ) );
                                             console.log( 'тырыдыц' );
@@ -138,7 +135,7 @@ const
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
                                                     else console.log( 'done!!' );
-                                                });*/}
+                                                });}
                                                 /*.write( imgpath, function ( err ) {
                                                     if ( !err ) console.log( 'done' );
                                                     else console.log( 'img err', err );
@@ -150,8 +147,7 @@ const
                                                 if ( err ) return console.log( err );
                                                 fs.writeFileSync( imgpath, stdout, 'binary' );
                                             });*/
-                                    }//);
-                                })();
+                                    });
                             });
                     }
                 }
