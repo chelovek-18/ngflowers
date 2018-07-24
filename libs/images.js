@@ -20,9 +20,9 @@ class Images extends Request
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
         let self = this;
         //return await this.setBody().request();
-        return https.get( `https://${ self.host }${ self.defaultPath }`, function( resp ) {
+        try { return https.get( `https://${ self.host }${ self.defaultPath }`, function( resp ) {
             console.log( 'okeok' );
-        });
+        }); } catch( e ) { console.log( 'eeeeeerrror', e ); }
     }
 
 }
