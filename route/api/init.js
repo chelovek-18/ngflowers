@@ -104,7 +104,7 @@ const
                                 image = prod.image || [];
                             for ( let i in image ) {
                                 //if ( !prod.image[ i ].replace ) continue;
-                                console.log( 'WTF?????', await ( await image )[ i ] );
+                                console.log( 'WTF?????', typeof ( await image[ i ] ) == 'function' ? await image[ i ]() : image[ i ] );
                                 let
                                     img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                     imghttp = `${ city.link }/${ img }`,
