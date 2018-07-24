@@ -7,6 +7,7 @@ const
 
     fs = require( 'fs' ),
     jimp = require( 'jimp' ),
+    https = require( 'https' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -115,14 +116,23 @@ const
                                         fs.mkdirSync( dir );
                                 });
                                 if ( !fs.existsSync( imgpath ) ) {
-                                    await images.getImage( city.link, img, imgpath );
+                                    https.get( imghttp, function( resp ) {
+                                        resp.pipe( fs.createWriteStream( imgpath ) );
+                                        jimp.read( imgpath ).then( function ( img ) {
+                                            img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
+                                            img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
+                                        }).catch( function( err ) {
+                                            console.log( 'erro!', err );
+                                        });
+                                    });
+                                    /*await images.getImage( city.link, img, imgpath );
                                     //await resp.pipe( fs.createWriteStream( imgpath ) );
                                     jimp.read( imgpath ).then( function ( img ) {
                                         img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                                         img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
                                     }).catch( function( err ) {
                                         console.log( err );
-                                    });
+                                    });*/
                                 }
                             }
                         }
