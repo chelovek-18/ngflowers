@@ -102,8 +102,9 @@ const
                             let prod = city[ prop ][ p ];
                             if ( typeof prod.image == 'object' && prod.image.length )
                                 for ( let i in prod.image ) {
+                                    if ( typeof prod.image[ i ] == 'function' ) continue;
                                     let
-                                        img = ( typeof prod.image[ i ] == 'function' ? prod.image[ i ]() : prod.image[ i ] ).replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                        img = prod.image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                         imghttp = `${ city.link }/${ img }`,
                                         imgpath = `${ dirpath }${ img }`,
                                         dirs = imgpath.split( '/' ),
