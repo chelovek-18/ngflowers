@@ -129,7 +129,7 @@ const
                                             });*/
                                         /*});
                                     });*/
-                                    await images.getImage( city.link, img, imgpath );
+                                    await images.getImage( city.link, img, imgpath, fnm );
                                     //let resp = await images.getImage( city.link, img, imgpath );
                                     //await resp.pipe( await fs.createWriteStream( imgpath ) );
                                     //console.log( 'ok:', imgpath );
