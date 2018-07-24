@@ -64,7 +64,7 @@ class Request
                 console.log( 'request error:', err );
                 j( {} );
             });
-            httpReq.write( self.body );
+            if ( this.method != 'GET' ) httpReq.write( self.body );
             httpReq.end();
         }).catch( e => {
             console.log( 'request error:', e );
