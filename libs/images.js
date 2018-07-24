@@ -22,8 +22,9 @@ class Images extends Request
         //this.imgpath = imgpath;
         return new Promise( async ( r, j ) => {
             let resp = await this.setBody().request();
-            await resp.pipe( await fs.createWriteStream( imgpath ) );
-            setTimeout( () => {
+            resp.pipe( fs.createWriteStream( imgpath ) );
+            console.log( 'good' );
+            /*setTimeout( () => {
                 jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
@@ -33,7 +34,7 @@ class Images extends Request
                     console.log( 'erro!', err );
                     r();
                 });
-            }, 1000);
+            }, 1000);*/
         });
 
         return this.setBody().request();
