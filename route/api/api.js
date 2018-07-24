@@ -77,20 +77,20 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 
 router.get( '/imgs/', async ( req, res, next ) => {
     // 2!..
-    /*await jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
-        return img.contain( 300, 5000 ).write( `${ global.appConf.location.root }/public/prob.jpg` );
+    await jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
+        return img.resize( 300, jimp.AUTO ).write( `${ global.appConf.location.root }/public/prob.jpg` );
     }).catch( function( err ) {
         console.log( 'erro!', err );
     });
-    res.send( 'e-e!' );*/
+    res.send( 'e-e!' );
 
 
     // 1!..
-    let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
+    /*let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
     https.get( imgsource, function( resp ) {
         resp.pipe( fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` ) );
         res.send( 'oke' );
-    });
+    });*/
 
     //res.end( fs.readFileSync( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
     //res.end( fs.readFileSync( await images.getImage( 'novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) );
