@@ -102,7 +102,7 @@ const
                             .filter( i => i.use )
                             .forEach( i => {
                                 if ( typeof i.image == 'object' && i.image.length )
-                                    i.image.forEach( async ( img ) => {
+                                    i.image.forEach( ( img ) => {
                                         let
                                             imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
                                             imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
@@ -114,7 +114,7 @@ const
                                                 fs.mkdirSync( dir );
                                         });
                                         if ( !fs.existsSync( imgpath ) )
-                                            await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
+                                            images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
                                             /*{ console.log( 'ch.z.ha?' ); jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
                                             //{ console.log( 'ch.z.ha?', imgpath ); jimp.read( imghttp, ( err, image ) => {
                                                 console.log( '??', imgpath );
