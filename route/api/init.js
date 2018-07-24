@@ -101,7 +101,7 @@ const
                         city[ prop ]
                             .filter( i => i.use )
                             .forEach( i => {
-                                console.log( 'i.image????', i.image );
+                                console.log( 'i.image????', city.key, prop, i.image );
                                 if ( typeof i.image == 'object' && i.image.length )
                                     i.image.forEach( img => {
                                         /*let
