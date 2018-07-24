@@ -19,7 +19,7 @@ class Images extends Request
         this.host = url.replace( 'https://', '' );
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
         this.imgpath = imgpath;
-        return await this.setBody().request();
+        return this.setBody().request();
     }
 
 }

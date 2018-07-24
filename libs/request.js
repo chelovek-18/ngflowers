@@ -33,7 +33,7 @@ class Request
 
     async request() {
         let self = this;
-        return await new Promise( ( r, j ) => {
+        return new Promise( ( r, j ) => {
             let httpReq = https.request( self, function( httpRes ) {
                 let output = '';
 
