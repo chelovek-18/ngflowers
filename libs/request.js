@@ -27,15 +27,15 @@ class Request
             this.path = this.defaultPath;
         }
         else this.path = `${ this.defaultPath }?${ this.body }`;
-        if ( this.dataType != 'json' ) this.encoding = 'binary';
+        //if ( this.dataType != 'json' ) this.encoding = 'binary';
         return this;
     }
 
     async request() {
         let self = this;
         return await new Promise( ( r, j ) => {
-            if ( self.dataType != 'json' ) console.log( 'path:', `https://${ self.host }/${ self.path }` );
-            let httpReq = https[ self.dataType != 'json' ? 'get' : 'request' ]/*.request*/( ( self.dataType != 'json' ? `https://${ self.host }/${ self.path }` : self ), function( httpRes ) {
+            if ( self.dataType != 'json' ) console.log( 'path:', `https://${ self.host }${ self.path }` );
+            let httpReq = https[ self.dataType != 'json' ? 'get' : 'request' ]/*.request*/( ( self.dataType != 'json' ? `https://${ self.host }${ self.path }` : self ), function( httpRes ) {
                 if ( self.dataType != 'json' ) console.log( 'self 2!' );
                 let output = '';
 
