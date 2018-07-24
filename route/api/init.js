@@ -103,9 +103,9 @@ const
                             if ( typeof prod.image == 'object' && prod.image.length )
                                 for ( let i in prod.image ) {
                                     let
-                                        img = prod.image[ i ],
-                                        imghttp = ( console.log( 'img?', img ), `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }` ),
-                                        imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
+                                        img = ( await prod.image[ i ] ).replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                        imghttp = `${ city.link }/${ img }`,
+                                        imgpath = `${ dirpath }${ img }`,
                                         dirs = imgpath.split( '/' ),
                                         fnm = dirs.pop();
                                     dirs.forEach( ( d, ii ) => {
