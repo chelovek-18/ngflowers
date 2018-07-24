@@ -98,7 +98,27 @@ const
                     // Проверяем наличие сохраненных изображений, сохраняем
                     if ( prop == 'products' ) {
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
-                        city[ prop ]
+                        for ( let p in city[ prop ].filter( i => i.use ) ) {
+                            let prod = city[ prop ][ p ];
+                            if ( typeof prod.image == 'object' && prod.image.length )
+                                for ( let i in prod.image ) {
+                                    let
+                                        img = prod.image[ i ],
+                                        imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
+                                        imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
+                                        dirs = imgpath.split( '/' ),
+                                        fnm = dirs.pop();
+                                    dirs.forEach( ( d, ii ) => {
+                                        let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
+                                        if ( dir && !fs.existsSync( dir ) )
+                                            fs.mkdirSync( dir );
+                                    });
+                                    if ( !fs.existsSync( imgpath ) )
+                                        await images.getImage( city.link, img );
+                                }
+                        }
+
+                        /*city[ prop ]
                             .filter( i => i.use )
                             .forEach( i => {
                                 if ( typeof i.image == 'object' && i.image.length )
@@ -153,8 +173,8 @@ const
                                                 if ( err ) return console.log( err );
                                                 fs.writeFileSync( imgpath, stdout, 'binary' );
                                             });*/
-                                    });
-                            });
+                                    //});
+                            //});
                     }
                 }
             }
