@@ -27,7 +27,6 @@ class Request
             this.path = this.defaultPath;
         }
         else this.path = `${ this.defaultPath }?${ this.body }`;
-        //if ( this.dataType != 'json' ) this.encoding = 'binary';
         return this;
     }
 
@@ -35,7 +34,6 @@ class Request
         let self = this;
         return await new Promise( ( r, j ) => {
             let httpReq = https.request( self, function( httpRes ) {
-                if ( self.dataType != 'json' ) console.log( 'self 2!' );
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 ) {
@@ -47,9 +45,7 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    //console.log( '3!', self.dataType );
-                    //if ( self.dataType != 'json' ) console.log( 'outp', output );
-                    if ( self.dataType != 'json' ) return r( output ); //return r( new Buffer( output, 'binary' ) );
+                    if ( self.dataType == 'image' ) return r( httpRes ); //return r( new Buffer( output, 'binary' ) );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {

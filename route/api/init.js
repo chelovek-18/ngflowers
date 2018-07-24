@@ -6,7 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    //gm = require( 'gm' ),
+    jimp = require( 'jimp' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -114,8 +114,16 @@ const
                                     if ( dir && !fs.existsSync( dir ) )
                                         fs.mkdirSync( dir );
                                 });
-                                if ( !fs.existsSync( imgpath ) )
-                                    await images.getImage( city.link, img );
+                                if ( !fs.existsSync( imgpath ) ) {
+                                    let resp = await images.getImage( city.link, img );
+                                    resp.pipe( fs.createWriteStream( imgpath ) );
+                                    await jimp.read( imgpath ).then( function ( img ) {
+                                        img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
+                                        img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
+                                    }).catch( function( err ) {
+                                        console.log( err );
+                                    });
+                                }
                             }
                         }
 
