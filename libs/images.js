@@ -4,6 +4,7 @@ const Request = require( './request' );
 
 const
     fs = require( 'fs' ),
+    jimp = require( 'jimp' ),
     dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
 
 
@@ -20,11 +21,14 @@ class Images extends Request
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
         //this.imgpath = imgpath;
         return new Promise( async ( r, j ) => {
-            console.log( 'e0' );
             let resp = await this.setBody().request();
-            console.log( 'e1' );
             r( await resp.pipe( await fs.createWriteStream( imgpath ) ) );
-            console.log( 'e2' );
+            jimp.read( imgpath ).then( function ( img ) {
+                img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
+                img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
+            }).catch( function( err ) {
+                console.log( 'erro!', err );
+            });
         });
 
         return this.setBody().request();
