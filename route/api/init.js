@@ -132,6 +132,7 @@ const
                                     let resp = await images.getImage( city.link, img, imgpath );
                                     await resp.pipe( await fs.createWriteStream( imgpath ) );
                                     console.log( 'ok:', imgpath );
+                                    process.kill();
                                     //await resp.pipe( fs.createWriteStream( imgpath ) );
                                     /*jimp.read( imgpath ).then( function ( img ) {
                                         img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
