@@ -6,7 +6,7 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    gm = require( 'gm' ),
+    //gm = require( 'gm' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -133,12 +133,12 @@ const
                                             console.log( 'тырыдыц' );
                                             //console.log( 'img buf', await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) );
                                             //gm( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ), fnm )
-                                            gm( imghttp )
+                                            /*gm( imghttp )
                                                 .resize( 300, 300 )
                                                 .write( imgpath, ( err ) => {
                                                     if ( err ) console.log( 'no done!', err );
                                                     else console.log( 'done!!' );
-                                                });}
+                                                });*/}
                                                 /*.write( imgpath, function ( err ) {
                                                     if ( !err ) console.log( 'done' );
                                                     else console.log( 'img err', err );
