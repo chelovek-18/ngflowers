@@ -130,7 +130,7 @@ const
                                         });*/
                                     //});
                                     let resp = await images.getImage( city.link, img, imgpath );
-                                    resp.pipe( fs.createWriteStream( imgpath ) );
+                                    await resp.pipe( await fs.createWriteStream( imgpath ) );
                                     console.log( 'ok:', imgpath );
                                     //await resp.pipe( fs.createWriteStream( imgpath ) );
                                     /*jimp.read( imgpath ).then( function ( img ) {
