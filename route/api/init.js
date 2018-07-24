@@ -100,7 +100,7 @@ const
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
                             let prod = city[ prop ][ p ];
-                            console.log( 'prod:', prod.image[ 0 ], typeof prod.image[ 0 ], prod.image[ 0 ].replace );
+                            console.log( 'prod:', prod.image[ 0 ], typeof prod.image[ 0 ], 'hu', prod.image[ 0 ].replace );
                             if ( typeof prod.image == 'object' && prod.image.length )
                                 for ( let i in prod.image ) {
                                     //if ( !prod.image[ i ].replace ) continue;
