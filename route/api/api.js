@@ -76,38 +76,21 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
-    /*jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
+    // 2!..
+    await jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
         return img.scaleToFit( 300, 0 ).write( `${ global.appConf.location.root }/public/prob.jpg` );
     }).catch( function( err ) {
         console.log( 'erro!', err );
-    });*/
+    });
+    res.send( 'e-e!' );
 
-    /*await gm( `${ global.appConf.location.root }/public/prob.jpg` )
-        .resize( 50 )
-        .stream()
-        .pipe( fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` ) );
-
-    res.send( 'hu!' );*/
-
-    /*images( `${ global.appConf.location.root }/public/prob.jpg` )
-        .resize( 300 )
-        .encode( "png" )
-        .save( `${ global.appConf.location.root }/public/prob.png` );
-    //});
-        /*.stream( ( err, stdout, stderr ) => {
-            // `${ global.appConf.location.root }/public/prob.jpg`
-            let writeStream = fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` );
-            stdout.pipe( writeStream );
-            //if ( err ) res.send( err );
-            //else res.send( 'resized!' );
-        });*/
 
     // 1!..
-    let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
+    /*let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
     https.get( imgsource, function( resp ) {
         resp.pipe( fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` ) );
         res.send( 'oke' );
-    });
+    });*/
 
     //res.end( fs.readFileSync( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
     //res.end( fs.readFileSync( await images.getImage( 'novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) );
