@@ -7,7 +7,8 @@ const
     geo = new ( require( './../../libs/geo' ) ),
     https = require( 'https' ),
     fs = require( 'fs' ),
-    gm = require( 'gm' ),
+    //gm = require( 'gm' ),
+    jimp = require( 'jimp' ),
     //images = require( 'images' ),
     url = require( 'url' );
     //images = new( require( './../../libs/images' ) );
@@ -75,6 +76,12 @@ router.get( '/rbanners/:city', async ( req, res, next ) => {
 });
 
 router.get( '/imgs/', async ( req, res, next ) => {
+    jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
+        return img.resize( 50 ).write( `${ global.appConf.location.root }/public/prob.jpg` );
+    }).catch( function( err ) {
+        console.loe( 'erro!', err );
+    });
+
     /*await gm( `${ global.appConf.location.root }/public/prob.jpg` )
         .resize( 50 )
         .stream()
@@ -96,11 +103,11 @@ router.get( '/imgs/', async ( req, res, next ) => {
         });*/
 
     // 1!..
-    let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
+    /*let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
     https.get( imgsource, function( resp ) {
         resp.pipe( fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` ) );
         res.send( 'oke' );
-    });
+    });*/
 
     //res.end( fs.readFileSync( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
     //res.end( fs.readFileSync( await images.getImage( 'novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) );
