@@ -6,8 +6,6 @@ const
     router = express.Router(),
 
     fs = require( 'fs' ),
-    jimp = require( 'jimp' ),
-    https = require( 'https' ),
     
     // api данные
     model = new ( require( './../../model/model' ) )( dbcomplete ),
@@ -243,7 +241,7 @@ async function dbcomplete() {
     let settings = await model.settings().findOne();
     geo.setParams( settings );
 
-    setInterval( refreshDatas, 15000 /*600000*/ );
+    setInterval( refreshDatas, /*15000*/ 600000 );
 }
 
 // ------------------------------------- Инициализация -------------------------------------

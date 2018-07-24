@@ -1,8 +1,7 @@
 'use strict';
 
-const Request = require( './request' );
-
 const
+    Request = require( './request' ),
     fs = require( 'fs' ),
     jimp = require( 'jimp' ),
     dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
@@ -19,7 +18,6 @@ class Images extends Request
     async getImage( url, path, imgpath, fnm ) {
         this.host = url.replace( 'https://', '' );
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
-        //this.imgpath = imgpath;
         return new Promise( async ( r, j ) => {
             let resp = await this.setBody().request();
             resp.pipe( fs.createWriteStream( imgpath ) );

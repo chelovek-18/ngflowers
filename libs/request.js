@@ -2,7 +2,6 @@
 
 const
     https = require( 'https' ),
-    fs = require( 'fs' ),
     dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
 
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
@@ -38,26 +37,19 @@ class Request
                 if ( self.dataType == 'image' ) return r( httpRes );
                 let output = '';
 
-                if ( httpRes.statusCode >= 400 ) {
-                    //console.log( 'request error:', httpRes.statusCode );
+                if ( httpRes.statusCode >= 400 )
                     j( {} );
-                }
     
                 httpRes.on( 'data', function ( chunk ) {
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    //if ( self.dataType == 'image' )
-                        //return r( httpRes.pipe( fs.createWriteStream( self.imgpath ) ) );
-                    //if ( self.dataType == 'image' ) r( httpRes ); //return r( new Buffer( output, 'binary' ) );
-                    //else {
-                        try {
-                            r( JSON.parse( output ) );
-                        } catch( err ) {
-                            console.log( 'request error:', err, ' in ', output );
-                            r( {} );
-                        }
-                    //}
+                    try {
+                        r( JSON.parse( output ) );
+                    } catch( err ) {
+                        console.log( 'request error:', err, ' in ', output );
+                        r( {} );
+                    }
                 });
             });
             httpReq.on( 'error', ( err ) => {
