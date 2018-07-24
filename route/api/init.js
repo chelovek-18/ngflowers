@@ -100,6 +100,7 @@ const
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
                             let prod = city[ prop ][ p ];
+                            console.log( 'prod:', prod );
                             if ( typeof prod.image == 'object' && prod.image.length )
                                 for ( let i in prod.image ) {
                                     if ( !prod.image[ i ].replace ) continue;
@@ -114,8 +115,8 @@ const
                                         if ( dir && !fs.existsSync( dir ) )
                                             fs.mkdirSync( dir );
                                     });
-                                    if ( !fs.existsSync( imgpath ) )
-                                        await images.getImage( city.link, img );
+                                    /*if ( !fs.existsSync( imgpath ) )
+                                        await images.getImage( city.link, img );*/
                                 }
                         }
 
