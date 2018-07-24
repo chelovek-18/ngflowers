@@ -22,14 +22,16 @@ class Images extends Request
         //this.imgpath = imgpath;
         return new Promise( async ( r, j ) => {
             let resp = await this.setBody().request();
-            r( await resp.pipe( await fs.createWriteStream( imgpath ) ) );
+            await resp.pipe( await fs.createWriteStream( imgpath ) );
             setTimeout( () => {
                 jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
                     console.log( '-=<ok>=-' );
+                    r();
                 }).catch( function( err ) {
                     console.log( 'erro!', err );
+                    r();
                 });
             }, 1000);
         });
