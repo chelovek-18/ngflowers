@@ -2,6 +2,7 @@
 
 const
     https = require( 'https' ),
+    fs = require( 'fs' ),
     dataSerialize = obj => Object.keys( obj ).map( k => k + '=' + obj[ k ] ).join( '&' );
 
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
@@ -45,7 +46,9 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
-                    if ( self.dataType == 'image' ) return r( httpRes ); //return r( new Buffer( output, 'binary' ) );
+                    if ( self.dataType == 'image' )
+                        return r( httpRes.pipe( fs.createWriteStream( self.imgpath ) ) );
+                    //if ( self.dataType == 'image' ) return r( httpRes ); //return r( new Buffer( output, 'binary' ) );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {

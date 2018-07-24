@@ -115,8 +115,8 @@ const
                                         fs.mkdirSync( dir );
                                 });
                                 if ( !fs.existsSync( imgpath ) ) {
-                                    let resp = await images.getImage( city.link, img );
-                                    await resp.pipe( fs.createWriteStream( imgpath ) );
+                                    await images.getImage( city.link, img, imgpath );
+                                    //await resp.pipe( fs.createWriteStream( imgpath ) );
                                     jimp.read( imgpath ).then( function ( img ) {
                                         img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                                         img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );

@@ -15,9 +15,10 @@ class Images extends Request
         this.dataType = 'image';
     }
 
-    async getImage( url, path ) {
+    async getImage( url, path, imgpath ) {
         this.host = url.replace( 'https://', '' );
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
+        this.imgpath = imgpath;
         return await this.setBody().request();
     }
 
