@@ -18,11 +18,11 @@ class Images extends Request
     async getImage( url, path ) {
         this.host = url.replace( 'https://', '' );
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
-        let self = this;
-        //return await this.setBody().request();
-        try { return https.get( `https://${ self.host }${ self.defaultPath }`, function( resp ) {
+        //let self = this;
+        return await this.setBody().request();
+        /*try { return https.get( `https://${ self.host }${ self.defaultPath }`, function( resp ) {
             console.log( 'okeok' );
-        }); } catch( e ) { console.log( 'eeeeeerrror', e ); }
+        }); } catch( e ) { console.log( 'eeeeeerrror', e ); }*/
     }
 
 }

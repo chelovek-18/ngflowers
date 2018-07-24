@@ -35,11 +35,11 @@ class Request
         let self = this;
         return await new Promise( ( r, j ) => {
             //if ( self.dataType != 'json' ) console.log( 'path:', self.dataType,  `https://${ self.host }${ self.path }` );
-            if ( self.dataType != 'json' ) {
+            /*if ( self.dataType != 'json' ) {
                 return https.get( `https://${ self.host }${ self.path }`, function( httpRes ) {
                     console.log( 'done!' );
                 }).on( 'error', ( err ) => { console.log( 'oh, bl...', err ); } ).end();
-            }
+            }*/
             let httpReq = https[ self.dataType != 'json' ? 'get' : 'request' ]/*.request*/( ( self.dataType != 'json' ? `https://${ self.host }${ self.path }` : self ), function( httpRes ) {
                 if ( self.dataType != 'json' ) console.log( 'self 2!' );
                 let output = '';

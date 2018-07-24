@@ -114,8 +114,8 @@ const
                                     if ( dir && !fs.existsSync( dir ) )
                                         fs.mkdirSync( dir );
                                 });
-                                /*if ( !fs.existsSync( imgpath ) )
-                                    await images.getImage( city.link, img );*/
+                                if ( !fs.existsSync( imgpath ) )
+                                    await images.getImage( city.link, img );
                             }
                         }
 
