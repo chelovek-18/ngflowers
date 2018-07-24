@@ -103,11 +103,8 @@ const
                                 prod = city[ prop ][ p ],
                                 image = ( prod.image || [] ).map( i => i );
                             for ( let i in image ) {
-                                //if ( !prod.image[ i ].replace ) continue;
-                                console.log( 'WTF?????', typeof ( await image[ i ] ) == 'function' ? ( await image() )[ i ] : image[ i ] );
                                 let
-                                    img = ( ( typeof ( await image[ i ] ) == 'function' ) ? ( await image() )[ i ] : image[ i ] )
-                                        .replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                                    img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
                                     imghttp = `${ city.link }/${ img }`,
                                     imgpath = `${ dirpath }${ img }`,
                                     dirs = imgpath.split( '/' ),
