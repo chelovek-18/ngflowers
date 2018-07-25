@@ -21,18 +21,18 @@ class Images extends Request
         return new Promise( async ( r, j ) => {
             let resp = await this.setBody().request();
             resp.pipe( fs.createWriteStream( imgpath ) );
-            console.log( 'image saved ' + imgpath );
+            console.log( 'image saved', imgpath );
             // Таймаут между запросами
             setTimeout( () => {
-                if ( ~fnm.indexOf( '.gif' ) ) {
+                /*if ( ~fnm.indexOf( '.gif' ) ) {
                     r();
-                } else jimp.read( imgpath ).then( function ( img ) {
+                } else*/ jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
-                    console.log( 'image resize ' + imgpath );
+                    console.log( 'image resize', imgpath );
                     r();
                 }).catch( function( err ) {
-                    console.log( 'resize error', err );
+                    console.log( 'resize error', imgpath, err );
                     r();
                 });
             }, 2000);
