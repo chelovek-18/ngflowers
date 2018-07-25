@@ -15,7 +15,6 @@ const
 
     // Периодическое обновление данных
     refreshDatas = async () => {
-        return;
         // Данные из api-запроса для сравнения
         let
             reqCities = ( await ng.getCities() ) || [],
@@ -96,12 +95,12 @@ const
                     }
 
                     // Проверяем наличие сохраненных изображений, сохраняем
-                    if ( prop == 'products' ) {
+                    if ( prop == 'products' || prop == 'banners' ) {
                         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
                             let
                                 prod = city[ prop ][ p ],
-                                image = ( prod.image || [] ).map( i => i );
+                                image = prop == 'banners' ? [ prod.image ] : ( prod.image || [] ).map( i => i );
                             for ( let i in image ) {
                                 let
                                     img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
