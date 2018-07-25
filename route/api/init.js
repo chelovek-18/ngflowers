@@ -15,6 +15,7 @@ const
 
     // Периодическое обновление данных
     refreshDatas = async () => {
+        return;
         // Данные из api-запроса для сравнения
         let
             reqCities = ( await ng.getCities() ) || [],
@@ -107,98 +108,19 @@ const
                                     imghttp = `${ city.link }${ img }`,
                                     imgpath = `${ dirpath }${ img }`,
                                     dirs = imgpath.split( '/' ),
-                                    fnm = dirs.pop();
+                                    fnm = dirs.pop(),
+                                    fnm1 = fnm.replace( '.', '-1.' ),
+                                    fnm2 = fnm.replace( '.', '-2.' );
                                 dirs.forEach( ( d, ii ) => {
                                     let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
                                     if ( dir && !fs.existsSync( dir ) )
                                         fs.mkdirSync( dir );
                                 });
-                                if ( !fs.existsSync( imgpath ) ) {
-                                    /*await new Promise( ( r, j ) => {
-                                        https.get( imghttp, async function( resp ) {
-                                            console.log( 'da!' );
-                                            r( await resp.pipe( await fs.createWriteStream( imgpath ) ) );
-                                            console.log( 'dada!' );
-                                            /*jimp.read( imgpath ).then( function ( img ) {
-                                                img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
-                                                img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
-                                            }).catch( function( err ) {
-                                                console.log( 'erro!', err );
-                                            });*/
-                                        /*});
-                                    });*/
+                                if ( !fs.existsSync( imgpath ) || !fs.existsSync( imgpath.replace( fnm, fnm1 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm2 ) ) )
                                     await images.getImage( city.link, img, imgpath, fnm );
-                                    //let resp = await images.getImage( city.link, img, imgpath );
-                                    //await resp.pipe( await fs.createWriteStream( imgpath ) );
-                                    //console.log( 'ok:', imgpath );
-                                    //await resp.pipe( fs.createWriteStream( imgpath ) );
-                                    /*jimp.read( imgpath ).then( function ( img ) {
-                                        img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
-                                        img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
-                                    }).catch( function( err ) {
-                                        console.log( err );
-                                    });*/
-                                }
                             }
                         }
 
-                        /*city[ prop ]
-                            .filter( i => i.use )
-                            .forEach( i => {
-                                if ( typeof i.image == 'object' && i.image.length )
-                                    i.image.forEach( img => {
-                                        let
-                                            imghttp = `${ city.link }/${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
-                                            imgpath = `${ dirpath }${ img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) }`,
-                                            dirs = imgpath.split( '/' ),
-                                            fnm = dirs.pop();
-                                        dirs.forEach( ( d, ii ) => {
-                                            let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
-                                            if ( dir && !fs.existsSync( dir ) )
-                                                fs.mkdirSync( dir );
-                                        });
-                                        if ( !fs.existsSync( imgpath ) )
-                                            ( async () => {
-                                                await images.getImage( city.link, img );
-                                            })();
-
-                                        
-                                        /*if ( !fs.existsSync( imgpath ) )
-                                            images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
-                                            /*{ console.log( 'ch.z.ha?' ); jimp.read( await ( new images( city.link, img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ).getImage(), ( err, image ) => {
-                                            //{ console.log( 'ch.z.ha?', imgpath ); jimp.read( imghttp, ( err, image ) => {
-                                                console.log( '??', imgpath );
-                                                if (err) return console.log( err );
-                                                console.log( 'image!', image );
-                                                image
-                                                    .cover( 300, 300 )
-                                                    .write( imgpath );
-                                            }); }*/
-                                            /*{//console.log( 'туц', city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) );
-                                            console.log( 'тыц' );
-                                            fs.writeFileSync( imghttp, new Buffer( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) ) );
-                                            console.log( 'тырыдыц' );
-                                            //console.log( 'img buf', await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ) );
-                                            //gm( await images.getImage( city.link.replace( 'https://', '' ), img.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ) ), fnm )
-                                            /*gm( imghttp )
-                                                .resize( 300, 300 )
-                                                .write( imgpath, ( err ) => {
-                                                    if ( err ) console.log( 'no done!', err );
-                                                    else console.log( 'done!!' );
-                                                });}
-                                                /*.write( imgpath, function ( err ) {
-                                                    if ( !err ) console.log( 'done' );
-                                                    else console.log( 'img err', err );
-                                                });*/
-                                            /*imagemagick.resize({
-                                                srcPath: imghttp,
-                                                width: 300
-                                            }, function( err, stdout, stderr ){
-                                                if ( err ) return console.log( err );
-                                                fs.writeFileSync( imgpath, stdout, 'binary' );
-                                            });*/
-                                    //});
-                            //});
                     }
                 }
             }
@@ -236,12 +158,15 @@ let
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
+    // Получаем из базы города со всем, что к ним относится
     cities = await model.cities().find();
 
+    // Получаем из базы и устанавливаем для геолокации настройки
     let settings = await model.settings().findOne();
     geo.setParams( settings );
 
-    setInterval( refreshDatas, /*15000*/ 600000 );
+    // Интервал обновлений данных
+    setInterval( refreshDatas, global.appConf.settings.refresh );
 }
 
 // ------------------------------------- Инициализация -------------------------------------

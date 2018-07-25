@@ -1,4 +1,7 @@
 {
+    "settings": {
+        "refresh": 600000
+    },
     "location": {
         "port": 50001,
         "ws": 50002,
