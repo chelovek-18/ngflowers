@@ -116,7 +116,7 @@ const
                                         fs.mkdirSync( dir );
                                 });
                                 if ( !fs.existsSync( imgpath ) || !fs.existsSync( imgpath.replace( fnm, fnm1 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm2 ) ) )
-                                    await images.getImage( city.link, img, imgpath, fnm );
+                                    if ( !~fnm.indexOf( '.gif' ) ) await images.getImage( city.link, img, imgpath, fnm );
                             }
                         }
 
