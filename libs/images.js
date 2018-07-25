@@ -38,6 +38,33 @@ class Images extends Request
         return this.setBody().request();
     }
 
+    async imgsExistenceCheck( city, prop ) {
+        let self = this;
+        let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
+        for ( let p in city[ prop ].filter( i => i.use ) ) {
+            let
+                prod = city[ prop ][ p ],
+                image = prop == 'banners' ? [ prod.image ] : ( prod.image || [] ).map( i => i );
+            for ( let i in image ) {
+                let
+                    img = image[ i ].replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' ),
+                    imghttp = `${ city.link }${ img }`,
+                    imgpath = `${ dirpath }${ img }`,
+                    dirs = imgpath.split( '/' ),
+                    fnm = dirs.pop(),
+                    fnm1 = fnm.replace( '.', '-1.' ),
+                    fnm2 = fnm.replace( '.', '-2.' );
+                dirs.forEach( ( d, ii ) => {
+                    let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
+                    if ( dir && !fs.existsSync( dir ) )
+                        fs.mkdirSync( dir );
+                });
+                if ( !fs.existsSync( imgpath ) || !fs.existsSync( imgpath.replace( fnm, fnm1 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm2 ) ) )
+                    if ( !~fnm.indexOf( '.gif' ) ) await self.getImage( city.link, img, imgpath, fnm );
+            }
+        }
+    }
+
 }
 
 module.exports = Images;

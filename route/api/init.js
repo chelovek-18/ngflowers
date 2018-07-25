@@ -96,7 +96,8 @@ const
 
                     // Проверяем наличие сохраненных изображений, сохраняем
                     if ( prop == 'products' || prop == 'banners' ) {
-                        let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
+                        images.imgsExistenceCheck( city, prop );
+                        /*let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
                         for ( let p in city[ prop ].filter( i => i.use ) ) {
                             let
                                 prod = city[ prop ][ p ],
@@ -118,7 +119,7 @@ const
                                 if ( !fs.existsSync( imgpath ) || !fs.existsSync( imgpath.replace( fnm, fnm1 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm2 ) ) )
                                     if ( !~fnm.indexOf( '.gif' ) ) await images.getImage( city.link, img, imgpath, fnm );
                             }
-                        }
+                        }*/
 
                     }
                 }
