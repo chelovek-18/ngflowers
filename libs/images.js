@@ -24,9 +24,16 @@ class Images extends Request
             console.log( 'image saved', imgpath );
             // Таймаут между запросами
             setTimeout( () => {
-                /*if ( ~fnm.indexOf( '.gif' ) ) {
-                    r();
-                } else*/ jimp.read( imgpath ).then( function ( img ) {
+                if ( ~fnm.indexOf( '.gif' ) ) {
+                    console.log( "sorry, i'm gif!" );
+                    resp.pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
+                    resp.pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
+                    setTimeout( () => {
+                        console.log( "e, cool" );
+                        r();
+                    }, 2000);
+                    //r();
+                } else jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
                     console.log( 'image resize', imgpath );
