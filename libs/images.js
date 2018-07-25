@@ -28,8 +28,10 @@ class Images extends Request
                     console.log( "sorry, i'm gif!" );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
-                    console.log( 'e, ok!' );
-                    r();
+                    setTimeout( () => {
+                        console.log( 'e, ok!' );
+                        r();
+                    }, 2000);
                 } else jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
