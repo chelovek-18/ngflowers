@@ -64,6 +64,7 @@ router.get( '/products/:city', ( req, res, next ) => {
 });
 
 router.get( '/app-settings/', async ( req, res, next ) => {
+    console.log( 'zapros e' );
     res.json( await req.db.settings().findOne() );
 });
 

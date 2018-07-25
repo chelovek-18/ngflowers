@@ -7,6 +7,9 @@ const
 
 let onProcess = false;
 
+/**
+ * ------------------------------------- Работа с изображениями -------------------------------------
+ */
 class Images extends Request
 {
     constructor() {
@@ -15,6 +18,7 @@ class Images extends Request
         this.dataType = 'image';
     }
 
+    // Получить изображение и сохранить к себе + сделать resize
     async getImage( url, path, imgpath, fnm ) {
         this.host = url.replace( 'https://', '' );
         this.defaultPath = path.replace( '/resize_cache/', '/' ).replace( '/80_80_1/', '/' );
@@ -22,7 +26,7 @@ class Images extends Request
             let resp = await this.setBody().request();
             resp.pipe( fs.createWriteStream( imgpath ) );
             console.log( 'image saved', imgpath );
-            // Таймаут между запросами
+            // Таймаут между запросами чтобы не перегружать сервак
             setTimeout( () => {
                 if ( ~fnm.indexOf( '.gif' ) ) {
                     console.log( "sorry, i'm gif!" );
@@ -52,6 +56,7 @@ class Images extends Request
         return this.setBody().request();
     }
 
+    // Перебор изображений товаров и баннеров и сохранение их к себе
     async imgsExistenceCheck( city, prop ) {
         if ( onProcess ) return;
         onProcess = true;
