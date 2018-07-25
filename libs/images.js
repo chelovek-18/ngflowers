@@ -26,8 +26,8 @@ class Images extends Request
             setTimeout( () => {
                 if ( ~fnm.indexOf( '.gif' ) ) {
                     console.log( "sorry, i'm gif!" );
-                    fs.writeFileSync( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ), imgpath );
-                    fs.writeFileSync( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ), imgpath );
+                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
+                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
                     console.log( 'e, ok!' );
                     r();
                 } else jimp.read( imgpath ).then( function ( img ) {
