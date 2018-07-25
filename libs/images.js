@@ -39,7 +39,12 @@ class Images extends Request
                     r();
                 }).catch( function( err ) {
                     console.log( 'resize error', imgpath, err );
-                    r();
+                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
+                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
+                    setTimeout( () => {
+                        console.log( 'e, ok!' );
+                        r();
+                    }, 2000);
                 });
             }, 2000);
         });
