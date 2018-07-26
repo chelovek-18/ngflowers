@@ -92,7 +92,12 @@ class Images extends Request
                 ( city.products.filter( p => p.image.filter( im => ~im.indexOf( '/' + cd ) ).length ).length
                 + city.banners.filter( p => ~p.image.indexOf( '/' + cd ) ).length ) == 0
             ) {
-                console.log( `remove dir ${ dirpath + '/upload/iblock/' + cd }?` );
+                console.log( `remove dir ${ dirpath + '/upload/iblock/' + cd }:` );
+                let files = fs.readdirSync( dirpath + '/upload/iblock/' + cd );
+                for ( let kf in files ) {
+                    fs.unlinkSync( dirpath + '/upload/iblock/' + cd + '/' + files[ kf ] );
+                }
+                fs.rmdir( dirpath + '/upload/iblock/' + cd );
             }
         }
     }
