@@ -21,7 +21,6 @@ class ProductsCollection
             },
             oldPrice: {
                 type: Number,
-                required: true
             },
             image: {
                 type: [ String ],

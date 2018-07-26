@@ -17,8 +17,7 @@ class CategoriesCollection
                 required: true
             },
             parent: {
-                type: Number,
-                required: true
+                type: Number
             },
             use: {
                 type: Boolean,
