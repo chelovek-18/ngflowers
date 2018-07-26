@@ -2,6 +2,9 @@
 
 const Request = require( './request' );
 
+/**
+ * ------------------------------------- API NG -------------------------------------
+ */
 class NG extends Request
 {
     constructor() {

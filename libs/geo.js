@@ -2,6 +2,9 @@
 
 const Request = require( './request' );
 
+/**
+ * ------------------------------------- Google Maps API -------------------------------------
+ */
 class Geo extends Request
 {
     constructor() {
@@ -18,6 +21,7 @@ class Geo extends Request
     }
 
     async setParams( settings ) {
+        // Установить ключ
         this.defaultData.key = ( await settings ).googleKey;
     }
 }

@@ -4,7 +4,7 @@
     },
     "location": {
         "port": 50001,
-        "ws": 50003,
+        "ws": 50002,
         "pages": {
             "settings": {
                 "key": "settings",
