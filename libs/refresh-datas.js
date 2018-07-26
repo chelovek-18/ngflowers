@@ -7,6 +7,7 @@ const
     images = new ( require( './images' ) );
 
 module.exports = async () => {
+    console.log( 'hzhz555' );
     // Данные из api-запроса для сравнения
     let
         cities = global.obj.cities,
