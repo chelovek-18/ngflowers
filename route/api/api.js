@@ -63,9 +63,9 @@ router.get( '/products/:city', ( req, res, next ) => {
     );
 });
 
-router.get( '/app-settings/', async ( req, res, next ) => {
-    console.log( 'zapros e' );
-    res.json( await req.db.settings().findOne() );
+router.get( '/app-settings/:version', async ( req, res, next ) => {
+    req.session.appVersion = req.params.version;
+    res.json( await req.db.settings().findOne( { version: req.session.appVersion } ) );
 });
 
 router.get( '/rproducts/:city', async ( req, res, next ) => {
