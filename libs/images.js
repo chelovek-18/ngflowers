@@ -89,8 +89,8 @@ class Images extends Request
         let chDirs = fs.readdirSync( dirpath + '/upload/iblock', 'utf8' );
         for ( let cd in chDirs ) {
             if (
-                ( city.products.filter( p => p.image.filter( sp => ~sp.indexOf( '/upload/iblock/' + cd ) ).length ).length
-                + city.banners.filter( p => ~p.image.indexOf( '/upload/iblock/' + cd ) ).length ) == 0
+                ( city.products.filter( p => p.image.filter( im => ~im.indexOf( '/' + cd ) ).length ).length
+                + city.banners.filter( p => ~p.image.indexOf( '/' + cd ) ).length ) == 0
             ) {
                 console.log( `remove dir ${ dirpath + '/upload/iblock/' + cd }?` );
             }
