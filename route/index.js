@@ -3,12 +3,11 @@
 const
     // express
     express = require( 'express' ),
-    //pem = require( 'pem' ),
-    //https = require( 'https' ),
     bodyParser = require( 'body-parser' ),
     session = require( 'express-session' ),
     handlebars = require( 'express-handlebars' ),
     app = express(),
+    app2 = express(),
     
     // paths
     viewsPath = global.appConf.location.root + '/views';
@@ -54,6 +53,36 @@ class Route
                 this.routes();
             });
 
+        app2
+            .engine( '.html', handlebars({
+                'defaultLayout': 'main',
+                'layoutsDir': viewsPath,
+                'partialsDir': viewsPath,
+                'extname': '.html',
+                'helpers': require( '../libs/helpers' )
+            }))
+
+            .set( 'view engine', '.html' )
+            .set( 'views', viewsPath )
+
+            .use( express.static( __dirname + '/../public' ) )
+            .use( bodyParser.json() )
+            .use( bodyParser.urlencoded( { extended: true } ) )
+            .use( session({
+                'secret': global.appConf.session.secret,
+                'resave': false,
+                'saveUninitialized': true,
+                'httpOnly': true,
+                'cookie': {
+                    'expires': new Date( Date.now() + global.appConf.session.maxAge ),
+                    'maxAge': global.appConf.session.maxAge
+                }
+            }))
+
+            .listen( 50002, () => {
+                this.routes();
+            });
+
         /*let self = this;
 
         pem.createCertificate( { days: 1, selfSigned: true }, function ( err, keys ) {
@@ -78,7 +107,7 @@ class Route
         app.use( require( './api/init' ) );
 
         // API
-        app.use( require( './api/api' ) );
+        app2.use( require( './api/api' ) );
 
         // Авторизация
         app.use( require( './api/auth' ) );
