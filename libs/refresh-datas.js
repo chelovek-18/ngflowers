@@ -1,7 +1,7 @@
 'use strict';
 
 const
-    prototypes = require( 'prototypes' ).city,
+    prototypes = require( './prototypes' ).city,
 
     // api данные
     ng = new ( require( './ng' ) ),
