@@ -20,11 +20,12 @@ let
 async function dbcomplete() {
     // Получаем из базы города со всем, что к ним относится
     cities = await model.cities().find();
-    Object.defineProperty( global, 'cities', {
+    global.obj = {};
+    Object.defineProperty( global.obj, 'cities', {
         get: () => cities
     });
 
-    Object.defineProperty( global, 'model', {
+    Object.defineProperty( global.obj, 'model', {
         get: () => model
     });
 

@@ -9,8 +9,8 @@ const
 module.exports = async () => {
     // Данные из api-запроса для сравнения
     let
-        cities = global.cities,
-        model = global.model,
+        cities = global.obj.cities,
+        model = global.obj.model,
         reqCities = ( await ng.getCities() ) || [],
         isUpd = false;
 
