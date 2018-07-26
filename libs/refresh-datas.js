@@ -102,7 +102,7 @@ module.exports = async () => {
         for ( let k in rKeysNew ) {
             await model.cities().save( rKeysNew[ k ] );
             isUpd = true;
-            console.log( `cities update (add cities ${ JSON.stringify( rKeysNew[ k ] ) })` );
+            console.log( `cities update (add cities ${ rKeysNew[ k ].key })` );
         }
         
         // 4. Сохраняем в cities
