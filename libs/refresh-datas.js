@@ -17,8 +17,8 @@ module.exports = async () => {
         isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
-    if ( reqCities.keys().length /*Object.keys( reqCities ).length*/ ) {
-        /*let
+    if ( Object.keys( reqCities ).length ) {
+        let
             // Список кодов городов (запрос)
             rKeys = reqCities.map( c => c.key ),
             // Список кодов городов (база)
@@ -37,7 +37,7 @@ module.exports = async () => {
             rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
 
         // 1. Отключаем те города, что отсутствуют в API
-        for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
+        /*for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
             await model.cities().update( { key: cities[ k ].key }, { use: false } );
             isUpd = true;
             console.log( `cities update (out city ${ cities[ k ].key })` );
@@ -98,14 +98,14 @@ module.exports = async () => {
                     images.imgsExistenceCheck( city, prop );
                 }
             }
-        }
+        }*/
 
         // 3. Добавляем новые
         for ( let k in rKeysNew ) {
             await model.cities().save( rKeysNew[ k ] );
             isUpd = true;
             console.log( `cities update (add cities ${ rKeysNew[ k ].key })` );
-        }*/
+        }
         
         // 4. Сохраняем в cities
         if ( isUpd ) cities = await model.cities().find();
