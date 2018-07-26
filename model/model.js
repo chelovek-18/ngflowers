@@ -79,6 +79,7 @@ class Model
 					dbcomplete();
 				});
 			} catch( err ) {
+				console.log( 'model err', err );
 				self.error = err;
 			}
 		})();
