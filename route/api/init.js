@@ -14,7 +14,7 @@ const
 
 // Данные
 let
-    cities = [];
+    cities = []; console.log( 'uuuuuuuuuuuuuuuu' );
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
@@ -38,7 +38,7 @@ async function dbcomplete() {
     console.log( 'hzhz4' );
 
     // Интервал обновлений данных
-    setInterval( refreshDatas, 10000 /*global.appConf.settings.refresh*/ );
+    setInterval( refreshDatas, global.appConf.settings.refresh );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
