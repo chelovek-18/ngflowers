@@ -32,7 +32,7 @@ module.exports = async () => {
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
+            rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) ); console.log( 'new city', rKeysNew );
 
         // 1. Отключаем те города, что отсутствуют в API
         /*for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
