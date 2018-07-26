@@ -38,7 +38,7 @@ async function dbcomplete() {
     console.log( 'hzhz4' );
 
     // Интервал обновлений данных
-    setInterval( refreshDatas, global.appConf.settings.refresh );
+    setInterval( refreshDatas, 10000 /*global.appConf.settings.refresh*/ );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
