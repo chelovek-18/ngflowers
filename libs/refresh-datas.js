@@ -6,13 +6,13 @@ const
     geo = new ( require( './geo' ) ),
     images = new ( require( './images' ) );
 
-module.exports = async () => { console.log( 'hzhz' );
+module.exports = async () => {
     // Данные из api-запроса для сравнения
     let
         cities = global.obj.cities,
-        model = (  console.log( 'model?' ), global.obj.model ),
-        reqCities = ( console.log( 'req?' ), ( await ng.getCities() ) || [] ),
-        isUpd = ( console.log( 'isupd' ), false ); console.log( 'reqCities', Object.keys( reqCities ).map( c => c.key ) );
+        model = global.obj.model,
+        reqCities = ( await ng.getCities() ) || [],
+        isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
     if ( Object.keys( reqCities ).length ) {
@@ -32,10 +32,10 @@ module.exports = async () => { console.log( 'hzhz' );
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) ); console.log( 'new city', rKeysNew );
+            rKeysNew = reqCities.filter( c => !~keys.in.indexOf( c.key ) );
 
         // 1. Отключаем те города, что отсутствуют в API
-        /*for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
+        for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
             await model.cities().update( { key: cities[ k ].key }, { use: false } );
             isUpd = true;
             console.log( `cities update (out city ${ cities[ k ].key })` );
@@ -96,7 +96,7 @@ module.exports = async () => { console.log( 'hzhz' );
                     images.imgsExistenceCheck( city, prop );
                 }
             }
-        }*/
+        }
 
         // 3. Добавляем новые
         for ( let k in rKeysNew ) {
@@ -110,7 +110,7 @@ module.exports = async () => { console.log( 'hzhz' );
     }
 
     // Подцепляем к городам геолокацию:
-    /*let geoUpd = false;
+    let geoUpd = false;
     for( let i in cities ) {
         if ( !cities[ i ].location || !cities[ i ].location.length ) {
             if ( !cities[ i ].geo ) {
@@ -124,5 +124,5 @@ module.exports = async () => { console.log( 'hzhz' );
         }
     }
     if ( geoUpd ) cities = await model.cities().find();
-    if ( geoUpd ) console.log( 'geolocations update' );*/
+    if ( geoUpd ) console.log( 'geolocations update' );
 };
