@@ -44,6 +44,7 @@ const
             for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
                 await model.cities().update( { key: cities[ k ].key }, { use: false } );
                 isUpd = true;
+                console.log( `cities update (out city ${ cities[ k ].key })` );
             }
 
             // 2. Сравниваем по полям
@@ -58,6 +59,7 @@ const
                 if ( Object.keys( updCity ).length ) {
                     await model.cities().update( { key: city.key }, updCity );
                     isUpd = true;
+                    console.log( `cities update (upd fields ${ JSON.stringify(updCity) })` );
                 }
 
                 // Сравниваем баннеры, категории, товары
@@ -92,6 +94,7 @@ const
                     if ( propUpd ) {
                         await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
                         isUpd = true;
+                        console.log( `cities update (upd ${ prop }: ${ JSON.stringify( city[ prop ] ) })` );
                     }
 
                     // Проверяем наличие сохраненных изображений, сохраняем
@@ -105,11 +108,11 @@ const
             for ( let k in rKeysNew ) {
                 await model.cities().save( rKeysNew[ k ] );
                 isUpd = true;
+                console.log( `cities update (add cities ${ JSON.stringify( rKeysNew[ k ] ) })` );
             }
             
             // 4. Сохраняем в cities
             if ( isUpd ) cities = await model.cities().find();
-            if ( isUpd ) console.log( 'cities update' );
         }
 
         // Подцепляем к городам геолокацию:
