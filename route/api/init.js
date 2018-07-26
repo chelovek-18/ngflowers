@@ -59,7 +59,7 @@ const
                 if ( Object.keys( updCity ).length ) {
                     await model.cities().update( { key: city.key }, updCity );
                     isUpd = true;
-                    console.log( `cities update (upd fields ${ JSON.stringify(updCity) })` );
+                    console.log( `cities update (upd fields)` );
                 }
 
                 // Сравниваем баннеры, категории, товары
@@ -94,7 +94,7 @@ const
                     if ( propUpd ) {
                         await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
                         isUpd = true;
-                        console.log( `cities update (upd ${ prop }: ${ JSON.stringify( city[ prop ] ) })` );
+                        console.log( `cities update (upd ${ prop })` );
                     }
 
                     // Проверяем наличие сохраненных изображений, сохраняем
