@@ -2,16 +2,7 @@
 
 const
     express = require( 'express' ),
-    router = express.Router(),
-    ng = new ( require( './../../libs/ng' ) ),
-    geo = new ( require( './../../libs/geo' ) ),
-    https = require( 'https' ),
-    fs = require( 'fs' ),
-    //gm = require( 'gm' ),
-    jimp = require( 'jimp' ),
-    //images = require( 'images' ),
-    url = require( 'url' );
-    //images = new( require( './../../libs/images' ) );
+    router = express.Router();
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
@@ -68,57 +59,8 @@ router.get( '/app-settings/:version', async ( req, res, next ) => {
     res.json( await req.db.settings().findOne( { version: req.session.appVersion } ) );
 });
 
-router.get( '/rproducts/:city', async ( req, res, next ) => {
-    res.json( await ng.getProducts( req.params.city ) );
+router.get( '/del/', async ( req, res, next ) => {
+    res.json( await req.db.cities().delete() );
 });
-
-router.get( '/rbanners/:city', async ( req, res, next ) => {
-    res.json( await ng.getBanners( req.params.city ) );
-});
-
-router.get( '/imgs/', async ( req, res, next ) => {
-    // 2!..
-    await jimp.read( `${ global.appConf.location.root }/public/prob.jpg` ).then( function ( img ) {
-        return img.resize( 300, jimp.AUTO ).write( `${ global.appConf.location.root }/public/prob.jpg` );
-    }).catch( function( err ) {
-        console.log( 'erro!', err );
-    });
-    res.send( 'e-e!' );
-
-
-    // 1!..
-    /*let imgsource = 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg';
-    https.get( imgsource, function( resp ) {
-        resp.pipe( fs.createWriteStream( `${ global.appConf.location.root }/public/prob.jpg` ) );
-        res.send( 'oke' );
-    });*/
-
-    //res.end( fs.readFileSync( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
-    //res.end( fs.readFileSync( await images.getImage( 'novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) ) );
-
-
-
-    //fs.writeFileSync( `${ global.appConf.location.root }/public/prob.jpg`, fs.readFileSync( 'https://novayagollandiya.ru/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg' ) );
-    //res.send( fs.readFileSync( `${ global.appConf.location.root }/public/prob.jpg` ) );
-    //fs.writeFileSync( `${ global.appConf.location.root }/public/prob.jpg`, new Buffer( await images.getImage('novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg') ) );
-    //res.send( fs.readFileSync( `${ global.appConf.location.root }/public/prob.jpg` ) );
-    //res.send( await images.getImage('novayagollandiya.ru', '/upload/iblock/c65/c657526991c0ab9cfd65fb1edcb843ba.jpg') );
-});
-
-/*router.get( '/citiesgeo/', async ( req, res, next ) => {
-    res.json( ( await geo.getCoords() ).results[ 0 ].geometry.location );
-});*/
-
-/*router.get( '/city/:city', async ( req, res, next ) => {
-    res.json( ( await req.cities ).filter( c => c.key == req.params.city )[ 0 ] );
-});
-
-router.put( '/city/:city', async ( req, res, next ) => {
-    req.body.use = req.body.use == 'true';
-    let answ = await req.db.cities().update( /*req.body*-/ { use: false }, { key: 'spb' /*req.params.city*-/ } ).exec();
-    req.citiesRefresh();
-    console.log( await req.db.cities().find() );
-    res.send( answ );
-});*/
 
 module.exports = router;
