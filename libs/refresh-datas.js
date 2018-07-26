@@ -6,13 +6,13 @@ const
     geo = new ( require( './geo' ) ),
     images = new ( require( './images' ) );
 
-module.exports = async () => {
+module.exports = async () => { console.log( 'hzhz' );
     // Данные из api-запроса для сравнения
     let
         cities = global.obj.cities,
-        model = global.obj.model,
-        reqCities = ( await ng.getCities() ) || [],
-        isUpd = false; console.log( 'reqCities', Object.keys( reqCities ).map( c => c.key ) );
+        model = (  console.log( 'model?' ), global.obj.model ),
+        reqCities = ( console.log( 'req?' ), ( await ng.getCities() ) || [] ),
+        isUpd = ( console.log( 'isupd' ), false ); console.log( 'reqCities', Object.keys( reqCities ).map( c => c.key ) );
 
     // Сравниваем данные из базы и из запроса:
     if ( Object.keys( reqCities ).length ) {
