@@ -12,7 +12,7 @@ module.exports = async () => {
         cities = global.obj.cities,
         model = global.obj.model,
         reqCities = ( await ng.getCities() ) || [],
-        isUpd = false;
+        isUpd = false; console.log( 'reqCities', Object.keys( reqCities ).map( c => c.key ) );
 
     // Сравниваем данные из базы и из запроса:
     if ( Object.keys( reqCities ).length ) {
