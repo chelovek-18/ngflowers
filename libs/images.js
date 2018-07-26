@@ -85,6 +85,16 @@ class Images extends Request
             }
         }
         onProcess = false;
+        // Удаление лишних дерикторий
+        let chDirs = fs.readdirSync( dirpath + '/upload/iblock', 'utf8' );
+        for ( let cd in chDirs ) {
+            if (
+                ( city.products.filter( p => p.image.filter( sp => ~sp.indexOf( '/upload/iblock/' + cd ) ).length ).length
+                + city.banners.filter( p => ~p.image.indexOf( '/upload/iblock/' + cd ) ).length ) == 0
+            ) {
+                console.log( `remove dir ${ dirpath + '/upload/iblock/' + cd }?` );
+            }
+        }
     }
 
 }
