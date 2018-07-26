@@ -1,6 +1,8 @@
 'use strict';
 
 const
+    prototypes = require( 'prototypes' ).city,
+
     // api данные
     ng = new ( require( './ng' ) ),
     geo = new ( require( './geo' ) ),
@@ -15,8 +17,8 @@ module.exports = async () => {
         isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
-    if ( Object.keys( reqCities ).length ) {
-        let
+    if ( reqCities.length /*Object.keys( reqCities ).length*/ ) {
+        /*let
             // Список кодов городов (запрос)
             rKeys = reqCities.map( c => c.key ),
             // Список кодов городов (база)
@@ -103,14 +105,14 @@ module.exports = async () => {
             await model.cities().save( rKeysNew[ k ] );
             isUpd = true;
             console.log( `cities update (add cities ${ rKeysNew[ k ].key })` );
-        }
+        }*/
         
         // 4. Сохраняем в cities
         if ( isUpd ) cities = await model.cities().find();
     }
 
     // Подцепляем к городам геолокацию:
-    let geoUpd = false;
+    /*let geoUpd = false;
     for( let i in cities ) {
         if ( !cities[ i ].location || !cities[ i ].location.length ) {
             if ( !cities[ i ].geo ) {
@@ -124,5 +126,5 @@ module.exports = async () => {
         }
     }
     if ( geoUpd ) cities = await model.cities().find();
-    if ( geoUpd ) console.log( 'geolocations update' );
+    if ( geoUpd ) console.log( 'geolocations update' );*/
 };

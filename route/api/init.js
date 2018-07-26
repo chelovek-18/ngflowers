@@ -19,7 +19,7 @@ let
 // Функция дергается по готовности базы
 async function dbcomplete() {
     // Получаем из базы города со всем, что к ним относится
-    cities = await model.cities().find();
+    cities = ( await model.cities().find() ) || [];
     global.obj = {};
     Object.defineProperty( global.obj, 'cities', {
         get: () => cities
