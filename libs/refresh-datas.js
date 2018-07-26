@@ -17,7 +17,7 @@ module.exports = async () => {
         isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
-    if ( reqCities.length /*Object.keys( reqCities ).length*/ ) {
+    if ( reqCities.keys /*Object.keys( reqCities ).length*/ ) {
         /*let
             // Список кодов городов (запрос)
             rKeys = reqCities.map( c => c.key ),
