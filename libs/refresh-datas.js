@@ -2,9 +2,9 @@
 
 const
     // api данные
-    ng = new ( require( './../../libs/ng' ) ),
-    geo = new ( require( './../../libs/geo' ) ),
-    images = new ( require( './../../libs/images' ) );
+    ng = new ( require( './ng' ) ),
+    geo = new ( require( './geo' ) ),
+    images = new ( require( './images' ) );
 
 module.exports = async () => {
     // Данные из api-запроса для сравнения
