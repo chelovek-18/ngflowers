@@ -4,25 +4,25 @@ const
     // api данные
     ng = new ( require( './ng' ) ),
     geo = new ( require( './geo' ) ),
-    images = new ( require( './images' ) );
+    images = new ( require( './images' ) ),
+    Cities = require( './cities' );
 
 module.exports = async () => {
     global.log( 'Старт обновления данных' );
     // Данные из api-запроса для сравнения
     let
-        cities = global.obj.cities,
         model = global.obj.model,
-        reqCities = ( await ng.getCities() ) || [],
+        cities = new Cities( ...global.obj.cities ),
+        reqCities = new Cities( ...( ( await ng.getCities() ) || [] ) ),
         isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
     if ( reqCities.length ) {
         let
             // Список кодов городов (из запроса)
-            rKeys = reqCities.map( c => c.key ),
+            rKeys = reqCities.getKeys(),
             // Список кодов городов (база)
-            keys = cities
-                .map( c => c.key )
+            keys = cities.getKeys()
                 .reduce(
                     ( o, c ) => {
                         // Отдельно города, которые есть в api (обслуживаются), отдельно которые отключены
@@ -36,14 +36,10 @@ module.exports = async () => {
             rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) );
 
         // 1. Отключаем те города, что отсутствуют в API
-        for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
-            await model.cities().update( { key: cities[ k ].key }, { use: false } );
-            isUpd = true;
-            global.log( `Отключен город ${ cities[ k ].key }` );
-        }
+        isUpd = await cities.switchOffCities( keys.out );
 
         // 2. Сравниваем по полям
-        for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
+        /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
             let
                 city = cities[ k ],
                 rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
@@ -97,15 +93,10 @@ module.exports = async () => {
                     //images.imgsExistenceCheck( city, prop );
                 }
             }
-        }
+        }*/
 
         // 3. Добавляем новые
-        for ( let k in rKeysNew ) {
-            let newC = reqCities.filter( c => c.key == rKeysNew[ k ] )[ 0 ];
-            await model.cities().save( newC );
-            isUpd = true;
-            global.log( `Добавлен город ${ newC.key }` );
-        }
+        isUpd = await reqCities.addCities( rKeysNew ) || isUpd;
         
         // 4. Сохраняем в cities
         global.log( `Обновлен список городов` );
