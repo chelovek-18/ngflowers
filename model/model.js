@@ -78,7 +78,10 @@ class Model
 					});
 
 				});
-				dbcomplete();
+				setTimeout( () => {
+					dbcomplete();
+				}, 2000);
+				//dbcomplete();
 			} catch( err ) {
 				console.log( 'model err', err );
 				self.error = err;
