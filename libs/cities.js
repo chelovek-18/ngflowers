@@ -4,12 +4,13 @@ let model;
 
 class Cities extends Array
 {
-    constructor() {
+    /*constructor() {
         super();
         model = global.obj.model;
-    }
+    }*/
 
     getKeys() {
+        model = global.obj.model;
         return this.map( c => c.key );
     }
 
