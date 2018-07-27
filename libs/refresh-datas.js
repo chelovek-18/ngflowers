@@ -109,7 +109,7 @@ module.exports = async () => {
         
         // 4. Сохраняем в cities
         global.log( `Обновлен список городов` );
-        if ( isUpd ) global.obj.cities = await model.cities().find();
+        if ( isUpd ) cities = await model.cities().find();
     }
 
     // Подцепляем к городам геолокацию:
@@ -130,6 +130,6 @@ module.exports = async () => {
             geoUpd = true;*/
         }
     }
-    if ( geoUpd ) global.obj.cities = await model.cities().find();
+    if ( geoUpd ) cities = await model.cities().find();
     if ( geoUpd ) global.log( 'Обновлена геолокация' );
 };
