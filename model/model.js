@@ -91,6 +91,7 @@ class Model
 	}
 
 	query( collection, method, data ) {
+		global.log( 'query', collection, method, data );
 
 		// Один аргумент - возвращает модель для создания запроса вручную
 		if ( !method ) {
