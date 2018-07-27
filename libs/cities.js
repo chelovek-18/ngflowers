@@ -1,10 +1,14 @@
 'use strict';
 
-let
-    model = global.obj.model;
+let model;
 
 class Cities extends Array
 {
+    constructor() {
+        super();
+        model = global.obj.model;
+    }
+
     getKeys() {
         return this.map( c => c.key );
     }
