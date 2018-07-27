@@ -67,6 +67,12 @@ class Route
                 ws.send( `ok, ${ message }` );
             });*/
         //});
+        global.console = {
+            log() {
+                arguments.push( 'yo! its global!' );
+                console.log( arguments );
+            }
+        };
     }
 
     routes() {
