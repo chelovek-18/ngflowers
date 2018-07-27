@@ -43,7 +43,7 @@ module.exports = async () => {
         }
 
         // 2. Сравниваем по полям
-        /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
+        for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
             let
                 city = cities[ k ],
                 rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
@@ -54,7 +54,7 @@ module.exports = async () => {
             if ( Object.keys( updCity ).length ) {
                 await model.cities().update( { key: city.key }, updCity );
                 isUpd = true;
-                global.log( `cities update (upd fields)` );
+                global.log( `Город обновлен` );
             }
 
             // Сравниваем баннеры, категории, товары
@@ -89,15 +89,15 @@ module.exports = async () => {
                 if ( propUpd ) {
                     await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
                     isUpd = true;
-                    global.log( `cities update (upd ${ prop })` );
+                    global.log( `Город обновлен, поле ${ prop }` );
                 }
 
                 // Проверяем наличие сохраненных изображений, сохраняем
                 if ( prop == 'products' || prop == 'banners' ) {
-                    images.imgsExistenceCheck( city, prop );
+                    //images.imgsExistenceCheck( city, prop );
                 }
             }
-        }*/
+        }
 
         // 3. Добавляем новые
         for ( let k in rKeysNew ) {
@@ -117,8 +117,8 @@ module.exports = async () => {
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
-            city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            global.log( 'Геолокация 1', city.location );
+            //city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            //global.log( 'Геолокация 1', city.location );
             /*if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             global.log( 'Геолокация 2', city.location );
