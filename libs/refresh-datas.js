@@ -18,8 +18,10 @@ module.exports = async () => {
         isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
-    if ( rKeys.length ) {
+    if ( reqCities.length ) {
         let
+            // Список кодов городов (из запроса)
+            rKeys = reqCities.map( c => c.key ),
             // Список кодов городов (база)
             keys = cities
                 .map( c => c.key )
@@ -33,7 +35,7 @@ module.exports = async () => {
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); global.log( 'rKeysNew', rKeysNew, rKeys ); return; 
+            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); global.log( 'rKeysNew', rKeysNew, rKeys, keys ); return; 
 
         // 1. Отключаем те города, что отсутствуют в API
         for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {

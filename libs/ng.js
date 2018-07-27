@@ -20,18 +20,17 @@ class NG extends Request
         global.log( 'Получить города' );
         let
             cities = await this.setBody( { action: 'getCities' } ).request(),
-            keys = Object.keys( cities );
-        for( let k in keys ) {
-            cities[ keys[ k ] ].banners = await this.getBanners( k );
-            cities[ keys[ k ] ].categories = await this.getSections( k );
-            cities[ keys[ k ] ].products = await this.getProducts( k );
+            newCities = Object.keys( cities ).reduce( ( o, k ) => { cities[ k ].key = k; o.push( cities[ k ] ); return o; }, []);
+        for( let n in newCities ) {
+            newCities[ n ].banners = await this.getBanners( newCities[ n ].key );
+            newCities[ n ].categories = await this.getSections( newCities[ n ].key );
+            newCities[ n ].products = await this.getProducts( newCities[ n ].key );
         }
-        return keys
-            .map( k => {
-                cities[ k ].key = k;
-                cities[ k ].siteId = cities[ k ].site_id;
-                delete cities[ k ].site_id;
-                return cities[ k ];
+        return newCities
+            .map( nc => {
+                nc.siteId = nc.site_id;
+                delete nc.site_id;
+                return nc;
             });
     }
 
