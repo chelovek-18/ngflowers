@@ -5,7 +5,9 @@ let model;
 class Cities extends Array
 {
     constructor() {
-        //super();
+        let args = [];
+        for ( let k in arguments ) args.push( arguments[ k ] );
+        super( ...args );
         model = global.obj.model;
     }
 
