@@ -37,11 +37,12 @@ async function dbcomplete() {
     geo.setParams( settings );
 
     // Интервал обновлений данных
-    //setInterval( refreshDatas, global.appConf.settings.refresh );
+    setInterval( refreshDatas, global.appConf.settings.refresh );
 }
 
 // ------------------------------------- Инициализация -------------------------------------
 router.use( async ( req, res, next ) => {
+    global.log( 'Инициализация запроса' );
     // Подключение БД
     req.db = model;
 

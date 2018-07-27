@@ -31,6 +31,7 @@ class Request
     }
 
     async request() {
+        global.log( this.method + '-запрос', this.host + this.path );
         let self = this;
         return new Promise( ( r, j ) => {
             let httpReq = https.request( self, function( httpRes ) {

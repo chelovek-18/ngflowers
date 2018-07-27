@@ -7,7 +7,7 @@ const
     images = new ( require( './images' ) );
 
 module.exports = async () => {
-    console.log( 'hzhz555' );
+    global.log( 'Старт обновления данных' );
     // Данные из api-запроса для сравнения
     let
         cities = global.obj.cities,
@@ -39,11 +39,11 @@ module.exports = async () => {
         for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
             await model.cities().update( { key: cities[ k ].key }, { use: false } );
             isUpd = true;
-            console.log( `cities update (out city ${ cities[ k ].key })` );
+            global.log( `Отключен город ${ cities[ k ].key }` );
         }
 
         // 2. Сравниваем по полям
-        for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
+        /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
             let
                 city = cities[ k ],
                 rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
@@ -54,7 +54,7 @@ module.exports = async () => {
             if ( Object.keys( updCity ).length ) {
                 await model.cities().update( { key: city.key }, updCity );
                 isUpd = true;
-                console.log( `cities update (upd fields)` );
+                global.log( `cities update (upd fields)` );
             }
 
             // Сравниваем баннеры, категории, товары
@@ -89,7 +89,7 @@ module.exports = async () => {
                 if ( propUpd ) {
                     await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
                     isUpd = true;
-                    console.log( `cities update (upd ${ prop })` );
+                    global.log( `cities update (upd ${ prop })` );
                 }
 
                 // Проверяем наличие сохраненных изображений, сохраняем
@@ -97,13 +97,13 @@ module.exports = async () => {
                     images.imgsExistenceCheck( city, prop );
                 }
             }
-        }
+        }*/
 
         // 3. Добавляем новые
         for ( let k in rKeysNew ) {
             await model.cities().save( rKeysNew[ k ] );
             isUpd = true;
-            console.log( `cities update (add cities ${ rKeysNew[ k ].key })` );
+            global.log( `Добавлен город ${ rKeysNew[ k ].key }` );
         }
         
         // 4. Сохраняем в cities
@@ -111,7 +111,7 @@ module.exports = async () => {
     }
 
     // Подцепляем к городам геолокацию:
-    let geoUpd = false;
+    /*let geoUpd = false;
     for( let i in cities ) {
         if ( !cities[ i ].location || !cities[ i ].location.length ) {
             if ( !cities[ i ].geo ) {
@@ -125,5 +125,5 @@ module.exports = async () => {
         }
     }
     if ( geoUpd ) cities = await model.cities().find();
-    if ( geoUpd ) console.log( 'geolocations update' );
+    if ( geoUpd ) global.log( 'Обновлена геолокация' );*/
 };
