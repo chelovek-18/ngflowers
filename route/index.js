@@ -68,8 +68,9 @@ class Route
             });*/
         //});
         global.log = function() {
-            arguments.push( 'yo! its global!' );
-            console.log( arguments );
+            let args = [ 'yo! its global!' ];
+            for ( let k in arguments ) args.push( arguments[ k ] );
+            console.log( ...args );
         }
     }
 
