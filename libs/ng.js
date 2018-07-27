@@ -17,6 +17,7 @@ class NG extends Request
     }
 
     async getCities() {
+        global.log( 'Получить города' );
         let
             cities = await this.setBody( { action: 'getCities' } ).request(),
             keys = Object.keys( cities );
@@ -35,10 +36,12 @@ class NG extends Request
     }
 
     async getBanners( city = this.city ) {
+        global.log( 'Получить баннеры города' );
         return await this.setBody( { action: 'getBanners', "filter[city]": city } ).request();
     }
 
     async getSections( city = this.city ) {
+        global.log( 'Получить категории города' );
         return ( await this.setBody( { action: 'getSections', "filter[city]": city } ).request() )
             .map( s => {
                 s.id = s.ID;
@@ -54,6 +57,7 @@ class NG extends Request
     }
 
     async getProducts( city = this.city ) {
+        global.log( 'Получить товары города' );
         return ( await this.setBody( { action: 'getProducts', "filter[city]": city } ).request() )
             .map( p => {
                 p.oldPrice = p.oldprice;

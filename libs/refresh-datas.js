@@ -107,23 +107,30 @@ module.exports = async () => {
         }
         
         // 4. Сохраняем в cities
+        global.log( `Обновлен список городов` );
         if ( isUpd ) cities = await model.cities().find();
     }
 
     // Подцепляем к городам геолокацию:
-    /*let geoUpd = false;
+    let geoUpd = false;
     for( let i in cities ) {
-        if ( !cities[ i ].location || !cities[ i ].location.length ) {
-            if ( !cities[ i ].geo ) {
+        let city = cities[ i ];
+        if ( !city.location || !city.location.length ) {
+            /*if ( !city.geo ) {
                 cities[ i ].geo = ( await geo.getCityLocation( cities[ i ].name.replace( / /g, '+' ) ) ).results[ 0 ].geometry.location;
                 cities[ i ].geo = Object.keys( cities[ i ].geo ).map( k => cities[ i ].geo[ k ] );
-            } else {
-                cities[ i ].location = cities[ i ].geo;
-                await model.cities().update( { key: cities[ i ].key }, { location: cities[ i ].location } );
+            } else {*/
+                //cities[ i ].location = cities[ i ].geo;
+                city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+                if ( !city.location ) continue;
+                city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
+                city.location = Object.keys( city.location ).map( k => city.location[ k ] );
+                if ( !city.location.length ) continue;
+                await model.cities().update( { key: city.key }, { location: city.location } );
                 geoUpd = true;
-            }
+            //}
         }
     }
     if ( geoUpd ) cities = await model.cities().find();
-    if ( geoUpd ) global.log( 'Обновлена геолокация' );*/
+    if ( geoUpd ) global.log( 'Обновлена геолокация' );
 };
