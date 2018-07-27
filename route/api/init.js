@@ -14,7 +14,7 @@ const
 
 // Данные
 let
-    cities = [];
+    cities = []; global.log( 'init app' );
 
 // Функция дергается по готовности базы
 async function dbcomplete() {

@@ -41,7 +41,7 @@ class Model
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor( dbcomplete ) {
-		let self = this;
+		let self = this; global.log( 'init db' );
 		( async () => {
 			try {
 				await mongoose.connect( path );
