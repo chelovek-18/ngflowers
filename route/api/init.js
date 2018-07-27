@@ -20,6 +20,7 @@ let
 // Функция дергается по готовности базы
 async function dbcomplete() {
     global.log( 'База инициализирована' );
+    return;
     await model.settings().save();
     // Получаем из базы города со всем, что к ним относится
     cities = ( await model.cities().find() ) || [];
