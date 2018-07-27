@@ -33,7 +33,7 @@ module.exports = async () => {
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); global.log( 'rKeysNew', rKeysNew, rKeys, keys ); 
+            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) );
 
         // 1. Отключаем те города, что отсутствуют в API
         for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
@@ -117,8 +117,8 @@ module.exports = async () => {
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
-            //city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            //global.log( 'Геолокация 1', city.location );
+            city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            global.log( 'Геолокация 1', city.location );
             /*if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             global.log( 'Геолокация 2', city.location );

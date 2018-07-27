@@ -27,7 +27,6 @@ async function dbcomplete() {
     Object.defineProperty( global.obj, 'cities', {
         get: () => cities,
         set: async cs => {
-            global.log( 'cs!', cs.filter( c => c.key ) );
             for( let k in cs )
                 await model.cities().update( { key: cs[ k ].key }, cs[ k ] );
             cities = await model.cities().find();
