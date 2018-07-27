@@ -34,12 +34,13 @@ async function dbcomplete() {
 
     // Получаем из базы и устанавливаем для геолокации настройки
     let settings = await model.settings().findOne();
-    global.log( 'geo:', Object.keys( geo ) );
-    if ( !settings ) {
+    global.log( 'settings:', settings );
+    //global.log( 'geo:', Object.keys( geo ) );
+    //if ( !settings ) {
         //await model.settings().save( { version: '1.0.0', phone: '', googleKey: 'AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M' } );
         //settings = await model.settings().findOne();
-    }
-    geo.setParams( settings );
+    //}
+    //geo.setParams( settings );
 
     // Интервал обновлений данных
     //setInterval( refreshDatas, global.appConf.settings.refresh );
