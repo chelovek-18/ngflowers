@@ -26,6 +26,7 @@ async function dbcomplete() {
     Object.defineProperty( global.obj, 'cities', {
         get: () => cities,
         set: async cs => {
+            global.log( 'cs!', cs.filter( c => c.key ) );
             for( let k in cs )
                 await req.db.cities().update( { key: cs[ k ].key }, cs[ k ] );
             cities = await req.db.cities().find();
@@ -53,7 +54,8 @@ router.use( async ( req, res, next ) => {
     req.db = model;
 
     // Геттер и сеттер req.cities
-    Object.defineProperty( req, 'cities', {
+    req.cities = global.obj.cities;
+    /*Object.defineProperty( req, 'cities', {
         get: () => cities,
         set: async cs => {
             for( let k in cs )
@@ -61,7 +63,7 @@ router.use( async ( req, res, next ) => {
             cities = await req.db.cities().find();
             return cs;
         }
-    });
+    });*/
 
     next();
 });

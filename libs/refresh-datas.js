@@ -117,8 +117,8 @@ module.exports = async () => {
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
-            city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            global.log( 'Геолокация 1', city.location );
+            //city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            //global.log( 'Геолокация 1', city.location );
             /*if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             global.log( 'Геолокация 2', city.location );
