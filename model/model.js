@@ -91,7 +91,7 @@ class Model
 	}
 
 	query( collection, method, data ) {
-		global.log( 'query', collection, method, collection == 'cities' ? '...' + data.name : data );
+		global.log( 'query', collection, method, collection == 'cities' && method == 'save' ? '...' + data.name : data );
 
 		// Один аргумент - возвращает модель для создания запроса вручную
 		if ( !method ) {
