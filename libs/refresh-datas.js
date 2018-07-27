@@ -14,7 +14,7 @@ module.exports = async () => {
         model = global.obj.model,
         reqCities = ( await ng.getCities() ) || [],
         isUpd = false;
-        global.log( 'cities', cities.map( c => c.key )  );
+        //global.log( 'cities', cities.map( c => c.key )  );
 
     // Сравниваем данные из базы и из запроса:
     if ( Object.keys( reqCities ).length ) {
@@ -34,7 +34,7 @@ module.exports = async () => {
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) );
+            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); return;
 
         // 1. Отключаем те города, что отсутствуют в API
         for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {

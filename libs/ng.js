@@ -20,7 +20,7 @@ class NG extends Request
         global.log( 'Получить города' );
         let
             cities = await this.setBody( { action: 'getCities' } ).request(),
-            keys = Object.keys( cities );
+            keys = Object.keys( cities ); global.log( 'u?', cities );
         for( let k in keys ) {
             cities[ keys[ k ] ].banners = await this.getBanners( k );
             cities[ keys[ k ] ].categories = await this.getSections( k );
