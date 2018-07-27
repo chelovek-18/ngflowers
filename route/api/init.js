@@ -20,6 +20,7 @@ let
 // Функция дергается по готовности базы
 async function dbcomplete() {
     global.log( 'База инициализирована' );
+    await model.settings().save();
     // Получаем из базы города со всем, что к ним относится
     cities = ( await model.cities().find() ) || [];
     global.obj = {};
@@ -33,6 +34,7 @@ async function dbcomplete() {
 
     // Получаем из базы и устанавливаем для геолокации настройки
     let settings = await model.settings().findOne();
+    if ( !settings ) await model.settings().save( settings = { version: '1.0.0', phone: '', googleKey: geo.defaultData.key } );
     geo.setParams( settings );
 
     // Интервал обновлений данных
