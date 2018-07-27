@@ -112,19 +112,23 @@ module.exports = async () => {
     }
 
     // Подцепляем к городам геолокацию:
-    /*let geoUpd = false;
+    let geoUpd = false;
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
             city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            global.log( 'Геолокация 1', city.location );
             if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
+            global.log( 'Геолокация 2', city.location );
             city.location = Object.keys( city.location ).map( k => city.location[ k ] );
+            global.log( 'Геолокация 3', city.location );
             if ( !city.location.length ) continue;
+            global.log( 'Геолокация 4', city.location );
             await model.cities().update( { key: city.key }, { location: city.location } );
             geoUpd = true;
         }
     }
     if ( geoUpd ) cities = await model.cities().find();
-    if ( geoUpd ) global.log( 'Обновлена геолокация' );*/
+    if ( geoUpd ) global.log( 'Обновлена геолокация' );
 };
