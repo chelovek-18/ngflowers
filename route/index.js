@@ -49,6 +49,7 @@ class Route
             }))
 
             .listen( global.appConf.location.port, () => {
+                global.log( 'Сервер запущен' );
                 this.routes();
             });
 
@@ -68,15 +69,10 @@ class Route
             });*/
         //});
 
-        // Логгирование
-        global.log = function() {
-            let args = [];
-            for ( let k in arguments ) args.push( arguments[ k ] );
-            console.log( ...args );
-        }
     }
 
     routes() {
+        global.log( 'Маршрутизация' );
         // Маршруты:
 
         // Инициализация

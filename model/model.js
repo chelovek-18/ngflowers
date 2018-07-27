@@ -1,5 +1,6 @@
 'use strict';
 
+global.log( 'Инициализация базы' );
 const
 	// mongoose
 	mongoose = require( 'mongoose' ),
@@ -41,7 +42,7 @@ class Model
 
     // ------------------------------------- Коннект с базой и схемы -------------------------------------
     constructor( dbcomplete ) {
-		let self = this; global.log( 'init db' );
+		let self = this;
 		( async () => {
 			try {
 				await mongoose.connect( path );
@@ -76,8 +77,8 @@ class Model
 						}
 					});
 
-					dbcomplete();
 				});
+				dbcomplete();
 			} catch( err ) {
 				console.log( 'model err', err );
 				self.error = err;

@@ -1,5 +1,6 @@
 'use strict';
 
+global.log( 'Инициализация приложения' );
 const
     // express
     express = require( 'express' ),
@@ -14,11 +15,11 @@ const
 
 // Данные
 let
-    cities = []; global.log( 'init app' );
+    cities = [];
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
-    global.log( 'dbcomplete' );
+    global.log( 'База инициализирована' );
     // Получаем из базы города со всем, что к ним относится
     cities = ( await model.cities().find() ) || [];
     global.obj = {};
