@@ -13,14 +13,13 @@ module.exports = async () => {
         cities = global.obj.cities,
         model = global.obj.model,
         reqCities = ( await ng.getCities() ) || [],
+        // Список кодов городов (из запроса)
+        rKeys = Object.keys( reqCities ),
         isUpd = false;
-        //global.log( 'cities', cities.map( c => c.key )  );
 
     // Сравниваем данные из базы и из запроса:
-    if ( Object.keys( reqCities ).length ) {
+    if ( rKeys.length ) {
         let
-            // Список кодов городов (запрос)
-            rKeys = reqCities.map( c => c.key ),
             // Список кодов городов (база)
             keys = cities
                 .map( c => c.key )
@@ -34,7 +33,7 @@ module.exports = async () => {
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); return;
+            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) );
 
         // 1. Отключаем те города, что отсутствуют в API
         for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
@@ -102,9 +101,9 @@ module.exports = async () => {
 
         // 3. Добавляем новые
         for ( let k in rKeysNew ) {
-            await model.cities().save( rKeysNew[ k ] );
+            await model.cities().save( reqCities[ rKeysNew[ k ] ] );
             isUpd = true;
-            global.log( `Добавлен город ${ rKeysNew[ k ].key }` );
+            global.log( `Добавлен город ${ reqCities[ rKeysNew[ k ] ].key }` );
         }
         
         // 4. Сохраняем в cities
