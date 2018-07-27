@@ -13,8 +13,6 @@ module.exports = async () => {
         cities = global.obj.cities,
         model = global.obj.model,
         reqCities = ( await ng.getCities() ) || [],
-        // Список кодов городов (из запроса)
-        rKeys = Object.keys( reqCities ),
         isUpd = false;
 
     // Сравниваем данные из базы и из запроса:
@@ -35,7 +33,7 @@ module.exports = async () => {
                     }, { in: [], out: [] }
                 ),
             // Новые города (которых еще нет в базе)
-            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); global.log( 'rKeysNew', rKeysNew, rKeys, keys ); return; 
+            rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) ); global.log( 'rKeysNew', rKeysNew, rKeys, keys ); 
 
         // 1. Отключаем те города, что отсутствуют в API
         for ( let k in cities.filter( c => ~keys.out.indexOf( c.key ) && c.use ) ) {
@@ -103,9 +101,10 @@ module.exports = async () => {
 
         // 3. Добавляем новые
         for ( let k in rKeysNew ) {
-            await model.cities().save( reqCities[ rKeysNew[ k ] ] );
+            let newC = reqCities.filter( c => c.key == rKeysNew[ k ] )[ 0 ];
+            await model.cities().save( newC );
             isUpd = true;
-            global.log( `Добавлен город ${ reqCities[ rKeysNew[ k ] ].key }` );
+            global.log( `Добавлен город ${ newC.key }` );
         }
         
         // 4. Сохраняем в cities
@@ -120,7 +119,7 @@ module.exports = async () => {
         if ( !city.location || !city.location.length ) {
             city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
             global.log( 'Геолокация 1', city.location );
-            if ( !city.location ) continue;
+            /*if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             global.log( 'Геолокация 2', city.location );
             city.location = Object.keys( city.location ).map( k => city.location[ k ] );
@@ -128,7 +127,7 @@ module.exports = async () => {
             if ( !city.location.length ) continue;
             global.log( 'Геолокация 4', city.location );
             await model.cities().update( { key: city.key }, { location: city.location } );
-            geoUpd = true;
+            geoUpd = true;*/
         }
     }
     if ( geoUpd ) cities = await model.cities().find();
