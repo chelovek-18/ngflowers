@@ -28,7 +28,7 @@ async function dbcomplete() {
     Object.defineProperty( global.obj, 'model', {
         get: () => model
     });
-    global.console.log( 'hzhz3' );
+    global.log( 'hzhz3' );
 
     // Получаем из базы и устанавливаем для геолокации настройки
     let settings = await model.settings().findOne();
