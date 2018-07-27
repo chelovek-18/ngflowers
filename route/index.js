@@ -67,8 +67,10 @@ class Route
                 ws.send( `ok, ${ message }` );
             });*/
         //});
+
+        // Логгирование
         global.log = function() {
-            let args = [ 'yo! its global!' ];
+            let args = [];
             for ( let k in arguments ) args.push( arguments[ k ] );
             console.log( ...args );
         }

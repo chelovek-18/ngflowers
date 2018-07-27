@@ -18,6 +18,7 @@ let
 
 // Функция дергается по готовности базы
 async function dbcomplete() {
+    global.log( 'dbcomplete' );
     // Получаем из базы города со всем, что к ним относится
     cities = ( await model.cities().find() ) || [];
     global.obj = {};
@@ -28,12 +29,10 @@ async function dbcomplete() {
     Object.defineProperty( global.obj, 'model', {
         get: () => model
     });
-    global.log( 'hzhz3' );
 
     // Получаем из базы и устанавливаем для геолокации настройки
     let settings = await model.settings().findOne();
     geo.setParams( settings );
-    console.log( 'hzhz4' );
 
     // Интервал обновлений данных
     //setInterval( refreshDatas, global.appConf.settings.refresh );
