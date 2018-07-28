@@ -5,8 +5,6 @@ const
     fs = require( 'fs' ),
     jimp = require( 'jimp' );
 
-let onProcess = false;
-
 /**
  * ------------------------------------- Работа с изображениями -------------------------------------
  */
@@ -25,28 +23,26 @@ class Images extends Request
         return new Promise( async ( r, j ) => {
             let resp = await this.setBody().request();
             resp.pipe( fs.createWriteStream( imgpath ) );
-            console.log( 'image saved', imgpath );
+            global.log( 'Сохранено изображение', imgpath );
             // Таймаут между запросами чтобы не перегружать сервак
             setTimeout( () => {
                 if ( ~fnm.indexOf( '.gif' ) ) {
-                    console.log( "sorry, i'm gif!" );
+                    global.log( "Изображение gif" );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
                     setTimeout( () => {
-                        console.log( 'e, ok!' );
                         r();
                     }, 2000);
                 } else jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
-                    console.log( 'image resize', imgpath );
+                    global.log( 'Resize', imgpath );
                     r();
                 }).catch( function( err ) {
-                    console.log( 'resize error', imgpath, err );
+                    global.log( 'Ошибка resize', imgpath, err );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
                     setTimeout( () => {
-                        console.log( 'e, ok!' );
                         r();
                     }, 2000);
                 });
@@ -58,8 +54,7 @@ class Images extends Request
 
     // Перебор изображений товаров и баннеров и сохранение их к себе
     async imgsExistenceCheck( city, prop ) {
-        if ( onProcess ) return;
-        onProcess = true;
+        global.log( `Обработка изображений ${ prop } ${ city.name }` );
         let self = this;
         let dirpath = `${ global.appConf.location.root }/public/thumbs/${ city.key }`;
         for ( let p in city[ prop ].filter( i => i.use ) ) {
@@ -84,7 +79,6 @@ class Images extends Request
                     await self.getImage( city.link, img, imgpath, fnm );
             }
         }
-        onProcess = false;
         // Удаление лишних дерикторий
         let chDirs = fs.readdirSync( dirpath + '/upload/iblock', 'utf8' );
         for ( let cd in chDirs ) {
@@ -92,7 +86,7 @@ class Images extends Request
                 ( city.products.filter( p => p.image.filter( im => ~im.indexOf( '/' + cd ) ).length ).length
                 + city.banners.filter( p => ~p.image.indexOf( '/' + cd ) ).length ) == 0
             ) {
-                console.log( `remove dir ${ dirpath + '/upload/iblock/' + cd }:` );
+                global.log( `remove dir ${ dirpath + '/upload/iblock/' + cd }:` );
                 let files = fs.readdirSync( dirpath + '/upload/iblock/' + cd ) || [];
                 for ( let kf in files ) {
                     fs.unlinkSync( dirpath + '/upload/iblock/' + cd + '/' + files[ kf ] );

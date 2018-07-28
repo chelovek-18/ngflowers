@@ -5,8 +5,7 @@ const
     ng = new ( require( './ng' ) ),
     geo = new ( require( './geo' ) ),
     images = new ( require( './images' ) ),
-    Cities = require( './cities' ),
-    https = require( 'https' );
+    Cities = require( './cities' );
 
 module.exports = async () => {
     global.log( 'Старт обновления данных' );
@@ -64,6 +63,6 @@ module.exports = async () => {
             geoUpd = true;
         }
     }
-    if ( geoUpd ) cities = await model.cities().find();
+    if ( geoUpd ) global.obj.cities = await model.cities().find();
     if ( geoUpd ) global.log( 'Обновлена геолокация' );
 };
