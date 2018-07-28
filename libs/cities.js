@@ -42,7 +42,7 @@ class Cities extends Array
             if ( city.use != on ) continue;
             await model.cities().update( { key: city.key }, { use: on } );
             isUpd = true;
-            global.log( on ? `Отключен город ${ city.key }` : `Включаем город ${ city.key }` );
+            global.log( !on ? `Отключен город ${ city.key }` : `Включаем город ${ city.key }` );
         }
         return isUpd;
     }
