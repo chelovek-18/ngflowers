@@ -77,12 +77,11 @@ x-client-data: CIW2yQEIo7bJAQjBtskBCKmdygEI153KAQioo8oB*/
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
-            city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            global.log( 'Геолокация 1', city.location );
-            if ( !city.location ) continue;
-            city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
-            global.log( 'Геолокация 2', city.location );
+            city.geo = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            global.log( 'Геолокация 1', city.geo );
+            if ( !city.geo ) continue;
+            city.geo = ( ( city.geo || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
+            global.log( 'Геолокация 2', city.geo );
             /*city.location = Object.keys( city.location ).map( k => city.location[ k ] );
             global.log( 'Геолокация 3', city.location );
             if ( !city.location.length ) continue;
