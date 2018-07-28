@@ -46,6 +46,7 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
+                    global.log( 'otvet2', output );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {
