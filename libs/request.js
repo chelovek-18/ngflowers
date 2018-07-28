@@ -56,12 +56,12 @@ class Request
                     }
                 });
             });
-            httpReq.on( 'error', ( err ) => {
+            /*httpReq.on( 'error', ( err ) => {
                 console.log( 'request error:', err );
                 j( {} );
             });
             if ( this.method != 'GET' ) httpReq.write( self.body );
-            httpReq.end();
+            httpReq.end();*/
         }).catch( e => {
             console.log( 'request error:', e );
             return {};
