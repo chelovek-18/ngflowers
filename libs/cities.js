@@ -70,8 +70,8 @@ class Cities extends Array
     }
 
     compare( city, rCity ) {
-        return Object.keys( city )
-            .map( cf => { global.log( 'city cf', cf, city.name ); return cf; } )
+        return Object.keys( rCity )
+            .map( cf => { global.log( 'city cf', cf ); return cf; } )
             .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
             .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
     }
