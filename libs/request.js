@@ -34,7 +34,7 @@ class Request
         global.log( this.method + '-запрос', this.host + this.path );
         let self = this;
         return new Promise( ( r, j ) => {
-            let httpReq = https.request( self, function( httpRes ) {
+            let httpReq = https[ self.geo ? 'get' : 'request' ]( self.geo ? `https://${ self.host }${ self.path }` : self, function( httpRes ) {
                 if ( self.dataType == 'image' ) return r( httpRes );
                 let output = '';
 
