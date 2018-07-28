@@ -88,9 +88,9 @@ class Cities extends Array
                     // Сравниваем значения и корректируем
                     Object.keys( rItem ).forEach( p => {
                         if (
-                            ( rItem[ p ] && typeof rItem[ p ] != 'object' )
-                                ? rItem[ p ] != item[ p ]
-                                : rItem[ p ].filter( it => ~item[ p ].indexOf( it ) ).length == item[ p ].length
+                            ( rItem[ p ] && typeof rItem[ p ] == 'object' )
+                                ? rItem[ p ].filter( it => ~item[ p ].indexOf( it ) ).length == item[ p ].length
+                                : rItem[ p ] != item[ p ]
                         ) {
                             global.log( 'upd', p );
                             item[ p ] = rItem[ p ];
