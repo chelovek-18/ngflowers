@@ -78,8 +78,8 @@ class Cities extends Array
                 let
                     prop = props[ nm ],
                     propUpd = false,
-                    rIds = rCity.getPropIds( prop ),
-                    ids = city.getPropIds( prop ),
+                    rIds = new Cities( ...rCity ).getPropIds( prop ),
+                    ids = new Cities( ...city ).getPropIds( prop ),
                     crossIds = ids.filter( id => ~rIds.indexOf( id ) ),
                     newIds = rIds.filter( id => !~ids.indexOf( id ) ),
                     noIds = ids.filter( id => !~rIds.indexOf( id ) );
