@@ -1,5 +1,7 @@
 'use strict';
 
+const images = new ( require( './images' ) );
+
 let model;
 
 class Cities extends Array
@@ -13,6 +15,10 @@ class Cities extends Array
 
     getKeys() {
         return this.map( c => c.key );
+    }
+
+    getPropIds( prop ) {
+        return this[ prop ].map( c => parseInt( c.id ) );
     }
 
     getCity( key ) {
@@ -58,12 +64,57 @@ class Cities extends Array
             let
                 city = this[ n ],
                 rCity = reqCities.getCity( city.key ),
-                updCity = this.compare( city, rCity ); global.log( 'updCity', updCity );
+                updCity = this.compare( city, rCity );
 
             if ( Object.keys( updCity ).length ) {
                 await model.cities().update( { key: city.key }, updCity );
                 isUpd = true;
                 global.log( `Город обновлен` );
+            }
+
+            // Сравниваем баннеры, категории, товары
+            let props = [ 'banners', 'categories', 'products' ];
+            for ( let nm in props ) {
+                let
+                    prop = props[ nm ],
+                    propUpd = false,
+                    rIds = rCity.getPropIds( prop ),
+                    ids = city.getPropIds( prop ),
+                    crossIds = ids.filter( id => ~rIds.indexOf( id ) ),
+                    newIds = rIds.filter( id => !~ids.indexOf( id ) ),
+                    noIds = ids.filter( id => !~rIds.indexOf( id ) );
+
+                // Перебираем массив (баннеров, категорий или товаров)
+                city[ prop ].filter( it => ~crossIds.indexOf( it.id ) ).forEach( item => {
+                    let rItem = rCity.filter( it => it.id == item.id )[ 0 ];
+
+                    // Сравниваем значения и корректируем
+                    Object.keys( rItem ).forEach( p => {
+                        if ( rItem[ p ] != item[ p ] ) {
+                            item[ p ] = rItem[ p ];
+                            propUpd = true;
+                        }
+                    });
+                });
+                rCity[ prop ].filter( it => ~newIds.indexOf( it.id ) ).forEach( rItem => {
+                    city[ prop ].push( Object.assign( rItem, { use: true } ) );
+                    propUpd = true;
+                });
+                city[ prop ].filter( it => ~noIds.indexOf( it.id ) && it.use ).forEach( item => {
+                    item.use = false;
+                    propUpd = true;
+                });
+
+                if ( propUpd ) {
+                    await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
+                    isUpd = true;
+                    global.log( `Город обновлен, поле ${ prop }` );
+                }
+
+                // Проверяем наличие сохраненных изображений, сохраняем
+                if ( prop == 'products' || prop == 'banners' ) {
+                    //images.imgsExistenceCheck( city, prop );
+                }
             }
         }
         return isUpd;
@@ -71,7 +122,6 @@ class Cities extends Array
 
     compare( city, rCity ) {
         return Object.keys( rCity )
-            .map( cf => { global.log( 'city cf', cf ); return cf; } )
             .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
             .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
     }

@@ -44,62 +44,6 @@ module.exports = async () => {
         // 2. Сравниваем по полям
         isUpd = await cities.checkProps( reqCities, keys.in ) || isUpd;
 
-        /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
-            let
-                city = cities[ k ],
-                rCity = reqCities.filter( c => c.key == city.key )[ 0 ],
-                updCity = Object.keys( city )
-                    .filter( c => ~[ 'name', 'link', 'siteId' ].indexOf( c ) && city[ c ] != rCity[ c ] )
-                    .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
-
-            if ( Object.keys( updCity ).length ) {
-                await model.cities().update( { key: city.key }, updCity );
-                isUpd = true;
-                global.log( `Город обновлен` );
-            }
-
-            // Сравниваем баннеры, категории, товары
-            let props = [ 'banners', 'categories', 'products' ];
-            for ( let nm in props ) {
-                let
-                    prop = props[ nm ],
-                    propUpd = false,
-                    ids = rCity[ prop ].map( p => parseInt( p.id ) );
-
-                // Перебираем массив (баннеров, категорий или товаров)
-                rCity[ prop ].forEach( item => {
-                    let
-                        id = item.id,
-                        propItem = city[ prop ]
-                            .filter( i => i.id == id )[ 0 ] ||
-                            ( city[ prop ].push( { id: id } ), city[ prop ][ city[ prop ].length - 1 ] );
-
-                    // Сравниваем значения и корректируем
-                    Object.keys( item ).forEach( p => {
-                        if ( item[ p ] != propItem[ p ] ) {
-                            propItem[ p ] = item[ p ];
-                            propUpd = true;
-                        }
-                    });
-                });
-                // Отключаем те, которые в api отсутствуют
-                city[ prop ]
-                    .filter( i => !~ids.indexOf( i.id ) && i.use )
-                    .forEach( i => { i.use = false; propUpd = true; } );
-                
-                if ( propUpd ) {
-                    await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
-                    isUpd = true;
-                    global.log( `Город обновлен, поле ${ prop }` );
-                }
-
-                // Проверяем наличие сохраненных изображений, сохраняем
-                if ( prop == 'products' || prop == 'banners' ) {
-                    //images.imgsExistenceCheck( city, prop );
-                }
-            }
-        }*/
-
         // 3. Добавляем новые
         isUpd = await reqCities.addCities( rKeysNew ) || isUpd;
         
