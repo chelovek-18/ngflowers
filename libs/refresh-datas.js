@@ -79,7 +79,11 @@ x-client-data: CIW2yQEIo7bJAQjBtskBCKmdygEI153KAQioo8oB*/
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
             //city.location = await https.get( 'https://maps.google.com/maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4' );
-            https.get( 'https://maps.google.com/maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4', ( httpRes ) => {
+            let options = {
+                host: 'maps.google.com',
+                path: '/maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4'
+            }
+            https.request( options, ( httpRes ) => {
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 )
