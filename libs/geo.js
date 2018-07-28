@@ -11,7 +11,7 @@ class Geo extends Request
         super();
         this.host = 'maps.google.com';
         this.defaultPath = '/maps/api/geocode/json';
-        this.method = 'GET';
+        this.method = 'POST';
         this.defaultData = { sensor: false, key: 'AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M' };
         this.address = 'Санкт-Петербург';
     }
