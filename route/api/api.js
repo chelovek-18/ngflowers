@@ -63,4 +63,8 @@ router.get( '/del/', async ( req, res, next ) => {
     res.json( await req.db.cities().delete() );
 });
 
+router.get( '/remsk/', async ( req, res, next ) => {
+    res.json( await req.db.cities().update( { key: 'msk' }, { name: 'Мозгва' } ) );
+});
+
 module.exports = router;
