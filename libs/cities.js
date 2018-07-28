@@ -17,10 +17,6 @@ class Cities extends Array
         return this.map( c => c.key );
     }
 
-    getPropIds( prop ) {
-        return this[ prop ].map( c => parseInt( c.id ) );
-    }
-
     getCity( key ) {
         return this.filter( c => c.key == key )[ 0 ];
     }
@@ -78,8 +74,8 @@ class Cities extends Array
                 let
                     prop = props[ nm ],
                     propUpd = false,
-                    rIds = new Cities( ...rCity ).getPropIds( prop ),
-                    ids = new Cities( ...city ).getPropIds( prop ),
+                    rIds = rCity[ prop ].map( c => parseInt( c.id ) ),
+                    ids = city[ prop ].map( c => parseInt( c.id ) ),
                     crossIds = ids.filter( id => ~rIds.indexOf( id ) ),
                     newIds = rIds.filter( id => !~ids.indexOf( id ) ),
                     noIds = ids.filter( id => !~rIds.indexOf( id ) );
