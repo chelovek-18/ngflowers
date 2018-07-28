@@ -27,6 +27,7 @@ class Request
             this.path = this.defaultPath;
         }
         else this.path = `${ this.defaultPath }?${ this.body }`;
+        global.log( 'mpth', this.path );
         return this;
     }
 

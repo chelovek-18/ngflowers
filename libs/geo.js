@@ -18,7 +18,7 @@ class Geo extends Request
 
     async getCityLocation( address = this.address ) {
         global.log( 'Получена геолокация города ' + address );
-        return await this.setBody( { address: address } ).request();
+        return await this.setBody( { address: '%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4' /*address*/ } ).request();
         // .setHeaders( this.xheaders )
     }
 
