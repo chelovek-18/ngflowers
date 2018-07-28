@@ -51,9 +51,9 @@ module.exports = async () => {
 
     // Подцепляем к городам геолокацию:
     let geoUpd = false;
-    geo.setHeaders( {
+    /*geo.setHeaders( {
         'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
-    } );
+    } );*/
     /*:authority: maps.google.com
 :method: GET
 :path: /maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4
@@ -70,10 +70,10 @@ x-client-data: CIW2yQEIo7bJAQjBtskBCKmdygEI153KAQioo8oB*/
         if ( !city.location || !city.location.length ) {
             city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
             global.log( 'Геолокация 1', city.location );
-            /*if ( !city.location ) continue;
+            if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             global.log( 'Геолокация 2', city.location );
-            city.location = Object.keys( city.location ).map( k => city.location[ k ] );
+            /*city.location = Object.keys( city.location ).map( k => city.location[ k ] );
             global.log( 'Геолокация 3', city.location );
             if ( !city.location.length ) continue;
             global.log( 'Геолокация 4', city.location );
