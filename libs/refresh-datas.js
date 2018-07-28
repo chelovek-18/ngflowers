@@ -51,6 +51,20 @@ module.exports = async () => {
 
     // Подцепляем к городам геолокацию:
     let geoUpd = false;
+    geo.setHeaders( {
+        'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
+    } );
+    /*:authority: maps.google.com
+:method: GET
+:path: /maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4
+:scheme: https
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*-/*;q=0.8
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+cookie: NID=135=LA5iPmhWBmep0PzQOl-8PUSoYvcwH4VFPqMYwqTNhFGyl-Rm6CA_o3_mI-wOgCZVLg-_rKjrJGPLRhBqz7ebCD3x9vEwF0p4e7lmyZ_4uZiFHfz1DsLwH3rYREDftk7g; 1P_JAR=2018-07-27-05
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+x-client-data: CIW2yQEIo7bJAQjBtskBCKmdygEI153KAQioo8oB*/
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {

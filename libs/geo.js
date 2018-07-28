@@ -25,6 +25,10 @@ class Geo extends Request
         // Установить ключ
         this.defaultData.key = ( await settings ).googleKey;
     }
+
+    setHeaders( headers ) {
+        this.headers = headers;
+    }
 }
 
 module.exports = Geo;
