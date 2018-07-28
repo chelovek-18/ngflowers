@@ -18,7 +18,7 @@ class Geo extends Request
 
     async getCityLocation( address = this.address ) {
         global.log( 'Получена геолокация города ' + address );
-        let res = await this.setBody( { address: address } ).request();
+        let res = await this.setBody( { address: escape( address ) } ).request();
         global.log( 'otv', res );
         return res;
         // .setHeaders( this.xheaders )
@@ -27,12 +27,6 @@ class Geo extends Request
     async setParams( settings ) {
         // Установить ключ
         this.defaultData.key = ( await settings ).googleKey;
-    }
-
-    setHeaders( headers ) {
-        this.headers = headers;
-        this.xheaders = headers;
-        return this;
     }
 }
 
