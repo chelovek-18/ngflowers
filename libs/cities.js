@@ -87,7 +87,11 @@ class Cities extends Array
 
                     // Сравниваем значения и корректируем
                     Object.keys( rItem ).forEach( p => {
-                        if ( rItem[ p ] != item[ p ] ) {
+                        if (
+                            typeof rItem != 'object'
+                                ? rItem[ p ] != item[ p ]
+                                : rItem.filter( it => ~item.indexOf( it ) ).length == item.length
+                        ) {
                             global.log( 'upd', p );
                             item[ p ] = rItem[ p ];
                             propUpd = true;
