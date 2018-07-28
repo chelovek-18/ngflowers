@@ -71,7 +71,7 @@ class Cities extends Array
 
     compare( city, rCity ) {
         return Object.keys( city )
-            .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
+            .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && ( ( global.log( 'ff', cf, city[ cf ], rCity[ cf ] ) ), city[ cf ] != rCity[ cf ] ) )
             .reduce( ( o, k ) => { global.log( 'compare', k, rCity[ k ] ); o[ k ] = rCity[ k ]; return o; }, {});
     }
 }
