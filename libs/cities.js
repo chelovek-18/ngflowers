@@ -83,7 +83,7 @@ class Cities extends Array
 
                 // Перебираем массив (баннеров, категорий или товаров)
                 city[ prop ].filter( it => ~crossIds.indexOf( it.id ) ).forEach( item => {
-                    let rItem = rCity.filter( it => it.id == item.id )[ 0 ];
+                    let rItem = rCity[ prop ].filter( it => it.id == item.id )[ 0 ];
 
                     // Сравниваем значения и корректируем
                     Object.keys( rItem ).forEach( p => {
