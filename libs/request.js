@@ -47,6 +47,7 @@ class Request
                     output += chunk;
                 });
                 httpRes.on( 'end', () => {
+                    return r( output );
                     try {
                         r( JSON.parse( output ) );
                     } catch( err ) {
