@@ -27,7 +27,6 @@ class Request
             this.path = this.defaultPath;
         }
         else this.path = `${ this.defaultPath }?${ this.body }`;
-        global.log( 'mpth', this.path );
         return this;
     }
 
@@ -37,6 +36,7 @@ class Request
         return new Promise( ( r, j ) => {
             let httpReq = https.request( self, function( httpRes ) {
                 if ( self.dataType == 'image' ) return r( httpRes );
+                global.log( 'otvet', httpRes.statusCode );
                 let output = '';
 
                 if ( httpRes.statusCode >= 400 )
