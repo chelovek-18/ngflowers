@@ -38,7 +38,12 @@ module.exports = async () => {
         // 1. Отключаем те города, что отсутствуют в API
         isUpd = await cities.switchOffCities( keys.out );
 
+        // ...и наоборот
+        isUpd = await cities.switchOnCities( keys.in ) || isUpd;
+
         // 2. Сравниваем по полям
+        isUpd = await cities.checkProps( reqCities, keys.in ) || isUpd;
+
         /*for ( let k in cities.filter( c => ~keys.in.indexOf( c.key ) ) ) {
             let
                 city = cities[ k ],

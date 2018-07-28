@@ -12,8 +12,11 @@ class Cities extends Array
     }
 
     getKeys() {
-        //model = global.obj.model;
         return this.map( c => c.key );
+    }
+
+    getCity( key ) {
+        return this.filter( c => c.key == key )[ 0 ];
     }
 
     async addCities( keys ) {
@@ -30,15 +33,46 @@ class Cities extends Array
         return isUpd;
     }
 
-    async switchOffCities( keys ) {
+    async switchCities( keys, on ) {
         let isUpd = false;
-        for ( let n in this.filter( c => ~keys.indexOf( c.key ) && c.use ) ) {
+        for ( let n in this.filter( c => ~keys.indexOf( c.key ) && c.use != on ) ) {
             let city = this[ n ];
-            await model.cities().update( { key: city.key }, { use: false } );
+            await model.cities().update( { key: city.key }, { use: on } );
             isUpd = true;
-            global.log( `Отключен город ${ city.key }` );
+            global.log( on ? `Отключен город ${ city.key }` : `Включаем город ${ city.key }` );
         }
         return isUpd;
+    }
+
+    async switchOffCities( keys ) {
+        return await this.switchCities( keys, false );
+    }
+
+    async switchOnCities( keys ) {
+        return await this.switchCities( keys, true );
+    }
+
+    async checkProps( reqCities, keys ) {
+        let isUpd = false;
+        for ( let n in this.filter( c => ~keys.indexOf( c.key ) ) ) {
+            let
+                city = this[ n ],
+                rCity = reqCities.getCity( city.key ),
+                updCity = this.compare( city, rCity );
+
+            if ( Object.keys( updCity ).length ) {
+                await model.cities().update( { key: city.key }, updCity );
+                isUpd = true;
+                global.log( `Город обновлен` );
+            }
+        }
+        return isUpd;
+    }
+
+    compare( city, rCity ) {
+        return Object.keys( city )
+            .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
+            .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
     }
 }
 
