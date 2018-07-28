@@ -36,7 +36,7 @@ class Request
         return new Promise( ( r, j ) => {
             let httpReq = https.request( self, function( httpRes ) {
                 if ( self.dataType == 'image' ) return r( httpRes );
-                let output = '';
+                let output = ''; r( { q: 'qq' } );
 
                 if ( httpRes.statusCode >= 400 )
                     j( {} );
