@@ -5,7 +5,8 @@ const
     ng = new ( require( './ng' ) ),
     geo = new ( require( './geo' ) ),
     images = new ( require( './images' ) ),
-    Cities = require( './cities' );
+    Cities = require( './cities' ),
+    https = require( 'https' );
 
 module.exports = async () => {
     global.log( 'Старт обновления данных' );
@@ -77,11 +78,13 @@ x-client-data: CIW2yQEIo7bJAQjBtskBCKmdygEI153KAQioo8oB*/
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
-            city.geo = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            global.log( 'Геолокация 1', city.geo );
-            if ( !city.geo ) continue;
-            city.geo = ( ( city.geo || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
-            global.log( 'Геолокация 2', city.geo );
+            city.location = await https.get( 'https://maps.google.com/maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4' );
+            global.log( 'Геолокация 1', city.location );
+            /*city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            global.log( 'Геолокация 1', city.location );
+            if ( !city.location ) continue;
+            city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
+            global.log( 'Геолокация 2', city.location );
             /*city.location = Object.keys( city.location ).map( k => city.location[ k ] );
             global.log( 'Геолокация 3', city.location );
             if ( !city.location.length ) continue;
