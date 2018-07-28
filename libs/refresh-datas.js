@@ -42,10 +42,10 @@ module.exports = async () => {
         isUpd = await cities.switchOnCities( keys.in ) || isUpd;
 
         // 2. Сравниваем по полям
-        isUpd = await cities.checkProps( reqCities, keys.in ) || isUpd;
+        isUpd = await cities.checkProps( reqCfities, keys.in ) || isUpd;
 
         // 3. Добавляем новые
-        isUpd = await reqCities.addCities( rKeysNew ) || isUpd;
+        isUpd = await reqCfities.addCities( rKeysNew ) || isUpd;
         
         // 4. Сохраняем в cities
         if ( isUpd ) global.log( `Обновлен список городов` );

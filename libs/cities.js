@@ -37,8 +37,9 @@ class Cities extends Array
 
     async switchCities( keys, on ) {
         let isUpd = false;
-        for ( let n in this.filter( c => ~keys.indexOf( c.key ) && c.use != on ) ) {
-            let city = this[ n ];
+        for ( let n in keys ) {
+            let city = this.getCity( [ keys[ n ] ] );
+            if ( city.use != on ) continue;
             await model.cities().update( { key: city.key }, { use: on } );
             isUpd = true;
             global.log( on ? `Отключен город ${ city.key }` : `Включаем город ${ city.key }` );
@@ -54,12 +55,12 @@ class Cities extends Array
         return await this.switchCities( keys, true );
     }
 
-    async checkProps( reqCities, keys ) {
+    async checkProps( reqCfities, keys ) {
         let isUpd = false;
-        for ( let n in this.filter( c => ~keys.indexOf( c.key ) ) ) {
+        for ( let n in keys ) {
             let
-                city = this[ n ],
-                rCity = reqCities.getCity( city.key ),
+                city = this.getCity( keys[ n ] ),
+                rCity = reqCfities.getCity( city.key ),
                 updCity = this.compare( city, rCity );
 
             if ( Object.keys( updCity ).length ) {
