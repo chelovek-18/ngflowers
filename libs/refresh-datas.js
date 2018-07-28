@@ -104,7 +104,7 @@ module.exports = async () => {
         isUpd = await reqCities.addCities( rKeysNew ) || isUpd;
         
         // 4. Сохраняем в cities
-        global.log( `Обновлен список городов` );
+        if ( isUpd ) global.log( `Обновлен список городов` );
         if ( isUpd ) global.obj.cities = await model.cities().find();
     }
 
