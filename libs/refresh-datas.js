@@ -80,8 +80,8 @@ x-client-data: CIW2yQEIo7bJAQjBtskBCKmdygEI153KAQioo8oB*/
         if ( !city.location || !city.location.length ) {
             //city.location = await https.get( 'https://maps.google.com/maps/api/geocode/json?sensor=false&key=AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M&address=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9+%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4' );
             //global.log( 'Геолокация 1', city.location );
-            city.location = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
-            global.log( 'Геолокация 1', city.location );
+            let gr = await geo.getCityLocation( city.name.replace( / /g, '+' ) );
+            global.log( 'Геолокация 1', gr );
             if ( !city.location ) continue;
             city.location = ( ( city.location || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             global.log( 'Геолокация 2', city.location );
