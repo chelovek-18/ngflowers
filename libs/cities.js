@@ -58,7 +58,7 @@ class Cities extends Array
             let
                 city = this[ n ],
                 rCity = reqCities.getCity( city.key ),
-                updCity = this.compare( city, rCity );
+                updCity = this.compare( city, rCity ); global.log( 'updCity', updCity );
 
             if ( Object.keys( updCity ).length ) {
                 await model.cities().update( { key: city.key }, updCity );
@@ -72,7 +72,7 @@ class Cities extends Array
     compare( city, rCity ) {
         return Object.keys( city )
             .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
-            .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
+            .reduce( ( o, k ) => { global.log( 'compare', k, rCity[ k ] ); o[ k ] = rCity[ k ]; return o; }, {});
     }
 }
 
