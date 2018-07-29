@@ -4,7 +4,7 @@
 global.appConf = require( './config/config' );
 global.appConf.location.root = __dirname;
 
-// Логгирование
+// Логгирование (TODO: добавить логирование в файл)
 global.log = function() {
 	let args = [];
 	for ( let k in arguments ) args.push( arguments[ k ] );
@@ -29,5 +29,4 @@ if ( cluster.isMaster ) {
 	global.log( 'Процесс-форк запущен' );
 
 	new ( require( './route' ) );
-	
 }
