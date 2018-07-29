@@ -82,7 +82,8 @@ class Images extends Request
         // Удаление лишних дерикторий
         let chDirs = fs.readdirSync( dirpath + '/upload/iblock', 'utf8' );
         global.log( 'chDirs?', chDirs.join( ', ' ) );
-        for ( let cd in chDirs ) {
+        for ( let n in chDirs ) {
+            let cd = chDir[ n ];
             if (
                 ( city.products.filter( p => p.image.filter( im => ~im.indexOf( '/' + cd ) ).length ).length
                 + city.banners.filter( p => ~p.image.indexOf( '/' + cd ) ).length ) == 0
