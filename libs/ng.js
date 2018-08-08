@@ -61,6 +61,18 @@ class NG extends Request
             .map( p => {
                 p.oldPrice = p.oldprice;
                 delete p.oldprice;
+                p.main = {
+                    vip_bukets: p.vip_bukets,
+                    avtor: p.avtor,
+                    exclusive: p.exclusive,
+                    svadeb: p.svadeb,
+                    korobki: p.korobki
+                }
+                delete p.vip_bukets;
+                delete p.avtor;
+                delete p.exclusive;
+                delete p.svadeb;
+                delete p.korobki;
                 return p;
             });
     }

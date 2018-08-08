@@ -123,9 +123,13 @@ class Cities extends Array
     }
 
     compare( city, rCity ) {
-        return Object.keys( rCity )
+        let comp1 = Object.keys( rCity )
             .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
             .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
+        let comp2 = Object.keys( rCity )
+            .filter( cf => ~[ 'main' ].indexOf( cf ) && JSON.stringify( city[ cf ] ) != JSON.stringify( rCity[ cf ] ) )
+            .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
+        return Object.assign( comp1, comp2 );
     }
 }
 

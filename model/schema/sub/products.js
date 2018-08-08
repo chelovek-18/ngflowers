@@ -48,6 +48,9 @@ class ProductsCollection
             groups: {
                 type: [ Number ]
             },
+            main: {
+                type: Object
+            },
             use: {
                 type: Boolean,
                 default: true
