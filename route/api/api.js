@@ -2,7 +2,7 @@
 
 const
     express = require( 'express' ),
-    ng = new ( require( './ng' ) ),
+    ng = new ( require( './../../libs/ng' ) ),
     router = express.Router();
 
 // ------------------------------------- API -------------------------------------
