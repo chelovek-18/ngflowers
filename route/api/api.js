@@ -2,6 +2,7 @@
 
 const
     express = require( 'express' ),
+    ng = new ( require( './ng' ) ),
     router = express.Router();
 
 // ------------------------------------- API -------------------------------------
@@ -63,8 +64,8 @@ router.get( '/del/', async ( req, res, next ) => {
     res.json( await req.db.cities().delete() );
 });
 
-router.get( '/remsk/', async ( req, res, next ) => {
-    res.json( await req.db.cities().update( { key: 'msk' }, { name: 'Мозгва' } ) );
+router.get( '/prd/', async ( req, res, next ) => {
+    res.json( await ng.getProducts() );
 });
 
 module.exports = router;
