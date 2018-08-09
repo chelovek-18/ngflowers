@@ -50,6 +50,7 @@ router.get( '/products/:city', ( req, res, next ) => {
                 description: c.description,
                 offers: c.offers,
                 qty: c.qty,
+                main: c.main,
                 groups: c.groups
             }; })
     );
