@@ -89,7 +89,10 @@ class Cities extends Array
                     Object.keys( rItem ).forEach( p => {
                         if (
                             ( rItem[ p ] && typeof rItem[ p ] == 'object' )
-                                ? rItem[ p ].filter( it => ~item[ p ].indexOf( it ) ).length != item[ p ].length
+                                ? JSON.stringify( rItem[ p ] ) != JSON.stringify( item[ p ] )
+                                //? rItem[ p ] instanceof Array
+                                //? rItem[ p ].filter( it => ~item[ p ].indexOf( it ) ).length != item[ p ].length
+                                //: 
                                 : rItem[ p ] != item[ p ]
                         ) {
                             global.log( 'upd', p );
@@ -123,13 +126,9 @@ class Cities extends Array
     }
 
     compare( city, rCity ) {
-        let comp1 = Object.keys( rCity )
+        return Object.keys( rCity )
             .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
             .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
-        let comp2 = Object.keys( rCity )
-            .filter( cf => ~[ 'main' ].indexOf( cf ) && JSON.stringify( city[ cf ] ) != JSON.stringify( rCity[ cf ] ) )
-            .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
-        return Object.assign( comp1, comp2 );
     }
 }
 
