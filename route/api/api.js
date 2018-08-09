@@ -19,7 +19,7 @@ router.get( '/banners/:city', ( req, res, next ) => {
         req.cities
             .filter( c => c.key == req.params.city )[ 0 ].banners
             .filter( b => b.use )
-            .map( b => { return { id: b.id, link: b.link, image: b.image }; } )
+            .map( b => { return { id: b.id, link: b.link, image: b.image, use: b.use }; } )
     );
 });
 
@@ -67,6 +67,10 @@ router.get( '/del/', async ( req, res, next ) => {
 
 router.get( '/prd/', async ( req, res, next ) => {
     res.json( await ng.getProducts() );
+});
+
+router.get( '/bnr/', async ( req, res, next ) => {
+    res.json( await ng.getBanners() );
 });
 
 module.exports = router;
