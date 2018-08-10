@@ -26,4 +26,4 @@ setInterval( () => {
 }, 400);
 
 
-module.exports = Request;
+module.exports = true;
