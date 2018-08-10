@@ -18,7 +18,7 @@ router.get( '/banners/:city', ( req, res, next ) => {
     res.json(
         req.cities
             .filter( c => c.key == req.params.city )[ 0 ].banners
-            .filter( b => b.use )
+            //.filter( b => b.use )
             .map( b => { return { id: b.id, link: b.link, image: b.image, use: b.use }; } )
     );
 });
