@@ -1,15 +1,10 @@
 'use strict';
 
+require( './libs/logs' );
+
 // Задаем глобальные конфиги для управления сервером
 global.appConf = require( './config/config' );
 global.appConf.location.root = __dirname;
-
-// Логгирование (TODO: добавить логирование в файл)
-global.log = function() {
-	let args = [];
-	for ( let k in arguments ) args.push( arguments[ k ] );
-	console.log( ...args );
-}
 
 const cluster = require( 'cluster' );
 
