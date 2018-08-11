@@ -22,29 +22,23 @@ class Cities extends Array
     }
 
     async addCities( keys ) {
-        let isUpd = false;
         for ( let n in keys ) {
             let
                 key = keys[ n ],
                 newCity = this.filter( c => c.key == key )[ 0 ];
 
-            await model.cities().save( newCity );
-            isUpd = true;
+            global.obj.cities = newCity;
             global.log( `Добавлен город ${ newCity.key }` );
         }
-        return isUpd;
     }
 
     async switchCities( keys, on ) {
-        let isUpd = false;
         for ( let n in keys ) {
             let city = this.getCity( [ keys[ n ] ] );
             if ( city.use != on ) continue;
-            await model.cities().update( { key: city.key }, { use: on } );
-            isUpd = true;
+            global.obj.cities = { key: city.key, use: on };
             global.log( !on ? `Отключен город ${ city.key }` : `Включаем город ${ city.key }` );
         }
-        return isUpd;
     }
 
     async switchOffCities( keys ) {
@@ -56,7 +50,6 @@ class Cities extends Array
     }
 
     async checkProps( reqCfities, keys ) {
-        let isUpd = false;
         for ( let n in keys ) {
             let
                 city = this.getCity( keys[ n ] ),
@@ -64,9 +57,8 @@ class Cities extends Array
                 updCity = this.compare( city, rCity );
 
             if ( Object.keys( updCity ).length ) {
-                await model.cities().update( { key: city.key }, updCity );
-                isUpd = true;
-                global.log( `Город обновлен` );
+                global.obj.cities = updCity;
+                global.log( `Город ${ updCity.key } обновлен` );
             }
 
             // Сравниваем баннеры, категории, товары
@@ -83,19 +75,31 @@ class Cities extends Array
 
                 // Перебираем массив (баннеров, категорий или товаров)
                 city[ prop ].filter( it => ~crossIds.indexOf( it.id ) ).forEach( item => {
+                    // Ищем имя для баннера если нет
+                    if ( prop == 'banners' && item.name == '' ) {
+                        let bannUrl = item.link;
+                        item.name = ( city.categories.filter( c => c.url == bannUrl )[ 0 ]
+                            || city.products.filter( p => p.url == bannUrl )[ 0 ]
+                            || {} ).name || '';
+                        if ( item.name != '' ) propUpd = true;
+                    }
+
                     let rItem = rCity[ prop ].filter( it => it.id == item.id )[ 0 ];
 
                     // Сравниваем значения и корректируем
                     Object.keys( rItem ).forEach( p => {
                         if (
-                            ( rItem[ p ] && typeof rItem[ p ] == 'object' )
-                                ? JSON.stringify( rItem[ p ] ) != JSON.stringify( item[ p ] )
-                                //? rItem[ p ] instanceof Array
-                                //? rItem[ p ].filter( it => ~item[ p ].indexOf( it ) ).length != item[ p ].length
-                                //: 
+                            ( rItem[ p ] instanceof Array )
+                                ? (
+                                    rItem[ p ].length != item[ p ].length
+                                    || rItem[ p ].filter( i => ~item[ p ].indexOf( i ) ).length != item[ p ].length
+                                ) : ( typeof rItem[ p ] == 'object' )
+                                ? (
+                                    Object.keys( rItem[ p ] ).length != Object.keys( item[ p ] ).length
+                                    || Object.keys( rItem[ p ] ).filter( k => rItem[ p ][ k ] != item[ p ][ k ] ).length
+                                )
                                 : rItem[ p ] != item[ p ]
                         ) {
-                            global.log( 'upd', p );
                             item[ p ] = rItem[ p ];
                             propUpd = true;
                         }
@@ -111,24 +115,22 @@ class Cities extends Array
                 });
 
                 if ( propUpd ) {
-                    await model.cities().update( { key: city.key }, { [ prop ]: city[ prop ] } );
-                    isUpd = true;
+                    global.obj.cities = { key: city.key, [ prop ]: city[ prop ] };
                     global.log( `Город обновлен, поле ${ prop }` );
                 }
 
                 // Проверяем наличие сохраненных изображений, сохраняем
                 if ( prop == 'products' || prop == 'banners' ) {
-                    images.imgsExistenceCheck( city, prop );
+                    //images.imgsExistenceCheck( city, prop );
                 }
             }
         }
-        return isUpd;
     }
 
     compare( city, rCity ) {
         return Object.keys( rCity )
             .filter( cf => ~[ 'name', 'link', 'siteId' ].indexOf( cf ) && city[ cf ] != rCity[ cf ] )
-            .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; return o; }, {});
+            .reduce( ( o, k ) => { o[ k ] = rCity[ k ]; o.key = rCity.key; return o; }, {});
     }
 }
 

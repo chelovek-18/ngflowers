@@ -8,6 +8,10 @@ class BannersCollection
                 type: Number,
                 required: true
             },
+            name: {
+                type: String,
+                default: ''
+            },
             link: {
                 type: String,
                 required: true

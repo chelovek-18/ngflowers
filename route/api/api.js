@@ -34,7 +34,9 @@ router.get( '/categories/:city', ( req, res, next ) => {
     );
 });
 
+// Получить товары для города
 router.get( '/products/:city', ( req, res, next ) => {
+    let ckeys = { 'СПб': 'spb', 'HCK': 'novosib', 'HH': 'nn', 'MCK': 'msk' }
     res.json(
         req.cities
             .filter( c => c.key == req.params.city )[ 0 ].products
@@ -52,7 +54,7 @@ router.get( '/products/:city', ( req, res, next ) => {
                 description: c.description,
                 offers: c.offers,
                 qty: c.qty,
-                main: c.main,
+                main: Object.keys( c.main ).map( k => ckeys[ c.main[ k ] ] || c.main[ k ] ),
                 groups: c.groups
             }; })
     );
@@ -80,7 +82,7 @@ router.get( '/ba/', async ( req, res, next ) => {
 });
 
 router.get( '/ca/', async ( req, res, next ) => {
-    res.json( await ng.getCategories( 'spb' ) );
+    res.json( await ng.getSections( 'spb' ) );
 });
 
 router.get( '/ci/', async ( req, res, next ) => {

@@ -41,7 +41,10 @@ async function dbcomplete() {
         set: async cs => {
             if ( !( cs instanceof Array ) ) cs = [ cs ];
             for( let k in cs )
-                await model.cities().update( { key: cs[ k ].key }, cs[ k ] );
+                if ( await model.cities().findOne( { key: cs[ k ].key } ) )
+                    await model.cities().update( { key: cs[ k ].key }, cs[ k ] );
+                else
+                    await model.cities().save( cs[ k ] );
             cities = await model.cities().find();
             return cs;
         }

@@ -12,8 +12,7 @@ module.exports = async () => {
     let
         model = global.obj.model,
         cities = new Cities( ...global.obj.cities ),
-        reqCities = new Cities( ...( ( await ng.getCities() ) || [] ) ),
-        isUpd = false;
+        reqCities = new Cities( ...( ( await ng.getCities() ) || [] ) );
 
     // Сравниваем данные из базы и из запроса:
     if ( reqCities.length ) {
@@ -35,21 +34,16 @@ module.exports = async () => {
             rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) );
 
         // 1. Отключаем те города, что отсутствуют в API
-        isUpd = await cities.switchOffCities( keys.out );
+        cities.switchOffCities( keys.out );
 
         // 2. Сравниваем по полям
-        isUpd = await cities.checkProps( reqCities, keys.in ) || isUpd;
+        cities.checkProps( reqCities, keys.in );
 
         // 3. Добавляем новые
-        isUpd = await reqCities.addCities( rKeysNew ) || isUpd;
-        
-        // 4. Сохраняем в cities
-        if ( isUpd ) global.log( `Обновлен список городов` );
-        if ( isUpd ) global.obj.cities = await model.cities().find();
+        reqCities.addCities( rKeysNew );
     }
 
     // Подцепляем к городам геолокацию:
-    let geoUpd = false;
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
@@ -58,10 +52,8 @@ module.exports = async () => {
             g = ( ( g || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             g = Object.keys( g ).map( k => g[ k ] );
             if ( !g.length ) continue;
-            await model.cities().update( { key: city.key }, { location: g } );
-            geoUpd = true;
+            global.obj.cities = { key: city.key, location: g };
+            global.log( `Обновлена геолокация ${ city.key }` );
         }
     }
-    if ( geoUpd ) global.obj.cities = await model.cities().find();
-    if ( geoUpd ) global.log( 'Обновлена геолокация' );
 };
