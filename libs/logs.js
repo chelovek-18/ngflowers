@@ -17,6 +17,7 @@ const f0 = n => n > 9 ? n : '0' + n;
 setInterval( () => {
     let log = global.logs.shift();
     if ( !log ) return;
+    log = log.map( l => typeof l == 'string' ? l : JSON.stringify( l ) );
     let
         d = new Date(),
         fnm = `${ f0( d.getDate() ) }-${ f0( d.getMonth() + 1 ) }-${ d.getFullYear() }.txt`,

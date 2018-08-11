@@ -89,7 +89,9 @@ class Route
 
         // Обработка ошибок
         app.use( ( err, req, res, next ) => {
-            res.send( err );
+            global.log( err );
+            if ( req.session.user ) res.send( err );
+            else res.send( 'Error: ' + ( err.status || 500 ) );
         });
     }
 }
