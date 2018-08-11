@@ -7,6 +7,7 @@ const
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
+    global.log( 'version?', req.session.appVersion );
     res.json(
         req.cities
             .filter( c => c.use )
@@ -56,9 +57,13 @@ router.get( '/products/:city', ( req, res, next ) => {
     );
 });
 
+// Получить настройки приложения
 router.get( '/app-settings/:version', async ( req, res, next ) => {
+    global.log( 'Запрос: получение настроек приложения' );
     req.session.appVersion = req.params.version;
-    res.json( await req.db.settings().findOne( { version: req.session.appVersion } ) );
+    let settings = await req.db.settings().findOne( { version: req.session.appVersion } );
+    settings.isCurrent = settings.version == await global.obj.getMaxVers();
+    res.json( settings );
 });
 
 router.get( '/del/', async ( req, res, next ) => {
