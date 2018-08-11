@@ -18,7 +18,12 @@ router.get( '/', ( req, res, next ) => {
 });
 
 router.post( '/cities/', async ( req, res, next ) => {
-    res.json( await ( global.obj.cities = global.obj.cities.map( c => { if ( c.key == req.body.key ) { Object.assign( c, req.body ); } return c; } ) ) );
+    res.json(
+        await ( req.cities = req.cities.map( c => {
+            if ( c.key == req.body.key ) { Object.assign( c, req.body ); }
+            return c;
+        }))
+    );
     //res.json( await req.db.cities().update( { key: req.body.key }, req.body ) );
 });
 

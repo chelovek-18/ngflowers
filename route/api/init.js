@@ -23,7 +23,7 @@ async function dbcomplete() {
     // Получаем из базы города со всем, что к ним относится
     cities = ( await model.cities().find() ) || [];
     global.obj = {};
-    // Геттер и сеттер для cities
+    // Геттер и сеттер для cities в global
     Object.defineProperty( global.obj, 'cities', {
         get: () => cities,
         set: async cs => {
@@ -53,7 +53,11 @@ router.use( async ( req, res, next ) => {
     // Подключение БД
     req.db = model;
 
-    req.cities = global.obj.cities;
+    // Геттер и сеттер для cities в req
+    Object.defineProperty( req, 'cities', {
+        get: () => cities,
+        set: cs => global.obj.cities = cs
+    });
 
     next();
 });
