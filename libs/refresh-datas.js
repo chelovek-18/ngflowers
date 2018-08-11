@@ -34,13 +34,13 @@ module.exports = async () => {
             rKeysNew = rKeys.filter( c => !~keys.in.indexOf( c ) );
 
         // 1. Отключаем те города, что отсутствуют в API
-        cities.switchOffCities( keys.out );
+        await cities.switchOffCities( keys.out );
 
         // 2. Сравниваем по полям
-        cities.checkProps( reqCities, keys.in );
+        await cities.checkProps( reqCities, keys.in );
 
         // 3. Добавляем новые
-        reqCities.addCities( rKeysNew );
+        await reqCities.addCities( rKeysNew );
     }
 
     // Подцепляем к городам геолокацию:
