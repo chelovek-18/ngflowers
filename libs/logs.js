@@ -22,7 +22,7 @@ setInterval( () => {
         fnm = `${ f0( d.getDate() ) }-${ f0( d.getMonth() + 1 ) }-${ d.getFullYear() }.txt`,
         txts = `${ f0( d.getHours() ) }:${ f0( d.getMinutes() ) } ${ log.join( '    ' ) }/r/n`;
         
-    fs.writeFile( `${ global.appConf.location.root }/logs/${ fnm }`, txts, { encoding: 'utf8', flag: 'a' } );
+    fs.writeFileSync( `${ global.appConf.location.root }/logs/${ fnm }`, txts, { encoding: 'utf8', flag: 'a' } );
 }, 400);
 
 
