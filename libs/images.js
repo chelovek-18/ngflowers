@@ -3,7 +3,8 @@
 const
     Request = require( './request' ),
     fs = require( 'fs' ),
-    jimp = require( 'jimp' );
+    jimp = require( 'jimp' ),
+    { GifUtil } = require( 'gifwrap' );
 
 /**
  * ------------------------------------- Работа с изображениями -------------------------------------
@@ -28,20 +29,49 @@ class Images extends Request
             setTimeout( () => {
                 if ( ~fnm.indexOf( '.gif' ) ) {
                     global.log( "Изображение gif" );
-                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
-                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
+                    GifUtil.read( imgpath ).then( inputGif => {
+                        inputGif.frames.foreach( frame => {
+                            let k = frame.bitmap.width / frame.bitmap.height;
+                            frame.reframe( 0, 0, 600, 600 * k );
+                        });
+                        return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ), inputGif.frames, inputGif ).then( outputGif => {
+                            console.log( "Resize gif 1" );
+                        });
+                    });
+                    GifUtil.read( imgpath ).then( inputGif => {
+                        inputGif.frames.foreach( frame => {
+                            let k = frame.bitmap.width / frame.bitmap.height;
+                            frame.reframe( 0, 0, 300, 300 * k );
+                        });
+                        return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ), inputGif.frames, inputGif ).then( outputGif => {
+                            console.log( "Resize gif 2" );
+                        });
+                    });
+                    GifUtil.read( imgpath ).then( inputGif => {
+                        inputGif.frames.foreach( frame => {
+                            let k = frame.bitmap.width / frame.bitmap.height;
+                            frame.reframe( 0, 0, 150, 150 * k );
+                        });
+                        return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-3.' ) ), inputGif.frames, inputGif ).then( outputGif => {
+                            console.log( "Resize gif 3" );
+                        });
+                    });
+                    //fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
+                    //fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
                     setTimeout( () => {
                         r();
                     }, 2000);
                 } else jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
+                    img.resize( 150, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-3.' ) ) );
                     global.log( 'Resize', imgpath );
                     r();
                 }).catch( function( err ) {
                     global.log( 'Ошибка resize', imgpath, err );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
                     fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
+                    fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-3.' ) ) ) );
                     setTimeout( () => {
                         r();
                     }, 2000);
@@ -69,13 +99,14 @@ class Images extends Request
                     dirs = imgpath.split( '/' ),
                     fnm = dirs.pop(),
                     fnm1 = fnm.replace( '.', '-1.' ),
-                    fnm2 = fnm.replace( '.', '-2.' );
+                    fnm2 = fnm.replace( '.', '-2.' ),
+                    fnm3 = fnm.replace( '.', '-3.' );
                 dirs.forEach( ( d, ii ) => {
                     let dir = dirs.filter( ( fd, fi ) => fi <= ii ).join( '/' );
                     if ( dir && !fs.existsSync( dir ) )
                         fs.mkdirSync( dir );
                 });
-                if ( !fs.existsSync( imgpath ) || !fs.existsSync( imgpath.replace( fnm, fnm1 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm2 ) ) )
+                if ( !fs.existsSync( imgpath ) || !fs.existsSync( imgpath.replace( fnm, fnm1 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm2 ) ) || !fs.existsSync( imgpath.replace( fnm, fnm3 ) ) )
                     await self.getImage( city.link, img, imgpath, fnm );
             }
         }
