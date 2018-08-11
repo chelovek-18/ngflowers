@@ -36,7 +36,7 @@ router.get( '/categories/:city', ( req, res, next ) => {
 
 // Получить товары для города
 router.get( '/products/:city', ( req, res, next ) => {
-    let ckeys = { 'СПб': 'spb', 'HCK': 'novosib', 'HH': 'nn', 'MCK': 'msk' }
+    let ckeys = { 'СПб': 'spb', 'НСК': 'novosib', 'НН': 'nn', 'МСК': 'msk' }
     res.json(
         req.cities
             .filter( c => c.key == req.params.city )[ 0 ].products
