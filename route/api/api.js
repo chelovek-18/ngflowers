@@ -54,11 +54,12 @@ router.get( '/products/:city', ( req, res, next ) => {
                 description: c.description,
                 offers: c.offers,
                 qty: c.qty,
-                main: c.main, /*Object.keys( c.main ).reduce( ( o, k ) => {
-                    o[ k ] = c.main[ k ] instanceof Array ? []
-                        : Object.keys( c.main[ k ] )//.map( n => ckeys[ c.main[ k ][ n ] ] || c.main[ k ][ n ] )
+                main: Object.keys( c.main ).reduce( ( o, k ) => {
+                    o[ k + 'q' ] = c.main[ k ] instanceof Array ? [ 'x' ] : c.main[ k ];
+                    /*o[ k ] = c.main[ k ] instanceof Array ? []
+                        : Object.keys( c.main[ k ] )//.map( n => ckeys[ c.main[ k ][ n ] ] || c.main[ k ][ n ] )*/
                     return o;
-                }, {}),*/
+                }, {}),
                 groups: c.groups
             }; })
     );
