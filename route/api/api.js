@@ -40,7 +40,7 @@ router.get( '/products/:city', ( req, res, next ) => {
     res.json(
         req.cities
             .filter( c => c.key == req.params.city )[ 0 ].products
-            /*.filter( c => c.use )
+            .filter( c => c.use )
             .map( c => { return {
                 id: c.id,
                 name: c.name,
@@ -54,9 +54,12 @@ router.get( '/products/:city', ( req, res, next ) => {
                 description: c.description,
                 offers: c.offers,
                 qty: c.qty,
-                main: Object.keys( c.main ).map( k => ckeys[ c.main[ k ] ] || c.main[ k ] ),
+                main: Object.keys( c.main ).reduce( ( o, k ) => {
+                    o[ k ] = c.main[ k ].map( ( c, i ) => ckeys[ c ] || c.main[ k ][ i ] )
+                    return o;
+                }, {}),
                 groups: c.groups
-            }; })*/
+            }; })
     );
 });
 
