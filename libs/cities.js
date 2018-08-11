@@ -82,7 +82,6 @@ class Cities extends Array
                             || city.products.filter( p => p.url == bannUrl )[ 0 ]
                             || {} ).name || '';
                         if ( item.name != '' ) propUpd = true;
-                        global.log( 'eee?', item.name );
                     }
 
                     let rItem = rCity[ prop ].filter( it => it.id == item.id )[ 0 ];
@@ -94,8 +93,9 @@ class Cities extends Array
                                 ? (
                                     rItem[ p ].length != item[ p ].length
                                     || rItem[ p ].filter( i => ~item[ p ].indexOf( i ) ).length != item[ p ].length
-                                ) : ( typeof rItem[ p ] == 'object' )
+                                ) : ( rItem[ p ] instanceof Object )
                                 ? (
+                                    item[ p ] &&
                                     Object.keys( rItem[ p ] ).length != Object.keys( item[ p ] ).length
                                     //|| Object.keys( rItem[ p ] ).filter( k => rItem[ p ][ k ] != item[ p ][ k ] ).length
                                 )
