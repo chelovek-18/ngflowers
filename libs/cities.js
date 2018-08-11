@@ -98,8 +98,7 @@ class Cities extends Array
                                     item[ p ] && ( Object.keys( rItem[ p ] ).length != Object.keys( item[ p ] ).length
                                     || Object.keys( rItem[ p ] )
                                         .filter( k => rItem[ p ][ k ].toString() != item[ p ][ k ].toString() ).length )
-                                )
-                                : rItem[ p ] != item[ p ]
+                                ) : rItem[ p ] != item[ p ]
                         ) {
                             item[ p ] = rItem[ p ];
                             propUpd = true;

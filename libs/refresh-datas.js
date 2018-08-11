@@ -47,7 +47,7 @@ module.exports = async () => {
     for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
-            global.log( 'loc??', city.location );
+            global.log( 'loc??', city.key, city.location );
             let g = await geo.getCityLocation( city.name );
             if ( !g ) continue;
             g = ( ( g || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};

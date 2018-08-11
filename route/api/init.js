@@ -22,6 +22,7 @@ async function dbcomplete() {
     global.log( 'База инициализирована' );
     // Получаем из базы города со всем, что к ним относится
     cities = ( await model.cities().find() ) || [];
+    global.log( 'cit', cities[ 0 ].key, cities[ 0 ].location );
 
     global.obj = {};
     global.obj.getMaxVers = async () => {
