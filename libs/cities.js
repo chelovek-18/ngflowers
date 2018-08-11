@@ -77,6 +77,7 @@ class Cities extends Array
                 city[ prop ].filter( it => ~crossIds.indexOf( it.id ) ).forEach( item => {
                     // Ищем имя для баннера если нет
                     if ( prop == 'banners' && item.name == '' ) {
+                        global.log( 'e? f***!' );
                         let bannUrl = item.link;
                         item.name = ( city.categories.filter( c => c.url == bannUrl )[ 0 ]
                             || city.products.filter( p => p.url == bannUrl )[ 0 ]
