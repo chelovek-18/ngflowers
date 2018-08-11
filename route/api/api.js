@@ -55,6 +55,7 @@ router.get( '/products/:city', ( req, res, next ) => {
                 offers: c.offers,
                 qty: c.qty,
                 main: Object.keys( c.main ).reduce( ( o, k ) => {
+                    global.log( '??', k );
                     o[ k ] = c.main[ k ].map( ( c, i ) => ckeys[ c ] || c.main[ k ][ i ] )
                     return o;
                 }, {}),
