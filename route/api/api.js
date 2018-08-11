@@ -71,12 +71,20 @@ router.get( '/del/', async ( req, res, next ) => {
     res.json( await req.db.cities().delete() );
 });
 
-router.get( '/prd/', async ( req, res, next ) => {
-    res.json( await ng.getProducts() );
+router.get( '/pr/', async ( req, res, next ) => {
+    res.json( await ng.getProducts( 'spb' ) );
 });
 
-router.get( '/bnr/', async ( req, res, next ) => {
-    res.json( await ng.getBanners() );
+router.get( '/ba/', async ( req, res, next ) => {
+    res.json( await ng.getBanners( 'spb' ) );
+});
+
+router.get( '/ca/', async ( req, res, next ) => {
+    res.json( await ng.getCategories( 'spb' ) );
+});
+
+router.get( '/ci/', async ( req, res, next ) => {
+    res.json( await ng.getCities() );
 });
 
 module.exports = router;

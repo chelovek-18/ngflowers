@@ -4,7 +4,6 @@ const
     // api данные
     ng = new ( require( './ng' ) ),
     geo = new ( require( './geo' ) ),
-    images = new ( require( './images' ) ),
     Cities = require( './cities' );
 
 module.exports = async () => {
