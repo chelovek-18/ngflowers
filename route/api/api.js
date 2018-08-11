@@ -55,9 +55,8 @@ router.get( '/products/:city', ( req, res, next ) => {
                 offers: c.offers,
                 qty: c.qty,
                 main: Object.keys( c.main ).reduce( ( o, k ) => {
-                    global.log( '??', k );
                     o[ k ] = c.main[ k ] instanceof Array ? []
-                        : Object.keys( c.main[ k ] ).map( n => ckeys[ c.main[ k ][ n ] ] || c.main[ k ][ n ] )
+                        : Object.keys( c.main[ k ] )//.map( n => ckeys[ c.main[ k ][ n ] ] || c.main[ k ][ n ] )
                     return o;
                 }, {}),
                 groups: c.groups
