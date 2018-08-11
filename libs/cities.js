@@ -95,9 +95,9 @@ class Cities extends Array
                                     || rItem[ p ].filter( i => ~item[ p ].indexOf( i ) ).length != item[ p ].length
                                 ) : ( rItem[ p ] instanceof Object )
                                 ? (
-                                    item[ p ] &&
-                                    Object.keys( rItem[ p ] ).length != Object.keys( item[ p ] ).length
-                                    //|| Object.keys( rItem[ p ] ).filter( k => rItem[ p ][ k ] != item[ p ][ k ] ).length
+                                    item[ p ] && ( Object.keys( rItem[ p ] ).length != Object.keys( item[ p ] ).length
+                                    || Object.keys( rItem[ p ] )
+                                        .filter( k => rItem[ p ][ k ].toString() != item[ p ][ k ].toString() ).length )
                                 )
                                 : rItem[ p ] != item[ p ]
                         ) {
