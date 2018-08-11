@@ -7,6 +7,7 @@ const
 
 // ------------------------------------- API -------------------------------------
 router.get( '/cities/', ( req, res, next ) => {
+    global.log( 'version?..' );
     global.log( 'version?', req.session.appVersion );
     res.json(
         req.cities
