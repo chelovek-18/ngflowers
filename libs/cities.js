@@ -97,7 +97,7 @@ class Cities extends Array
                                 ) : ( typeof rItem[ p ] == 'object' )
                                 ? (
                                     Object.keys( rItem[ p ] ).length != Object.keys( item[ p ] ).length
-                                    || Object.keys( rItem[ p ] ).filter( k => rItem[ p ][ k ] != item[ p ][ k ] ).length
+                                    //|| Object.keys( rItem[ p ] ).filter( k => rItem[ p ][ k ] != item[ p ][ k ] ).length
                                 )
                                 : rItem[ p ] != item[ p ]
                         ) {
