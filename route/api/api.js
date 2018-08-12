@@ -98,10 +98,10 @@ router.get( '/xgif/', async ( req, res, next ) => {
     GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
         global.log( "gif!! width/height", inputGif.width, inputGif.height );
         inputGif.frames = inputGif.frames.filter( ( f, i ) => i == 1 );
-        inputGif.frames.forEach( frame => {
+        /*inputGif.frames.forEach( frame => {
             global.log( "gif width/height", frame.bitmap.width, frame.bitmap.height );
             frame.reframe( 0, 0, 348, 29 );
-        });
+        });*/
         return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
             res.send( 'Вроде е...' );
         });
