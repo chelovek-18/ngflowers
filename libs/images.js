@@ -30,7 +30,7 @@ class Images extends Request
                 if ( ~fnm.indexOf( '.gif' ) ) {
                     global.log( "Изображение gif" );
                     GifUtil.read( imgpath ).then( inputGif => {
-                        inputGif.frames.foreach( frame => {
+                        inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
                             frame.reframe( 0, 0, 600, 600 * k );
                         });
@@ -39,7 +39,7 @@ class Images extends Request
                         });
                     });
                     GifUtil.read( imgpath ).then( inputGif => {
-                        inputGif.frames.foreach( frame => {
+                        inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
                             frame.reframe( 0, 0, 300, 300 * k );
                         });
@@ -48,7 +48,7 @@ class Images extends Request
                         });
                     });
                     GifUtil.read( imgpath ).then( inputGif => {
-                        inputGif.frames.foreach( frame => {
+                        inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
                             frame.reframe( 0, 0, 150, 150 * k );
                         });
