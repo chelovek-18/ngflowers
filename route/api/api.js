@@ -99,7 +99,7 @@ router.get( '/ci/', async ( req, res, next ) => {
 router.get( '/xgif/', async ( req, res, next ) => {
     GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
         let k = inputGif.width / inputGif.height;
-        execFile( gifsicle, [ '--resize-fit-width', '150', '-o', 'output.gif', 'proba.gif' ], err => {
+        execFile( gifsicle, [ '--resize-fit-width', '150', '-o', global.appConf.location.root + '/public/output.gif', global.appConf.location.root + '/public/proba.gif' ], err => {
             res.send( 'Готово!' );
         });
 
