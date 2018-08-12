@@ -100,7 +100,7 @@ router.get( '/xgif/', async ( req, res, next ) => {
         inputGif.frames = inputGif.frames.filter( ( f, i ) => !i );
         inputGif.frames.forEach( frame => {
             global.log( "gif width/height", frame.bitmap.width, frame.bitmap.height );
-            frame.reframe( 990 - 330, 337 - Math.round( 337 / 3 ), 330, Math.round( 337 / 3 ) );
+            frame.reframe( 0, 0, 330, Math.round( 337 / 3 ) );
         });
         return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
             res.send( 'Вроде е...' );
