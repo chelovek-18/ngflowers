@@ -3,6 +3,7 @@
 const
     express = require( 'express' ),
     ng = new ( require( './../../libs/ng' ) ),
+    { GifUtil } = require( 'gifwrap' ),
     router = express.Router();
 
 // ------------------------------------- API -------------------------------------
@@ -93,9 +94,12 @@ router.get( '/ci/', async ( req, res, next ) => {
     res.json( await ng.getCities() );
 });
 
-router.get( '/xgeo/:city/:loc1/:loc2', async ( req, res, next ) => {
-    req.cities = { key: req.params.city, location: [ req.params.loc1, req.params.loc2 ] }
-    res.send( 'Спасибо, добрый человек' );
+router.get( '/xgif/', async ( req, res, next ) => {
+    GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
+        return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
+            res.send( 'Вроде е...' );
+        });
+    }).catch( err => { res.send( 'Ошипко: ' + JSON.stringify( err ) ); });
 });
 
 module.exports = router;

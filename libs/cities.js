@@ -121,7 +121,7 @@ class Cities extends Array
 
                 // Проверяем наличие сохраненных изображений, сохраняем
                 if ( prop == 'products' || prop == 'banners' ) {
-                    images.imgsExistenceCheck( city, prop );
+                    //images.imgsExistenceCheck( city, prop );
                 }
             }
         }

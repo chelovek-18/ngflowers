@@ -15,7 +15,7 @@ module.exports = async () => {
         reqCities = new Cities( ...( ( await ng.getCities() ) || [] ) );
 
     // Сравниваем данные из базы и из запроса:
-    /*if ( reqCities.length ) {
+    if ( reqCities.length ) {
         let
             // Список кодов городов (из запроса)
             rKeys = reqCities.getKeys(),
@@ -41,19 +41,20 @@ module.exports = async () => {
 
         // 3. Добавляем новые
         await reqCities.addCities( rKeysNew );
-    }*/
+    }
 
     // Подцепляем к городам геолокацию:
     for( let i in cities ) {
         let city = cities[ i ];
-        /*if ( !city.location || !city.location.length ) {
-            let g = await geo.getCityLocation( city.name );
+        if ( !city.location || !city.location.length ) {
+            global.log( 'chtoo?' );
+            /*let g = await geo.getCityLocation( city.name );
             if ( !g ) continue;
             g = ( ( g || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             g = Object.keys( g ).map( k => g[ k ] );
             if ( !g.length ) continue;
             global.obj.cities = { key: city.key, location: g };
-            global.log( `Обновлена геолокация ${ city.key }` );
-        }*/
+            global.log( `Обновлена геолокация ${ city.key }` );*/
+        }
     }
 };
