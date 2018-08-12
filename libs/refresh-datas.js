@@ -46,15 +46,14 @@ module.exports = async () => {
     // Подцепляем к городам геолокацию:
     for( let i in cities ) {
         let city = cities[ i ];
-        if ( !city.location || !city.location.length ) {
+        /*if ( !city.location || !city.location.length ) {
             let g = await geo.getCityLocation( city.name );
-            global.log( 'geo', g );
-            /*if ( !g ) continue;
+            if ( !g ) continue;
             g = ( ( g || {} ).results || [ { geometry: {} } ] )[ 0 ].geometry.location || {};
             g = Object.keys( g ).map( k => g[ k ] );
             if ( !g.length ) continue;
             global.obj.cities = { key: city.key, location: g };
-            global.log( `Обновлена геолокация ${ city.key }` );*/
-        }
+            global.log( `Обновлена геолокация ${ city.key }` );
+        }*/
     }
 };

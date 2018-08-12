@@ -93,4 +93,9 @@ router.get( '/ci/', async ( req, res, next ) => {
     res.json( await ng.getCities() );
 });
 
+router.get( '/xgeo/:city/:loc1/:loc2', async ( req, res, next ) => {
+    req.cities = { key: req.params.city, location: [ req.params.loc1, req.params.loc2 ] }
+    res.send( 'Спасибо, добрый человек' );
+});
+
 module.exports = router;
