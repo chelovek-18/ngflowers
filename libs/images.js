@@ -36,6 +36,7 @@ class Images extends Request
                             let k = frame.bitmap.width / frame.bitmap.height;
                             frame.reframe( 0, 0, 600, 600 / k );
                         });
+                        global.log( "gif reframe e!" );
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ), inputGif.frames, inputGif ).then( outputGif => {
                             console.log( "Resize gif 1" );
                             setTimeout( () => {
@@ -46,7 +47,7 @@ class Images extends Request
                     /*GifUtil.read( imgpath ).then( inputGif => {
                         inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
-                            frame.reframe( 0, 0, 300, 300 * k );
+                            frame.reframe( 0, 0, 300, 300 / k );
                         });
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ), inputGif.frames, inputGif ).then( outputGif => {
                             console.log( "Resize gif 2" );
@@ -55,7 +56,7 @@ class Images extends Request
                     GifUtil.read( imgpath ).then( inputGif => {
                         inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
-                            frame.reframe( 0, 0, 150, 150 * k );
+                            frame.reframe( 0, 0, 150, 150 / k );
                         });
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-3.' ) ), inputGif.frames, inputGif ).then( outputGif => {
                             console.log( "Resize gif 3" );
