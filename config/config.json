@@ -1,6 +1,6 @@
 {
     "settings": {
-        "refresh": 300000
+        "refresh": 600000
     },
     "location": {
         "port": 50001,

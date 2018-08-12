@@ -3,9 +3,6 @@
 const
     express = require( 'express' ),
     ng = new ( require( './../../libs/ng' ) ),
-    { GifUtil } = require( 'gifwrap' ),
-    { exec } = require( 'child_process' ),
-    //gifsicle = require( 'gifsicle' ),
     router = express.Router();
 
 // ------------------------------------- API -------------------------------------
@@ -72,6 +69,7 @@ router.get( '/app-settings/:version', async ( req, res, next ) => {
     global.log( 'Запрос: получение настроек приложения' );
     req.session.appVersion = req.params.version;
     let settings = await req.db.settings().findOne( { version: req.session.appVersion } );
+    if ( !settings ) settings = await req.db.settings().findOne( { version: await global.obj.getMaxVers() } );
     settings.isCurrent = settings.version == await global.obj.getMaxVers();
     res.json( settings );
 });
@@ -94,26 +92,6 @@ router.get( '/ca/', async ( req, res, next ) => {
 
 router.get( '/ci/', async ( req, res, next ) => {
     res.json( await ng.getCities() );
-});
-
-router.get( '/xgif/', async ( req, res, next ) => {
-    GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
-        let k = inputGif.width / inputGif.height;
-        /*execFile( gifsicle, [ '--resize-fit-width', '150', '-o', global.appConf.location.root + '/public/output.gif', global.appConf.location.root + '/public/proba.gif' ], err => {
-            res.send( 'Готово!' );
-        });*/
-        exec( `gifsicle ${ global.appConf.location.root }/public/proba.gif --resize 150x${ 150 / k } > ${ global.appConf.location.root }/public/output.gif` );
-
-        //global.log( "gif!! width/height", inputGif.width, inputGif.height );
-        /*inputGif.frames = inputGif.frames.filter( ( f, i ) => !i );
-        inputGif.frames.forEach( frame => {
-            global.log( "gif width/height", frame.bitmap.width, frame.bitmap.height );
-            frame.reframe( 0, 0, 990, 377 ); //frame.reframe( 86, 0, 904, 377 );
-        });
-        return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
-            res.send( 'Вроде е...' );
-        });*/
-    }); //.catch( err => { res.send( 'Ошипко: ' + JSON.stringify( err ) ); });
 });
 
 module.exports = router;
