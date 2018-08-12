@@ -42,7 +42,7 @@ class Images extends Request
                                 r();
                             }, 2000);
                         });
-                    }).catch( err => console.log( 'gif err?', err ); );
+                    }).catch( err => console.log( 'gif err?', err ) );
                     /*GifUtil.read( imgpath ).then( inputGif => {
                         inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
