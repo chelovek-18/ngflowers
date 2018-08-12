@@ -97,13 +97,10 @@ router.get( '/ci/', async ( req, res, next ) => {
 router.get( '/xgif/', async ( req, res, next ) => {
     GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
         global.log( "gif!! width/height", inputGif.width, inputGif.height );
-        const edgeLength = Math.min( inputGif.width, inputGif.height );
         inputGif.frames = inputGif.frames.filter( ( f, i ) => !i );
         inputGif.frames.forEach( frame => {
             global.log( "gif width/height", frame.bitmap.width, frame.bitmap.height );
-            const xOffset = (frame.bitmap.width - edgeLength)/2;
-            const yOffset = (frame.bitmap.height - edgeLength)/2;
-            frame.reframe( xOffset, yOffset, edgeLength, edgeLength );
+            frame.reframe( 990 - 330, 337 - Math.round( 337 / 3 ), 330, Math.round( 337 / 3 ) );
         });
         return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
             res.send( 'Вроде е...' );
