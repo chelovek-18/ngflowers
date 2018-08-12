@@ -15,7 +15,7 @@ module.exports = async () => {
         reqCities = new Cities( ...( ( await ng.getCities() ) || [] ) );
 
     // Сравниваем данные из базы и из запроса:
-    if ( reqCities.length ) {
+    /*if ( reqCities.length ) {
         let
             // Список кодов городов (из запроса)
             rKeys = reqCities.getKeys(),
@@ -41,7 +41,7 @@ module.exports = async () => {
 
         // 3. Добавляем новые
         await reqCities.addCities( rKeysNew );
-    }
+    }*/
 
     // Подцепляем к городам геолокацию:
     for( let i in cities ) {
