@@ -33,8 +33,8 @@ class Images extends Request
                         global.log( "gif read" );
                         inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
-                            global.log( "gif frame", ( 600 / k ), parseInt( 600 / k ) );
-                            frame.reframe( 0, 0, 600, parseInt( 600 / k ) );
+                            global.log( "gif frame", ( 600 / k ), Math.round( 600 / k ) );
+                            //frame.reframe( 0, 0, 600, Math.round( 600 / k ) );
                         });
                         global.log( "gif reframe e!" );
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ), inputGif.frames, inputGif ).then( outputGif => {
