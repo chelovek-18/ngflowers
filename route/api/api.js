@@ -96,6 +96,9 @@ router.get( '/ci/', async ( req, res, next ) => {
 
 router.get( '/xgif/', async ( req, res, next ) => {
     GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
+        inputGif.frames.forEach( frame => {
+            global.log( "gif width/height", frame.bitmap.width, frame.bitmap.height );
+        });
         return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
             res.send( 'Вроде е...' );
         });
