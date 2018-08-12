@@ -4,8 +4,8 @@ const
     express = require( 'express' ),
     ng = new ( require( './../../libs/ng' ) ),
     { GifUtil } = require( 'gifwrap' ),
-    { execFile } = require( 'child_process' ),
-    gifsicle = require( 'gifsicle' ),
+    { exec } = require( 'child_process' ),
+    //gifsicle = require( 'gifsicle' ),
     router = express.Router();
 
 // ------------------------------------- API -------------------------------------
@@ -99,9 +99,10 @@ router.get( '/ci/', async ( req, res, next ) => {
 router.get( '/xgif/', async ( req, res, next ) => {
     GifUtil.read( global.appConf.location.root + '/public/proba.gif' ).then( inputGif => {
         let k = inputGif.width / inputGif.height;
-        execFile( gifsicle, [ '--resize-fit-width', '150', '-o', global.appConf.location.root + '/public/output.gif', global.appConf.location.root + '/public/proba.gif' ], err => {
+        /*execFile( gifsicle, [ '--resize-fit-width', '150', '-o', global.appConf.location.root + '/public/output.gif', global.appConf.location.root + '/public/proba.gif' ], err => {
             res.send( 'Готово!' );
-        });
+        });*/
+        exec( `gifsicle ${ global.appConf.location.root }/public/proba.gif --resize 150x${ 150 / k } > ${ global.appConf.location.root }/public/output.gif` );
 
         //global.log( "gif!! width/height", inputGif.width, inputGif.height );
         /*inputGif.frames = inputGif.frames.filter( ( f, i ) => !i );
