@@ -103,7 +103,7 @@ router.get( '/xgif/', async ( req, res, next ) => {
             global.log( "gif width/height", frame.bitmap.width, frame.bitmap.height );
             const xOffset = (frame.bitmap.width - edgeLength)/2;
             const yOffset = (frame.bitmap.height - edgeLength)/2;
-            frame.reframe( xOffset, yOffset, 990, 337 );
+            frame.reframe( xOffset, yOffset, edgeLength, edgeLength );
         });
         return GifUtil.write( global.appConf.location.root + '/public/outed.gif', inputGif.frames, inputGif ).then( outputGif => {
             res.send( 'Вроде е...' );
