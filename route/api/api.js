@@ -70,9 +70,10 @@ router.get( '/app-settings/:version', async ( req, res, next ) => {
     req.session.appVersion = req.params.version;
     let settings = await req.db.settings().findOne( { version: req.session.appVersion } );
     if ( !settings ) settings = await req.db.settings().findOne( { version: await global.obj.getMaxVers() } );
-    let sett = settings;
-    sett.isCurrent = req.params.version == await global.obj.getMaxVers();
-    res.json( sett );
+    delete settings.__v;
+    delete settings._id;
+    settings.isCurrent = req.params.version == await global.obj.getMaxVers();
+    res.json( settings );
 });
 
 router.get( '/del/', async ( req, res, next ) => {
