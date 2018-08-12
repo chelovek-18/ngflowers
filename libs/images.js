@@ -38,8 +38,11 @@ class Images extends Request
                         });
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ), inputGif.frames, inputGif ).then( outputGif => {
                             console.log( "Resize gif 1" );
+                            setTimeout( () => {
+                                r();
+                            }, 2000);
                         });
-                    });
+                    }).catch( err => console.log( 'gif err?', err ); );
                     /*GifUtil.read( imgpath ).then( inputGif => {
                         inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
@@ -60,9 +63,9 @@ class Images extends Request
                     });*/
                     //fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
                     //fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
-                    setTimeout( () => {
+                    /*setTimeout( () => {
                         r();
-                    }, 2000);
+                    }, 2000);*/
                 } else jimp.read( imgpath ).then( function ( img ) {
                     img.resize( 600, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) );
                     img.resize( 300, jimp.AUTO ).write( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) );
