@@ -44,7 +44,7 @@ module.exports = async () => {
     }
 
     // Подцепляем к городам геолокацию:
-    for( let i in cities ) {
+    /*for( let i in cities ) {
         let city = cities[ i ];
         if ( !city.location || !city.location.length ) {
             let g = await geo.getCityLocation( city.name );
@@ -56,5 +56,5 @@ module.exports = async () => {
             global.obj.cities = { key: city.key, location: g };
             global.log( `Обновлена геолокация ${ city.key }` );
         }
-    }
+    }*/
 };

@@ -30,15 +30,17 @@ class Images extends Request
                 if ( ~fnm.indexOf( '.gif' ) ) {
                     global.log( "Изображение gif" );
                     GifUtil.read( imgpath ).then( inputGif => {
+                        global.log( "gif read" );
                         inputGif.frames.forEach( frame => {
+                            global.log( "gif frame" );
                             let k = frame.bitmap.width / frame.bitmap.height;
-                            frame.reframe( 0, 0, 600, 600 * k );
+                            frame.reframe( 0, 0, 600, 600 / k );
                         });
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ), inputGif.frames, inputGif ).then( outputGif => {
                             console.log( "Resize gif 1" );
                         });
                     });
-                    GifUtil.read( imgpath ).then( inputGif => {
+                    /*GifUtil.read( imgpath ).then( inputGif => {
                         inputGif.frames.forEach( frame => {
                             let k = frame.bitmap.width / frame.bitmap.height;
                             frame.reframe( 0, 0, 300, 300 * k );
@@ -55,7 +57,7 @@ class Images extends Request
                         return GifUtil.write( imgpath.replace( fnm, fnm.replace( '.', '-3.' ) ), inputGif.frames, inputGif ).then( outputGif => {
                             console.log( "Resize gif 3" );
                         });
-                    });
+                    });*/
                     //fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-1.' ) ) ) );
                     //fs.createReadStream( imgpath ).pipe( fs.createWriteStream( imgpath.replace( fnm, fnm.replace( '.', '-2.' ) ) ) );
                     setTimeout( () => {
