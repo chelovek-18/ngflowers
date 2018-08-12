@@ -68,8 +68,8 @@ router.get( '/products/:city', ( req, res, next ) => {
 router.get( '/app-settings/:version', async ( req, res, next ) => {
     global.log( 'Запрос: получение настроек приложения' );
     req.session.appVersion = req.params.version;
-    let settings = await req.db.settings().findOne( { version: req.session.appVersion } );
-    if ( !settings ) settings = await req.db.settings().findOne( { version: await global.obj.getMaxVers() } );
+    let settings = ( await req.db.settings().findOne( { version: req.session.appVersion } ) );
+    if ( !settings ) settings = ( await req.db.settings().findOne( { version: await global.obj.getMaxVers() } ) );
     delete settings.__v;
     delete settings._id;
     settings.isCurrent = req.params.version == await global.obj.getMaxVers();
