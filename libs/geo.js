@@ -12,7 +12,7 @@ class Geo extends Request
         this.host = 'maps.google.com';
         this.defaultPath = '/maps/api/geocode/json';
         this.method = 'GET';
-        this.defaultData = { sensor: false, key: 'AIzaSyAQc5Tfg8shWq24eTkwWzshLG0p58ZLH7M' };
+        this.defaultData = { sensor: false, key: '' };
         this.address = 'Санкт-Петербург';
     }
 
